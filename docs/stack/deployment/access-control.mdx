@@ -144,8 +144,9 @@ The endpoint evaluates a typical request in this order:
 5. If the call targets a contract, check that contract grant (and function selector, parameter, and
    event rules where they exist).
 6. If the method is `eth_call` or `eth_estimateGas`, simulate the call with `debug_traceCall`
-   and reject it if any internal `CALL`, `DELEGATECALL`, `STATICCALL`, or `CREATE` target is
-   outside the caller's organization.
+   and reject it if any internal `CALL`, `DELEGATECALL`, `STATICCALL`, `CREATE`, or `CREATE2`
+   targets a contract the caller is not authorized to use (contract creation additionally requires
+   the `deploy` claim).
 7. Forward the request to the node, then redact the response before returning it.
 
 The endpoint binds the call's sender to the authenticated account, so a caller cannot inherit another
