@@ -17,8 +17,10 @@ For data visibility choices, see [Privacy and data visibility](../evaluate/valid
 :::important
 
 Access control is not cryptographic privacy.
-It limits who can use the operator's RPC, but it does not make public chain data private, replace
-zero-knowledge proofs, or provide data availability.
+It limits who can use the operator's RPC, but it does not hide chain data from the
+operator who runs the node or stores the data.
+It does not make public chain data private, replace zero-knowledge proofs, or provide
+data availability.
 
 :::
 
@@ -30,7 +32,6 @@ Operators can configure access control independently of
 
 A restricted deployment exposes **one RPC endpoint**.
 Wallets, apps, and other clients access this endpoint, not the Lineth node directly.
-
 The access control endpoint:
 
 - Authenticates the caller.
@@ -38,6 +39,8 @@ The access control endpoint:
 - Forwards allowed requests to the node.
 - Returns only data the caller is permitted to see.
 
+Operators provision [roles and permissions](#role-based-access-control-rbac) (organizations, groups,
+users, and contract grants) through an admin API and UI.
 Permission data and JSON-RPC access logs are recorded in [audit databases](#audit-logs).
 
 Applications built on the stack must implement authentication to communicate with the
@@ -140,8 +143,9 @@ The endpoint evaluates a typical request in this order:
 4. Check the method against the group's RPC method allowlist.
 5. If the call targets a contract, check that contract grant (and function selector, parameter, and
    event rules where they exist).
-6. Simulate the call with `debug_traceCall` and reject it if any internal `CALL`, `DELEGATECALL`,
-   `STATICCALL`, or `CREATE` target is outside the caller's organization.
+6. If the method is `eth_call` or `eth_estimateGas`, simulate the call with `debug_traceCall`
+   and reject it if any internal `CALL`, `DELEGATECALL`, `STATICCALL`, or `CREATE` target is
+   outside the caller's organization.
 7. Forward the request to the node, then redact the response before returning it.
 
 The endpoint binds the call's sender to the authenticated account, so a caller cannot inherit another
