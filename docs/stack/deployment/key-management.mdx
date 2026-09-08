@@ -26,7 +26,7 @@ each role can use, and the controls the operator owns.
 
 ## Signer roles
 
-Each role below has its own key and its own impact if lost or compromised.
+Each signer role has its own key and its own impact if lost or compromised.
 Do not reuse one key across roles.
 
 <table className="table-valign-middle table-narrow-first-col">
@@ -204,10 +204,15 @@ Configure `custom` for the coordinator or `CUSTOM` for the
 sequencer liveness plugin to resolve a named signer
 through an injected factory.
 The open-source coordinator fails if no factory is configured for that name.
-Treat `custom` as an extension point, not as a documented built-in KMS backend.
 
-Confirm any additional factory-backed backends with the [Lineth team](/support)
-for a given deployment.
+:::info
+In an enterprise engagement, Lineth can supply the custom factory so the coordinator,
+sequencer liveness plugin, and Maru validator sign directly with AWS KMS,
+without deploying Web3Signer.
+The open-source signer type remains `custom` or `CUSTOM`.
+Confirm whether that backend is available for a given deployment with the
+[Lineth team](/support).
+:::
 
 ## Operator responsibilities
 

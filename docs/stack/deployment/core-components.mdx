@@ -67,9 +67,8 @@ Common examples include:
 
 **Special cases**
 
-- [Web3Signer](../../protocol/architecture/index.mdx#web3signer): remote signing service that can
-  front files, vaults, and cloud KMS products. Not required for protocol correctness. Optional.
-  In the signing-path trust boundary.
-  See [Key management](./key-management.mdx) for which components call Web3Signer and which
-  use a built-in AWS KMS backend.
+- [Web3Signer](../../protocol/architecture/index.mdx#web3signer): Optional remote signing service
+  that can front files, vaults, and cloud key management services (KMS).
+  Web3Signer is in the signing-path trust boundary.
+  See [Key management](./key-management.mdx) for how to configure Web3Signer and other key custody options.
 
