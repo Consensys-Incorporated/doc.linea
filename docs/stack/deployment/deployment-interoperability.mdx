@@ -75,8 +75,8 @@ Two restricted networks can communicate with each other as follows:
    agreed call would be allowed as a live RPC request.
    The endpoint evaluates that caller against the destination's own RBAC policy.
    The subject is the source contract on the source chain, represented as a chain-based
-   decentralized identifier (DID) such as `did:pkh:eip155:<source-chain>:<address>`.
-   It is not `tx.origin` of the source transaction.
+   decentralized identifier (DID) such as `did:pkh:eip155:<source-chain>:<address>`;
+   it is not `tx.origin` of the source transaction.
    If the endpoint allows the call, both sides commit.
    If it denies the call, or if the endpoint is unreachable, both sides abort.
 6. The destination access control endpoint records the decision on its append-only
