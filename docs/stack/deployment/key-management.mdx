@@ -205,13 +205,14 @@ sequencer liveness plugin to resolve a named signer
 through an injected factory.
 The open-source coordinator fails if no factory is configured for that name.
 
-:::info
-In an enterprise engagement, Lineth can supply the custom factory so the coordinator,
-sequencer liveness plugin, and Maru validator sign directly with AWS KMS,
+:::info[Lineth for institutions]
+Direct AWS KMS signing for the coordinator, sequencer liveness plugin, and Maru
+validator is not in the open-source stack.
+For enterprise deployments, Lineth can supply the custom factory so those components sign with AWS KMS
 without deploying Web3Signer.
 The open-source signer type remains `custom` or `CUSTOM`.
-Confirm whether that backend is available for a given deployment with the
-[Lineth team](/support).
+To request access, use the
+[strategic inquiries form](https://linea.build/contact/inquiries).
 :::
 
 ## Operator responsibilities
@@ -240,9 +241,12 @@ Operators own the following controls:
     onchain role (for example, `OPERATOR_ROLE` for coordinator submission) before
     the old key is retired, or submission reverts. Web3Signer can load a replacement
     key in its store while components keep calling the same endpoint.
-  - **Maru validator keys** are mounted as files. Changing a validator key (or
-    the validator set) requires a coordinated genesis update. See
+  - **Maru validator keys (local signing)** are mounted as files. Changing that
+    validator key or the validator set requires a coordinated genesis update.
+    See
     [Set up distributed sequencing](../how-to/set-up-distributed-sequencing.mdx#manage-the-validator-set).
+    When Lineth supplies AWS KMS signing for an enterprise deployment, the
+    validator key lives in KMS. The local key file is still used for P2P identity.
   - **Contract admin keys** (`DEFAULT_ADMIN_ROLE` and related roles) are rotated by
     granting a new holder and revoking the old one through the deployment's
     governance or multisig process. See
