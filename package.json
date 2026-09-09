@@ -67,7 +67,7 @@
     "@mermaid-js/layout-elk": "0.1.9",
     "@r74tech/docusaurus-plugin-panzoom": "2.4.2",
     "axios": "1.18.1",
-    "browserslist": "4.28.4",
+    "browserslist": "4.28.9",
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "concurrently": "10.0.4",
@@ -85,7 +85,7 @@
     "react-dom": "19.2.7",
     "react-player": "3.4.0",
     "redocusaurus": "2.5.0",
-    "sharp": "0.35.2",
+    "sharp": "0.35.4",
     "turndown": "7.2.4",
     "turndown-plugin-gfm": "1.0.2",
     "yaml": "2.9.0"
