@@ -43,8 +43,8 @@ Operators provision [roles and permissions](#role-based-access-control-rbac) (or
 users, and contract grants) through an admin API and UI.
 Permission data and JSON-RPC access logs are recorded in [audit databases](#audit-logs).
 
-Applications built on the stack must implement authentication to communicate with the
-endpoint, as well as their own read and write flows on top of the endpoint.
+Applications built on the stack must implement authentication and their own read and write
+flows on top of the endpoint.
 
 <div class="mermaid-medium mermaid-deployment" style={{ marginBottom: "2rem" }}>
 ```mermaid
@@ -79,11 +79,11 @@ flowchart TB
 ```
 </div>
 
-A public or private deployment can configure access control.
+You can configure access control on a public or private deployment.
 In a public deployment, transaction data is posted to the
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, so the endpoint restricts who
-uses the operator's RPC; it does not hide onchain data.
-A <GlossaryTerm term="Validium">private validium</GlossaryTerm> keeps transaction data offchain, so the
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. The endpoint restricts who
+can use the operator's RPC. It does not hide data that is already onchain.
+A <GlossaryTerm term="Validium">private validium</GlossaryTerm> keeps transaction data offchain. The
 endpoint is also the path to chain data.
 
 ### Role-based access control (RBAC)
