@@ -253,7 +253,7 @@ Operators own the following controls:
     onchain role (for example, [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority)
     for coordinator submission) before the old key is retired, or submission reverts.
     Web3Signer can load a replacement key in its store while components keep calling the same endpoint.
-  - **Maru validator keys** are typically mounted as files.
+  - In the open-source stack, **Maru validator keys** are mounted as files.
     Changing that validator key or the validator set requires a
     [coordinated genesis update](../how-to/set-up-distributed-sequencing.mdx#manage-the-validator-set).
     When Lineth supplies AWS KMS signing for an enterprise deployment, the
@@ -269,9 +269,6 @@ boundary can be used from more than one region without a new key ceremony.
 
 ## See also
 
-- [Access control](./rbac.mdx): RPC and API access policy, which does not
-  replace key management
-- [Trust and responsibilities](../evaluate/trust-model.mdx): onchain roles and
+- [Access control](./rbac.mdx): How to restrict access to RPC, APIs, and tooling
+- [Trust and responsibilities](../evaluate/trust-model.mdx): Onchain roles and
   component trust boundaries
-- [Security and assurance](../evaluate/security.mdx): operator-controlled
-  security surfaces and cryptographic primitives
