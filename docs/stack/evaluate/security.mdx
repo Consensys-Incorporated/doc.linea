@@ -54,15 +54,20 @@ For the trust boundaries behind each of these, see
 
 <GlossaryTerm term="Operator">Operators</GlossaryTerm> define and operate their own security boundary.
 Lineth does not ship a production security operations program.
+Component-level trust boundaries and failure modes are on
+[Trust and responsibilities](./trust-model.mdx).
+
 Operators are responsible for:
 
 - Infrastructure isolation and network security controls
 - [Access control](../deployment/access-control.mdx) for JSON-RPC, APIs, and tooling.
+- Validium offchain data availability and access, when the deployment uses
+  <GlossaryTerm term="Validium">validium</GlossaryTerm> mode
 - Key management via KMS-backed signing and remote signing through
-  [Web3Signer](../../protocol/architecture/index.mdx#web3signer).
+  [Web3Signer](../../protocol/architecture/index.mdx#web3signer)
 - Governance contracts or multisig controls for privileged roles, proxy
-  administration, and upgrades.
-- Monitoring and incident response tooling.
+  administration, and upgrades
+- Monitoring and incident response tooling
 
 Governance contracts and multisig controls should be treated as critical
 security infrastructure. They can hold privileged roles, coordinate emergency
@@ -92,7 +97,7 @@ The following public materials are the available assurance evidence for the Line
   computation (MPC) ceremonies and structured reference strings used by the proving system
 - [Security audits](../../protocol/reference/security-audits.mdx): The published audit reports
   for reviewed components and revisions
-- [Trust and responsibilities](./trust-model.mdx): Component-level trust boundaries and
+- [Trust and responsibilities](./trust-model.mdx): Deployment-model trust boundaries and
   failure modes
 - [Smart contracts](../../protocol/architecture/smart-contracts.mdx): The onchain contracts a
   deployment uses

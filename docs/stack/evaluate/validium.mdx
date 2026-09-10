@@ -95,18 +95,9 @@ Private validium deployments include:
 
 ## Trust and security
 
-### Trust assumptions
-
-Private validium requires trust in:
-
-- Data availability providers: they must make data available when needed
-- Validator set: must follow consensus protocol (QBFT provides fault tolerance
-  with `3f+1` validators)
-- Finalization layer: the deployment inherits the finality assumptions of the
-  selected finalization layer
-
-For the full trust assumptions, see
-[Trust and responsibilities](./trust-model.mdx).
+Trust assumptions for a private validium, including data availability, the validator set, and the
+selected finalization layer, are on
+[Trust and responsibilities](./trust-model.mdx#what-participants-can-verify).
 
 ### Security features
 
@@ -117,16 +108,10 @@ For the full trust assumptions, see
   backed by a hardware security module (HSM) or key management service (KMS)
 - Network isolation: private network topology
 
-### Data availability
-
-Where deployments use a private node set for data storage, participants must
-trust that data availability providers will make data available when needed, or
-operate under a consortium model that gives them direct access to the data
-required for verification and recovery.
-
 ## Next steps
 
 - Learn more about selecting a
   [deployment model](./deployment-models.mdx)
+- Review [trust and responsibilities](./trust-model.mdx#what-participants-can-verify)
 - Review [security and assurance](./security.mdx)
 - Review [compliance](./compliance.mdx)
