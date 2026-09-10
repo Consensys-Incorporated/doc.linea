@@ -14,10 +14,9 @@ That endpoint authenticates callers and enforces role-based access control (RBAC
 
 For data visibility choices, see [Privacy and data visibility](../evaluate/validium.mdx).
 
-:::important
+:::warning Access control is not cryptographic privacy
 
-Access control is not cryptographic privacy.
-It limits who can use the operator's RPC, but it does not hide chain data from the
+Access control limits who can use the operator's RPC, but it does not hide chain data from the
 operator who runs the node or stores the data.
 It does not make public chain data private, replace zero-knowledge proofs, or provide
 data availability.
@@ -30,7 +29,7 @@ Operators can configure access control independently of
 [deployment model](../evaluate/deployment-models.mdx) and
 [data availability](data-availability-finalization.mdx).
 
-A restricted deployment exposes **one RPC endpoint**.
+A restricted deployment exposes one RPC endpoint (the access control endpoint).
 Wallets, apps, and other clients access this endpoint, not the Lineth node directly.
 The access control endpoint:
 
@@ -43,8 +42,8 @@ Operators provision [roles and permissions](#role-based-access-control-rbac) (or
 users, and contract grants) through an admin API and UI.
 Permission data and JSON-RPC access logs are recorded in [audit databases](#audit-logs).
 
-Applications built on the stack must implement authentication to communicate with the
-endpoint, as well as their own read and write flows on top of the endpoint.
+Applications built on the stack must implement authentication and their own read and write
+flows on top of the endpoint.
 
 <div class="mermaid-medium mermaid-deployment" style={{ marginBottom: "2rem" }}>
 ```mermaid
@@ -79,19 +78,19 @@ flowchart TB
 ```
 </div>
 
-A public or private deployment can configure access control.
+You can configure access control on a public or private deployment.
 In a public deployment, transaction data is posted to the
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, so the endpoint restricts who
-uses the operator's RPC; it does not hide onchain data.
-A <GlossaryTerm term="Validium">private validium</GlossaryTerm> keeps transaction data offchain, so the
-endpoint is also the path to chain data.
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
+The endpoint restricts who can use the operator's RPC;
+It does not hide data that is already onchain.
+
+In a <GlossaryTerm term="Validium">private validium</GlossaryTerm>, transaction data is
+kept offchain, so the endpoint is also the path to chain data.
 
 ### Role-based access control (RBAC)
 
-The endpoint evaluates a role-based access control (RBAC) model: permissions are
-organization-scoped and group-centric.
-After the endpoint authenticates the caller, it checks the group's method allowlist, claims, and
-contract grants.
+The endpoint enforces role-based access control (RBAC) inside an organization.
+Permissions belong to a group, not an individual user.
 
 - An **organization** is the tenant boundary.
   Users, groups, and contract registrations belong to an organization.
@@ -101,11 +100,14 @@ contract grants.
   (DID).
   Optional flags cover KYC status and bans.
 
-A group's permission set includes:
+After the endpoint authenticates the caller, it checks the group's permission set.
+A permission set includes:
 
 - **Method allowlist:** Which JSON-RPC methods members may call.
-- **Claims:** Extra permissions on top of the method allowlist: `deploy` (create contracts), `upgrade`
-  (upgrade contracts), and `admin` (includes deploy and upgrade).
+- **Claims:** Extra permissions on top of the method allowlist:
+  - A `deploy` claim allows creating contracts.
+  - An `upgrade` claim allows upgrading proxy (upgradeable) contracts.
+  - An `admin` claim includes deploy and upgrade permissions.
 - **Contract grants:** Per-group permission on a registered contract: this group may use this contract,
   optionally limited to function selectors, parameter constraints, and event topics.
   Contracts stay private until a grant exists.
@@ -115,7 +117,7 @@ A group's permission set includes:
     example, a parameter that must equal the caller's own address).
   - Event rules can deny logs, allow all, or allow specific event topics.
 
-This RBAC data is stored in a PostgreSQL database.
+This RBAC data is stored in a dedicated database.
 The access control endpoint reads that data when it evaluates a request.
 
 ### Audit logs
@@ -123,13 +125,15 @@ The access control endpoint reads that data when it evaluates a request.
 The access control endpoint writes two streams:
 
 - **Access log:** One record per JSON-RPC decision (allow or deny), stored in a database separate from
-  RBAC data, with a restricted append-only role and a hash chain over entries.
+  RBAC data.
+  Records are append-only: they cannot be edited or deleted.
+  Each record is hashed with the previous one so a change is detectable.
 - **Control-plane audit:** One record each time an organization, group, user, membership, contract, or
   contract grant is created, updated, deleted, assigned, or revoked.
   These records live with the RBAC data.
 
-These logs are evidence that a request was allowed or denied under the active
-[RBAC](#role-based-access-control-rbac) permissions at that time.
+These logs are operator records of whether a request was allowed or denied under the
+active [RBAC](#role-based-access-control-rbac) permissions at that time.
 
 ## How a request is evaluated
 
