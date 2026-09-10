@@ -32,3 +32,13 @@ section.
 Where a page already uses a term consistently, keep matching it rather than introducing a
 new term. If you're unsure whether a name is final, leave the existing wording in place and
 note your question in the pull request description rather than guessing.
+
+## Lineth deployment vs. Lineth network
+
+Do not treat **deployment** and **network** as interchangeable, and do not switch between
+them at random on the same page.
+
+- A **deployment** is the operator's instance of the stack: topology, access control,
+  data availability, finalization layer, and endpoints. Use it for how the stack is run.
+- A **network** is the chain that instance produces: it has a chain ID and state, and it
+  sends or claims messages. Use it for chain-to-chain behavior.
