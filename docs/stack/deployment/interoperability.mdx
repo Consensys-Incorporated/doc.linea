@@ -1,5 +1,6 @@
 ---
-title: Deployment interoperability
+title: Lineth-to-Lineth interoperability
+sidebar_label: Lineth-to-Lineth interop
 description: >-
   How two Lineth deployments exchange contract calls, and how a restricted
   destination authorizes those calls
@@ -7,8 +8,7 @@ description: >-
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-This page describes how two <GlossaryTerm term="Lineth" /> deployments communicate with each
-other.
+This page describes how two <GlossaryTerm term="Lineth" /> networks communicate with each other.
 
 A Lineth network communicates with its
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> through
@@ -16,16 +16,22 @@ A Lineth network communicates with its
 the message service and token bridge.
 Claiming is permissionless: anyone who can submit the claim can execute the message.
 
-When a Lineth network wants to communicate with another Lineth network that is not
-[access controlled](access-control.mdx) (unrestricted), and the networks share a
-finalization layer, they can use canonical interoperability: the source network sends a
-message to the finalization layer, and the destination network claims it from the finalization layer.
+To communicate between two Lineth networks, use canonical interoperability when both of these are true:
 
-When a Lineth network wants to communicate with an [access controlled](access-control.mdx) (restricted)
-network, or the two deployments do not share a finalization layer, they communicate
-directly with each other over a trusted bridge.
-The destination network's access control endpoint checks the inbound call against role-based
-access control (RBAC) permissions before it accepts the call.
+- The deployments share a finalization layer.
+- The destination is not [access controlled](access-control.mdx) (unrestricted).
+
+The source network sends a message to the finalization layer, and the destination
+network claims it.
+
+Communicate directly using a trusted bridge when either of these is true:
+
+- The deployments do not share a finalization layer.
+- The destination is [access controlled](access-control.mdx) (restricted).
+
+On a restricted destination, its access control endpoint checks the inbound
+call against role-based access control (RBAC) permissions before the destination network
+accepts the call.
 
 <div class="mermaid-medium mermaid-deployment">
 ```mermaid
@@ -97,7 +103,7 @@ Two restricted networks can communicate with each other as follows:
 sequenceDiagram
   participant App as Wallets and apps
   participant Src as Source access control endpoint
-  participant Dest as Destination deployment
+  participant Dest as Destination network
   participant DestEP as Destination access control endpoint
 
   App->>Src: Authenticate, then stage the call
@@ -124,8 +130,8 @@ on the destination are not separately evaluated.
 
 :::info Trust assumptions
 
-Deployment interoperability is a [trusted bridge](../evaluate/trust-model.mdx): there is no shared proof across the two
-Lineth networks that replaces operator and relayer trust.
+Communicating directly between networks using the process outlined here is a [trusted bridge](../evaluate/trust-model.mdx).
+There is no shared proof across the two Lineth networks that replaces operator and relayer trust.
 Each side trusts its own access control configuration, its own permissions, and the peer
 deployment endpoints it has configured.
 

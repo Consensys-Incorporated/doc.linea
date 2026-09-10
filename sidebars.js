@@ -481,7 +481,7 @@ const sidebars = {
         "stack/deployment/distributed-sequencing",
         "stack/deployment/high-availability",
         "stack/deployment/access-control",
-        "stack/deployment/deployment-interoperability",
+        "stack/deployment/interoperability",
       ],
     },
     {
