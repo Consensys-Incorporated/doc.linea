@@ -45,7 +45,7 @@ Do not reuse one key across roles.
       </td>
       <td>
         Submission from that address stalls or can be issued by an attacker until
-        <a href="../evaluate/trust-model#admin-keys-and-upgrade-authority"><code>OPERATOR_ROLE</code></a> is revoked
+        <a href="../evaluate/trust-model#system-contract-roles"><code>OPERATOR_ROLE</code></a> is revoked
       </td>
     </tr>
     <tr>
@@ -59,7 +59,7 @@ Do not reuse one key across roles.
       </td>
       <td>
         Finalization from that address stalls or can be issued by an attacker until
-        <a href="../evaluate/trust-model#admin-keys-and-upgrade-authority"><code>OPERATOR_ROLE</code></a> is revoked
+        <a href="../evaluate/trust-model#system-contract-roles"><code>OPERATOR_ROLE</code></a> is revoked
       </td>
     </tr>
     <tr>
@@ -136,10 +136,10 @@ Do not reuse one key across roles.
 </table>
 
 Coordinator blob and aggregation signers must use an Ethereum address that
-holds the rollup contracts' [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority).
+holds the rollup contracts' [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#system-contract-roles).
 Custody (how the key is stored) does not grant that role.
 Keep signer addresses aligned with the role holders in
-[Admin keys and upgrade authority](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority).
+[System contract roles](../evaluate/trust-model.mdx#system-contract-roles).
 
 ## Key custody options
 
@@ -239,7 +239,7 @@ Operators own the following controls:
   (IAM) policies or a signer access control list (ACL), network isolation, and
   credential rotation for anyone allowed to sign.
 - **Onchain authorization**: Grant the signer address the role it needs
-  ([`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority) for coordinator submission),
+  ([`OPERATOR_ROLE`](../evaluate/trust-model.mdx#system-contract-roles) for coordinator submission),
   and revoke it when the key is retired.
 - **Access review and audit**: Review who can use the KMS key, Web3Signer API,
   and onchain roles. Retain and review signer and KMS audit logs against your
@@ -250,7 +250,7 @@ Operators own the following controls:
   - **Operational signers** (coordinator, Postman, sequencer liveness plugin) sign as a
     specific Ethereum address. Changing the key changes the sender unless the new
     material is the same key pair. If you change the address, update the matching
-    onchain role (for example, [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority)
+    onchain role (for example, [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#system-contract-roles)
     for coordinator submission) before the old key is retired, or submission reverts.
     Web3Signer can load a replacement key in its store while components keep calling the same endpoint.
   - In the open-source stack, **Maru validator keys** are mounted as files.
@@ -258,11 +258,10 @@ Operators own the following controls:
     [coordinated genesis update](../how-to/set-up-distributed-sequencing.mdx#manage-the-validator-set).
     When Lineth supplies AWS KMS signing for an enterprise deployment, the
     validator key lives in the KMS. The local key file is still used for P2P identity.
-  - **Contract admin keys** ([`DEFAULT_ADMIN_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority)
+  - **Contract admin keys** ([`DEFAULT_ADMIN_ROLE`](../evaluate/trust-model.mdx#system-contract-roles)
     and related roles) are rotated by
     granting a new holder and revoking the old one through the deployment's
-    governance or multisig process. See
-    [Failure modes and recovery](../evaluate/trust-model.mdx#failure-modes-and-recovery).
+    governance or multisig process.
 
 For [high availability](high-availability.mdx) placement, hardware-backed keys that stay in an HSM
 boundary can be used from more than one region without a new key ceremony.
