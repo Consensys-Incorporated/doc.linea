@@ -67,9 +67,8 @@ Common examples include:
 
 **Special cases**
 
-- [Web3Signer](../../protocol/architecture/index.mdx#web3signer): remote signing with integration with a large number of Key Management Solutions (KMS):
-  - Not required for correctness
-  - *In* trust boundary (signing path)
-  - Not replaceable: currently, Web3Signer is integral
-  - Optional
+- [Web3Signer](../../protocol/architecture/index.mdx#web3signer): Optional remote signing service
+  that can front files, vaults, and cloud key management services (KMS).
+  Web3Signer is in the signing-path trust boundary.
+  See [Key management](./key-management.mdx) for how to configure Web3Signer and other key custody options.
 
