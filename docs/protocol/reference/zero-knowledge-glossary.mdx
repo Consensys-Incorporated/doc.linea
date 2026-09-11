@@ -245,6 +245,10 @@ The point at which a block is confirmed and committed on the L2 itself, before i
 
 The Lineth component that maintains the network's state representation for proof generation and recovery. It consists of a Besu node with the Shomei plugin and a Shomei node that uses sparse Merkle trees to track state changes block by block, generate Merkle proofs for state transitions, and serve `linea_getProof` RPC requests.
 
+### System contracts
+
+The onchain contracts Lineth deploys on the finalization layer and on the network. They include the finalization contract, which verifies proofs and records state, and the message service and token bridge contracts, which move messages and tokens between the two chains.
+
 ### Tracer
 
 The Linea Besu plugin, part of the sequencer, that generates the execution traces the prover needs to create zero-knowledge proofs. The tracer provides trace counts for batch-size calculations and produces conflated trace files as prover input.

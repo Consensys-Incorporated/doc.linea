@@ -22,7 +22,7 @@ is the network's onchain root of trust: nothing the network claims about its own
 until this contract has recorded it.
 The finalization contract:
 
-- Verifies the <GlossaryTerm term="zk-SNARK" /> proof submitted for each range of blocks, and records the
+- Calls a verifier contract to check the <GlossaryTerm term="zk-SNARK" /> proof submitted for each range of blocks, and records the
   resulting finalized state.
 - Accepts the transaction data the network publishes, through whichever
   [data submission model](./index.mdx#transaction-lifecycle) the deployment uses.
@@ -66,7 +66,7 @@ Lineth's upgradeable contracts, including the finalization contract, message ser
 pattern (v4.x): state lives in a proxy, and an upgrade replaces the implementation the proxy delegates to.
 
 Who holds upgrade authority is a deployment decision, not a protocol one.
-See [Trust and responsibilities](../../stack/evaluate/trust-model.mdx) for how that authority is scoped.
+See [Trust model](../../stack/evaluate/trust-model.mdx) for how that authority is scoped.
 
 :::note Linea Mainnet
 

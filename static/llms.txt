@@ -174,7 +174,7 @@
 - [Stack overview](https://docs.linea.build/stack): What Lineth is and who it is for.
 - [Evaluate Lineth](https://docs.linea.build/stack/evaluate): Evidence paths for evaluating a Lineth deployment.
 - [Deployment models](https://docs.linea.build/stack/evaluate/deployment-models): Public deployments, private validium deployments, and operator design trade-offs.
-- [Trust and responsibilities](https://docs.linea.build/stack/evaluate/trust-model): Trust assumptions, authority, and failure boundaries.
+- [Trust model](https://docs.linea.build/stack/evaluate/trust-model): Trust assumptions, authority, and failure boundaries.
 - [Privacy and data visibility](https://docs.linea.build/stack/evaluate/validium): What is published, retained offchain, visible, and verifiable.
 - [Security and assurance](https://docs.linea.build/stack/evaluate/security): Protocol guarantees, operator controls, and assurance evidence.
 - [Compliance](https://docs.linea.build/stack/evaluate/compliance): Protocol evidence operators can use in a compliance program, and what Lineth does not claim.
