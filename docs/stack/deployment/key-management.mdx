@@ -1,0 +1,274 @@
+---
+title: Key management
+description: >-
+  Signer roles, custody backends, and operator responsibilities for Lineth
+  deployments
+image: /img/socialCards/key-management.jpg
+---
+
+import GlossaryTerm from "@theme/GlossaryTerm";
+
+This page describes the signer roles in the <GlossaryTerm term="Lineth" /> stack, the key custody options
+each role can use, and the controls the <GlossaryTerm term="Operator">operator</GlossaryTerm> owns.
+
+## Signer roles
+
+The Lineth deployment components sign data using dedicated keys.
+The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> has three signer roles
+(blob submission, aggregation, and message anchoring).
+The <GlossaryTerm term="Postman" /> has two (message relay on the Lineth network and
+finalization layer).
+The <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> liveness plugin and
+<GlossaryTerm term="Maru validator" /> each have one.
+Each signer role has its own key, configuration, and impact if that key is lost or compromised.
+Do not reuse one key across roles.
+
+<table className="table-valign-middle table-narrow-first-col">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>What it signs</th>
+      <th>Configuration reference</th>
+      <th>If the key is lost or compromised</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">Coordinator</td>
+      <td>
+        Blob submission to the finalization layer
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-coordinator-options#l1-submission">
+          <code>l1-submission.blob.signer.type</code>
+        </a>
+      </td>
+      <td>
+        Submission from that address stalls or can be issued by an attacker until
+        <a href="../evaluate/trust-model#admin-keys-and-upgrade-authority"><code>OPERATOR_ROLE</code></a> is revoked
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Aggregation and finalization submissions
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-coordinator-options#l1-submission">
+          <code>l1-submission.aggregation.signer.type</code>
+        </a>
+      </td>
+      <td>
+        Finalization from that address stalls or can be issued by an attacker until
+        <a href="../evaluate/trust-model#admin-keys-and-upgrade-authority"><code>OPERATOR_ROLE</code></a> is revoked
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Message-anchoring transactions
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-coordinator-options#message-anchoring">
+          <code>message-anchoring.signer.type</code>
+        </a>
+      </td>
+      <td>
+        Anchoring from that address stalls or can be issued by an attacker
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="2">Postman</td>
+      <td>
+        Message claim or relay on the finalization layer
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-postman-options#signer">
+          <code>L1_SIGNER_TYPE</code>
+        </a>
+      </td>
+      <td>
+        Finalization layer relay from that address stalls or can be issued by an attacker
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Message claim or relay on the Lineth network
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-postman-options#signer">
+          <code>L2_SIGNER_TYPE</code>
+        </a>
+      </td>
+      <td>
+        Lineth network relay from that address stalls or can be issued by an attacker
+      </td>
+    </tr>
+    <tr>
+      <td>Sequencer liveness plugin</td>
+      <td>
+        Liveness contract transactions
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-besu-plugin-options#sequencer--liveness-service">
+          <code>--plugin-linea-liveness-signer-type</code>
+        </a>
+      </td>
+      <td>
+        Liveness reporting from that address stalls or can be issued by an
+        attacker. Block production does not use this key
+      </td>
+    </tr>
+    <tr>
+      <td>Maru validator</td>
+      <td>
+        QBFT consensus messages
+      </td>
+      <td>
+        <a href="../../reference/component-configuration/linea-maru-options#persistence">
+          <code>persistence.private-key-path</code>
+        </a>
+      </td>
+      <td>
+        That validator can miss or sign unauthorized consensus messages.
+        Replacing the key is a coordinated genesis update
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Coordinator blob and aggregation signers must use an Ethereum address that
+holds the rollup contracts' [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority).
+Custody (how the key is stored) does not grant that role.
+Keep signer addresses aligned with the role holders in
+[Admin keys and upgrade authority](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority).
+
+## Key custody options
+
+Each signer role configures a key custody backend.
+Lineth supports the following custody options.
+
+### Local private key
+
+A local backend keeps the private key in the signing component: in process memory, or as a
+Maru validator key file.
+
+Configure `web3j` for the [coordinator](../../reference/component-configuration/linea-coordinator-options#l1-submission)
+or `private-key` for the [Postman](../../reference/component-configuration/linea-postman-options#signer)
+to load a hex-encoded secp256k1 private key into the process.
+Use those backends for development and local testing only.
+The [local stack quickstart](../how-to/run-local-lineth-stack.mdx) generates runtime
+keys for that purpose and is not a production custody model.
+
+:::warning Do not use in-process keys in production
+In a production deployment, keep coordinator and Postman keys in hardware-backed
+custody: a hardware security module (HSM) or cloud key management service (KMS), through
+Web3Signer, the Postman's AWS KMS backend, or a custom signer factory.
+:::
+
+Set `private-key-path` for
+[Maru](../../reference/component-configuration/linea-maru-options#persistence) to mount a validator key as a file.
+Protect the file in production.
+To use hardware-backed custody for Maru signing, use a [custom signer factory](#custom-signer-factory).
+
+### Web3Signer
+
+<GlossaryTerm term="Web3Signer" /> is a remote signing service you call over HTTP.
+When using Web3Signer, the Lineth component holds the endpoint and the public key.
+Web3Signer holds the private key in the store attached to it.
+
+Configure `web3signer` for the [coordinator](../../reference/component-configuration/linea-coordinator-options#l1-submission)
+or [Postman](../../reference/component-configuration/linea-postman-options#signer), or
+`WEB3SIGNER` for the [sequencer liveness plugin](../../reference/component-configuration/linea-besu-plugin-options#sequencer--liveness-service),
+to call Web3Signer over HTTP.
+Optional mutual TLS uses PKCS12 keystore and truststore files.
+
+Use Web3Signer when a component should sign without holding the private key, or
+when you want an HSM or KMS that Lineth does not call directly.
+Several components can share one Web3Signer.
+See the [Web3Signer documentation](https://docs.web3signer.consensys.io/) for more information.
+
+### AWS KMS (Postman)
+
+AWS Key Management Service (KMS) is a managed cloud keystore.
+When using AWS KMS, the <GlossaryTerm term="Postman" /> holds a key ID, Amazon Resource Name (ARN), or alias.
+It loads the public key from the KMS and asks the KMS to sign; the private key stays in the KMS.
+
+Configure `aws-kms` for the [Postman](../../reference/component-configuration/linea-postman-options#signer)
+to sign with AWS KMS.
+Provide the key ID, ARN, or alias.
+Region is optional and falls back to the AWS SDK default.
+
+The Postman requires a key with [spec](https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose-key-spec.html)
+`ECC_SECG_P256K1` and [usage](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#key-usage) `SIGN_VERIFY`.
+It calls `kms:GetPublicKey` once to derive the Ethereum address, then `kms:Sign`
+with `MessageType=DIGEST` for each transaction.
+Credentials come from the AWS default provider chain, not from the Postman configuration.
+
+The coordinator and the sequencer liveness plugin do not have a built-in `aws-kms` type.
+To keep those keys in a KMS, point those components at Web3Signer and
+[load the key from AWS KMS](https://docs.web3signer.consensys.io/how-to/store-keys/vaults/aws/kms-execution-layer)
+in Web3Signer, use [another store Web3Signer supports](https://docs.web3signer.consensys.io/how-to/store-keys),
+or use a [custom signer factory](#custom-signer-factory).
+
+### Custom signer factory
+
+A custom factory injects a named signer that is not one of the built-in local, Web3Signer,
+or AWS KMS backends.
+
+Configure `CUSTOM` for the [coordinator](../../reference/component-configuration/linea-coordinator-options#l1-submission)
+or [sequencer liveness plugin](../../reference/component-configuration/linea-besu-plugin-options#sequencer--liveness-service)
+to resolve a named signer through an injected factory.
+The coordinator fails if no factory is configured for that name.
+
+:::tip Lineth for institutions
+For institutional and enterprise deployments, Lineth can supply the custom factory so the
+coordinator, sequencer liveness plugin, and Maru validator sign with AWS KMS without deploying Web3Signer.
+This is a proprietary feature that is not part of the open-source stack.
+To request access, use the
+[strategic inquiries form](https://linea.build/contact/inquiries).
+:::
+
+## Operator responsibilities
+
+Operators own the following controls:
+
+- **Key generation**: Create each key in the chosen store (local file,
+  Web3Signer store, or AWS KMS).
+- **Storage and custody**: Keep private key material out of application configuration
+  and source control. Use hardware-backed custody for production signing.
+- **Access to the signer**: Apply least-privilege identity and access management
+  (IAM) policies or a signer access control list (ACL), network isolation, and
+  credential rotation for anyone allowed to sign.
+- **Onchain authorization**: Grant the signer address the role it needs
+  ([`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority) for coordinator submission),
+  and revoke it when the key is retired.
+- **Access review and audit**: Review who can use the KMS key, Web3Signer API,
+  and onchain roles. Retain and review signer and KMS audit logs against your
+  policy.
+- **Incident response**: Detect compromise, pause affected subsystems, revoke
+  roles, and replace keys.
+- **Rotation and recovery**: Plan rotation and recovery per key class:
+  - **Operational signers** (coordinator, Postman, sequencer liveness plugin) sign as a
+    specific Ethereum address. Changing the key changes the sender unless the new
+    material is the same key pair. If you change the address, update the matching
+    onchain role (for example, [`OPERATOR_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority)
+    for coordinator submission) before the old key is retired, or submission reverts.
+    Web3Signer can load a replacement key in its store while components keep calling the same endpoint.
+  - In the open-source stack, **Maru validator keys** are mounted as files.
+    Changing that validator key or the validator set requires a
+    [coordinated genesis update](../how-to/set-up-distributed-sequencing.mdx#manage-the-validator-set).
+    When Lineth supplies AWS KMS signing for an enterprise deployment, the
+    validator key lives in the KMS. The local key file is still used for P2P identity.
+  - **Contract admin keys** ([`DEFAULT_ADMIN_ROLE`](../evaluate/trust-model.mdx#admin-keys-and-upgrade-authority)
+    and related roles) are rotated by
+    granting a new holder and revoking the old one through the deployment's
+    governance or multisig process. See
+    [Failure modes and recovery](../evaluate/trust-model.mdx#failure-modes-and-recovery).
+
+For [high availability](high-availability.mdx) placement, hardware-backed keys that stay in an HSM
+boundary can be used from more than one region without a new key ceremony.
+
+## See also
+
+- [Access control](./access-control.mdx): How to restrict access to JSON-RPC, APIs, and tooling.
+- [Trust and responsibilities](../evaluate/trust-model.mdx): Onchain roles and
+  component trust boundaries.

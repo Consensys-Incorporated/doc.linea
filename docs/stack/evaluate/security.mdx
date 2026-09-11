@@ -59,15 +59,15 @@ Component-level trust boundaries and failure modes are on
 
 Operators are responsible for:
 
-- Infrastructure isolation and network security controls
+- Infrastructure isolation and network security controls.
 - [Access control](../deployment/access-control.mdx) for JSON-RPC, APIs, and tooling.
-- Validium offchain data availability and access, when the deployment uses
-  <GlossaryTerm term="Validium">validium</GlossaryTerm> mode
-- Key management via KMS-backed signing and remote signing through
-  [Web3Signer](../../protocol/architecture/index.mdx#web3signer)
+- Offchain data availability and access, in a <GlossaryTerm term="Validium">private validium</GlossaryTerm>.
+- [Key management](../deployment/key-management.mdx) via KMS-backed signing and
+  remote signing through
+  [Web3Signer](../../protocol/architecture/index.mdx#web3signer).
 - Governance contracts or multisig controls for privileged roles, proxy
-  administration, and upgrades
-- Monitoring and incident response tooling
+  administration, and upgrades.
+- Monitoring and incident response tooling.
 
 Governance contracts and multisig controls should be treated as critical
 security infrastructure. They can hold privileged roles, coordinate emergency
