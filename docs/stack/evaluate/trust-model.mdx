@@ -28,8 +28,7 @@ In both deployment models, the components can take these actions:
   the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 - The <GlossaryTerm term="System contracts">system contracts</GlossaryTerm> can pause subsystems, change the verifier address, change rate limits,
   and upgrade contracts through the proxy upgrade path (and, on a
-  <GlossaryTerm term="Canonical token bridge">canonical bridge</GlossaryTerm>, pause and upgrade
-  roles).
+  <GlossaryTerm term="Canonical token bridge">canonical bridge</GlossaryTerm>, pause and upgrade [contract roles](#system-contract-roles)).
 
 In both models, the components **cannot**:
 
@@ -38,7 +37,7 @@ In both models, the components **cannot**:
 - Modify state independently of the sequencer or prover.
 - Process canonical bridge messages that are not tied to a verified state commitment, unless
   a privileged role upgrades or reconfigures the contracts.
-- Bypass the [contract roles](#system-contract-roles) in the deployed implementation.
+- Bypass the contract roles in the deployed implementation.
   Privileged functions require the matching role.
 
 Each participant can read state visible to them and broadcast transactions.
@@ -49,7 +48,8 @@ Access control does not hide data already posted onchain.
 
 When the deployment uses
 <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>,
-you also trust the validator set to follow consensus (`3f+1` validators).
+block production depends on the validator set: with `3f+1` validators, at most `f` can fail
+or deviate.
 See [Multi-validator consensus](../deployment/distributed-sequencing.mdx).
 
 ### What participants can verify
@@ -57,7 +57,7 @@ See [Multi-validator consensus](../deployment/distributed-sequencing.mdx).
 In every deployment, participants can check that a proof was accepted by reading the
 [finalization contract](../../protocol/architecture/smart-contracts.mdx#finalization-contract) on
 the finalization layer.
-They can also read submission events, contract role assignments, contract state, proxy admin,
+They can also read submission events, [contract role](#system-contract-roles) assignments, contract state, proxy admin,
 implementation addresses, and canonical bridge events on that layer.
 
 In a public deployment, transaction data is posted onchain to the finalization layer.
@@ -98,7 +98,7 @@ and those pause and upgrade roles.
 A deployment inherits its finalization layer's finality.
 The deployment carries its own sequencer, prover, contract role, and verifier assumptions.
 
-If the finalization layer is Linea Mainnet, the deployment also depends on Linea operating that
+If the finalization layer is Linea Mainnet, the deployment also depends on Linea Mainnet operating the
 same component stack, plus Linea's Security Council and its bridge to Ethereum.
 Verifying the chain end-to-end requires verifying both the deployment's proof on Linea
 Mainnet and Linea Mainnet's proofs on Ethereum.
