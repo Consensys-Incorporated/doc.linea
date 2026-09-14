@@ -41,9 +41,11 @@ In both models, the components **cannot**:
 - Bypass the [contract roles](#system-contract-roles) in the deployed implementation.
   Privileged functions require the matching role.
 
-Each participant runs their own nodes if they choose to.
-A participant can read state visible to them and broadcast transactions.
+Each participant can read state visible to them and broadcast transactions.
 They cannot modify network state.
+What a participant can see through the operator's RPC depends on the deployment's
+[access control](../deployment/access-control.mdx) configuration.
+Access control does not hide data already posted onchain.
 
 When the deployment uses
 <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>,
