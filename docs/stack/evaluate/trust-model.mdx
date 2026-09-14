@@ -97,8 +97,11 @@ and those pause and upgrade roles.
 
 A deployment inherits its finalization layer's finality.
 The deployment carries its own sequencer, prover, contract role, and verifier assumptions.
+
 If the finalization layer is Linea Mainnet, the deployment also depends on Linea operating that
 same component stack, plus Linea's Security Council and its bridge to Ethereum.
+Verifying the chain end-to-end requires verifying both the deployment's proof on Linea
+Mainnet and Linea Mainnet's proofs on Ethereum.
 See [Linea Mainnet risk disclosures](/network/risk-disclosures).
 
 ## System contract roles
