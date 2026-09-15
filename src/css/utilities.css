@@ -44,6 +44,13 @@
   max-width: 9rem;
 }
 
+/* Size every column to its content instead of the 12rem site-wide min-width */
+.linea-table-wrapper > table.table-fit-cols thead th,
+.linea-table-wrapper > table.table-fit-cols tbody td {
+  min-width: 0;
+  width: auto;
+}
+
 /* Intro row with copy button (e.g. API quickstart) */
 .intro-with-copy {
   display: flex;
