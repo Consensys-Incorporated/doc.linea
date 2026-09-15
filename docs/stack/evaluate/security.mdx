@@ -48,7 +48,7 @@ Under the configured deployment model, Lineth provides:
   tied to verified state transitions in the normal protocol path.
 
 For the trust boundaries behind each of these, see
-[Trust and responsibilities](./trust-model.mdx).
+[Trust model](./trust-model.mdx).
 
 ## Operator-controlled security surfaces
 
@@ -56,8 +56,9 @@ For the trust boundaries behind each of these, see
 Lineth does not ship a production security operations program.
 Operators are responsible for:
 
-- Infrastructure isolation and network security controls
+- Infrastructure isolation and network security controls.
 - [Access control](../deployment/access-control.mdx) for JSON-RPC, APIs, and tooling.
+- Offchain data availability and access, in a <GlossaryTerm term="Validium">private validium</GlossaryTerm>.
 - [Key management](../deployment/key-management.mdx) via KMS-backed signing and
   remote signing through
   [Web3Signer](../../protocol/architecture/index.mdx#web3signer).
@@ -93,7 +94,7 @@ The following public materials are the available assurance evidence for the Line
   computation (MPC) ceremonies and structured reference strings used by the proving system
 - [Security audits](../../protocol/reference/security-audits.mdx): The published audit reports
   for reviewed components and revisions
-- [Trust and responsibilities](./trust-model.mdx): Component-level trust boundaries and
+- [Trust model](./trust-model.mdx): Component-level trust boundaries and
   failure modes
 - [Smart contracts](../../protocol/architecture/smart-contracts.mdx): The onchain contracts a
   deployment uses

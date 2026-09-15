@@ -454,7 +454,7 @@ const sidebars = {
         {
           type: "doc",
           id: "stack/evaluate/trust-model",
-          label: "Trust and responsibilities",
+          label: "Trust model",
         },
         {
           type: "doc",
