@@ -7,6 +7,7 @@ image: /img/socialCards/monitor-a-deployment.jpg
 ---
 
 import GlossaryTerm from "@theme/GlossaryTerm";
+import IconExternalLink from "@theme/Icon/ExternalLink";
 
 This page describes how to expose health and metrics endpoints on a
 <GlossaryTerm term="Lineth" /> deployment, and what to watch once they are scraped.
@@ -28,6 +29,7 @@ The `/metrics` endpoint exports named counters and gauges in
 For each component you operate, do the following:
 
 1. Set the option that opens the HTTP server.
+   Linea Besu and the prover also require setting an option to enable metrics.
 2. Allow Prometheus (or another scraper) to reach that host and port.
 3. Poll `http://<host>:<port><endpoint>` with HTTP `GET` on an interval, or add
    that URL as a Prometheus scrape target.
@@ -94,6 +96,38 @@ each component.
     </tr>
     <tr>
       <td>
+        <GlossaryTerm term="Linea Besu" />
+      </td>
+      <td>
+        <a
+          href="https://docs.besu-eth.org/public-networks/reference/options#metrics-enabled"
+          target="_blank"
+          rel="noopener noreferrer">
+          <code>{"--metrics-enabled"}</code>
+          <IconExternalLink />
+        </a>
+        <br />
+        <a
+          href="https://docs.besu-eth.org/public-networks/reference/options#metrics-port"
+          target="_blank"
+          rel="noopener noreferrer">
+          <code>{"--metrics-port"}</code>
+          <IconExternalLink />
+        </a>
+      </td>
+      <td>
+        <code>9545</code>
+      </td>
+      <td>Unsupported</td>
+      <td>
+        <code>/metrics</code>
+      </td>
+      <td>
+        <code>besu_</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <GlossaryTerm term="Prover" />
       </td>
       <td>
@@ -103,10 +137,6 @@ each component.
         <br />
         <a href="../../reference/component-configuration/linea-prover-options#controller">
           <code>controller.prometheus.port</code>
-        </a>
-        <br />
-        <a href="../../reference/component-configuration/linea-prover-options#controller">
-          <code>controller.prometheus.route</code>
         </a>
       </td>
       <td>
@@ -141,12 +171,8 @@ each component.
   </tbody>
 </table>
 
-:::note Prover options
-Set the prover [`controller.prometheus.enabled`](../../reference/component-configuration/linea-prover-options#controller)
-option to `true` before you scrape it.
-The prover metrics endpoint is [`controller.prometheus.route`](../../reference/component-configuration/linea-prover-options#controller)
-if you change it from the default `/metrics`.
-:::
+The coordinator, Maru, and Linea Besu default to port `9545`.
+Assign a different port or host when more than one of these processes shares a machine.
 
 The coordinator also polls the
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>
@@ -162,9 +188,9 @@ Trigger a notification when a signal stops advancing or crosses a threshold you 
 deployment's block time, finalization interval, and capacity.
 
 - **Service health:** Poll the `/health` endpoint on the coordinator and Maru to confirm each process is up and serving.
-  The prover and Postman don't have a `/health` endpoint; poll their `/metrics` endpoint to confirm those
-  processes are reachable.
-- **Data availability posting:** Watch the `linea_blob_*` metrics to see whether the coordinator is
+  Linea Besu, the prover, and the Postman don't have a `/health` endpoint.
+  Poll their `/metrics` endpoint to confirm those processes are reachable.
+- **Data availability posting:** Watch the `linea_blob_*` metrics on the coordinator to see whether it is
   submitting blobs or other data availability payloads.
   See [Data availability and finalization](../deployment/data-availability-finalization)
   for blob posting success and gas.
@@ -179,6 +205,8 @@ deployment's block time, finalization interval, and capacity.
   confirm validators still have time to produce a block.
   See [Monitor Maru](./set-up-distributed-sequencing#monitor-maru) for the key metrics and
   recommended threshold.
+- **Message relay:** Watch the `linea_postman_*` metrics on the Postman to see whether messages
+  are being claimed and relayed between the Lineth network and the finalization layer.
 - **Storage capacity:** Check proving artifacts and databases to confirm they still have room to grow.
   See [High availability](../deployment/high-availability#within-region-redundancy).
 
