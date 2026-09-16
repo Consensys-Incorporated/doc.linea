@@ -22,6 +22,6 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Case check action
-        uses: Consensys-Incorporated/github-actions/docs-case-check@28327992dc4f4eeeee937abbaebf63f00f4f6068 # main
+        uses: Consensys-Incorporated/github-actions/docs-case-check@89c262a30cae735be99dc776f9556b796fb456ca # main
         with:
           DOC_DIR: ${{ matrix.folder }}

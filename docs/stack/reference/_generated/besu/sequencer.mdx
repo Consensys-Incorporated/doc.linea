@@ -72,9 +72,10 @@ Config-file key: `rpc-config-sequencer`
 
 Config-file key: `tracer-sequencer-config`
 
-| Option                                  | Description                                        | Default                | Type     | Visibility |
-| --------------------------------------- | -------------------------------------------------- | ---------------------- | -------- | ---------- |
-| `--plugin-linea-module-limit-file-path` | Path to the toml file containing the module limits | `moduleLimitFile.toml` | `STRING` | Advanced   |
+| Option                                  | Description                                                    | Default                | Type                 | Visibility |
+| --------------------------------------- | -------------------------------------------------------------- | ---------------------- | -------------------- | ---------- |
+| `--plugin-linea-module-limit-file-path` | Path to the toml file containing the module limits             | `moduleLimitFile.toml` | `STRING`             | Advanced   |
+| `--plugin-linea-tracing-end-timestamp`  | Stop sequencer bespoke tracing at this pending block timestamp | —                      | `UNIX_EPOCH_SECONDS` | Standard   |
 
 ### Sequencer — Transaction pool validator
 
