@@ -46,7 +46,6 @@ Data is collected and updated from multiple sources:
 - MetaMask Token & Price API
 - [Dune Analytics](https://dune.com/)
 - [Nile](https://nile.build/)
-- [Moralis](https://moralis.com/)
 
 Please see the [Linea terms of use](https://linea.build/terms-of-service) about third party
 information.
@@ -64,7 +63,8 @@ Getting a raw list of tokens is good, but getting a list of tokens that are secu
 You can filter tokens according to their security status using the `isSecure` query parameter.
 
 For a token to be considered as secure,
-it must have a Moralis security score greater than 70 and a market capitalization greater than $50k.
+it must have a minimum level of trading activity (swap count) and a market capitalization greater
+than $50k.
 
 ```typescript
 async function getSecureTokens() {
