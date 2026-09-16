@@ -1,7 +1,7 @@
 ---
 title: Access control
 description: >-
-  How a restricted Lineth deployment exposes a single RPC endpoint that
+  How a restricted private validium exposes a single RPC endpoint that
   enforces access control
 image: /img/socialCards/access-control.jpg
 ---
@@ -13,20 +13,21 @@ This page describes how a <GlossaryTerm term="Lineth" />
 In a restricted deployment, clients send all reads and writes to a single RPC endpoint.
 That endpoint authenticates callers and enforces role-based access control (RBAC) permissions.
 
-For data visibility choices, see [Privacy and data visibility](../evaluate/validium.mdx).
-
 :::warning Access control is not cryptographic privacy
 
 Access control restricts who can use the operator's RPC.
 It does **not** restrict access to data that is already onchain, hide chain data from the operator who runs
 the node or stores the data, replace zero-knowledge proofs, or provide data availability.
-Operators typically configure access control on a private validium, where transaction data stays offchain.
 
 :::
 
+Operators typically configure access control on a private validium instead of a public deployment.
+Because a private validium keeps transaction data offchain, its access control endpoint is
+also the path to the chain data.
+
 ## Access control stack
 
-A restricted deployment exposes one RPC endpoint (the access control endpoint).
+A restricted private validium exposes one RPC endpoint (the access control endpoint).
 Wallets, apps, and other clients access this endpoint, not the Lineth node directly.
 The access control endpoint:
 
