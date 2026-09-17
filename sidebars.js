@@ -458,11 +458,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          id: "stack/evaluate/validium",
-          label: "Privacy and data visibility",
-        },
-        {
-          type: "doc",
           id: "stack/evaluate/security",
           label: "Security and assurance",
         },
