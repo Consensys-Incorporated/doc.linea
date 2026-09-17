@@ -1,0 +1,55 @@
+---
+title: Run and test
+sidebar_label: Overview
+description: Guides for running and testing a Lineth deployment.
+image: /img/socialCards/how-to.jpg
+---
+
+import ActionCards from "@site/src/components/ActionCards";
+import GlossaryTerm from "@theme/GlossaryTerm";
+
+This section contains guides for running and testing a <GlossaryTerm term="Lineth" /> deployment.
+Detailed production operations for a given deployment can be confirmed with the
+[Lineth team](/support) in enterprise engagements.
+
+<ActionCards
+  cards={[
+    {
+      text: "Run a local Lineth stack",
+      description:
+        "Start a local evaluation chain, deploy contracts, and verify finalization against a local L1 or Sepolia.",
+      href: "/stack/how-to/run-local-lineth-stack",
+    },
+    {
+      text: "Set up distributed sequencing",
+      description:
+        "Run Maru in multi-validator QBFT mode, including monitoring Maru and upgrading validators.",
+      href: "/stack/how-to/set-up-distributed-sequencing",
+    },
+    {
+      text: "Monitor a deployment",
+      description:
+        "Expose health and metrics endpoints, and watch finalization, data availability, and consensus signals.",
+      href: "/stack/how-to/monitor-a-deployment",
+    },
+    {
+      text: "Enable forced transactions",
+      description:
+        "Intended design for submitting forced transactions. This feature is not live.",
+      href: "/stack/how-to/enable-forced-transactions",
+    },
+    {
+      text: "Prepare for production",
+      description:
+        "Production operations require environment-specific guidance that is outside the scope of these docs. Contact support to review your operating model.",
+      href: "/support",
+    },
+  ]}
+/>
+
+:::tip
+If you're still evaluating whether Lineth is the right stack for your use case,
+see [Evaluate Lineth](../evaluate/index.mdx).
+To explore the components and architectural design choices, see
+[Deployment architecture](../deployment/index.mdx).
+:::
