@@ -23,7 +23,7 @@ objectives for their own environment.
 ## Expose health and metrics
 
 Some deployment components can expose `/health` and `/metrics` HTTP endpoints.
-The `/health` endpoint tells you whether the process answers liveness checks.
+The `/health` endpoint confirms that the process is up and serving.
 The `/metrics` endpoint exports named counters and gauges in
 [Prometheus text format](https://prometheus.io/docs/instrumenting/exposition_formats/).
 For each component you operate, do the following:
