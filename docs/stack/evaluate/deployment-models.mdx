@@ -15,7 +15,7 @@ with offchain data availability and controlled access.
 
 Consider these questions when choosing a deployment model:
 
-- [Privacy](validium.mdx) requirements: Should transaction data remain private to authorized participants?
+- Privacy requirements: Should transaction data remain private to authorized participants?
 - Regulatory and [compliance](./compliance.mdx) obligations: What controls does your program
   require, and who owns them?
 - [Data availability](../deployment/data-availability-finalization.mdx) guarantees: How important is onchain data availability for
@@ -35,7 +35,7 @@ Choose the deployment model that aligns with your requirements.
 | Who can reconstruct history | Anyone with the blob data, while it is retained | Participants the operator authorizes through DA access and RBAC |
 | Network topology | Open access | Controlled node membership |
 
-The following sections provide more details about use cases and security considerations for each model.
+The following sections provide more details about each model.
 
 ## Public deployments
 
@@ -53,51 +53,80 @@ RPC access is public, and node membership is not restricted.
 
 ### Security considerations
 
-- Validator topology: if the deployment uses a
+The following operator choices affect how you secure a public deployment:
+
+- Validator topology: If the deployment uses a
   [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4
-  Maru validators are required to tolerate one faulty validator
-- [Key management](../deployment/key-management.mdx): remote
+  Maru validators are required to tolerate one faulty validator.
+- [Key management](../deployment/key-management.mdx): Remote
   signing backed by a hardware security module (HSM) or key management service
   (KMS)
 
 ## Private validium
 
-A private validium keeps transaction data offchain, using <GlossaryTerm term="zk-SNARK" /> proofs
-to support state-transition correctness and finalization.
-RPC endpoints are protected by [access control](../deployment/access-control.mdx), and node membership is controlled.
+A private validium keeps transaction data offchain in a data availability layer, and proves state
+transitions using <GlossaryTerm term="zk-SNARK">zk-SNARK</GlossaryTerm> proofs.
+After the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> produces blocks, the
+<GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> batches them and requests a proof.
+The <GlossaryTerm term="Prover">prover</GlossaryTerm> generates a zk-SNARK proof of the resulting state transition.
+The coordinator submits that proof to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
+Only state commitments and proofs are posted onchain.
 
-Whether this model
-suits a regulated environment depends on the operator's own compliance, privacy,
-and access-control design; Lineth does not certify a deployment as compliant.
+A private validium can [restrict access to JSON-RPC](../deployment/access-control.mdx) and control
+node membership.
+
+For an illustrative topology, see the
+[example validium architecture](../deployment/index.mdx#example-architecture).
+
+Operators with regulatory or compliance obligations are responsible for
+designing their own [compliance](compliance.mdx) program.
+
+### Data visibility
+
+The following table outlines what is published and who can see it on each layer: the finalization layer,
+the private node set for data storage (data availability layer), and RPC and API surfaces.
+
+| Layer | What is published | Who can see it |
+| --- | --- | --- |
+| Finalization layer | State commitments, zk-SNARK proofs, bridge messages | Anyone reading the finalization layer |
+| Data availability layer | Transaction data, full ordered history | Participants the operator authorizes to read the offchain data |
+| RPC and API surfaces | State and transactions the caller is authorized to view | Callers with [RBAC permissions](../deployment/access-control.mdx) for the relevant endpoint |
+
+:::warning Private validium is not cryptographic privacy
+
+A private validium's offchain data availability does not make transactions cryptographically private.
+Anyone authorized to see the offchain data can read the transactions.
+The zk-SNARK proofs confirm that state transitions are correct; they do not hide that data.
+
+:::
+
+To learn what participants can verify from the published proofs and authorized offchain data, see
+[Trust model](./trust-model.mdx#what-participants-can-verify).
 
 ### Use cases
 
 - Workflows where transaction data should not be public
 - Multi-party workflows where participants should not see all transaction
   details
-- Operators who accept the validium trade-off: state-transition correctness is
-  proven onchain, but data reconstruction without the operator depends on the
-  deployment's data availability arrangement
-
-Operators with regulatory or compliance obligations are responsible for
-designing their own compliance program. See
-[Compliance](./compliance.mdx) for what protocol evidence exists and
-what is not claimed.
+- Workflows that accept the validium trade-off: state-transition correctness is
+  proven onchain, but reconstructing history requires access to the operator's
+  [offchain data](../deployment/data-availability-finalization.mdx#private-validium)
 
 ### Security considerations
 
-- Validator topology: at least 4 Maru validators are required for a
-  [QBFT design](../deployment/distributed-sequencing.mdx) that tolerates one faulty
-  validator
-- [Access control](../deployment/access-control.mdx): RBAC on RPC endpoints and API portal
-- [Key management](../deployment/key-management.mdx): remote
+The following operator choices affect how you secure a private validium:
+
+- Validator topology: If the deployment uses a
+  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators are
+  required to tolerate one faulty validator.
+- [Access control](../deployment/access-control.mdx): RBAC permissions on JSON-RPC, APIs, and tooling
+- [Key management](../deployment/key-management.mdx): Remote
   signing backed by a hardware security module (HSM) or key management service
   (KMS)
-- Network isolation: private network topology with controlled peering
+- Network isolation: Private network topology with controlled peering
 
 ## See also
 
-- [Trust model](./trust-model.mdx): Trust assumptions for each deployment model
-- [Privacy and data visibility](./validium.mdx): What a private validium publishes and who can see it
+- [Trust model](./trust-model.mdx): Trust assumptions for each deployment model, and what participants can verify
 - [Data availability and finalization](../deployment/data-availability-finalization.mdx): Where transaction
   data is stored in each deployment model, and where proofs settle
