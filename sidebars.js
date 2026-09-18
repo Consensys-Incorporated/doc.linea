@@ -482,15 +482,17 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Build and test",
+      label: "Run and test",
       collapsible: false,
       items: [
+        "stack/how-to/index",
         "stack/how-to/run-local-lineth-stack",
         {
           type: "doc",
           id: "stack/how-to/set-up-distributed-sequencing",
           label: "Set up distributed sequencing",
         },
+        "stack/how-to/monitor-a-deployment",
         "stack/how-to/enable-forced-transactions",
       ],
     },
