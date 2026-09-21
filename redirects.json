@@ -1493,9 +1493,10 @@
         ]
     },
     {
-        "to": "/stack/deployment/fast-finality",
+        "to": "/stack/deployment/finality",
         "from": [
-            "/stack/features/fast-finality"
+            "/stack/features/fast-finality",
+            "/stack/deployment/fast-finality"
         ]
     },
     {

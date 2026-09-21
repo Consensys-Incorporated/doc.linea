@@ -37,10 +37,10 @@ Detailed production topology and supported tooling for a given deployment can be
       href: "/stack/deployment/finalization-layer",
     },
     {
-      text: "Finality design",
+      text: "Finality",
       description:
         "Application-level finality on the network versus settlement finality on the finalization layer.",
-      href: "/stack/deployment/fast-finality",
+      href: "/stack/deployment/finality",
     },
     {
       text: "Multi-validator consensus",
@@ -95,9 +95,8 @@ Proofs and state commitments go to a chosen
   [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs) in a public deployment, or offchain in a
   <GlossaryTerm term="Validium">private validium</GlossaryTerm>
 - [Finalization layer](finalization-layer.mdx): Ethereum (L1) or Linea Mainnet (L2)
+- Validator model: Single Maru validator, or [multi-validator QBFT](distributed-sequencing.mdx)
 
-Operators own these choices,
-including [compliance](../evaluate/compliance.mdx) design.
 Lineth does not recommend a specific set of customizations.
 
 ## Example architecture
