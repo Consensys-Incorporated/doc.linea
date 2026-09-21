@@ -25,15 +25,21 @@ Detailed production topology and supported tooling for a given deployment can be
       href: "/stack/deployment/core-components",
     },
     {
-      text: "Data availability and finalization",
+      text: "Data availability",
       description:
-        "Where transaction data is stored and where proofs and state commitments settle on the chosen finalization layer.",
-      href: "/stack/deployment/data-availability-finalization",
+        "Where transaction data is stored: onchain in a public deployment, or offchain in a private validium.",
+      href: "/stack/deployment/data-availability",
+    },
+    {
+      text: "Finalization layer",
+      description:
+        "Where proofs and state commitments settle: on Ethereum (L1) or Linea Mainnet (L2).",
+      href: "/stack/deployment/finalization-layer",
     },
     {
       text: "Finality design",
       description:
-        "Application-level finality on the network versus settlement finality on the finalization layer, and the trade-offs between them.",
+        "Application-level finality on the network versus settlement finality on the finalization layer.",
       href: "/stack/deployment/fast-finality",
     },
     {
@@ -45,13 +51,13 @@ Detailed production topology and supported tooling for a given deployment can be
     {
       text: "High availability",
       description:
-        "Multi-region placement of the same components: validators and RPC across regions, primary and warm-standby finalization, and failure behavior.",
+        "Multi-region setup: validators and RPC across regions, primary and warm-standby finalization, and failure behavior.",
       href: "/stack/deployment/high-availability",
     },
     {
       text: "Access control",
       description:
-        "How to restrict access to JSON-RPC using a single endpoint that authenticates callers and enforces RBAC permissions.",
+        "How to restrict RPC access using a single endpoint that authenticates callers and enforces RBAC permissions.",
       href: "/stack/deployment/access-control",
     },
     {
@@ -85,10 +91,10 @@ Proofs and state commitments go to a chosen
 
 - [Key management](key-management.mdx): Local keys, remote signing through
   <GlossaryTerm term="Web3Signer" />, or AWS KMS
-- [Data availability](data-availability-finalization.mdx#data-availability): Onchain (for example,
-  [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs) or offchain in a
+- [Data availability](data-availability.mdx): Onchain (for example,
+  [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs) in a public deployment, or offchain in a
   <GlossaryTerm term="Validium">private validium</GlossaryTerm>
-- [Finalization layer](data-availability-finalization.mdx#finalization-layer): L1 (such as Ethereum) or L2 (such as Linea)
+- [Finalization layer](finalization-layer.mdx): Ethereum (L1) or Linea Mainnet (L2)
 
 Operators own these choices,
 including [compliance](../evaluate/compliance.mdx) design.
@@ -104,7 +110,7 @@ A public deployment uses the same internal services; access and data availabilit
 In this example, transaction data stays offchain in the operator's private node set, and is not
 shown on the diagram.
 In a public deployment, transaction data is posted to the finalization layer.
-See [Data availability and finalization](./data-availability-finalization.mdx).
+See [Data availability](./data-availability.mdx).
 
 For regional placement, failover, and recovery, see [High availability](./high-availability.mdx).
 
@@ -125,9 +131,9 @@ The example architecture flows as follows:
 4. Inside the operator network, the coordinator batches blocks, the tracer produces traces,
    and the prover generates <GlossaryTerm term="zk-SNARK" /> proofs.
 5. Proofs and state commitments leave that network when they are submitted to the
-   finalization layer contracts.
+   [finalization contract](../../protocol/architecture/smart-contracts.mdx#finalization-contract).
    This validium example does not post transaction data; a public deployment posts it onchain.
-   See [Data availability and finalization](./data-availability-finalization.mdx).
+   See [Data availability](./data-availability.mdx).
 6. Interoperability with the finalization layer uses the
    [canonical token bridge and message service](../../protocol/architecture/interoperability/index.mdx).
    This example also shows validium message relayers to other enterprise or public chains.

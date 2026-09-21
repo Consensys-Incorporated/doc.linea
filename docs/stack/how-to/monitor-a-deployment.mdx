@@ -192,8 +192,6 @@ deployment's block time, finalization interval, and capacity.
   Poll their `/metrics` endpoint to confirm those processes are reachable.
 - **Data availability posting:** Watch the `linea_blob_*` metrics on the coordinator to see whether it is
   submitting blobs or other data availability payloads.
-  See [Data availability and finalization](../deployment/data-availability-finalization)
-  for blob posting success and gas.
 - **Finalization:** Watch the `linea_aggregation_*` metrics on the coordinator to see whether proofs are settling.
   Confirm [`currentL2BlockNumber`](/api/linea-smart-contracts/zkevmv2#currentl2blocknumber)
   advances after a successful

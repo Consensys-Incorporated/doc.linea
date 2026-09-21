@@ -1485,10 +1485,11 @@
         ]
     },
     {
-        "to": "/stack/deployment/data-availability-finalization",
+        "to": "/stack/deployment/data-availability",
         "from": [
             "/stack/features/data-availability",
-            "/stack/how-it-works/data-availability-finalization"
+            "/stack/how-it-works/data-availability-finalization",
+            "/stack/deployment/data-availability-finalization"
         ]
     },
     {

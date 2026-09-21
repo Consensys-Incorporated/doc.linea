@@ -64,8 +64,9 @@ In a public deployment, transaction data is posted onchain to the finalization l
 While that data remains available, the operator cannot withhold data availability.
 When the finalization layer is Ethereum, transaction data is posted as
 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs.
-Participants can reconstruct state from those blobs while they are retained;
-long-term reconstruction needs independent archival.
+Participants can reconstruct state from those blobs while they are retained.
+After Ethereum's blob retention window, reconstructing history from Ethereum requires a copy of
+the blob data kept outside Ethereum's blob store.
 Participants can also verify public rollup block contents and ordering by running a
 <GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state
 from that public data.
