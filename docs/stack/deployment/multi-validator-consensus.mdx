@@ -1,0 +1,153 @@
+---
+title: Multi-validator consensus
+description: >-
+  How multiple Maru validators use QBFT for sequencer fault tolerance and
+  distributed block ordering
+sidebar_position: 4
+image: /img/socialCards/multi-validator-consensus.jpg
+---
+
+import GlossaryTerm from '@theme/GlossaryTerm';
+import MultiValidatorConsensusGraphic from '/img/stack/deployment/multi-validator-consensus.svg';
+
+This page describes multi-validator consensus for a <GlossaryTerm term="Lineth" /> deployment.
+Multiple <GlossaryTerm term="Maru validator">Maru validators</GlossaryTerm> use
+<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> to order blocks together, so
+the network can keep producing blocks if one validator fails.
+To set up and operate multiple validators, see [Run multiple Maru validators](../how-to/run-multiple-validators.mdx).
+
+[Linea Mainnet](../../network/index.mdx) runs a single, trusted Maru validator.
+A Lineth deployment can use a single validator if it accepts that trust model.
+Use multi-validator consensus when more than one party must participate in block ordering, or when the chain
+should keep producing blocks if one validator or region fails.
+
+Maru is permissioned: <GlossaryTerm term="Operator">operators</GlossaryTerm> define the validator set in the genesis file.
+
+:::warning Distributed sequencing only
+
+Multi-validator consensus only improves <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> fault tolerance.
+The rest of the deployment stays centralized.
+If the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> goes down, batching, proving, and
+submission to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> stop.
+For stack-wide high availability, see [High availability](./high-availability.mdx).
+
+:::
+
+:::note QBFT consensus
+
+The [Besu QBFT documentation](https://docs.besu-eth.org/private-networks/how-to/configure/consensus/qbft)
+describes the consensus algorithm.
+Maru manages consensus state independently from Besu.
+Besu-specific details such as `extraData` encoding and JSON-RPC validator management methods do not
+apply to Maru.
+
+:::
+
+## Sequencer nodes
+
+Each Maru validator pairs 1:1 with its own <GlossaryTerm term="Linea Besu" /> execution client running the
+<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins.
+Together they form a **sequencer node**.
+This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders, builds, and executes the block.
+
+Multiple Maru validators communicate over a QBFT mesh.
+Use [direct, static peering](../how-to/run-multiple-validators.mdx#set-up-and-configure-validators)
+between validators rather than P2P discovery to minimize latency.
+The Linea Besu clients sync chain data with each other over execution-layer P2P.
+
+No coordinator-side changes are required when running multi-validator consensus.
+The coordinator still connects to a single designated Linea Besu client as its source of truth, not to
+every sequencer node interchangeably.
+
+<div className="img-fit">
+  <MultiValidatorConsensusGraphic />
+    <em>
+      4 Maru validators, each paired 1:1 with a Linea Besu execution client.
+      The coordinator reads from a single designated sequencer node.
+    </em>
+</div>
+
+## Validator count
+
+In a multi-validator setup, we recommend a minimum of 4 validators.
+With 2 or 3 validators, the setup provides no fault-tolerance benefit: if one validator goes down, the chain
+halts.
+With 4 validators, one can go down while the chain continues.
+If a validator fails, expect 1 missed round in every 4: the offline validator's proposal slot is skipped, so
+that block's time effectively doubles.
+
+The QBFT fault-tolerance threshold is `3f+1`.
+For example:
+
+- 4 validators tolerate 1 fault (`4=3×1+1`)
+- 7 validators tolerate 2 faults (`7=3×2+1`)
+- 10 validators tolerate 3 faults (`10=3×3+1`)
+
+:::note
+Only 4-validator Lineth setups have been tested.
+Higher counts are expected to work but may require additional LibP2P configuration tuning.
+:::
+
+Geographic distribution depends on the operator's goals (latency, regulatory constraints, redundancy).
+Pick a topology that suits those goals, then apply the [latency formula](#block-time-and-latency) to
+confirm it works.
+
+## Block time and latency
+
+QBFT consensus runs in three phases per block, each requiring a one-way message between validators.
+Block production therefore requires three one-way network hops, plus a small fixed overhead (~50ms) for
+Engine API communication.
+The **block-building window** (the time available for transaction execution after consensus overhead) is:
+
+```txt
+block_building_window = configured_block_time - (3 × inter_validator_latency + ~50ms)
+```
+
+`inter_validator_latency` is the one-way latency between two validators, not the round-trip ping.
+If you measure with the `ping` command, divide by 2 to get one-way latency.
+
+Before deploying, measure the latency between your validators and pick a configured block time that
+absorbs `3 × latency` plus ~50ms of overhead.
+
+:::note
+The `3 × latency` overhead is a QBFT property and does not change with [validator count](#validatory-count).
+Adding more validators improves fault tolerance but increases latency variance.
+:::
+
+The following examples apply the block building window formula at a 1-second configured block time:
+
+| Placement | One-way latency | Consensus overhead | Block-building window at 1s |
+| --- | --- | --- | --- |
+| Same data center | ~5ms | ~65ms | ~935ms |
+| Same region (~50ms ping) | ~25ms | ~125ms | ~875ms |
+| Cross-region, for example EU↔US (~100ms ping) | ~50ms | ~200ms | ~800ms |
+| Long haul, for example EU↔Asia (~300ms ping) | ~150ms | ~500ms | ~500ms |
+
+On a long-haul path, a 1s block time leaves about 500ms of block-building window; use a 2s block time to
+increase that window to about 1.5s.
+We recommend setting a 4s block time for a globally distributed validator set.
+
+:::warning Minimum block-building window
+
+Allow at least 500ms of block-building window (configured block time minus consensus overhead) so
+transactions of typical complexity have room to execute.
+Computationally heavy transactions can exceed the window in narrow configurations.
+When that happens, the transaction is excluded from the block, remains in the mempool, and is
+retried on later blocks.
+If the window stays too narrow, the transaction keeps failing until it is evicted from the mempool.
+
+:::
+
+:::note
+Longer block times do not reduce throughput.
+They slow [application-level finality](./fast-finality.mdx): the time before users see their
+transactions confirmed.
+Throughput is reduced by inter-validator latency itself.
+:::
+
+## See also
+
+- [Run multiple Maru validators](../how-to/run-multiple-validators.mdx): Procedure for configuring validators,
+  managing the validator set, monitoring Maru, and restoring lost quorum.
+- [High availability](./high-availability.mdx): Multi-region placement of validators, RPC, and finalization.
+- [Finality design](./fast-finality.mdx): How QBFT changes application-level finality.

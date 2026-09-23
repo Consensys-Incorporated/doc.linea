@@ -146,7 +146,9 @@
  * - `.mermaid-fit` scales the diagram to the content column.
  * - `.mermaid-deployment` is the theme hook for deployment-models colors
  *   (applied in docusaurus-overrides.css via --linea-mermaid-* tokens).
+ * `.img-fit` does the same for imported SVGs that need the full content column.
  */
+.img-fit,
 .mermaid-fit,
 .mermaid-deployment {
   width: 100%;
@@ -165,6 +167,13 @@
 }
 
 /* Beat `.theme-doc-markdown … svg { max-width: none }` so fit-to-width works. */
+.theme-doc-markdown .img-fit svg {
+  display: block;
+  width: 100% !important; /* override Infima/Docusaurus svg sizing */
+  max-width: 100% !important;
+  height: auto !important;
+}
+
 .theme-doc-markdown .mermaid-fit .docusaurus-mermaid-container {
   overflow-x: visible;
 }

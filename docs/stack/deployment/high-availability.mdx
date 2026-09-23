@@ -19,8 +19,8 @@ Detailed production topology and supported tooling for a given deployment can be
 ## Example multi-region design
 
 An example HA topology includes four independent cloud regions, which is the smallest
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> validator set that can
-tolerate the loss of one region (`n=4`, `f=1`).
+<GlossaryTerm term="Maru validator">Maru validator</GlossaryTerm> set that can tolerate the loss of one region
+under <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> (`n=4`, `f=1`).
 
 In this example, each region is a self-contained deployment.
 Two of the four regions (primary and warm standby) run the finalization pipeline.
@@ -54,10 +54,10 @@ flowchart TB
 
   subgraph Regions["Regions"]
     direction LR
-    V1["Region 1 (primary)<br/>Validator + RPC +<br/>finalization pipeline (active)"]:::core
-    V2["Region 2 (standby)<br/>Validator + RPC +<br/>finalization pipeline (warm standby)"]:::core
-    V3["Region 3<br/>Validator + RPC"]:::core
-    V4["Region 4<br/>Validator + RPC"]:::core
+    V1["Region 1 (primary)<br/>Sequencer node + RPC +<br/>finalization pipeline (active)"]:::core
+    V2["Region 2 (standby)<br/>Sequencer node + RPC +<br/>finalization pipeline (warm standby)"]:::core
+    V3["Region 3<br/>Sequencer node + RPC"]:::core
+    V4["Region 4<br/>Sequencer node + RPC"]:::core
   end
 
   CL --> GA
@@ -75,16 +75,13 @@ flowchart TB
 ```
 </div>
 
-Each region runs a <GlossaryTerm term="Maru" /> consensus client paired with a
-<GlossaryTerm term="Linea Besu" /> execution client (one
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>
-validator per region).
+Each region runs a <GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>: a
+<GlossaryTerm term="Maru validator" /> paired with its own
+<GlossaryTerm term="Linea Besu" /> execution client.
 Each region also runs public and/or private JSON-RPC gateways in front of
 <GlossaryTerm term="RPC node">RPC nodes</GlossaryTerm>, with [access control](./access-control.mdx) where
 required.
-For QBFT topology, latency, and setup, see
-[Multi-validator consensus](./distributed-sequencing.mdx) and
-[Set up distributed sequencing](../how-to/set-up-distributed-sequencing.mdx).
+For QBFT topology and latency, see [Multi-validator consensus](./multi-validator-consensus.mdx).
 
 Only the primary and standby regions also run the finalization pipeline: the
 <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm>,
@@ -99,7 +96,7 @@ This table summarizes which components run in which regions:
 
 | Component | Regions 1 and 2 (primary and standby) | Regions 3 and 4 |
 | --- | --- | --- |
-| QBFT validator | Active | Active |
+| Sequencer node | Active | Active |
 | RPC services | Active | Active |
 | Finalization pipeline (coordinator, provers, related services) | Active in primary; warm standby in secondary | Not deployed |
 | Operational databases | Primary has the live (writable) DB; standby keeps a replica that can take over on [failover](#finalization-failover) | Not deployed |
@@ -227,9 +224,9 @@ Multi-region high availability still depends on within-region design:
 
 ## See also
 
-- Learn how [multi-validator consensus](./distributed-sequencing.mdx) improves
+- Learn how [multi-validator consensus](./multi-validator-consensus.mdx) improves
   <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> fault tolerance and learn how to
-  [set up distributed sequencing](../how-to/set-up-distributed-sequencing.mdx).
+  [run multiple Maru validators](../how-to/run-multiple-validators.mdx).
 - Understand [data availability](./data-availability-finalization.mdx#private-validium)
   redundancy and backup responsibilities for
   <GlossaryTerm term="Validium">private validium</GlossaryTerm> deployments, where participants

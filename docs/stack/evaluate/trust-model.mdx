@@ -50,7 +50,7 @@ When the deployment uses
 <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>,
 block production depends on the validator set: with `3f+1` validators, at most `f` can fail
 or deviate.
-See [Multi-validator consensus](../deployment/distributed-sequencing.mdx).
+See [Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
 
 ### What participants can verify
 
@@ -156,8 +156,8 @@ See [High availability](../deployment/high-availability.mdx).
 Each failure has the following effect on participants:
 
 - **Sequencer halt**: Block production stops, and pending transactions are not included.
-  In a [multi-validator](../deployment/distributed-sequencing.mdx) deployment, restore quorum as
-  described in [Set up distributed sequencing](../how-to/set-up-distributed-sequencing.mdx#restore-lost-quorum).
+  In a [multi-validator](../deployment/multi-validator-consensus.mdx) deployment,
+  [restore lost quorum](../how-to/run-multiple-validators.mdx#restore-lost-quorum).
 - **Prover stall**: Proofs are not generated and finalization stops.
   Soft-finalized blocks remain on the Lineth network.
 - **Coordinator stall**: Submission to the finalization layer stops, with the same downstream effect
