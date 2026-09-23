@@ -51,7 +51,7 @@ Together they form a **sequencer node**.
 This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders, builds, and executes the block.
 
 Multiple Maru validators communicate over a QBFT mesh.
-Use [direct, static peering](../how-to/run-multiple-validators.mdx#set-up-and-configure-validators)
+Use [direct, static peering](../how-to/run-multiple-validators.mdx#set-up-validators)
 between validators rather than P2P discovery to minimize latency.
 The Linea Besu clients sync chain data with each other over execution-layer P2P.
 
@@ -110,7 +110,7 @@ Before deploying, measure the latency between your validators and pick a configu
 absorbs `3 × latency` plus ~50ms of overhead.
 
 :::note
-The `3 × latency` overhead is a QBFT property and does not change with [validator count](#validatory-count).
+The `3 × latency` overhead is a QBFT property and does not change with [validator count](#validator-count).
 Adding more validators improves fault tolerance but increases latency variance.
 :::
 
