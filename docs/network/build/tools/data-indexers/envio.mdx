@@ -1,99 +1,89 @@
 ---
 title: Envio
+description: Index real-time and historical Linea data with Envio HyperIndex and HyperSync.
 image: /img/socialCards/envio.jpg
 ---
 
-[Envio](https://envio.dev/) is a customizable, real-time indexing solution that
-provides developers with a seamless, efficient way to index and aggregate
-blockchain data. The indexed data is accessible through GraphQL queries,
-providing developers with the ability to flexibly retrieve specific information.
+[Envio](https://envio.dev/) HyperIndex is an indexing framework for real-time and historical
+blockchain data.
+You define the contracts and events to index, write handlers that turn those events into
+entities, and query the result through a GraphQL API.
 
-Envio offers native support for Linea (both testnet and mainnet) and has been
-designed to support high-throughput blockchain applications that rely on
-real-time data for their business requirements.
+HyperIndex supports Linea Mainnet (chain ID 59144) through HyperSync.
+It can also index other EVM networks by using an
+[RPC data source](https://docs.envio.dev/docs/HyperIndex/rpc-sync).
 
-Designed to optimize the user experience, Envio offers automatic code
-generation, flexible language support, quickstart templates, and a reliable,
-cost-effective hosted service.
-
-Indexers on Envio can be written in JavaScript, TypeScript, or ReScript.
+Handlers are written in TypeScript (the default) or ReScript.
+You can run an indexer locally, self-host it, or deploy it to
+[Envio Cloud](https://docs.envio.dev/docs/HyperIndex/hosted-service), Envio's managed hosting.
 
 ## Envio HyperSync
 
-Envio offers support for [HyperSync](https://docs.envio.dev/docs/hypersync) on
-Linea Mainnet.
+[HyperSync](https://docs.envio.dev/docs/HyperSync/overview) is Envio's data retrieval layer, used
+as an alternative to JSON-RPC.
+It's available on Linea Mainnet at `https://linea.hypersync.xyz`.
 
-HyperSync is an indexed layer of the Linea blockchain, providing accelerated
-APIs (JSON-RPC bypass) for fast historical data syncing. Developers do not need
-to worry about RPC URLs, rate-limited APIs, or managing infrastructure, and can
-sync large datasets in a few minutes, something that would usually take 20x
-longer via JSON-RPC.
+HyperIndex uses HyperSync as its default data source, so you don't need to configure RPC URLs or
+handle rate limits.
+HyperSync is also available as a standalone API through the
+[Python, Rust, Node.js, and Go clients](https://docs.envio.dev/docs/HyperSync/hypersync-clients).
+HyperSync requires an [API token](https://docs.envio.dev/docs/HyperSync/api-tokens).
 
 ## Other features
 
-- Fully customizable to meet your unique data needs.
-- Aggregate data from multi-chain/cross-chain deployments into a unified GraphQL
-  API (or REST API).
-- Detailed logging and error messaging for effective troubleshooting and
-  debugging.
-- Quickstart templates with pre-defined indexing logic for popular OpenZeppelin
-  contracts (ERC-20, ERC-721, ERC-1155, etc.)
+- Generate an indexer from a verified contract address or a local ABI file
+- Index several chains into one database with
+  [multichain indexing](https://docs.envio.dev/docs/HyperIndex/multichain-indexing)
+- Index contracts created by factory contracts with
+  [dynamic contracts](https://docs.envio.dev/docs/HyperIndex/dynamic-contracts)
+- Test handler logic without syncing the chain with the
+  [testing framework](https://docs.envio.dev/docs/HyperIndex/testing)
 
 ## Get started
 
-The following files are required from the user to run the Envio indexer:
+You need [Node.js](https://nodejs.org/en/download) 22 or newer, and
+[Docker Desktop](https://www.docker.com/products/docker-desktop/) to run the indexer locally.
+We recommend [pnpm](https://pnpm.io/installation).
 
-- Configuration (defaults to `config.yaml`)
-- GraphQL Schema (defaults to `schema.graphql`)
-- Event Handlers (defaults to `src/EventHandlers.*` depending on the language
-  chosen)
-
-These files are auto-generated according to the template and language chosen by
-running the `envio init` command.
-
-> [See our **quickstart guide**.](https://docs.envio.dev/docs/quickstart)
+Run the following command and follow the prompts:
 
 ```bash
-? Would you like to start from a template or migrate from a subgraph?
-> "Template"
-  "SubgraphMigration"
-[↑↓ to move, enter to select, type to filter]
-
+pnpx envio init
 ```
 
-Then choose a template out of the possible options:
+Select `Evm` as the blockchain ecosystem, then choose how to start:
 
 ```bash
-? Which template would you like to use?
-> "Blank"
-  "Greeter"
-  "ERC-20"
+? Choose an initialization option
+> From Address - Lookup ABI from block explorer
+  From ABI File - Use your own ABI file
+  Template: ERC20
+  Template: Greeter
+  Feature: External Calls
+  Feature: Factory Contract
 [↑↓ to move, enter to select, type to filter]
 ```
 
-Then choose a language from **Javascript**, **Typescript**, or **Rescript** to
-write the event handlers file.
+With **From Address**, select `linea` and enter the contract address.
+The CLI fetches the ABI from a block explorer and lets you choose which events to index.
+At the end, it asks you to add an Envio API token to the project's `.env` file.
+
+You can also run contract import without prompts:
 
 ```bash
-? Which language would you like to use?
-> "Javascript"
-  "Typescript"
-  "Rescript"
-[↑↓ to move, enter to select, type to filter]
+pnpx envio init contract-import explorer -b linea -c <CONTRACT_ADDRESS> --single-contract --all-events -n my-indexer -d my-indexer
 ```
 
-This will create the config, schema and event handlers files according to the
-template and language chosen.
+The command generates the configuration (`config.yaml`), GraphQL schema (`schema.graphql`), and
+event handlers (`src/handlers/`).
+
+To start the indexer locally, make sure Docker is running and run `pnpm dev` from the project
+folder.
+See [running the indexer locally](https://docs.envio.dev/docs/HyperIndex/running-locally) and the
+[HyperIndex quickstart](https://docs.envio.dev/docs/HyperIndex/quickstart).
 
 ## Get help
 
-Indexing can be a rollercoaster, especially for more complex use cases. Our
-engineers are available to help you with your data availability needs.
-
-You can schedule an [intro call](https://calendly.com/sven-float-shipping/envio)
-to talk about your use case and where Envio can provide value.
-
-Join our growing community of elite builders, and find peace of mind with Envio.
-
-- [Discord](https://discord.gg/mZHNWgNCAc)
+- [Envio documentation](https://docs.envio.dev/docs/HyperIndex/overview)
+- [Discord](https://discord.gg/envio)
 - Email: [hello@envio.dev](mailto:hello@envio.dev)
