@@ -1542,9 +1542,16 @@
         ]
     },
     {
-        "to": "/stack/how-to/set-up-distributed-sequencing",
+        "to": "/stack/how-to/run-multiple-validators",
         "from": [
-            "/stack/how-to/distributed-sequencing"
+            "/stack/how-to/distributed-sequencing",
+            "/stack/how-to/set-up-distributed-sequencing"
+        ]
+    },
+    {
+        "to": "/stack/deployment/multi-validator-consensus",
+        "from": [
+            "/stack/deployment/distributed-sequencing"
         ]
     },
     {
