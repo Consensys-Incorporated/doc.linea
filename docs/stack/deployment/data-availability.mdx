@@ -1,0 +1,65 @@
+---
+title: Data availability
+description: >-
+  Where a Lineth deployment stores transaction data, and who can reconstruct
+  history from it
+---
+
+import GlossaryTerm from '@theme/GlossaryTerm';
+
+This page describes data availability design for <GlossaryTerm term="Lineth" /> deployments.
+**Data availability** is the guarantee that transaction data stays accessible to the parties who need
+it to verify or reconstruct historical state.
+Each [deployment model](../evaluate/deployment-models.mdx) provides a different type of data availability:
+
+- A <GlossaryTerm term="Validium">private validium</GlossaryTerm> provides **offchain data availability**: it keeps
+  transaction data off the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, in a private node set.
+- A public deployment provides **onchain data availability**: it posts transaction data to the finalization layer.
+
+:::warning Important
+<GlossaryTerm term="zk-SNARK" /> proofs show that a state transition is correct.
+They do not, by themselves, make the underlying transaction data available.
+:::
+
+## Private validium
+
+In a private validium, transaction data stays offchain in the
+<GlossaryTerm term="Operator">operator</GlossaryTerm>'s private node set.
+Typically that set is the validium's [archive nodes](../../protocol/architecture/rpc-services.mdx#archive-nodes), not
+an external data availability service.
+
+Only state commitments and proofs are posted to the finalization layer.
+Authorized participants who can reach those nodes can reconstruct and verify history if enough archive nodes remain available.
+A third party without that access cannot replicate the network from the finalization layer alone.
+
+Assurance of data availability is an operator responsibility: node redundancy, backups, and operational commitments
+across the parties who run the node set.
+See [Trust model](../evaluate/trust-model.mdx) for what participants can verify when data stays offchain.
+
+Operators are responsible for the following:
+
+- Deploying and maintaining the private node set that stores transaction data.
+- Keeping redundant copies and a backup procedure that can restore history.
+- Keeping the network running, or winding it down so participants can submit exit transactions before services stop.
+
+For regional copies and restoring from snapshots, see [High availability](./high-availability.mdx).
+
+## Public deployments
+
+In a public deployment, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> posts transaction data to the
+finalization layer (for example, [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs when that layer is Ethereum).
+Anyone who can read that data can reconstruct state and submit exit transactions without the operator, for as long as
+the data remains available.
+
+When the finalization layer is Ethereum, blob data is retained for 4096 epochs (about 18 days).
+After that window, reconstructing history from Ethereum requires a copy of the blob data kept outside Ethereum's blob store.
+
+Operators are responsible for the following:
+
+- Ensuring the coordinator can post data to the finalization layer.
+- Monitoring posting success and gas cost.
+
+## See also
+
+- [Finalization layer](./finalization-layer.mdx): Where proofs and state commitments settle.
+- [Deployment models](../evaluate/deployment-models.mdx): How public and private validium deployments differ.

@@ -1485,16 +1485,18 @@
         ]
     },
     {
-        "to": "/stack/deployment/data-availability-finalization",
+        "to": "/stack/deployment/data-availability",
         "from": [
             "/stack/features/data-availability",
-            "/stack/how-it-works/data-availability-finalization"
+            "/stack/how-it-works/data-availability-finalization",
+            "/stack/deployment/data-availability-finalization"
         ]
     },
     {
-        "to": "/stack/deployment/fast-finality",
+        "to": "/stack/deployment/finality",
         "from": [
-            "/stack/features/fast-finality"
+            "/stack/features/fast-finality",
+            "/stack/deployment/fast-finality"
         ]
     },
     {

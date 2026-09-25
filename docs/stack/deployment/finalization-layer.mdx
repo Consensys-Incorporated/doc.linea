@@ -1,0 +1,85 @@
+---
+title: Finalization layer
+description: >-
+  Where a Lineth deployment submits proofs and state commitments for
+  verification and settlement
+---
+
+import GlossaryTerm from '@theme/GlossaryTerm';
+
+This page describes the finalization layer options and requirements for a <GlossaryTerm term="Lineth" /> deployment.
+The finalization layer records the deployment's proofs and state commitments for verification and
+[settlement finality](./finality.mdx).
+Whether it also records transaction data depends on the [data availability](./data-availability.mdx) model:
+a public deployment posts that data to the finalization layer; a
+<GlossaryTerm term="Validium">private validium</GlossaryTerm> keeps it offchain.
+
+## Finalization layer options
+
+Enterprise operators typically choose Ethereum (L1) or [Linea Mainnet](/network) (L2) as the finalization layer.
+Linea Mainnet is itself a Lineth deployment that uses Ethereum as its finalization layer.
+The choice between finalizing on an L1 or L2 comes with different trade-offs:
+
+<table className="table-fit-cols">
+  <thead>
+    <tr>
+      <th>Finalization layer</th>
+      <th>Lineth network layer</th>
+      <th>What the deployment inherits</th>
+      <th>Trade-off</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ethereum (L1)</td>
+      <td>L2</td>
+      <td>Direct settlement on Ethereum</td>
+      <td>Higher cost and longer settlement time</td>
+    </tr>
+    <tr>
+      <td>Linea Mainnet (L2)</td>
+      <td>L3</td>
+      <td>
+        Linea Mainnet's operation, then Linea's own settlement on Ethereum
+      </td>
+      <td>
+        Lower cost and faster settlement on Linea; end-to-end verification
+        includes both layers
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+L2 finalization is sufficient for many deployments.
+Choose L1 finalization when the deployment must settle directly on Ethereum.
+
+:::note Other finalization layers
+A Lineth network can use a custom finalization layer other than Ethereum or Linea Mainnet if it can run the
+[system contracts](../../protocol/architecture/smart-contracts.mdx).
+[Public deployments](./data-availability.mdx#public-deployments) that post EIP-4844 blobs need blob support
+on that chain.
+:::
+
+Learn more about the [trust assumptions](../evaluate/trust-model.mdx#finalization-layer) inherited from the
+finalization layer.
+
+## Smart contract requirements
+
+Operators must deploy [the finalization and verifier contracts](../../protocol/architecture/smart-contracts.mdx)
+on the finalization layer.
+Together, these contracts allow the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> to finalize
+batches and state.
+The process is as follows:
+
+1. The coordinator submits <GlossaryTerm term="zk-SNARK" /> proofs, state commitments, and, for a public
+   deployment, data availability payloads to the finalization layer.
+2. The finalization contract calls the verifier to check the proof.
+3. The verifier uses the submitted commitments and, for a public deployment, the data availability payloads to
+   check the proof.
+4. If verification succeeds, the finalization layer records the new state.
+
+## See also
+
+- [Data availability](./data-availability.mdx): Where transaction data is stored.
+- [Finality](./finality.mdx): When a transaction becomes irreversible on the network versus on the
+  finalization layer.

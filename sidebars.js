@@ -476,8 +476,9 @@ const sidebars = {
       items: [
         "stack/deployment/index",
         "stack/deployment/core-components",
-        "stack/deployment/data-availability-finalization",
-        "stack/deployment/fast-finality",
+        "stack/deployment/data-availability",
+        "stack/deployment/finalization-layer",
+        "stack/deployment/finality",
         "stack/deployment/distributed-sequencing",
         "stack/deployment/high-availability",
         "stack/deployment/access-control",
