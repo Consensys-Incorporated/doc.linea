@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
+import Intercom, { show, shutdown } from "@intercom/messenger-js-sdk";
 import { DiscordIcon, GitHubIcon } from "@site/src/components/icons";
 
 import styles from "./support.module.css";
 
-const INTERCOM_APP_ID = "txttgas6";
-const INTERCOM_SCRIPT_SRC = `https://widget.intercom.io/widget/${INTERCOM_APP_ID}`;
-const INTERCOM_LAUNCHER_SELECTOR = "#intercom-button";
-
-type IntercomStatus = "idle" | "loading" | "ready" | "delayed" | "error";
+const INTERCOM_APP_ID = "aprh5f83";
 
 type LayoutProps = {
   title?: string;
@@ -17,154 +14,20 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-type IntercomSettings = {
-  api_base: string;
-  app_id: string;
-  custom_launcher_selector: string;
-};
-
-type IntercomFunction = {
-  (...args: unknown[]): void;
-  q?: unknown[][];
-};
-
-declare global {
-  interface Window {
-    Intercom?: IntercomFunction;
-    intercomSettings?: IntercomSettings;
-  }
-}
-
-const intercomSettings: IntercomSettings = {
-  api_base: "https://api-iam.intercom.io",
-  app_id: INTERCOM_APP_ID,
-  custom_launcher_selector: INTERCOM_LAUNCHER_SELECTOR,
-};
-
 const Layout: React.FC<LayoutProps> = require("@theme/Layout").default;
 
-function installIntercomQueue() {
-  if (typeof window.Intercom === "function") {
-    return;
-  }
-
-  const queuedIntercom: IntercomFunction = (...args: unknown[]) => {
-    queuedIntercom.q?.push(args);
-  };
-
-  queuedIntercom.q = [];
-
-  window.Intercom = queuedIntercom;
-}
-
 export default function Support(): React.ReactNode {
-  const [intercomStatus, setIntercomStatus] = useState<IntercomStatus>("idle");
-  const delayedTimerRef = useRef<number | undefined>(undefined);
-  const hasBootedIntercomRef = useRef(false);
-  const isMountedRef = useRef(true);
-
   useEffect(() => {
+    Intercom({
+      app_id: INTERCOM_APP_ID,
+      custom_launcher_selector: "#intercom-button",
+      hide_default_launcher: true,
+    });
+
     return () => {
-      isMountedRef.current = false;
-
-      if (delayedTimerRef.current !== undefined) {
-        window.clearTimeout(delayedTimerRef.current);
-      }
-
-      if (hasBootedIntercomRef.current) {
-        window.Intercom?.("shutdown");
-      }
+      shutdown();
     };
   }, []);
-
-  const showMessenger = () => {
-    if (!isMountedRef.current) {
-      return;
-    }
-
-    window.Intercom?.("show");
-  };
-
-  const markScriptReady = (script: HTMLScriptElement) => {
-    script.dataset.loaded = "true";
-    delete script.dataset.failed;
-
-    if (!isMountedRef.current) {
-      return;
-    }
-
-    setIntercomStatus("ready");
-    showMessenger();
-  };
-
-  const markScriptError = (script: HTMLScriptElement) => {
-    script.dataset.failed = "true";
-
-    if (isMountedRef.current) {
-      setIntercomStatus("error");
-    }
-  };
-
-  const bootIntercom = () => {
-    window.intercomSettings = intercomSettings;
-    installIntercomQueue();
-
-    if (!hasBootedIntercomRef.current) {
-      window.Intercom?.("boot", intercomSettings);
-      hasBootedIntercomRef.current = true;
-    }
-  };
-
-  const showIntercom = () => {
-    setIntercomStatus("loading");
-    bootIntercom();
-    showMessenger();
-
-    if (delayedTimerRef.current !== undefined) {
-      window.clearTimeout(delayedTimerRef.current);
-    }
-
-    delayedTimerRef.current = window.setTimeout(() => {
-      setIntercomStatus((status) =>
-        status === "loading" ? "delayed" : status,
-      );
-    }, 2500);
-
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      `script[src="${INTERCOM_SCRIPT_SRC}"]`,
-    );
-
-    if (existingScript) {
-      if (existingScript.dataset.loaded === "true") {
-        setIntercomStatus("ready");
-        showMessenger();
-        return;
-      }
-
-      if (existingScript.dataset.failed === "true") {
-        existingScript.remove();
-      } else {
-        existingScript.addEventListener(
-          "load",
-          () => markScriptReady(existingScript),
-          { once: true },
-        );
-        existingScript.addEventListener(
-          "error",
-          () => markScriptError(existingScript),
-          { once: true },
-        );
-        return;
-      }
-    }
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = INTERCOM_SCRIPT_SRC;
-    script.onload = () => markScriptReady(script);
-    script.onerror = () => markScriptError(script);
-    document.head.appendChild(script);
-  };
 
   return (
     <Layout
@@ -182,21 +45,9 @@ export default function Support(): React.ReactNode {
               id="intercom-button"
               type="button"
               className={clsx("button", styles.primaryButton)}
-              onClick={showIntercom}>
+              onClick={() => show()}>
               Contact support
             </button>
-            {intercomStatus === "delayed" && (
-              <p className={styles.status}>
-                Support messenger is still loading. You can also use the
-                resources below.
-              </p>
-            )}
-            {intercomStatus === "error" && (
-              <p className={styles.status}>
-                Support messenger did not load. Use the resources below, then
-                try again.
-              </p>
-            )}
           </div>
         </section>
 
