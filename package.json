@@ -63,6 +63,7 @@
     "@docusaurus/remark-plugin-npm2yarn": "3.10.1",
     "@docusaurus/theme-mermaid": "3.10.1",
     "@easyops-cn/docusaurus-search-local": "0.55.2",
+    "@intercom/messenger-js-sdk": "0.0.20",
     "@mdx-js/react": "3.1.1",
     "@mermaid-js/layout-elk": "0.1.9",
     "@r74tech/docusaurus-plugin-panzoom": "2.4.2",
