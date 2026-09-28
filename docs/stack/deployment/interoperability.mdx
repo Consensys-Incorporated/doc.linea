@@ -1,15 +1,13 @@
 ---
-title: Interoperability
+title: Native interoperability
 description: >-
-  Native interoperability between two restricted Lineth networks using a prepare-agree-commit plugin
+  Native interoperability between two Lineth networks using a prepare-agree-commit plugin
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-This page describes **native interoperability** between two <GlossaryTerm term="Lineth" /> networks.
-To communicate with each other, two [access controlled](access-control.mdx) (restricted) networks
-coordinate a cross-chain call.
-Each network runs the native interoperability plugin in its Lineth node.
+This page describes native interoperability between two <GlossaryTerm term="Lineth" /> networks.
+Each network's operator runs a plugin in their Lineth node, and use it to coordinate a cross-chain call.
 There is no shared chain and no third-party bridge operator.
 
 :::tip Lineth for institutions
@@ -27,27 +25,28 @@ To communicate with a non-Lineth network, use a bridge or relayer such as [Chain
 
 ## Native interoperability flow
 
-Two restricted Lineth networks can communicate with each other as follows:
+Two Lineth networks communicate with each other as follows:
 
 1. Operators of each network configure [role-based access control (RBAC)](./access-control.mdx)
-   permissions for their network.
+   permissions for their network, if required.
    They onboard organizations, groups, and users; and register the contracts those groups may use.
 2. Each operator enables the native interoperability plugin on their Lineth node, deploys and
    registers the contracts it requires, and connects it to the peer network's node.
-3. Each operator configures the plugin with the address of their access control endpoint, so it can
-   ask the endpoint to evaluate the permissions of inbound cross-chain calls.
+3. If their network is restricted (access controlled), each operator configures the plugin with the
+   address of their access control endpoint, so it can ask the endpoint to evaluate the permissions of
+   inbound cross-chain calls.
 4. A user (or contract) from one network initiates a cross-chain call to the other network.
 5. The two networks run a two-phase commit: **prepare**, then **commit** or **abort**.
    In the prepare phase, they simulate the call until both sides agree on the same result.
-6. In the commit phase, the destination asks its access control endpoint whether that
-   agreed call would be allowed as a live RPC request.
+6. In the commit phase, both sides commit.
+   If the destination is restricted, it first asks its access control endpoint whether that agreed call
+   would be allowed as a live RPC request.
    The endpoint evaluates that caller against the destination's own RBAC policy.
    The subject is the source contract on the source chain, represented as a chain-based
    decentralized identifier (DID) such as `did:pkh:eip155:<source-chain>:<address>`;
    it is not `tx.origin` of the source transaction.
-   If the endpoint allows the call, both sides commit.
-   If it denies the call, or if the endpoint is unreachable, both sides abort.
-7. The destination access control endpoint records the decision on its append-only
+   If the endpoint denies the call, or if the endpoint is unreachable, both sides abort instead.
+7. If the destination is restricted, its access control endpoint records the decision on its append-only
    access log.
 
 <div class="mermaid-large mermaid-deployment" style={{ marginBottom: "2rem" }}>
@@ -64,11 +63,11 @@ Two restricted Lineth networks can communicate with each other as follows:
 }}%%
 sequenceDiagram
   participant App as Wallets and apps
-  participant Src as Source access control endpoint
+  participant Src as Source network
   participant Dest as Destination network
   participant DestEP as Destination access control endpoint
 
-  App->>Src: Authenticate, then stage the call
+  App->>Src: Initiate the call
   Src->>Dest: Prepare
   Dest->>DestEP: Is this root call allowed?
   DestEP->>DestEP: Check grants for source contract DID
@@ -105,5 +104,3 @@ operator and the peer endpoints you configured.
 - [Access control](./access-control.mdx): The access control stack for restricted deployments.
 - [Native bridge](../../protocol/architecture/interoperability/index.mdx): Message service
   and token bridging to the finalization layer.
-- [Trust and responsibilities](../evaluate/trust-model.mdx): What participants can verify
-  in a Lineth deployment.
