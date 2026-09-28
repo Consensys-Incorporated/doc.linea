@@ -388,7 +388,7 @@ const sidebars = {
         "protocol/architecture/state-manager",
         {
           type: "category",
-          label: "Interoperability",
+          label: "Native bridge",
           collapsible: true,
           collapsed: true,
           link: { type: "doc", id: "protocol/architecture/interoperability/index" },

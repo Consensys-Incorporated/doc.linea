@@ -55,9 +55,9 @@ Detailed production topology and supported tooling for a given deployment can be
       href: "/stack/deployment/access-control",
     },
     {
-      text: "Lineth-to-Lineth interoperability",
+      text: "Interoperability",
       description:
-        "How two Lineth networks communicate with each other, and how an access controlled destination authorizes calls.",
+        "How two access controlled Lineth networks communicate with each other using native interoperability.",
       href: "/stack/deployment/interoperability",
     },
     {
@@ -98,7 +98,7 @@ Lineth does not recommend a specific set of customizations.
 
 The following diagram illustrates an example architecture for a
 <GlossaryTerm term="Validium">validium</GlossaryTerm> deployment: access control at the edge, a private
-network boundary, and validium message relayers to other chains.
+network boundary, and message relayers to other chains.
 A public deployment uses the same internal services; access and data availability differ.
 
 In this example, transaction data stays offchain in the operator's private node set, and is not
@@ -128,9 +128,8 @@ The example architecture flows as follows:
    finalization layer contracts.
    This validium example does not post transaction data; a public deployment posts it onchain.
    See [Data availability and finalization](./data-availability-finalization.mdx).
-6. Interoperability with the finalization layer uses the
-   [canonical token bridge and message service](../../protocol/architecture/interoperability/index.mdx).
-   This example also shows validium message relayers to other enterprise or public chains.
+6. Lineth networks can communicate with each other using [native interoperability](interoperability.mdx).
+   This example also shows message relayers to other non-Lineth enterprise or public chains.
 
 See [Trust model](../evaluate/trust-model.mdx) to understand what each deployment component can do and
 what participants can verify.
