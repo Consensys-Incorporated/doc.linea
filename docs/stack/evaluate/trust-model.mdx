@@ -17,7 +17,7 @@ For protocol guarantees and operator-controlled security measures, see
 
 ## Trust assumptions
 
-In a public deployment and a <GlossaryTerm term="Validium">private validium</GlossaryTerm>, the
+In a public deployment and a <GlossaryTerm term="Validium">validium</GlossaryTerm>, the
 <GlossaryTerm term="Operator">operator</GlossaryTerm> runs the
 [deployment components](../deployment/core-components.mdx).
 In both deployment models, the components can take these actions:
@@ -71,7 +71,7 @@ Participants can also verify public rollup block contents and ordering by runnin
 <GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state
 from that public data.
 
-In a <GlossaryTerm term="Validium">private validium</GlossaryTerm>, transaction data stays
+In a <GlossaryTerm term="Validium">validium</GlossaryTerm>, transaction data stays
 offchain.
 Data availability (DA) is operated by
 <GlossaryTerm term="Archive node">archive nodes</GlossaryTerm> or a DA committee.
@@ -168,7 +168,7 @@ Each failure has the following effect on participants:
   `DEFAULT_ADMIN_ROLE` compromise affects all roles.
   Revoke or rotate authority through the deployment's governance or multisig process, and use
   emergency pause roles where available.
-- **Data availability (DA) withheld in a private validium**: Participants without the required DA or
+- **Data availability (DA) withheld in a validium**: Participants without the required DA or
   [access control](../deployment/access-control.mdx) permissions cannot reconstruct or verify affected private data.
   Operators define a wind-down procedure (this depends on a consortium agreement and is not enforced
   by the Lineth protocol).
@@ -177,4 +177,4 @@ Each failure has the following effect on participants:
 
 - [Security and assurance](./security.mdx): Protocol guarantees, operator controls, and published
   assurance evidence.
-- [Deployment models](./deployment-models.mdx): Comparison and tradeoffs between a public deployment and private validium.
+- [Deployment models](./deployment-models.mdx): Comparison and tradeoffs between a public deployment and validium.

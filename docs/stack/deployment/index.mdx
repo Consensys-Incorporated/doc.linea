@@ -27,7 +27,7 @@ Detailed production topology and supported tooling for a given deployment can be
     {
       text: "Data availability",
       description:
-        "Where transaction data is stored: onchain in a public deployment, or offchain in a private validium.",
+        "Where transaction data is stored: on the finalization layer in a public deployment, or offchain in a validium.",
       href: "/stack/deployment/data-availability",
     },
     {
@@ -91,9 +91,9 @@ Proofs and state commitments go to a chosen
 
 - [Key management](key-management.mdx): Local keys, remote signing through
   <GlossaryTerm term="Web3Signer" />, or AWS KMS
-- [Data availability](data-availability.mdx): Onchain (for example,
+- [Data availability](data-availability.mdx): On the finalization layer (for example, using
   [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs) in a public deployment, or offchain in a
-  <GlossaryTerm term="Validium">private validium</GlossaryTerm>
+  <GlossaryTerm term="Validium">validium</GlossaryTerm>
 - [Finalization layer](finalization-layer.mdx): Ethereum (L1) or Linea Mainnet (L2)
 - Validator model: Single Maru validator, or [multi-validator QBFT](distributed-sequencing.mdx)
 
@@ -102,11 +102,11 @@ Lineth does not recommend a specific set of customizations.
 ## Example architecture
 
 The following diagram illustrates an example architecture for a
-<GlossaryTerm term="Validium">validium</GlossaryTerm> deployment: access control at the edge, a private
+<GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted
 network boundary, and validium message relayers to other chains.
 A public deployment uses the same internal services; access and data availability differ.
 
-In this example, transaction data stays offchain in the operator's private node set, and is not
+In this example, transaction data stays offchain in the operator's restricted node set, and is not
 shown on the diagram.
 In a public deployment, transaction data is posted to the finalization layer.
 See [Data availability](./data-availability.mdx).
