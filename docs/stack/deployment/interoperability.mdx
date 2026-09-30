@@ -1,7 +1,7 @@
 ---
 title: Native interoperability
 description: >-
-  Native interoperability between two Lineth networks using a prepare-agree-commit plugin
+  Native interoperability between two Lineth networks using the Cross Ledger Interoperability Protocol (CLIP)
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
@@ -85,23 +85,20 @@ sequenceDiagram
 
 :::warning Known limitation
 
-Currently, the access control endpoint only evaluates the **root** cross-chain
-call; nested calls made during execution on the destination are not separately
-evaluated.
+Currently, the access control endpoint only evaluates the **root** cross-chain call; nested calls made during execution
+on the destination are not separately evaluated.
 
 :::
 
 :::info Trust assumptions
 
-Each side checks that it included the agreed call and that both plugins computed the same
-result from the exchanged simulation.
-There is no shared proof across the two Lineth networks that replaces trust in the peer
-operator and the peer endpoints you configured.
+Each side checks that it included the agreed call and that both plugins computed the same result from the exchanged simulation.
+There is no shared proof across the two Lineth networks that replaces trust in the peer operator and the peer endpoints you configured.
 
 :::
 
 ## See also
 
 - [Access control](./access-control.mdx): The access control stack for restricted deployments.
-- [Canonical bridge](../../protocol/architecture/bridge/index.mdx): Message service
-  and token bridging to the finalization layer.
+- [Canonical bridge](../../protocol/architecture/bridge/index.mdx): Canonical message service
+  and token bridge to the finalization layer.
