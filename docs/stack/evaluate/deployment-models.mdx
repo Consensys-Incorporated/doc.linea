@@ -1,129 +1,119 @@
 ---
 title: Deployment models
-description: >-
-  How to compare Lineth public and private validium deployment models and their
-  trade-offs
-sidebar_position: 2
+description: Compare public deployments and validiums, and their trade-offs
 image: /img/socialCards/deployment-models.jpg
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-<GlossaryTerm term="Lineth" /> supports two deployment models: **public deployments**, such as
-[Linea Mainnet](/network), with onchain data availability and open access; and **private validium deployments**,
-with offchain data availability and controlled access.
+<GlossaryTerm term="Lineth" /> supports two deployment models: **public deployments (rollups)**, in which
+transaction data is posted to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>,
+and **validiums**, in which only state commitments and proofs are posted to the finalization layer.
+A validium can be **public** or **private**, depending on who can read that network's transaction data.
 
 Consider these questions when choosing a deployment model:
 
-- Privacy requirements: Should transaction data remain private to authorized participants?
+- Privacy requirements: Should transaction data remain visible only to authorized participants?
 - Regulatory and [compliance](./compliance.mdx) obligations: What controls does your program
   require, and who owns them?
-- [Data availability](../deployment/data-availability-finalization.mdx) guarantees: How important is onchain data availability for
-  your participants?
+- [Data availability](../deployment/data-availability-finalization.mdx) guarantees: Do participants
+  need to be able to reconstruct history from the finalization layer?
 - Network topology: Do you need a private network with controlled membership?
-- [Access control](../deployment/access-control.mdx): Do you need role-based access control (RBAC) on RPC endpoints and
-  APIs?
+- [Access control](../deployment/access-control.mdx): Do you need role-based access control (RBAC)
+  on RPC endpoints and APIs?
 
-The following table compares how characteristics differ between public deployments and private validium deployments.
+The following table compares how characteristics differ between public deployments and validiums.
 Choose the deployment model that aligns with your requirements.
 
-| Characteristic | Public deployments | Private validium |
-| --- | --- | --- |
-| Data availability | Transaction data is posted onchain via EIP-4844 blobs | Transaction data can be stored offchain in a private node set |
-| Access control | Public RPC endpoint | RPC endpoints protected by RBAC |
-| What is posted to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> | State commitments, proofs, and transaction data | State commitments and proofs; transaction details stay offchain |
-| Who can reconstruct history | Anyone with the blob data, while it is retained | Participants the operator authorizes through DA access and RBAC |
-| Network topology | Open access | Controlled node membership |
+| Characteristic | Public deployment (rollup) | Public validium | Private validium |
+| --- | --- | --- | --- |
+| Transaction data | Posted to the finalization layer via EIP-4844 blobs | Stored by the Lineth network's nodes | Stored by the Lineth network's nodes |
+| What is posted to the finalization layer | State commitments, proofs, and transaction data | State commitments and proofs only | State commitments and proofs only |
+| Access and topology | Open RPC access | Open RPC access | Restricted node set and RBAC permissions on RPC |
+| Who can reconstruct history | Anyone with blob data, while it is retained | Anyone who can reach the network's nodes | Authorized participants only |
 
 The following sections provide more details about each model.
 
-## Public deployments
+## Public deployments (rollups)
 
-Public deployments such as Linea Mainnet are open networks with onchain data availability.
-Transaction data is posted as EIP-4844 blobs, so state commitments, proofs, and transaction data all appear on
-the finalization layer.
-Anyone with the blob data can reconstruct history while those blobs are retained.
+In a public deployment, or rollup, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> posts
+transaction data to the finalization layer (for example, using
+[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs on Ethereum).
+State commitments, proofs, and transaction data appear on the finalization layer.
+Anyone who can read that data can reconstruct history while it remains available.
 RPC access is public, and node membership is not restricted.
 
 ### Use cases
 
-- Networks requiring maximum transparency
+- Applications that require maximum transparency
 - Applications that benefit from onchain data availability
-- Networks that prioritize open access over transaction privacy
+- Applications that prioritize open access over transaction privacy
 
 ### Security considerations
 
 The following operator choices affect how you secure a public deployment:
 
 - Validator topology: If the deployment uses a
-  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4
-  Maru validators are required to tolerate one faulty validator.
-- [Key management](../deployment/key-management.mdx): Remote
-  signing backed by a hardware security module (HSM) or key management service
-  (KMS)
+  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  are required to tolerate one faulty validator.
+- [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
+  module (HSM) or key management service (KMS)
 
-## Private validium
+## Validiums
 
-A private validium keeps transaction data offchain in a data availability layer, and proves state
-transitions using <GlossaryTerm term="zk-SNARK">zk-SNARK</GlossaryTerm> proofs.
-After the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> produces blocks, the
-<GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> batches them and requests a proof.
-The <GlossaryTerm term="Prover">prover</GlossaryTerm> generates a zk-SNARK proof of the resulting state transition.
-The coordinator submits that proof to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
-Only state commitments and proofs are posted onchain.
+In a validium, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> submits state
+commitments and proofs to the finalization layer.
+Transaction data is not posted there.
+Typically that data lives on the validium's <GlossaryTerm term="Archive node">archive nodes</GlossaryTerm>.
 
-A private validium can [restrict access to JSON-RPC](../deployment/access-control.mdx) and control
-node membership.
+### Public validiums
 
-For an illustrative topology, see the
-[example validium architecture](../deployment/index.mdx#example-architecture).
+A public validium makes the Lineth network's data publicly readable.
+RPC access is open, so anyone who can reach a node can reconstruct history from the network.
 
-Operators with regulatory or compliance obligations are responsible for
-designing their own [compliance](compliance.mdx) program.
+#### Use cases
 
-### Data visibility
+- Applications that need the lower finalization cost on Linea Mainnet, while keeping open access
+- Applications that do not require transaction data on the finalization layer
 
-The following table outlines what is published and who can see it on each layer: the finalization layer,
-the private node set for data storage (data availability layer), and RPC and API surfaces.
+#### Security considerations
 
-| Layer | What is published | Who can see it |
-| --- | --- | --- |
-| Finalization layer | State commitments, zk-SNARK proofs, bridge messages | Anyone reading the finalization layer |
-| Data availability layer | Transaction data, full ordered history | Participants the operator authorizes to read the offchain data |
-| RPC and API surfaces | State and transactions the caller is authorized to view | Callers with [RBAC permissions](../deployment/access-control.mdx) for the relevant endpoint |
+The following operator choices affect how you secure a public validium:
 
-:::warning Private validium is not cryptographic privacy
+- Validator topology: If the deployment uses a
+  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  are required to tolerate one faulty validator.
+- [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
+  module (HSM) or key management service (KMS)
 
-A private validium's offchain data availability does not make transactions cryptographically private.
-Anyone authorized to see the offchain data can read the transactions.
-The zk-SNARK proofs confirm that state transitions are correct; they do not hide that data.
+### Private validiums
 
-:::
+A private validium keeps transaction data in a restricted node set and
+[controls RPC access](../deployment/access-control.mdx).
+Authorized participants who can reach those nodes can reconstruct history.
+A third party without that access cannot.
 
-To learn what participants can verify from the published proofs and authorized offchain data, see
-[Trust model](./trust-model.mdx#what-participants-can-verify).
+#### Use cases
 
-### Use cases
+- Applications where transaction data should not be public
+- Multi-party workflows where participants should not see all transaction details
+- Applications that accept the private validium trade-off: state-transition correctness is proven onchain, but
+  reconstructing history requires authorized access to the operator's offchain data
 
-- Workflows where transaction data should not be public
-- Multi-party workflows where participants should not see all transaction
-  details
-- Workflows that accept the validium trade-off: state-transition correctness is
-  proven onchain, but reconstructing history requires access to the operator's
-  [offchain data](../deployment/data-availability-finalization.mdx#private-validium)
-
-### Security considerations
+#### Security considerations
 
 The following operator choices affect how you secure a private validium:
 
 - Validator topology: If the deployment uses a
-  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators are
-  required to tolerate one faulty validator.
+  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  are required to tolerate one faulty validator.
 - [Access control](../deployment/access-control.mdx): RBAC permissions on JSON-RPC, APIs, and tooling
-- [Key management](../deployment/key-management.mdx): Remote
-  signing backed by a hardware security module (HSM) or key management service
-  (KMS)
+- [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
+  module (HSM) or key management service (KMS)
 - Network isolation: Private network topology with controlled peering
+
+For an illustrative topology, see the
+[example private validium architecture](../deployment/index.mdx#example-architecture).
 
 ## See also
 
