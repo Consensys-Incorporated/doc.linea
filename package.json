@@ -115,7 +115,7 @@
     "typescript-eslint": "8.70.1"
   },
   "engines": {
-    "node": "24.18.0"
+    "node": "24.21.0"
   },
   "overrides": {
     "@vercel/node": {
