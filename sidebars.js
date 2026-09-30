@@ -388,13 +388,13 @@ const sidebars = {
         "protocol/architecture/state-manager",
         {
           type: "category",
-          label: "Native bridge",
+          label: "Canonical bridge",
           collapsible: true,
           collapsed: true,
-          link: { type: "doc", id: "protocol/architecture/interoperability/index" },
+          link: { type: "doc", id: "protocol/architecture/bridge/index" },
           items: [
-            "protocol/architecture/interoperability/canonical-token-bridge",
-            "protocol/architecture/interoperability/canonical-message-service",
+            "protocol/architecture/bridge/canonical-token-bridge",
+            "protocol/architecture/bridge/canonical-message-service",
           ],
         },
         "protocol/architecture/smart-contracts",

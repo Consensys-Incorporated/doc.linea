@@ -7,11 +7,12 @@ description: >-
 import GlossaryTerm from '@theme/GlossaryTerm';
 
 This page describes native interoperability between two <GlossaryTerm term="Lineth" /> networks.
-Each network's operator runs a plugin in their Lineth node, and use it to coordinate a cross-chain call.
+Native interoperability is enabled via the Cross Ledger Interoperability Protocol (CLIP).
+Each network's operator runs the CLIP plugin in their Lineth node and uses it to coordinate a cross-chain call.
 There is no shared chain and no third-party bridge operator.
 
 :::tip Lineth for institutions
-Native interoperability is a proprietary feature for institutional and enterprise deployments.
+CLIP is a proprietary feature for institutional and enterprise deployments.
 To request access, use the
 [strategic inquiries form](https://linea.build/contact/inquiries).
 :::
@@ -19,18 +20,18 @@ To request access, use the
 :::note Other interoperability flows
 Native interoperability refers to communication between two Lineth networks.
 To communicate with a Lineth network's <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>,
-use the [native bridge](../../protocol/architecture/interoperability/index.mdx).
+use the [canonical bridge](../../protocol/architecture/bridge/index.mdx).
 To communicate with a non-Lineth network, use a bridge or relayer such as [Chainlink CCIP](https://docs.chain.link/ccip).
 :::
 
 ## Native interoperability flow
 
-Two Lineth networks communicate with each other as follows:
+Two Lineth networks use CLIP to communicate with each other as follows:
 
 1. Operators of each network configure [role-based access control (RBAC)](./access-control.mdx)
    permissions for their network, if required.
    They onboard organizations, groups, and users; and register the contracts those groups may use.
-2. Each operator enables the native interoperability plugin on their Lineth node, deploys and
+2. Each operator enables the CLIP plugin on their Lineth node, deploys and
    registers the contracts it requires, and connects it to the peer network's node.
 3. If their network is restricted (access controlled), each operator configures the plugin with the
    address of their access control endpoint, so it can ask the endpoint to evaluate the permissions of
@@ -102,5 +103,5 @@ operator and the peer endpoints you configured.
 ## See also
 
 - [Access control](./access-control.mdx): The access control stack for restricted deployments.
-- [Native bridge](../../protocol/architecture/interoperability/index.mdx): Message service
+- [Canonical bridge](../../protocol/architecture/bridge/index.mdx): Message service
   and token bridging to the finalization layer.
