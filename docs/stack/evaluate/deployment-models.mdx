@@ -1,14 +1,14 @@
 ---
 title: Deployment models
-description: Compare public deployments and validiums, and their trade-offs
+description: Compare rollups and validiums, and their trade-offs
 image: /img/socialCards/deployment-models.jpg
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-<GlossaryTerm term="Lineth" /> supports two deployment models: **public deployments (rollups)**, in which
-transaction data is posted to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>,
-and **validiums**, in which only state commitments and proofs are posted to the finalization layer.
+<GlossaryTerm term="Lineth" /> supports two deployment models: **rollups**, in which transaction data is
+posted to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, and
+**validiums**, in which only state commitments and proofs are posted to the finalization layer.
 A validium can be **public** or **private**, depending on who can read that network's transaction data.
 
 Consider these questions when choosing a deployment model:
@@ -22,10 +22,10 @@ Consider these questions when choosing a deployment model:
 - [Access control](../deployment/access-control.mdx): Do you need role-based access control (RBAC)
   on RPC endpoints and APIs?
 
-The following table compares how characteristics differ between public deployments and validiums.
+The following table compares how characteristics differ between rollups and validiums.
 Choose the deployment model that aligns with your requirements.
 
-| Characteristic | Public deployment (rollup) | Public validium | Private validium |
+| Characteristic | Rollup | Public validium | Private validium |
 | --- | --- | --- | --- |
 | Transaction data | Posted to the finalization layer via EIP-4844 blobs | Stored by the Lineth network's nodes | Stored by the Lineth network's nodes |
 | What is posted to the finalization layer | State commitments, proofs, and transaction data | State commitments and proofs only | State commitments and proofs only |
@@ -34,9 +34,9 @@ Choose the deployment model that aligns with your requirements.
 
 The following sections provide more details about each model.
 
-## Public deployments (rollups)
+## Rollups
 
-In a public deployment, or rollup, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> posts
+In a rollup, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> posts
 transaction data to the finalization layer (for example, using
 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs on Ethereum).
 State commitments, proofs, and transaction data appear on the finalization layer.
@@ -51,7 +51,7 @@ RPC access is public, and node membership is not restricted.
 
 ### Security considerations
 
-The following operator choices affect how you secure a public deployment:
+The following operator choices affect how you secure a rollup:
 
 - Validator topology: If the deployment uses a
   [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
@@ -92,6 +92,12 @@ A private validium keeps transaction data in a restricted node set and
 [controls RPC access](../deployment/access-control.mdx).
 Authorized participants who can reach those nodes can reconstruct history.
 A third party without that access cannot.
+
+:::warning Private validium is not cryptographic privacy
+A private validium does not make transactions cryptographically private.
+Anyone authorized to see the offchain data can read the transactions.
+The zk-SNARK proofs confirm that state transitions are correct; they do not hide that data.
+:::
 
 #### Use cases
 

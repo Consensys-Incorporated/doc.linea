@@ -1473,7 +1473,7 @@
         ]
     },
     {
-        "to": "/stack/evaluate/deployment-models#private-validium",
+        "to": "/stack/evaluate/deployment-models#private-validiums",
         "from": [
             "/stack/evaluate/validium",
             "/stack/features/validium"
