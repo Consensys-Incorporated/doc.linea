@@ -66,7 +66,7 @@
     "@mdx-js/react": "3.1.1",
     "@r74tech/docusaurus-plugin-panzoom": "2.4.5",
     "axios": "1.20.0",
-    "browserslist": "4.29.0",
+    "browserslist": "4.29.1",
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "dotenv": "17.4.2",
@@ -78,8 +78,8 @@
     "raw-loader": "4.0.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "redocusaurus": "2.5.0",
-    "sharp": "0.35.4",
+    "redocusaurus": "2.5.2",
+    "sharp": "0.35.5",
     "turndown": "7.2.4",
     "turndown-plugin-gfm": "1.0.2",
     "yaml": "2.9.1"
@@ -106,7 +106,7 @@
     "globals": "17.12.0",
     "google-auth-library": "10.9.1",
     "googleapis-common": "8.0.3",
-    "lint-staged": "17.5.1",
+    "lint-staged": "17.6.0",
     "prettier": "3.9.9",
     "stylelint": "17.15.0",
     "stylelint-config-standard": "40.0.0",
@@ -120,11 +120,11 @@
   "overrides": {
     "@vercel/node": {
       "path-to-regexp": "6.3.0",
-      "undici": "6.28.1"
+      "undici": "6.29.0"
     },
     "@vercel/static-config": {
       "ajv": "8.20.0"
     },
-    "serialize-javascript": "7.0.5"
+    "serialize-javascript": "7.1.2"
   }
 }
