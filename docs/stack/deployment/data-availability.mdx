@@ -13,10 +13,11 @@ it to verify or reconstruct historical state.
 Each [deployment model](../evaluate/deployment-models.mdx) differs in whether transaction data is posted
 to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>:
 
-- A **validium** posts only state commitments and proofs to the finalization layer.
+- A <GlossaryTerm term="Validium">validium</GlossaryTerm> posts only state commitments and proofs to
+  the finalization layer.
   A validium can be **public** or **private**, depending on who can read that network's transaction data.
-- A **public deployment (rollup)** also posts transaction data to the finalization layer (for example, using
-  [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs).
+- A <GlossaryTerm term="Rollup">rollup</GlossaryTerm> also posts transaction data to the finalization
+  layer (for example, using [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs).
 
 :::warning Important
 <GlossaryTerm term="zk-SNARK" /> proofs show that a state transition is correct.
@@ -49,9 +50,9 @@ Operators are responsible for ensuring data availability, including:
 
 For regional copies and restoring from snapshots, see [High availability](./high-availability.mdx).
 
-## Public deployments (rollups)
+## Rollups
 
-In a public deployment, or rollup, the coordinator posts transaction data to the finalization layer (for
+In a rollup, the coordinator posts transaction data to the finalization layer (for
 example, using [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs).
 Anyone who can read that data can reconstruct state and submit exit transactions without the operator, for
 as long as the data remains available.
@@ -68,4 +69,4 @@ Operators are responsible for the following:
 ## See also
 
 - [Finalization layer](./finalization-layer.mdx): Where proofs and state commitments settle.
-- [Deployment models](../evaluate/deployment-models.mdx): How public deployments and validiums differ.
+- [Deployment models](../evaluate/deployment-models.mdx): How rollups and validiums differ.

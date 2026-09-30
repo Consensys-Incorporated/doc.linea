@@ -17,7 +17,8 @@ For protocol guarantees and operator-controlled security measures, see
 
 ## Trust assumptions
 
-In a public deployment and a <GlossaryTerm term="Validium">validium</GlossaryTerm>, the
+In a <GlossaryTerm term="Rollup">rollup</GlossaryTerm> and a
+<GlossaryTerm term="Validium">validium</GlossaryTerm>, the
 <GlossaryTerm term="Operator">operator</GlossaryTerm> runs the
 [deployment components](../deployment/core-components.mdx).
 In both deployment models, the components can take these actions:
@@ -60,7 +61,8 @@ the finalization layer.
 They can also read submission events, [contract role](#system-contract-roles) assignments, contract state, proxy admin,
 implementation addresses, and canonical bridge events on that layer.
 
-In a public deployment, transaction data is posted onchain to the finalization layer.
+In a <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, transaction data is posted onchain to the
+finalization layer.
 While that data remains available, the operator cannot withhold data availability.
 When the finalization layer is Ethereum, transaction data is posted as
 [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs.
@@ -177,4 +179,4 @@ Each failure has the following effect on participants:
 
 - [Security and assurance](./security.mdx): Protocol guarantees, operator controls, and published
   assurance evidence.
-- [Deployment models](./deployment-models.mdx): Comparison and tradeoffs between a public deployment and validium.
+- [Deployment models](./deployment-models.mdx): Comparison and tradeoffs between rollups and validiums.

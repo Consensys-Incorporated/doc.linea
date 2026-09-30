@@ -204,14 +204,7 @@ Furthermore, Linea takes action to ensure that interoperability between the publ
 
 ### Rollup
 
-A type of L2 scaling solution that batches multiple transactions and submits them to Ethereum in a single transaction. This allows for reductions in gas costs and increases in transaction throughput. There are optimistic and zero-knowledge rollups, which use different security methods to offer these scalability gains.
-
-Rollup architecture is made up of the following components:
-
-- Rollup contract: contract on the L1 stores rollup blocks, monitors state updates on the rollup, and tracks user deposits
-- Offchain VM: computation and state storage on another virtual machine separate from the Ethereum Virtual Machine
-- Aggregators/sequencers/operators/validators: nodes that aggregate transactions, compress the underlying data, and publish the block on Ethereum
-- Verifier contract: contract on the L1 that verifies the validity proof
+A deployment model in which a Lineth network proves state transitions with zk-SNARKs and posts transaction data, state commitments, and proofs to the finalization layer. Anyone who can read that data can reconstruct history while it remains available.
 
 ### RPC node
 
