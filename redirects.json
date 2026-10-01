@@ -176,8 +176,16 @@
         ]
     },
     {
-        "to": "/protocol/architecture/interoperability/canonical-message-service",
+        "to": "/protocol/architecture/bridge",
         "from": [
+            "/protocol/architecture/interoperability",
+            "/protocol/architecture/interoperability/index"
+        ]
+    },
+    {
+        "to": "/protocol/architecture/bridge/canonical-message-service",
+        "from": [
+            "/protocol/architecture/interoperability/canonical-message-service",
             "/protocol/architecture/interoperability/message-service",
             "/protocol/message-service",
             "/protocol/message-service/index",
@@ -350,8 +358,9 @@
         ]
     },
     {
-        "to": "/protocol/architecture/interoperability/canonical-token-bridge",
+        "to": "/protocol/architecture/bridge/canonical-token-bridge",
         "from": [
+            "/protocol/architecture/interoperability/canonical-token-bridge",
             "/architecture/bridges",
             "/architecture/stack/bridges",
             "/architecture/stack/bridges/canonical-token-bridge",

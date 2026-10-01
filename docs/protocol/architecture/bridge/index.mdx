@@ -1,13 +1,16 @@
 ---
-title: Interoperability
-description: Cross-chain messaging and canonical token bridging between a Lineth network and its finalization layer.
+title: Canonical bridge
+description: >-
+  The canonical bridge between a Lineth network and its finalization layer, using
+  the canonical message service and token bridge.
 image: /img/socialCards/interoperability.jpg
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
 A <GlossaryTerm term="Lineth" /> network exchanges data and value with its
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> through two protocol components:
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> through the **canonical bridge**.
+The canonical bridge is two protocol components:
 
 - [Canonical token bridge](./canonical-token-bridge.mdx): A pair of lock-and-mint contracts for bridging any
   ERC-20 token.
@@ -26,6 +29,6 @@ the finalization layer at the next finalization.
 See [Message commitments](./canonical-message-service.mdx#message-commitments) for more information.
 
 :::tip
-To learn how two Lineth deployments communicate with each other, see
-[Deployment interoperability](../../../stack/deployment/interoperability.mdx).
+To learn how two Lineth networks communicate with each other, see
+[native interoperability](../../../stack/deployment/interoperability.mdx).
 :::
