@@ -3,7 +3,6 @@ title: Finality
 description: >-
   Application-level finality on the network versus settlement finality on the
   finalization layer
-sidebar_position: 3
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
@@ -12,16 +11,16 @@ This page describes when a transaction becomes final in a <GlossaryTerm term="Li
 production on the network (application-level finality), and when the matching state is verified on the
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> (settlement finality).
 
-How fast each one is, and what makes it irreversible, depends on <GlossaryTerm term="Maru validator">validator</GlossaryTerm>
+How fast finality is, and what makes it irreversible, depends on <GlossaryTerm term="Maru validator">validator</GlossaryTerm>
 topology, proof generation and submission, and the chosen finalization layer.
 
 ## Application-level and settlement finality
 
 Finality is the point at which a transaction is immutable under the deployment's security assumptions.
 
-- **Application-level finality** (or **soft finality**): The network has accepted the transaction as final.
+- **Application-level finality** (or **soft finality**) is reached when the Lineth network has accepted the transaction as final.
   This happens when the configured validator model commits the block.
-- **Settlement finality** (or **hard finality**): The matching state commitment has been verified and recorded
+- **Settlement finality** (or **hard finality**) is reached when the matching state commitment has been verified and recorded
   on the finalization layer.
 
 Every Lineth deployment produces blocks on the network and submits <GlossaryTerm term="zk-SNARK" /> proofs to a
@@ -77,8 +76,8 @@ For topology, latency, and setup, see [Multi-validator consensus](./distributed-
 Choose block time and topology together so each block can be produced and committed in time.
 A single validator produces the block alone, so block time must leave room for that validator's availability.
 For example, [Linea Mainnet](../../network/index.mdx) uses 1-second blocks.
-A multi-validator set must finish the QBFT commit within the block time; choose an interval based on network latency and
-validator performance.
+A multi-validator set must finish the QBFT commit within the block time;
+[choose a block time](distributed-sequencing.mdx#block-time-and-latency) based on network latency and validator performance.
 
 ### Settlement finality design
 
