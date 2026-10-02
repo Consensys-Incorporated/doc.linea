@@ -82,17 +82,6 @@ A Merkle proof can support inclusion of authorized data.
 It does not by itself establish global transaction ordering for participants who do not have the
 full ordered data set.
 
-### Trusted bridge
-
-A deployment's operator and a trusted relayer may operate a bridge to a private or non-anchored chain.
-The operator holds the [contract roles](#system-contract-roles) that can pause or upgrade the bridge.
-The relayer can withhold or delay messages.
-In the normal relayer path, the bridge cannot process messages that are not signed over
-source-chain events.
-Participants can verify bridge events on each side.
-There is no shared proof, so verifiability depends on trust in the relayer, its keys,
-and those pause and upgrade roles.
-
 ### Finalization layer
 
 A deployment inherits its finalization layer's finality.
