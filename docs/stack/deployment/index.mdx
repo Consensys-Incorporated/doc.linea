@@ -40,7 +40,7 @@ Detailed production topology and supported tooling for a given deployment can be
       text: "Multi-validator consensus",
       description:
         "Maru multi-validator QBFT for sequencer fault tolerance and distributed block ordering within the execution path.",
-      href: "/stack/deployment/distributed-sequencing",
+      href: "/stack/deployment/multi-validator-consensus",
     },
     {
       text: "High availability",
@@ -120,7 +120,7 @@ The example architecture flows as follows:
    <GlossaryTerm term="RPC node">RPC nodes</GlossaryTerm>, which read chain state from
    onchain contracts.
 3. The sequencer orders transactions and builds blocks.
-   [Multi-validator consensus](./distributed-sequencing.mdx) is a design choice that improves sequencer
+   [Multi-validator consensus](./multi-validator-consensus.mdx) is a design choice that improves sequencer
    fault tolerance.
 4. Inside the operator network, the coordinator batches blocks, the tracer produces traces,
    and the prover generates <GlossaryTerm term="zk-SNARK" /> proofs.

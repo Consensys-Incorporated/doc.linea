@@ -203,7 +203,7 @@ deployment's block time, finalization interval, and capacity.
   finalization layer submissions.
 - **Consensus latency:** Watch the Maru block-building window in a multi-validator deployment to
   confirm validators still have time to produce a block.
-  See [Monitor Maru](./set-up-distributed-sequencing#monitor-maru) for the key metrics and
+  See [Monitor Maru](./run-multiple-validators#monitor-maru) for the key metrics and
   recommended threshold.
 - **Message relay:** Watch the `linea_postman_*` metrics on the Postman to see whether messages
   are being claimed and relayed between the Lineth network and the finalization layer.
@@ -214,5 +214,4 @@ deployment's block time, finalization interval, and capacity.
 
 - Review example failure behavior in
   [High availability](../deployment/high-availability.mdx).
-- Restore Maru quorum using
-  [Set up distributed sequencing](./set-up-distributed-sequencing.mdx#restore-lost-quorum).
+- Learn how to [restore Maru quorum](./run-multiple-validators.mdx#restore-lost-quorum).
