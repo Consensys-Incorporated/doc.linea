@@ -11,34 +11,22 @@ posted to the <GlossaryTerm term="Finalization layer">finalization layer</Glossa
 **validiums**, in which only state commitments and proofs are posted to the finalization layer.
 A validium can be **public** or **private**, depending on who can read that network's transaction data.
 
-Consider these questions when choosing a deployment model:
+The following table compares how rollups and validiums address key deployment questions.
+Choose the model that aligns with your requirements.
 
-- Privacy requirements: Should transaction data remain visible only to authorized participants?
-- Regulatory and [compliance](./compliance.mdx) obligations: What controls does your program
-  require, and who owns them?
-- [Data availability](../deployment/data-availability-finalization.mdx) guarantees: Do participants
-  need to be able to reconstruct history from the finalization layer?
-- Network topology: Do you need a private network with controlled membership?
-- [Access control](../deployment/access-control.mdx): Do you need role-based access control (RBAC)
-  on RPC endpoints and APIs?
-
-The following table compares how characteristics differ between rollups and validiums.
-Choose the deployment model that aligns with your requirements.
-
-| Characteristic | Rollup | Public validium | Private validium |
+| Questions | Rollup | Public validium | Private validium |
 | --- | --- | --- | --- |
-| Transaction data | Posted to the finalization layer via EIP-4844 blobs | Stored by the Lineth network's nodes | Stored by the Lineth network's nodes |
-| What is posted to the finalization layer | State commitments, proofs, and transaction data | State commitments and proofs only | State commitments and proofs only |
-| Access and topology | Open RPC access | Open RPC access | Restricted node set and RBAC permissions on RPC |
-| Who can reconstruct history | Anyone with blob data, while it is retained | Anyone who can reach the network's nodes | Authorized participants only |
+| Where is transaction data stored? | On the finalization layer as [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs | On the Lineth network's nodes | On the Lineth network's nodes |
+| What is posted to the finalization layer? | State commitments, proofs, and transaction data | State commitments and proofs only | State commitments and proofs only |
+| Who can reconstruct history? | Anyone with blob data, while it is retained | Anyone who can reach the network's nodes | Authorized participants only |
+| What is the network topology and access policy? | Open network and RPC access | Open network and RPC access | Restricted node set and [RBAC](../deployment/access-control.mdx) permissions on RPC |
 
 The following sections provide more details about each model.
 
 ## Rollups
 
 In a rollup, the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> posts
-transaction data to the finalization layer (for example, using
-[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs on Ethereum).
+transaction data to the finalization layer using [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs.
 State commitments, proofs, and transaction data appear on the finalization layer.
 Anyone who can read that data can reconstruct history while it remains available.
 RPC access is public, and node membership is not restricted.
@@ -69,11 +57,13 @@ Typically that data lives on the validium's <GlossaryTerm term="Archive node">ar
 ### Public validiums
 
 A public validium makes the Lineth network's data publicly readable.
+A public L3 that finalizes to Linea Mainnet uses this model: the coordinator submits state commitments and proofs to
+Linea, and transaction data stays on the L3's nodes because Linea cannot store it as blobs.
 RPC access is open, so anyone who can reach a node can reconstruct history from the network.
 
 #### Use cases
 
-- Applications that need the lower finalization cost on Linea Mainnet, while keeping open access
+- Applications that need the lower finalization cost and faster settlement on Linea Mainnet, while keeping open access
 - Applications that do not require transaction data on the finalization layer
 
 #### Security considerations
