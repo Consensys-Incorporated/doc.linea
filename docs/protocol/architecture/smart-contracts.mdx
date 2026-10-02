@@ -28,7 +28,7 @@ The finalization contract:
   [data submission model](./index.mdx#transaction-lifecycle) the deployment uses.
 - Anchors the Merkle roots of the messages the finalized blocks sent, and verifies the rolling hash of the
   messages the network received.
-  See [Message commitments](./interoperability/canonical-message-service.mdx#message-commitments).
+  See [Message commitments](./bridge/canonical-message-service.mdx#message-commitments).
 - Queues [forced transactions](../forced-transactions.mdx) submitted on the finalization layer, so they can be
   proven to have been processed by their deadline.
 
@@ -48,7 +48,7 @@ Together they carry arbitrary calldata and native currency in both directions, a
 it can be checked against a commitment recorded by the finalization contract.
 
 Everything else that crosses chains, including the token bridge, is built on this pair.
-See [Canonical message service](./interoperability/canonical-message-service.mdx).
+See [Canonical message service](./bridge/canonical-message-service.mdx).
 
 ## Token bridge contracts
 
@@ -56,7 +56,7 @@ A token bridge contract is deployed on each chain.
 They bridge ERC-20 tokens by escrowing the original on its home chain and minting a bridged equivalent on the
 other, sending each instruction through the message service.
 Minted supply is always matched by escrowed supply, so the bridge cannot mint tokens that were never locked.
-See [Canonical token bridge](./interoperability/canonical-token-bridge.mdx).
+See [Canonical token bridge](./bridge/canonical-token-bridge.mdx).
 
 ## Contract versioning
 

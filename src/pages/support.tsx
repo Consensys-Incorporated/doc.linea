@@ -20,7 +20,6 @@ export default function Support(): React.ReactNode {
   useEffect(() => {
     Intercom({
       app_id: INTERCOM_APP_ID,
-      custom_launcher_selector: "#intercom-button",
       hide_default_launcher: true,
     });
 

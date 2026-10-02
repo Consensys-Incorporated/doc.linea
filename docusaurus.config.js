@@ -140,6 +140,7 @@ const config = {
           ".theme-doc-markdown .img-small > svg",
           ".theme-doc-markdown .img-medium > svg",
           ".theme-doc-markdown .img-large > svg",
+          ".theme-doc-markdown .img-fit svg",
           ".theme-doc-markdown .responsive-graphic svg",
         ],
         wrap: true,

@@ -54,7 +54,7 @@ RPC access is public, and node membership is not restricted.
 The following operator choices affect how you secure a rollup:
 
 - Validator topology: If the deployment uses a
-  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  [multi-validator QBFT design](../deployment/multi-validator-consensus.mdx), at least 4 Maru validators
   are required to tolerate one faulty validator.
 - [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
   module (HSM) or key management service (KMS)
@@ -81,7 +81,7 @@ RPC access is open, so anyone who can reach a node can reconstruct history from 
 The following operator choices affect how you secure a public validium:
 
 - Validator topology: If the deployment uses a
-  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  [multi-validator QBFT design](../deployment/multi-validator-consensus.mdx), at least 4 Maru validators
   are required to tolerate one faulty validator.
 - [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
   module (HSM) or key management service (KMS)
@@ -111,7 +111,7 @@ The zk-SNARK proofs confirm that state transitions are correct; they do not hide
 The following operator choices affect how you secure a private validium:
 
 - Validator topology: If the deployment uses a
-  [multi-validator QBFT design](../deployment/distributed-sequencing.mdx), at least 4 Maru validators
+  [multi-validator QBFT design](../deployment/multi-validator-consensus.mdx), at least 4 Maru validators
   are required to tolerate one faulty validator.
 - [Access control](../deployment/access-control.mdx): RBAC permissions on JSON-RPC, APIs, and tooling
 - [Key management](../deployment/key-management.mdx): Remote signing backed by a hardware security
