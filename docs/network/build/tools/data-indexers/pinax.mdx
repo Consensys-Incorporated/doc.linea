@@ -1,0 +1,98 @@
+---
+title: Pinax
+description: Index Linea data with Pinax Firehose, Substreams, and RPC endpoints.
+---
+
+[Pinax](https://pinax.network/) provides Firehose, Substreams, and JSON-RPC endpoints for Linea
+Mainnet and Linea Sepolia.
+Pinax maintains the open source Firehose and Substreams stack alongside StreamingFast, and
+operates its own nodes for both networks.
+
+## Stream blocks with Firehose
+
+[Firehose](https://app.pinax.network/docs/firehose) streams full blocks over gRPC, including
+transactions, receipts, logs, call traces, and balance changes.
+Use it when an application needs the complete block payload rather than the subset a JSON-RPC
+node returns, or when it needs to process history faster than sequential RPC calls allow.
+
+<table>
+  <thead>
+    <tr>
+      <th>Network</th>
+      <th>Endpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Linea Mainnet</td>
+      <td><code>linea.firehose.pinax.network:443</code></td>
+    </tr>
+    <tr>
+      <td>Linea Sepolia</td>
+      <td><code>lineasepolia.firehose.pinax.network:443</code></td>
+    </tr>
+  </tbody>
+</table>
+
+Authenticate by passing an API key in the `X-Api-Key` header.
+
+## Transform blocks with Substreams
+
+[Substreams](https://app.pinax.network/docs/substreams) is a parallel indexing engine that runs
+on top of Firehose.
+Write modules in Rust, package them as an `.spkg` file, and run them on Pinax servers to
+transform raw blocks into the data model an application needs.
+Output can be written to PostgreSQL or ClickHouse, served over a stream, or consumed by a
+Graph Node as a subgraph data source.
+
+<table>
+  <thead>
+    <tr>
+      <th>Network</th>
+      <th>Endpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Linea Mainnet</td>
+      <td><code>linea.substreams.pinax.network:443</code></td>
+    </tr>
+    <tr>
+      <td>Linea Sepolia</td>
+      <td><code>lineasepolia.substreams.pinax.network:443</code></td>
+    </tr>
+  </tbody>
+</table>
+
+Set the API key in `SUBSTREAMS_API_KEY` before running the
+[Substreams CLI](https://docs.substreams.dev/).
+
+## Query state with RPC
+
+[Pinax RPC](https://app.pinax.network/docs/rpc) serves standard Ethereum JSON-RPC 2.0 from
+archive nodes, so historical state is queryable at any block rather than only at recent ones.
+
+<table>
+  <thead>
+    <tr>
+      <th>Network</th>
+      <th>Endpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Linea Mainnet</td>
+      <td><code>https://linea.rpc.pinax.network</code></td>
+    </tr>
+    <tr>
+      <td>Linea Sepolia</td>
+      <td><code>https://lineasepolia.rpc.pinax.network</code></td>
+    </tr>
+  </tbody>
+</table>
+
+## Get started
+
+Create a key at [app.pinax.network](https://app.pinax.network/), then follow the
+[Pinax documentation](https://app.pinax.network/docs).
+Free and paid plans are listed on the [pricing page](https://pinax.network/en/pricing).
