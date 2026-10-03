@@ -61,7 +61,7 @@ Application-level finality depends on the configured validator model.
 | Validator model | When application-level finality is reached | Trust assumption |
 | --- | --- | --- |
 | Single Maru validator | When that validator produces and commits the block | The operator's sequencer is trusted. No consensus-driven forks or reorgs are expected by design |
-| Multiple Maru validators ([QBFT](./distributed-sequencing.mdx)) | When a supermajority (≥2/3) of authorized validators commit the block, typically within seconds | Byzantine fault tolerance of the validator set (`n=3f+1`) |
+| Multiple Maru validators ([QBFT](./multi-validator-consensus.mdx)) | When a supermajority (≥2/3) of authorized validators commit the block, typically within seconds | Byzantine fault tolerance of the validator set (`n=3f+1`) |
 
 A single-validator deployment prioritizes simplicity and low latency.
 Use it when validator trust is explicit and a single sequencer is acceptable.
@@ -70,14 +70,14 @@ For example, [Linea Mainnet](../../network/index.mdx) uses a single validator.
 A multi-validator deployment finalizes each block when the authorized validators commit it.
 Use it when more than one party must participate in block ordering, or when the chain should keep producing blocks if one
 validator fails.
-For topology, latency, and setup, see [Multi-validator consensus](./distributed-sequencing.mdx).
+For topology, latency, and setup, see [Multi-validator consensus](./multi-validator-consensus.mdx).
 
 **Block time** is an operator parameter on the Maru validator.
 Choose block time and topology together so each block can be produced and committed in time.
 A single validator produces the block alone, so block time must leave room for that validator's availability.
 For example, [Linea Mainnet](../../network/index.mdx) uses 1-second blocks.
 A multi-validator set must finish the QBFT commit within the block time;
-[choose a block time](distributed-sequencing.mdx#block-time-and-latency) based on network latency and validator performance.
+[choose a block time](multi-validator-consensus.mdx#block-time-and-latency) based on network latency and validator performance.
 
 ### Settlement finality design
 
@@ -95,5 +95,5 @@ It changes who can reconstruct history if they need the settled state.
 ## See also
 
 - [Linea transaction finality](../../network/overview/transaction-finality.mdx): Soft and hard finality on Linea Mainnet.
-- [Multi-validator consensus](./distributed-sequencing.mdx): How QBFT changes application-level finality and sequencer
+- [Multi-validator consensus](./multi-validator-consensus.mdx): How QBFT changes application-level finality and sequencer
   fault tolerance.

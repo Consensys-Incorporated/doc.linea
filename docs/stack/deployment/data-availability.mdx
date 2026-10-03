@@ -17,7 +17,7 @@ to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>
   the finalization layer.
   A validium can be **public** or **private**, depending on who can read that network's transaction data.
 - A <GlossaryTerm term="Rollup">rollup</GlossaryTerm> also posts transaction data to the finalization
-  layer (for example, using [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs).
+  layer via [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs.
 
 :::warning Important
 <GlossaryTerm term="zk-SNARK" /> proofs show that a state transition is correct.
@@ -52,8 +52,8 @@ For regional copies and restoring from snapshots, see [High availability](./high
 
 ## Rollups
 
-In a rollup, the coordinator posts transaction data to the finalization layer (for
-example, using [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs).
+In a rollup, the coordinator posts transaction data to the finalization layer via
+[EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs.
 Anyone who can read that data can reconstruct state and submit exit transactions without the operator, for
 as long as the data remains available.
 
