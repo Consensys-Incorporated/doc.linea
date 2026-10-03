@@ -49,9 +49,8 @@ provides mechanisms operators can configure, but does not own the program:
 
 - Access policy: [RBAC](../deployment/access-control.mdx) on RPC endpoints and API surfaces controls
   who can read or submit
-- Data availability arrangement: operators choose where transaction data is
-  stored and who can reconstruct it; see
-  [Data availability and finalization](../deployment/data-availability-finalization.mdx)
+- [Data availability](../deployment/data-availability.mdx) arrangement: operators choose where transaction data is
+  stored and who can reconstruct it
 - [Key management](../deployment/key-management.mdx): remote signing backed by
   HSM or KMS via [Web3Signer](../../protocol/architecture/index.mdx#web3signer)
 - Governance and upgrade authority: multisig, governance contract, or timelock
@@ -79,4 +78,3 @@ provides mechanisms operators can configure, but does not own the program:
 | Who can see what data?                                      | [Privacy and data visibility](./validium.mdx)                                            |
 | What is protocol versus operator, and what evidence exists? | [Security and assurance](./security.mdx)                                                 |
 | How is access to RPC and APIs controlled?                   | [Access control](../deployment/access-control.mdx)                                                             |
-| How do data availability and finalization choices interact? | [Data availability and finalization](../deployment/data-availability-finalization.mdx) |
