@@ -46,7 +46,7 @@ Detailed production topology and supported tooling for a given deployment can be
       text: "Multi-validator consensus",
       description:
         "Maru multi-validator QBFT for sequencer fault tolerance and distributed block ordering within the execution path.",
-      href: "/stack/deployment/distributed-sequencing",
+      href: "/stack/deployment/multi-validator-consensus",
     },
     {
       text: "High availability",
@@ -61,9 +61,9 @@ Detailed production topology and supported tooling for a given deployment can be
       href: "/stack/deployment/access-control",
     },
     {
-      text: "Lineth-to-Lineth interoperability",
+      text: "Native interoperability",
       description:
-        "How two Lineth networks communicate with each other, and how an access controlled destination authorizes calls.",
+        "How two Lineth networks communicate with each other using the Cross Ledger Interoperability Protocol (CLIP).",
       href: "/stack/deployment/interoperability",
     },
     {
@@ -103,7 +103,7 @@ Lineth does not recommend a specific set of customizations.
 
 The following diagram illustrates an example architecture for a
 <GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted
-network boundary, and validium message relayers to other chains.
+network boundary, and message relayers to other chains.
 A rollup or public validium uses the same internal services; access and data availability differ.
 
 In this example, transaction data stays on the operator's restricted node set, and is not shown on the
@@ -126,7 +126,7 @@ The example architecture flows as follows:
    <GlossaryTerm term="RPC node">RPC nodes</GlossaryTerm>, which read chain state from
    onchain contracts.
 3. The sequencer orders transactions and builds blocks.
-   [Multi-validator consensus](./distributed-sequencing.mdx) is a design choice that improves sequencer
+   [Multi-validator consensus](./multi-validator-consensus.mdx) is a design choice that improves sequencer
    fault tolerance.
 4. Inside the operator network, the coordinator batches blocks, the tracer produces traces,
    and the prover generates <GlossaryTerm term="zk-SNARK" /> proofs.
@@ -134,9 +134,8 @@ The example architecture flows as follows:
    [finalization contract](../../protocol/architecture/smart-contracts.mdx#finalization-contract).
    This validium example does not post transaction data; a rollup posts it to the finalization layer.
    See [Data availability](./data-availability.mdx).
-6. Interoperability with the finalization layer uses the
-   [canonical token bridge and message service](../../protocol/architecture/interoperability/index.mdx).
-   This example also shows validium message relayers to other enterprise or public chains.
+6. Lineth networks can communicate with each other using [native interoperability](interoperability.mdx).
+   This example also shows message relayers to other non-Lineth enterprise or public chains.
 
 See [Trust model](../evaluate/trust-model.mdx) to understand what each deployment component can do and
 what participants can verify.

@@ -1,0 +1,133 @@
+---
+title: Run multiple Maru validators
+sidebar_label: Run multiple validators
+description: >-
+  Set up and operate multiple Maru validators with QBFT consensus on a Lineth
+  deployment
+image: /img/socialCards/set-up-distributed-sequencing.jpg
+---
+
+import GlossaryTerm from '@theme/GlossaryTerm';
+
+This page describes how to set up and operate multiple
+<GlossaryTerm term="Maru validator">Maru validators</GlossaryTerm> with
+<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> consensus on a
+<GlossaryTerm term="Lineth" /> deployment.
+
+:::info Migrate from one to multiple validators
+To migrate a running single-validator deployment, complete the [setup steps](#set-up-validators) for
+each new sequencer node, then schedule the [genesis update](#manage-the-validator-set).
+:::
+
+## Prerequisites
+
+- Review [Multi-validator consensus](../deployment/multi-validator-consensus.mdx), and confirm that you can
+  meet the topology and latency recommendations (minimum 4 validators for useful fault tolerance).
+- Choose a block time using the
+  [block-building window formula](../deployment/multi-validator-consensus.mdx#block-time-and-latency).
+
+## Set up validators
+
+Follow these steps to set up and configure Maru validators:
+
+1. Generate validator keys using Maru's
+   [PrivateKeyGenerator](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/maru/utils#1-privatekeygenerator).
+   In a multi-party deployment, each operator generates their own key locally and shares only the
+   public address.
+   Private keys never leave the operator's environment.
+2. Collect every public address into the genesis file.
+   See the
+   [`genesis-maru.json` template](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/maru/docker/initialization/genesis-maru.json.template).
+3. Mount each validator's private key as a file on that validator's filesystem at runtime.
+4. On each validator, set [`p2p.static-peers`](../reference/linea-maru-options.mdx#p2p) to the other validators' enodes.
+   Use this direct, static peering instead of P2P discovery (`p2p.discovery.bootnodes`).
+   Indirect routing adds latency and reduces consensus performance.
+
+A reference K3s setup is available at
+[`lineth-monorepo/maru/chaos-testing`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/maru/chaos-testing).
+
+:::warning[Key rotation]
+
+Validator keys are mounted as files on the filesystem.
+Rotating a key requires fork management and a coordinated genesis update across all validators.
+Plan rotations carefully and avoid them when possible.
+See [Key management](../deployment/key-management.mdx) for Maru validator custody and rotation.
+
+:::
+
+## Manage the validator set
+
+You can add or remove a validator on a running network using a scheduled Maru genesis file update.
+The genesis file is keyed by timestamp, similar to an Ethereum hard fork schedule, so changes apply
+at a future point all validators agree on.
+
+1. If you are adding a validator that does not yet have a key pair, generate one using the
+   [PrivateKeyGenerator](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/maru/utils#1-privatekeygenerator)
+   tool.
+   The new operator keeps the private key locally and shares only the public address.
+2. All existing validator operators agree on a future timestamp far enough ahead for everyone to
+   update their genesis file in time.
+3. Each operator updates their genesis file with the validator list that should be active at that timestamp.
+   If you're adding a validator, include the new public address.
+   If you're removing a validator, omit it from the list.
+4. Keep block time consistent across validators.
+
+This is a coordinated operation, not a runtime configuration change.
+There is no onchain governance or RPC method to add or remove validators dynamically.
+
+## Monitor Maru
+
+Maru exposes Prometheus metrics on its metrics port (`9545` by default).
+Maru metrics are prefixed with `maru_`.
+Key metrics for operators include:
+
+- `maru_consensus_block_latency` (histogram, ms): Total consensus time per block.
+  **P95 is the value to alert on.**
+  Tagged by `role` (proposer / non-proposer).
+- `maru_engine_api_request_latency` (timer): Engine API request latency between Maru and its paired
+  Linea Besu.
+  Tagged by `method`, `status`.
+- `maru_metadata_cl_block_height` (gauge): Latest beacon chain block height.
+  Useful for liveness checks.
+
+For diagnosing consensus slowdowns, additional `maru_consensus_phase_*` histograms break latency
+down by QBFT phase.
+
+:::warning Recommended alert threshold
+Trigger a Prometheus notification when the block-building window (configured block time minus
+P95 of `maru_consensus_block_latency`) drops below 500ms.
+This matches the minimum block-building window in
+[Multi-validator consensus](../deployment/multi-validator-consensus.mdx#block-time-and-latency).
+:::
+
+See [Monitor a deployment](./monitor-a-deployment.mdx) for more information about exposing the metrics endpoint.
+
+## Restore lost quorum
+
+In [multi-validator consensus](../deployment/multi-validator-consensus.mdx), if up to `f` validators fail
+(for example, 1 validator out of 4 fails), consensus continues.
+Expect missed rounds: the offline validator's proposal slot is skipped, so that block's time effectively doubles.
+
+If **more than `f`** validators fail (for example, 2 validators out of 4 fail), **quorum is lost** and the chain halts.
+To restore quorum:
+
+1. Bring enough validators back online so no more than `f` validators are offline.
+2. The remaining operators coordinate a [scheduled genesis update](#manage-the-validator-set) to add the
+   restored validators.
+
+If consensus cannot complete within the configured block time, the protocol automatically advances
+to a missed round and changes the proposer for that slot.
+The affected slot is skipped and the next proposer takes over.
+
+## Upgrade validators
+
+You can upgrade validators in a rolling window without halting consensus.
+Take at most `f` validators offline (for example, 1 validator out of 4).
+Apply the new software to those offline nodes, then bring them back before taking any more offline.
+Expect missed rounds while they are down: the offline validator's proposal slot is skipped, so that
+block's time effectively doubles.
+
+## Next steps
+
+- Review [Multi-validator consensus](../deployment/multi-validator-consensus.mdx) for topology and latency recommendations.
+- Configure Maru using the [Maru options](../reference/linea-maru-options.mdx) reference.
