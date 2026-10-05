@@ -16,7 +16,7 @@ Choose the model that aligns with your requirements.
 
 | Questions | Rollup | Public validium | Private validium |
 | --- | --- | --- | --- |
-| Where is transaction data stored? | On the finalization layer as [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs | On the Lineth network's nodes | On the Lineth network's nodes |
+| Where is transaction data stored? | On the finalization layer as [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) blobs | On the Lineth network's nodes | On a restricted node set in the Lineth network |
 | What is posted to the finalization layer? | State commitments, proofs, and transaction data | State commitments and proofs only | State commitments and proofs only |
 | Who can reconstruct history? | Anyone with blob data, while it is retained | Anyone who can reach the network's nodes | Authorized participants only |
 | What is the network topology and access policy? | Open network and RPC access | Open network and RPC access | Restricted node set and [RBAC](../deployment/access-control.mdx) permissions on RPC |
