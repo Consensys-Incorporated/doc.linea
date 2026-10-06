@@ -204,14 +204,7 @@ Furthermore, Linea takes action to ensure that interoperability between the publ
 
 ### Rollup
 
-A type of L2 scaling solution that batches multiple transactions and submits them to Ethereum in a single transaction. This allows for reductions in gas costs and increases in transaction throughput. There are optimistic and zero-knowledge rollups, which use different security methods to offer these scalability gains.
-
-Rollup architecture is made up of the following components:
-
-- Rollup contract: contract on the L1 stores rollup blocks, monitors state updates on the rollup, and tracks user deposits
-- Offchain VM: computation and state storage on another virtual machine separate from the Ethereum Virtual Machine
-- Aggregators/sequencers/operators/validators: nodes that aggregate transactions, compress the underlying data, and publish the block on Ethereum
-- Verifier contract: contract on the L1 that verifies the validity proof
+A deployment model in which a Lineth network proves state transitions with zk-SNARKs and posts transaction data, state commitments, and proofs to the finalization layer. Anyone who can read that data can reconstruct history while it remains available.
 
 ### RPC node
 
@@ -270,7 +263,7 @@ A security model for certain L2 solutions where, to increase speed, transactions
 
 ### Validium
 
-A deployment model in which a Lineth network proves state transitions with zk-SNARKs but keeps transaction data in a private data availability layer instead of publishing it to the finalization layer. Only state commitments and proofs are posted onchain, so participants without access to the offchain data can't independently reconstruct or verify the full transaction history.
+A deployment model in which a Lineth network proves state transitions with zk-SNARKs and posts only state commitments and proofs to the finalization layer. A validium can be public or private, depending on who has access to the transaction data. Participants cannot reconstruct the full transaction history from the finalization layer alone.
 
 ### Verifiable computation
 

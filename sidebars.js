@@ -458,11 +458,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          id: "stack/evaluate/validium",
-          label: "Privacy and data visibility",
-        },
-        {
-          type: "doc",
           id: "stack/evaluate/security",
           label: "Security and assurance",
         },
@@ -476,8 +471,9 @@ const sidebars = {
       items: [
         "stack/deployment/index",
         "stack/deployment/core-components",
-        "stack/deployment/data-availability-finalization",
-        "stack/deployment/fast-finality",
+        "stack/deployment/data-availability",
+        "stack/deployment/finalization-layer",
+        "stack/deployment/finality",
         "stack/deployment/multi-validator-consensus",
         "stack/deployment/high-availability",
         "stack/deployment/access-control",
