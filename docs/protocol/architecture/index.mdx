@@ -12,7 +12,8 @@ L3 networks, scaling Ethereum by providing an Ethereum-equivalent execution envi
 
 <GlossaryTerm term="Operator">Operators</GlossaryTerm> and network designers configure their stack to shape
 protocol behavior and trust assumptions, for example, choosing the
-[data availability and finalization](../../stack/deployment/data-availability-finalization.mdx) design.
+[data availability](../../stack/deployment/data-availability.mdx) and
+[finalization layer](../../stack/deployment/finalization-layer.mdx) design.
 
 The following represents a possible configuration for a network built on Lineth:
 
@@ -211,10 +212,11 @@ How data availability is handled depends on the
 The network may rely on another blockchain or third-party service to provide data availability, or
 operators may run nodes specifically for data availability.
 
-- <GlossaryTerm term="Validium">Private validium</GlossaryTerm>: Data stored offchain with private node set; no onchain data posting
-- Public deployment: Data posted to finalization layer using EIP-4844 blobs
+- <GlossaryTerm term="Validium">Validium</GlossaryTerm>: Only proofs and state commitments posted to the finalization layer
+- <GlossaryTerm term="Rollup">Rollup</GlossaryTerm>: Transaction data posted to the finalization layer
+  via EIP-4844 blobs
 
-See [Data availability and finalization](../../stack/deployment/data-availability-finalization.mdx) for
+See [Data availability](../../stack/deployment/data-availability.mdx) for
 more information.
 
 :::
@@ -233,7 +235,7 @@ the prover generates compression proofs.
 6. Data submission: Lineth contracts define three data-submission models:
    - Compressed data submitted as EIP-4844 blobs. Supported by the coordinator. Requires the rollup to support the `IAcceptEip4844Blobs` interface.
    - Compressed data submitted as calldata. The current coordinator does not provide a calldata submitter. Requires the rollup to support the `IAcceptCalldataBlobs` interface.
-   - Shnarf-only submission for <GlossaryTerm term="Validium">private validium</GlossaryTerm> deployments, without publishing the compressed batch data to the finalization layer. Supported by the coordinator. Requires the validium to support the `IAcceptShnarfData` interface.
+   - Shnarf-only submission for <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, without publishing the compressed batch data to the finalization layer. Supported by the coordinator. Requires the validium to support the `IAcceptShnarfData` interface.
 7. Finalization: The coordinator submits proofs to the finalization
 layer; after verification and any configured delay, transactions reach hard finality on the selected
 finalization layer.
