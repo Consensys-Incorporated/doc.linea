@@ -22,10 +22,10 @@ is the network's onchain root of trust: nothing the network claims about its own
 until this contract has recorded it.
 The finalization contract:
 
+- Accepts the transaction data the network publishes, through the deployment's chosen
+  [data submission model](./index.mdx#transaction-lifecycle), and records each submission as a [shnarf](#data-commitments-shnarfs).
 - Calls a verifier contract to check the <GlossaryTerm term="zk-SNARK" /> proof submitted for each range of blocks, and records the
   resulting finalized state.
-- Accepts the transaction data the network publishes, through whichever
-  [data submission model](./index.mdx#transaction-lifecycle) the deployment uses.
 - Anchors the Merkle roots of the messages the finalized blocks sent, and verifies the rolling hash of the
   messages the network received.
   See [Message commitments](./bridge/canonical-message-service.mdx#message-commitments).
@@ -40,6 +40,31 @@ Operators running other deployments can reuse the same contract or deploy an equ
 interfaces their finalization design requires.
 
 :::
+
+### Data commitments (shnarfs)
+
+Each data submission is recorded on the finalization contract as a shnarf: a single hash that commits to the
+submitted data, the state it produces, and the submission before it.
+A shnarf is the <GlossaryTerm term="Keccak">Keccak</GlossaryTerm> hash of these values concatenated:
+
+- The parent shnarf, which links submissions into an ordered chain
+- A SNARK-friendly hash of the compressed data
+- The final state root after the submitted data
+- A data evaluation point and claim, which bind the shnarf to the submitted data
+
+At finalization, the <GlossaryTerm term="zk-SNARK" /> public input includes the last finalized shnarf and the
+new final shnarf.
+The contract accepts the proof only when that new shnarf matches one it has already recorded.
+
+How the shnarf is recorded depends on the [data submission model](./index.mdx#transaction-lifecycle):
+
+- **EIP-4844 blobs (<GlossaryTerm term="Rollup">rollup</GlossaryTerm>):** The contract computes the shnarf from
+  the blob posted with the submission, so the data the shnarf commits to is posted to the finalization layer.
+- **Calldata:** The contract computes the shnarf from the compressed data in the submission.
+  The coordinator does not currently provide a calldata submitter.
+- **Shnarf-only (<GlossaryTerm term="Validium">validium</GlossaryTerm>):** The
+  <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> computes the shnarf and the contract records it.
+  The proof is still bound to the data, but the data itself is not posted to the finalization layer.
 
 ## Message service contracts
 
