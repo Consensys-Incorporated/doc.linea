@@ -22,8 +22,9 @@ is the network's onchain root of trust: nothing the network claims about its own
 until this contract has recorded it.
 The finalization contract:
 
-- Accepts the transaction data the network publishes, through the deployment's chosen
-  [data submission model](./index.mdx#transaction-lifecycle), and records each submission as a [shnarf](#data-commitments-shnarfs).
+- Records each data submission as a [shnarf](#data-commitments-shnarfs).
+  The contract computes that shnarf from the submitted data, except for a <GlossaryTerm term="Validium">validium</GlossaryTerm>,
+  which stores the shnarf the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> provides.
 - Calls a verifier contract to check the <GlossaryTerm term="zk-SNARK" /> proof submitted for each range of blocks, and records the
   resulting finalized state.
 - Anchors the Merkle roots of the messages the finalized blocks sent, and verifies the rolling hash of the
@@ -53,17 +54,19 @@ A shnarf is the <GlossaryTerm term="Keccak">Keccak</GlossaryTerm> hash of these 
 - A data evaluation point and claim, which bind the shnarf to the submitted data
 
 At finalization, the <GlossaryTerm term="zk-SNARK" /> public input includes the last finalized shnarf and the
-new final shnarf binding the proven execution to the data provided based on data model.
+new final shnarf.
 The contract accepts the proof only when that new final shnarf matches one it has already recorded.
 
 How the shnarf is recorded depends on the [data submission model](./index.mdx#transaction-lifecycle):
 
 - **EIP-4844 blobs (<GlossaryTerm term="Rollup">rollup</GlossaryTerm>):** The contract computes the shnarf from
   the blob posted with the submission, so the data the shnarf commits to is posted to the finalization layer.
+  When multiple blobs are submitted, the contract computes a shnarf for each blob, chains them together, and stores
+  the final shnarf.
 - **Calldata:** The contract computes the shnarf from the compressed data in the submission.
   The coordinator does not currently provide a calldata submitter.
-- **Shnarf-only (<GlossaryTerm term="Validium">validium</GlossaryTerm>):** The
-  <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> computes the shnarf and the contract records it.
+- **Shnarf-only (<GlossaryTerm term="Validium">validium</GlossaryTerm>):** The coordinator computes the shnarf and
+  the contract records it.
   The proof is still bound to the data, but the data itself is not posted to the finalization layer.
 
 ## Message service contracts
