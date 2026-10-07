@@ -19,11 +19,20 @@ You can view the LSC account history here:
 Transactions are designated by their nonce, and each entry details the action taken and the steps
 you can take to verify this information. 
 
+### October 07, 2026
+#### L1
+- **[Nonce 80](https://app.safe.global/transactions/tx?safe=eth:0x892bb7EeD71efB060ab90140e7825d8127991DD3&id=multisig_0x892bb7EeD71efB060ab90140e7825d8127991DD3_0xed567f3da2d38e5bb1ff980920ba98df2406c8cf9924f3e58ce8a85ee0aa03dd)**
+  - Actions: 
+    - Add verifier at index 1 replacing existing unused verifier to fix issues preventing the generation of proofs in some cases.
+  - Verification
+    - `VerifierAddressChanged` records the new verifier `0x1d930e3Fac9fbc7026eC17962d2F57d558d37532`, at index 1.
+
+
 ### September 03, 2026
 #### L1
 - **[Nonce 79](https://app.safe.global/transactions/tx?safe=eth:0x892bb7EeD71efB060ab90140e7825d8127991DD3&id=multisig_0x892bb7EeD71efB060ab90140e7825d8127991DD3_0x1e6883c989d587db78972e842fd4b44fc930864caa6c9440833914798f3ffb81)**
   - Actions: 
-    - Add verifier at index 0 replacing existing unused validator to fix issues preventing the generation of proofs in some cases.
+    - Add verifier at index 0 replacing existing unused verifier to fix issues preventing the generation of proofs in some cases.
   - Verification
     - `VerifierAddressChanged` records the new verifier `0xAFF26999780901ee8B48f0a1271a177ff46fD53F`, at index 0.
 
@@ -50,7 +59,7 @@ you can take to verify this information.
     - Revoke `NODE_OPERATOR_PROVE_UNKNOWN_VALIDATOR_ROLE` for the node operator account.
     - Adjust Yield Manager parameters ramping up to 10% of funds.
     - [No effect] Prevent execution by anyone apart from `0x535dE1e2A961529AA84EF208981f8cF4e7dcbdF5`
-    - Add verifier at index 1 replacing existing unused validator to support the coinbase change and allowed circuit ids.
+    - Add verifier at index 1 replacing existing unused verifier to support the coinbase change and allowed circuit ids.
     - Upgrade the LineaRollup implementation containing future forced transaction support.
   - Verification
      - [Links to audits](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/audits.md#eighth-audit-round)  
