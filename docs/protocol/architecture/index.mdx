@@ -232,10 +232,10 @@ These architectural components support transactions from submission to finalizat
 4. Conflation: The coordinator groups blocks into batches.
 5. Proof and blob generation: The prover generates execution proofs for batches and the coordinator combines batches into blobs;
 the prover generates compression proofs.
-6. Data submission: Lineth contracts define three data-submission models:
+6. Data submission: Lineth contracts define three data submission models:
    - Compressed data submitted as EIP-4844 blobs. Supported by the coordinator. Requires the rollup to support the `IAcceptEip4844Blobs` interface.
    - Compressed data submitted as calldata. The current coordinator does not provide a calldata submitter. Requires the rollup to support the `IAcceptCalldataBlobs` interface.
-   - Shnarf-only submission for <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, without publishing the compressed batch data to the finalization layer. Supported by the coordinator. Requires the validium to support the `IAcceptShnarfData` interface.
+   - <GlossaryTerm term="Shnarf" />-only submission for <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, without publishing the compressed batch data to the finalization layer. Supported by the coordinator. Requires the validium to support the `IAcceptShnarfData` interface.
 7. Finalization: The coordinator submits proofs to the finalization
 layer; after verification and any configured delay, transactions reach hard finality on the selected
 finalization layer.

@@ -190,6 +190,10 @@
       "definition": "A node that pairs a Maru validator with a Linea Besu execution client running the sequencer plugins. This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders, builds, and executes the block. Some materials use \"validator\" and \"sequencer\" interchangeably. Here, the validator is the Maru process, the sequencer is the Linea Besu plugin set, and the sequencer node is the two together."
     },
     {
+      "term": "Shnarf",
+      "definition": "A hash commitment recorded on the finalization contract for each data submission. It covers the submitted data, the resulting state root, and the previous shnarf. Finalization proofs are verified against it."
+    },
+    {
       "term": "Shomei",
       "definition": "A state manager that communicates with Linea Besu, via a corresponding plugin, to maintain and update network state using sparse Merkle trees. Shomei is the component behind Lineth's state manager."
     },
