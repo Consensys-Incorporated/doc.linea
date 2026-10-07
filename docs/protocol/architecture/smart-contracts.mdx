@@ -53,8 +53,8 @@ A shnarf is the <GlossaryTerm term="Keccak">Keccak</GlossaryTerm> hash of these 
 - A data evaluation point and claim, which bind the shnarf to the submitted data
 
 At finalization, the <GlossaryTerm term="zk-SNARK" /> public input includes the last finalized shnarf and the
-new final shnarf.
-The contract accepts the proof only when that new shnarf matches one it has already recorded.
+new final shnarf binding the proven execution to the data provided based on data model.
+The contract accepts the proof only when that new final shnarf matches one it has already recorded.
 
 How the shnarf is recorded depends on the [data submission model](./index.mdx#transaction-lifecycle):
 
