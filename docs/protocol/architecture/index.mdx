@@ -18,7 +18,7 @@ protocol behavior and trust assumptions, for example, choosing the
 
 ## Transaction lifecycle
 
-Lineth carries each transaction from submission to finalization in four stages.
+Lineth carries a transaction from submission to finalization in four stages:
 
 <div className="img-fit img-large">
   <TransactionLifecycle />
@@ -56,7 +56,6 @@ After verification and any configured delay, transactions reach settlement final
 [Data availability](../../stack/deployment/data-availability.mdx) is the guarantee that the
 transaction data underlying these proofs remains accessible to the parties who need it to verify or
 reconstruct historical state.
-zk-SNARK proofs ensure the correctness of the state transitions.
 How data availability is provided depends on the
 [deployment model](../../stack/evaluate/deployment-models.mdx):
 
@@ -74,8 +73,7 @@ Read more about [Data commitments (shnarfs)](smart-contracts.mdx#data-commitment
 
 ## Components overview
 
-Lineth is comprised of several classes of components, each of which serve one or more of the
-transaction lifecycle stages:
+Lineth includes several classes of components, each of which serve part of the transaction lifecycle:
 
 - [**Nodes**](./nodes/index.mdx) accept transactions over JSON-RPC and produce or import blocks.
   A fully public network provides externally reachable nodes.
@@ -92,8 +90,6 @@ transaction lifecycle stages:
   - The [**prover**](./prover/index.mdx) generates zk-SNARK proofs for state transitions.
 
 - [**Smart contracts**](./smart-contracts.mdx) execute small programs according to EVM rules.
-  Once deployed, they are immutable unless they are explicitly designed with upgradeability or
-  administrative controls.
   For example, the finalization contract verifies proofs and records state roots on the finalization layer.
   The [**canonical bridge**](./bridge/index.mdx) includes contracts that move messages and tokens between
   the network and the finalization layer.
