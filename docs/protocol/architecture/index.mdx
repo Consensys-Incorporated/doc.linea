@@ -61,14 +61,16 @@ How data availability is provided depends on the
 [deployment model](../../stack/evaluate/deployment-models.mdx):
 
 - For a <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, the coordinator submits compressed
-  transaction data as EIP-4844 blobs.
+  transaction data to the finalization layer as EIP-4844 blobs.
   The rollup must support the `IAcceptEip4844Blobs` interface.
-- For a <GlossaryTerm term="Validium">validium</GlossaryTerm>, submission is shnarf-only.
+- For a <GlossaryTerm term="Validium">validium</GlossaryTerm>, submission is
+  <GlossaryTerm term="Shnarf">shnarf</GlossaryTerm>-only.
   Only proofs and state commitments are posted to the finalization layer.
   The validium must support the `IAcceptShnarfData` interface.
+  The network may rely on another blockchain or a third-party service, or operators may run nodes
+  specifically for data availability.
 
-The network may rely on another blockchain or a third-party service, or operators may run nodes
-specifically for data availability.
+Read more about [Data commitments (shnarfs)](smart-contracts.mdx#data-commitments-shnarfs).
 
 ## Components overview
 
