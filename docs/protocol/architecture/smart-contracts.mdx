@@ -58,6 +58,12 @@ other, sending each instruction through the message service.
 Minted supply is always matched by escrowed supply, so the bridge cannot mint tokens that were never locked.
 See [Canonical token bridge](./bridge/canonical-token-bridge.mdx).
 
+## Application contracts
+
+Application contracts are deployed on the Lineth network to enable token issuance, workflow automation, and
+other network-specific functionality.
+For example, a contract can issue an ERC-20 token on the network, or release that token when a settlement condition is met.
+
 ## Contract versioning
 
 Contracts are immutable once deployed unless they're explicitly designed to be upgraded.

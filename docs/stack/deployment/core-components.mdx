@@ -18,8 +18,8 @@ The following components are **required**.
 
 **Replaceability:** Versioned via protocol upgrade.
 
-- [Maru](../../protocol/architecture/index.mdx#consensus-client-maru): Consensus layer client
-- [Linea Besu](../../protocol/architecture/index.mdx#execution-client-linea-besu): Execution layer client.
+- [Maru](../../protocol/architecture/nodes/index.mdx#consensus-client-maru): Consensus layer client
+- [Linea Besu](../../protocol/architecture/nodes/index.mdx#execution-client-linea-besu): Execution layer client.
   Required for sequencer nodes and trace generation; other nodes can run any Ethereum execution client
 - [Sequencer](../../protocol/architecture/sequencer/index.mdx): Linea Besu plugins that order, build, and
   execute blocks
@@ -29,7 +29,7 @@ The following components are **required**.
 - [Tracer](../../protocol/architecture/sequencer/traces-generator.mdx): Generates execution traces required for proofs
 
 :::note
-Lineth uses a [dual-layer architecture](../../protocol/architecture/index.mdx#nodes): Maru for consensus and an
+Lineth uses a [dual-layer architecture](../../protocol/architecture/nodes/index.mdx): Maru for consensus and an
 execution client for the EVM.
 Operators can configure the consensus and execution layers separately.
 This enables but does not guarantee client diversity and network resilience; those depend on the operator's deployment.
