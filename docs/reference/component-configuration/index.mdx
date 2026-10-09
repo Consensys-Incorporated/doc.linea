@@ -1,0 +1,45 @@
+---
+title: Component configuration
+sidebar_label: Overview
+description: 'Configuration references for Lineth components, for any deployment.'
+image: /img/socialCards/component-configuration.jpg
+---
+
+import ActionCards from "@site/src/components/ActionCards";
+
+These pages list configuration options for Lineth components.
+They apply to any Lineth deployment, including the components that run Linea Mainnet and a custom
+network.
+Defaults are the values defined in each component's source.
+A deployment can override them.
+
+<ActionCards
+  cards={[
+    {
+      text: "Linea Besu plugins",
+      description:
+        "CLI options for the sequencer, tracer, and state recovery plugins.",
+      href: "/reference/component-configuration/linea-besu",
+    },
+    {
+      text: "Prover",
+      description: "TOML options for the prover.",
+      href: "/reference/component-configuration/prover",
+    },
+    {
+      text: "Coordinator",
+      description: "TOML options for the coordinator.",
+      href: "/reference/component-configuration/coordinator",
+    },
+    {
+      text: "Maru",
+      description: "TOML options for the Maru consensus client.",
+      href: "/reference/component-configuration/maru",
+    },
+    {
+      text: "Postman",
+      description: "Environment variables for the Postman service.",
+      href: "/reference/component-configuration/postman",
+    },
+  ]}
+/>

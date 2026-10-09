@@ -1,0 +1,44 @@
+---
+title: Reference
+description: Technical references for the public Linea network and for Lineth deployments.
+image: /img/socialCards/reference.jpg
+---
+
+import ActionCards from "@site/src/components/ActionCards";
+
+Technical references for [Linea](../protocol/linea-vs-lineth), the public network, and for
+[Lineth](../protocol/linea-vs-lineth), the stack that powers Linea and other deployments.
+Each section states which of the two it covers.
+
+<!-- vale Consensys.CaseSensitive-Substitution = NO -->
+
+<ActionCards
+  cards={[
+    {
+      text: "RPC and APIs",
+      description:
+        "Public Linea JSON-RPC and Token API, and where a custom deployment's JSON-RPC differs.",
+      href: "/reference/apis",
+    },
+    {
+      text: "Lineth SDK",
+      description:
+        "Bridge helpers for Ethereum and Linea. Custom deployments pass contract addresses.",
+      href: "/reference/lineth-sdk",
+    },
+    {
+      text: "Component configuration",
+      description:
+        "Lineth component options for any deployment, including Linea Mainnet.",
+      href: "/reference/component-configuration",
+    },
+    {
+      text: "Smart contracts",
+      description:
+        "Lineth protocol contract interfaces. Each deployment uses its own addresses.",
+      href: "/reference/smart-contracts",
+    },
+  ]}
+/>
+
+<!-- vale Consensys.CaseSensitive-Substitution = YES -->

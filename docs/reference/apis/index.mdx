@@ -1,0 +1,32 @@
+---
+title: RPC and APIs
+sidebar_label: Overview
+description: >-
+  JSON-RPC and Token API references for the public Linea network, and how
+  JSON-RPC behavior can differ on a custom Lineth deployment.
+image: /img/socialCards/rpc-and-apis.jpg
+---
+
+import ActionCards from "@site/src/components/ActionCards";
+
+These pages document APIs for Linea, the public network.
+A custom Lineth deployment can expose JSON-RPC on its own endpoint.
+Which methods that endpoint serves depends on the execution client, the plugins enabled on it,
+and any access control in front of the node.
+
+<ActionCards
+  cards={[
+    {
+      text: "Linea API",
+      description:
+        "Methods on Linea's public endpoint. Standard methods work on any Lineth node.",
+      href: "/reference/apis/linea-api",
+    },
+    {
+      text: "Token API",
+      description:
+        "Token metadata and balances for the public Linea network.",
+      href: "/reference/apis/token-api",
+    },
+  ]}
+/>

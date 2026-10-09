@@ -1,6 +1,8 @@
 ---
 title: linea_estimateGas
-description: Estimates the gas limit, base fee, and priority fee for a Linea transaction using Linea's predictable pricing model.
+description: >-
+  Estimates the gas limit, base fee, and priority fee for a Linea transaction
+  using Linea's predictable pricing model.
 image: /img/socialCards/lineaestimategas.jpg
 ---
 
@@ -11,9 +13,9 @@ import RpcPlayground from '@site/src/components/RpcPlayground';
 Generates and returns an estimate of how much gas is necessary to allow the transaction to complete
 and be published on Ethereum. The transaction will not be added to the blockchain.
 
-For more information about estimating gas, see our [guide](../../network/how-to/gas-fees.mdx), and
+For more information about estimating gas, see our [guide](../../../network/how-to/gas-fees.mdx), and
 for more information about how this API formulates the transaction costs, see the
-[predictable pricing feature](../../network/overview/predictable-pricing.mdx).
+[predictable pricing feature](../../../network/overview/predictable-pricing.mdx).
 
 The `priorityFeePerGas` returned by this method includes the cost of submitting the transaction to
 Ethereum, which can vary based on the size of the calldata.
@@ -21,7 +23,7 @@ Ethereum, which can vary based on the size of the calldata.
 :::note
 
 `linea_estimateGas` uses the same inputs as the standard
-[`eth_estimateGas`](./eth-estimategas.mdx), but returns the recommended gas limit, the base fee per
+[`eth_estimateGas`](eth-estimategas.mdx), but returns the recommended gas limit, the base fee per
 gas, and the priority fee per gas. We recommend using `linea_estimateGas` for more accurate results.
 
 :::
