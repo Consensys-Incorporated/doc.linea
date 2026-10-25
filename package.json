@@ -125,7 +125,8 @@
     "@vercel/static-config": {
       "ajv": "8.20.0"
     },
-    "serialize-javascript": "7.1.2"
+    "serialize-javascript": "7.1.2",
+    "tinypool": "^2.1.2"
   },
   "allowScripts": {
     "@swc/core": false,
