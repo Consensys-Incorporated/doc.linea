@@ -1,19 +1,28 @@
 ---
 title: Run a local Lineth Stack
 description: >-
-  Use the guided wizard to configure and start a local Lineth Stack L2 with L1
-  finality, settling to either a local L1 or Sepolia.
+  Use the guided wizard to configure and start a local Lineth L2 rollup that
+  settles to Sepolia or a local L1.
 image: /img/socialCards/run-a-local-lineth-stack.jpg
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-This quickstart guide walks you through starting a local <GlossaryTerm term="Lineth" /> chain, deploying the required contracts,
+This quickstart guide walks you through starting a local <GlossaryTerm term="Lineth" />
+<GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, deploying the required contracts,
 and verifying L1 finality.
-You will choose how the stack settles to L1 and how it proves blocks.
+You will choose the L1 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, and how the stack proves blocks.
 
 This quickstart is intended for <GlossaryTerm term="Operator">operators</GlossaryTerm>, architects, and engineers evaluating how
 the stack behaves before designing a production deployment.
+
+:::note
+
+This quickstart only supports an L2 rollup.
+To evaluate a <GlossaryTerm term="Validium">validium</GlossaryTerm>, such as an L2 private validium or
+an L3 public validium that settles to Linea Mainnet, [contact support](/support).
+
+:::
 
 :::caution
 
@@ -26,7 +35,7 @@ quickstart material in production.
 
 ## What this quickstart runs
 
-The quickstart runs a local Lineth Stack <GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> with these services. For component
+The quickstart runs a local Lineth L2 rollup with these services. For component
 details, see [Deployment components](/stack/deployment/core-components).
 
 - Linea Besu <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm>, and an L2 Besu
@@ -41,8 +50,8 @@ details, see [Deployment components](/stack/deployment/core-components).
 - <GlossaryTerm term="Prover" /> for proof generation
 - Local L2 Blockscout block explorer, including API backend and frontend
 
-The L2 is always local. What differs between modes is where the stack settles
-its L1 finality: public Sepolia, which is the primary path, or a local
+The L2 is always local. What differs between modes is the finalization layer:
+public Sepolia, which is the primary path, or a local
 development L1 that the stack runs for you for easier testing.
 
 ## Prerequisites
@@ -98,7 +107,7 @@ a `.env` file already exists, the wizard backs it up before making changes.
 The wizard asks for:
 
 1. **L1 mode**: `Local L1` or `Sepolia`. See
-   [Choose your L1 mode](#choose-your-l1-mode) below.
+   [Choose your finalization layer](#choose-your-finalization-layer) below.
 2. **Prover mode**: `Dev proofs` (default, fast dummy proofs for laptops and
    demos) or `Partial prover` (real partial proving, resource-heavy).
 3. **Sepolia L1 RPC URL**: asked only when you choose Sepolia mode.
@@ -116,9 +125,9 @@ runtime wallets, Web3Signer key config, L2 genesis, and service configuration,
 pulls Docker images, starts services, deploys contracts, prints links, waits for
 first finality, and prints the result.
 
-#### Choose your L1 mode
+#### Choose your finalization layer
 
-Both modes exercise L1 finality. Sepolia is the primary path, since it settles
+Both finalization layer options are L1s. Sepolia is the primary path, since it settles
 against public Sepolia and exercises real public L1 finality. Local L1 is
 offered for ease of testing when you want a faster, self-contained run.
 
