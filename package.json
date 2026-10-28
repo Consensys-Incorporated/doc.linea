@@ -67,26 +67,26 @@
     "@mdx-js/react": "3.1.1",
     "@r74tech/docusaurus-plugin-panzoom": "2.5.0",
     "axios": "1.20.0",
-    "browserslist": "4.29.3",
+    "browserslist": "4.29.4",
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "dotenv": "17.4.2",
     "fast-xml-parser": "5.11.2",
     "github-slugger": "1.5.0",
-    "ignore": "7.0.12",
+    "ignore": "7.0.14",
     "prism-react-renderer": "2.4.1",
     "raw-loader": "4.0.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "redocusaurus": "2.5.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "redocusaurus": "2.5.2",
     "sharp": "0.35.5",
     "turndown": "7.2.4",
     "turndown-plugin-gfm": "1.0.2",
     "yaml": "2.9.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "21.2.3",
-    "@commitlint/config-conventional": "21.2.3",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@eslint/compat": "2.1.1",
@@ -101,18 +101,18 @@
     "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-prettier": "5.5.6",
+    "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-react": "7.37.5",
     "globals": "17.13.0",
     "google-auth-library": "10.9.1",
     "googleapis-common": "8.0.3",
     "lint-staged": "17.6.0",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
     "tsc-files": "1.1.4",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.71.1"
+    "typescript-eslint": "8.72.0"
   },
   "engines": {
     "node": "24.22.1"
@@ -120,13 +120,13 @@
   "overrides": {
     "@vercel/node": {
       "path-to-regexp": "6.3.0",
-      "undici": "6.29.0"
+      "undici": "6.29.1"
     },
     "@vercel/static-config": {
       "ajv": "8.20.0"
     },
-    "serialize-javascript": "7.1.2",
-    "tinypool": "^2.1.2"
+    "serialize-javascript": "7.1.4",
+    "tinypool": "2.2.0"
   },
   "allowScripts": {
     "@swc/core": false,
