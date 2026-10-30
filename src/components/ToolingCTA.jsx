@@ -15,7 +15,7 @@ export default function ToolingCTA() {
       <Admonition type="info" title="Want to be featured here?">
         Have you built a tool for Linea? Contribute to the docs to add it here!
         See our{" "}
-        <a href="https://github.com/Consensys/doc.linea?tab=readme-ov-file#contribute">
+        <a href="https://github.com/Consensys-Incorporated/doc.linea?tab=readme-ov-file#contribute">
           {" "}
           guide to contributing
         </a>
