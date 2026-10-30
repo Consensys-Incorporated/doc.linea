@@ -9,7 +9,7 @@ const redirectsData = require("./redirects.json");
 // const isDev = process.env.NODE_ENV === "development";
 // const baseUrl = isDev ? "/" : "/";
 
-// const organizationName = "Consensys";
+// const organizationName = "Consensys-Incorporated";
 // const projectName = "doc.linea";
 
 /** @type {import("@docusaurus/types").Config} */
@@ -25,7 +25,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Consensys", // Usually your GitHub org/user name.
+  organizationName: "Consensys-Incorporated", // Usually your GitHub org/user name.
   projectName: "doc.linea", // Usually your repo name.
   deploymentBranch: "gh-pages", // Github Pages deploying branch
 
@@ -68,7 +68,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Set a base path separate from default /docs
-          editUrl: "https://github.com/Consensys/doc.linea/tree/main/",
+          editUrl: "https://github.com/Consensys-Incorporated/doc.linea/tree/main/",
           path: "docs",
           routeBasePath: "/",
           include: ["**/*.md", "**/*.mdx"],
@@ -279,7 +279,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/Consensys/doc.linea",
+                href: "https://github.com/Consensys-Incorporated/doc.linea",
               },
             ],
           },
@@ -539,7 +539,7 @@ const config = {
         "url": "https://docs.linea.build",
         "logo": "https://docs.linea.build/img/favicons/favicon-96x96.png",
         "sameAs": [
-          "https://github.com/Consensys/doc.linea",
+          "https://github.com/Consensys-Incorporated/doc.linea",
           "https://x.com/LineaBuild",
           "https://www.linkedin.com/company/lineabuild/",
           "https://www.youtube.com/@LineaBuild",

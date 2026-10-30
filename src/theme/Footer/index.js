@@ -18,7 +18,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/Consensys/doc.linea",
+    href: "https://github.com/Consensys-Incorporated/doc.linea",
     icon: <GitHubIcon aria-hidden="true" />,
   },
   {

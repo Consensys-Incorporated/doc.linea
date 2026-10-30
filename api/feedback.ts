@@ -58,7 +58,7 @@ async function createGitHubIssue(
   pageUrl: string,
   reason: string,
 ): Promise<string | null> {
-  const repo = process.env.GITHUB_REPO!; // "Consensys/doc.linea"
+  const repo = process.env.GITHUB_REPO!; // "Consensys-Incorporated/doc.linea"
   const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
     method: "POST",
     headers: {
