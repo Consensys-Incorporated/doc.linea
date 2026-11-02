@@ -12,7 +12,7 @@ metadata:
 
 ## When to use
 
-- You're about to open a PR against `Consensys/doc.linea` and want a structured editorial
+- You're about to open a PR against `Consensys-Incorporated/doc.linea` and want a structured editorial
   pass first.
 - You're reviewing a draft or an existing page for style, terminology, naming, or
   formatting issues.

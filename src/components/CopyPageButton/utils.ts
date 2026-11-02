@@ -3,8 +3,8 @@
  * Supports standard GitHub URLs (github.com/owner/repo/tree/branch/path).
  *
  * @example
- * getGitHubRawUrl('https://github.com/Consensys/doc.linea/tree/main/docs/index.mdx')
- * // => 'https://raw.githubusercontent.com/Consensys/doc.linea/main/docs/index.mdx'
+ * getGitHubRawUrl('https://github.com/Consensys-Incorporated/doc.linea/tree/main/docs/index.mdx')
+ * // => 'https://raw.githubusercontent.com/Consensys-Incorporated/doc.linea/main/docs/index.mdx'
  */
 export function getGitHubRawUrl(
   editUrl: string | null | undefined,
