@@ -19,7 +19,7 @@ We provide issue templates for [bug reports](.github/ISSUE_TEMPLATE/bug-report.y
 
 ## Steps
 
-1. [Fork the repo](https://github.com/Consensys/doc.linea/fork) so you can work on it.
+1. [Fork the repo](https://github.com/Consensys-Incorporated/doc.linea/fork) so you can work on it.
 2. Make your changes. See [Writing conventions](README.mdx#writing-conventions) and
    AGENTS.md's linked rule files for editorial standards.
 3. Review your changes locally. See
@@ -57,7 +57,7 @@ glossary at
 [`/protocol/reference/zero-knowledge-glossary`](https://docs.linea.build/protocol/reference/zero-knowledge-glossary).
 The glossary page is generated, so don't edit it directly:
 
-1. [Fork the repo](https://github.com/Consensys/doc.linea/fork).
+1. [Fork the repo](https://github.com/Consensys-Incorporated/doc.linea/fork).
 2. Add your term, in alphabetical order, to `src/lib/glossary.json` with a `term` and a
    `definition`. Keep definitions to a short paragraph or two.
 3. Run `npm run glossary:generate` to regenerate
@@ -83,15 +83,15 @@ The <GlossaryTerm term="Coordinator" /> orchestrates batching, and the
 
 ## Additional resources
 
-- [Submit a contribution](https://docs-template.consensys.net/contribute/submit-a-contribution)
+- [Submit a contribution](https://docs-template.consensys.com/contribute/submit-a-contribution)
   using forks and pull requests.
-- [Documentation style guide](https://docs-template.consensys.net/contribute/style-guide).
-- [Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown).
-- [Preview the docs locally](https://docs-template.consensys.net/contribute/preview).
-- [Guidance on using Vale](https://docs-template.consensys.net/contribute/run-vale).
+- [Documentation style guide](https://docs-template.consensys.com/contribute/style-guide).
+- [Markdown formatting guide](https://docs-template.consensys.com/contribute/format-markdown).
+- [Preview the docs locally](https://docs-template.consensys.com/contribute/preview).
+- [Guidance on using Vale](https://docs-template.consensys.com/contribute/run-vale).
 
 ## Questions
 
-[Create an issue](https://github.com/Consensys/doc.linea/issues), post in the
+[Create an issue](https://github.com/Consensys-Incorporated/doc.linea/issues), post in the
 [community forum](https://community.linea.build/), or reach out via
 [Linea Support](https://docs.linea.build/support).

@@ -184,7 +184,7 @@ Optional mutual TLS uses PKCS12 keystore and truststore files.
 Use Web3Signer when a component should sign without holding the private key, or
 when you want an HSM or KMS that Lineth does not call directly.
 Several components can share one Web3Signer.
-See the [Web3Signer documentation](https://docs.web3signer.consensys.io/) for more information.
+See the [Web3Signer documentation](https://docs.web3signer.consensys.com/) for more information.
 
 ### AWS KMS (Postman)
 
@@ -205,8 +205,8 @@ Credentials come from the AWS default provider chain, not from the Postman confi
 
 The coordinator and the sequencer liveness plugin do not have a built-in `aws-kms` type.
 To keep those keys in a KMS, point those components at Web3Signer and
-[load the key from AWS KMS](https://docs.web3signer.consensys.io/how-to/store-keys/vaults/aws/kms-execution-layer)
-in Web3Signer, use [another store Web3Signer supports](https://docs.web3signer.consensys.io/how-to/store-keys),
+[load the key from AWS KMS](https://docs.web3signer.consensys.com/how-to/store-keys/vaults/aws/kms-execution-layer)
+in Web3Signer, use [another store Web3Signer supports](https://docs.web3signer.consensys.com/how-to/store-keys),
 or use a [custom signer factory](#custom-signer-factory).
 
 ### Custom signer factory

@@ -197,5 +197,5 @@
 - [Risk disclosures](https://docs.linea.build/network/risk-disclosures): Known risks for users and integrators.
 
 ## Authoring and licensing
-- Source repository for these docs: https://github.com/Consensys/doc.linea
+- Source repository for these docs: https://github.com/Consensys-Incorporated/doc.linea
 - Docs licence: see repository LICENSE
