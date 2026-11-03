@@ -20,5 +20,5 @@ jobs:
       - name: Lint code
         uses: Consensys-Incorporated/github-actions/docs-lint-all@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
 
-      - name: Lint markdown
-        uses: Consensys-Incorporated/github-actions/docs-lint-markdown@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
+      - name: Check Markdown formatting
+        run: npm run format:docs:check

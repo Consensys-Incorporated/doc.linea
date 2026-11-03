@@ -1,6 +1,4 @@
 # Automation-owned generated content. Seeded from the lineth-monorepo artifact and refreshed by
-# the coordinator-config-docs and maru-config-docs workflows; prettier would reformat
-# tables/prose and create churn against the generator output, so these namespaces are exempt
-# from formatting checks.
-docs/stack/reference/_generated/coordinator/
-docs/stack/reference/_generated/maru/
+# the config-docs workflows. Prettier would reformat tables and prose and create churn
+# against the generator output, so this tree is exempt from formatting checks.
+docs/stack/reference/_generated/
