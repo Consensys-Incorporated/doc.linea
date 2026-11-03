@@ -7,10 +7,11 @@ image: /img/socialCards/evm-state-manager.jpg
 import GlossaryTerm from '@theme/GlossaryTerm';
 import StateManagerAccumulator from '/img/protocol/architecture/state-manager-accumulator.svg';
 
-The state manager maintains the network's state in the representation the proving pipeline needs.
-It consists of a Besu execution client running the [Shomei plugin](https://github.com/Consensys/besu-shomei-plugin)
+The state manager tracks the network's state in a sparse Merkle tree, which the prover uses to prove
+each block's state transition.
+It consists of a Besu execution client running the [Shomei plugin](https://github.com/Consensys-Incorporated/besu-shomei-plugin)
 (for example, <GlossaryTerm term="Linea Besu"/>), which exposes each block's state changes,
-and a [Shomei node](https://github.com/Consensys-Incorporated/shomei) that imports those changes into a sparse Merkle tree.
+and a [Shomei node](https://github.com/Consensys-Incorporated/shomei) that imports those changes into the tree.
 
 :::note
 
@@ -27,11 +28,14 @@ Shomei plugin exposes the state changes each block made. The Shomei node imports
 applies them to its own tree, tracking the state of user accounts, smart contracts, and balances
 block by block, and deriving a new state root for each block.
 
-The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> requests the Merkle proof for a batch's range of blocks
-and passes it to the <GlossaryTerm term="Prover">prover</GlossaryTerm> with the rest of the proof request, so the
-resulting proof attests to the state transition that batch produced. The state manager also serves
-[`linea_getProof`](../../reference/apis/linea-api/linea-getproof) to callers that need an account or storage
-proof for a block already finalized on the
+The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> requests the Merkle proof
+for a batch of blocks and includes it in the execution proof request it sends to the
+<GlossaryTerm term="Prover">prover</GlossaryTerm>.
+The prover returns an execution proof, a <GlossaryTerm term="zk-SNARK" /> of the state transition
+that batch produced.
+The state manager also serves
+[`linea_getProof`](../../reference/apis/linea-api/linea-getproof) to callers that need
+a Merkle proof of an account or a storage slot for a block already finalized on the
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 Two data structures are involved:
@@ -42,8 +46,7 @@ This mirrors how Ethereum records world state.
 [Merkle tree](#merkle-trees) called a sparse Merkle tree (SMT), which is more efficient to update
 and prove.
 
-The rest of this page explains Lineth state management in greater detail, focusing on the SMT
-implementation that sets Lineth apart.
+The rest of this page explains Lineth's SMT implementation in more detail.
 
 ## Merkle trees
 
@@ -227,15 +230,15 @@ The accumulator, built using a sparse Merkle tree, is simultaneously:
 transition from hash A to hash B.
 
 Once the accumulator has processed a new block's state changes and updated state accordingly, the
-coordinator can request the proof of the resulting transition and pass it to the prover. That proof
-is the witness for the state transition: it shows that applying the block's account and storage
-operations to the previous state root produces the new one.
+coordinator can request the Merkle proof of the resulting transition and include it in the execution
+proof request. That Merkle proof shows that applying the block's account and storage operations to
+the previous state root produces the new one.
 
 ### See also
 
-- See the [coordinator](./coordinator/index.mdx) for how state proofs reach the prover, and the
-  [prover](./prover/index.mdx) for how they're used in proof generation.
+- See the [coordinator](./coordinator/index.mdx) for how Merkle proofs reach the prover, and the
+  [prover](./prover/index.mdx) for how the prover turns them into an execution proof.
 - See [`linea_getProof`](../../reference/apis/linea-api/linea-getproof) for requesting an account or storage
   proof directly.
-- See the source code for the [Shomei plugin](https://github.com/Consensys/besu-shomei-plugin) and
+- See the source code for the [Shomei plugin](https://github.com/Consensys-Incorporated/besu-shomei-plugin) and
   [Shomei node](https://github.com/Consensys-Incorporated/shomei).
