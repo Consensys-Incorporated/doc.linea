@@ -9,7 +9,7 @@ permissions: {} # lock everything by default (least-privilege)
 
 jobs:
   lint:
-    name: Lint Code Base, Spelling
+    name: Lint code and Markdown
     runs-on: ubuntu-latest
     permissions:
       contents: read
