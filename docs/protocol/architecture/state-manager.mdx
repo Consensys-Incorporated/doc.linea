@@ -1,6 +1,6 @@
 ---
 title: State manager
-description: How the Lineth state manager tracks network state and proves state transitions.
+description: How the Lineth state manager tracks network state and supplies the Merkle proofs the prover needs.
 image: /img/socialCards/evm-state-manager.jpg
 ---
 
@@ -9,7 +9,7 @@ import StateManagerAccumulator from '/img/protocol/architecture/state-manager-ac
 
 The state manager maintains the network's state in the representation the proving pipeline needs.
 It consists of a Besu execution client running the [Shomei plugin](https://github.com/Consensys/besu-shomei-plugin)
-(for example, <GlossaryTerm term="Linea Besu"/>), which exposes each block's state changes;
+(for example, <GlossaryTerm term="Linea Besu"/>), which exposes each block's state changes,
 and a [Shomei node](https://github.com/Consensys-Incorporated/shomei) that imports those changes into a sparse Merkle tree.
 
 :::note
@@ -48,7 +48,7 @@ implementation that sets Lineth apart.
 ## Merkle trees
 
 The Merkle tree and its variations are commonly used across <GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> chains to store and retrieve 
-data about the state of every account on the blockchain.
+state data.
 
 A Merkle tree is comprised of "nodes" that branch off from each other. The root,
 or state root, is the hash from which the branches stem, and the leaves stem from the branches. 
