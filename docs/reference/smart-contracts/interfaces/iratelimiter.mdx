@@ -10,11 +10,11 @@ Emitted when the Rate Limit is initialized.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| periodInSeconds | uint256 | The time period in seconds the rate limiter has been initialized to. |
-| limitInWei | uint256 | The limit in Wei the rate limiter has been initialized to. |
-| currentPeriodEnd | uint256 | The time the current rate limit period will end. |
+| Name             | Type    | Description                                                          |
+| ---------------- | ------- | -------------------------------------------------------------------- |
+| periodInSeconds  | uint256 | The time period in seconds the rate limiter has been initialized to. |
+| limitInWei       | uint256 | The limit in Wei the rate limiter has been initialized to.           |
+| currentPeriodEnd | uint256 | The time the current rate limit period will end.                     |
 
 ### AmountUsedInPeriodReset
 
@@ -26,8 +26,8 @@ Emitted when the amount in the period is reset to zero.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name             | Type    | Description                                                    |
+| ---------------- | ------- | -------------------------------------------------------------- |
 | resettingAddress | address | The indexed address of who reset the used amount back to zero. |
 
 ### LimitAmountChanged
@@ -43,12 +43,12 @@ amountUsedLoweredToLimit and usedAmountResetToZero cannot be true at the same ti
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| amountChangeBy | address | The indexed address of who changed the rate limit. |
-| amount | uint256 | The rate limited amount in Wei that was set. |
-| amountUsedLoweredToLimit | bool | Indicates if the amount used was lowered to the limit to avoid confusion. |
-| usedAmountResetToZero | bool | Indicates if the amount used was set to zero because of the current period expiring. |
+| Name                     | Type    | Description                                                                          |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| amountChangeBy           | address | The indexed address of who changed the rate limit.                                   |
+| amount                   | uint256 | The rate limited amount in Wei that was set.                                         |
+| amountUsedLoweredToLimit | bool    | Indicates if the amount used was lowered to the limit to avoid confusion.            |
+| usedAmountResetToZero    | bool    | Indicates if the amount used was set to zero because of the current period expiring. |
 
 ### RateLimitExceeded
 
@@ -89,9 +89,9 @@ usedLimitAmountToSet will use the default value of zero if period has expired._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _amount | uint256 | The amount to reset the limit to. |
+| Name     | Type    | Description                       |
+| -------- | ------- | --------------------------------- |
+| \_amount | uint256 | The amount to reset the limit to. |
 
 ### resetAmountUsedInPeriod
 
@@ -103,4 +103,3 @@ Resets the amount used to zero.
 
 _Only the USED_RATE_LIMIT_RESETTER_ROLE is allowed to execute this function.
 Emits the AmountUsedInPeriodReset event._
-

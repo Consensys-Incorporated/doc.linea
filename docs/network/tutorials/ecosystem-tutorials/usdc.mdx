@@ -5,7 +5,7 @@ image: /img/socialCards/usdc-quickstart.jpg
 ---
 
 USDC, [issued by Circle](https://developers.circle.com/stablecoins/what-is-usdc), enables the seamless
-transfer of digital dollars on the Linea network using a smart contract. 
+transfer of digital dollars on the Linea network using a smart contract.
 This tutorial walks you through building a simple React app that allows users to connect their wallet
 and send USDC transactions over Linea Sepolia.
 
@@ -15,8 +15,8 @@ and send USDC transactions over Linea Sepolia.
 - Install the [MetaMask](https://metamask.io) browser extension.
 - Fund your wallet with:
   - Native gas tokens (ETH on Linea Sepolia) to cover transaction fees.
-  - USDC tokens for testing. ([Use a faucet](../../build/get-testnet-eth.mdx) to get 
-  testnet USDC and ETH.)
+  - USDC tokens for testing. ([Use a faucet](../../build/get-testnet-eth.mdx) to get
+    testnet USDC and ETH.)
 
 ## Steps
 
@@ -67,7 +67,7 @@ After installing dependencies, open your `package.json` file and verify that it 
 }
 ```
 
-If your `package.json` doesn't have the `scripts` section, add it. This ensures you can run the 
+If your `package.json` doesn't have the `scripts` section, add it. This ensures you can run the
 project using:
 
 ```bash
@@ -81,8 +81,8 @@ npm run dev
 Create a `src/clients.ts` file and add:
 
 ```ts
-import { http, createPublicClient } from 'viem';
-import { lineaSepolia } from 'viem/chains';
+import { http, createPublicClient } from "viem";
+import { lineaSepolia } from "viem/chains";
 
 export const publicClient = createPublicClient({
   chain: lineaSepolia,
@@ -95,7 +95,7 @@ export const publicClient = createPublicClient({
 Modify `src/clients.ts`:
 
 ```ts
-import { createWalletClient, custom } from 'viem';
+import { createWalletClient, custom } from "viem";
 
 export const walletClient = createWalletClient({
   chain: lineaSepolia,
@@ -108,7 +108,7 @@ export const walletClient = createWalletClient({
 Add this to `src/constants.ts`:
 
 ```ts
-export const USDC_CONTRACT_ADDRESS = '0xfece4462d57bd51a6a552365a011b95f0e16d9b7';
+export const USDC_CONTRACT_ADDRESS = "0xfece4462d57bd51a6a552365a011b95f0e16d9b7";
 
 export const USDC_ABI = [
   {
@@ -136,10 +136,10 @@ export const USDC_ABI = [
 Create `src/App.tsx`:
 
 ```tsx
-import React, { useEffect, useState } from 'react';
-import { publicClient, walletClient } from './clients';
-import { USDC_CONTRACT_ADDRESS, USDC_ABI } from './constants';
-import { type Address, encodeFunctionData, type Hash, type TransactionReceipt, stringify } from 'viem';
+import React, { useEffect, useState } from "react";
+import { publicClient, walletClient } from "./clients";
+import { USDC_CONTRACT_ADDRESS, USDC_ABI } from "./constants";
+import { type Address, encodeFunctionData, type Hash, type TransactionReceipt, stringify } from "viem";
 
 function USDCApp() {
   const [account, setAccount] = useState<Address>();
@@ -173,8 +173,12 @@ function USDCApp() {
       <h1>USDC Transfer Sample App</h1>
       {account ? (
         <>
-          <p><strong>Connected Wallet:</strong> {account}</p>
-          <p><strong>USDC Balance:</strong> {balance ? `${balance} USDC` : "Fetching..."}</p>
+          <p>
+            <strong>Connected Wallet:</strong> {account}
+          </p>
+          <p>
+            <strong>USDC Balance:</strong> {balance ? `${balance} USDC` : "Fetching..."}
+          </p>
         </>
       ) : (
         <button onClick={connect}>Connect Wallet</button>
@@ -191,14 +195,14 @@ export default USDCApp;
 Create `src/main.tsx`:
 
 ```tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import USDCApp from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import USDCApp from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <USDCApp />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 ```
 
@@ -209,15 +213,15 @@ Create `index.html`:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USDC Transfer Sample App</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>USDC Transfer Sample App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
 ```
 
@@ -230,4 +234,3 @@ npm run dev
 ```
 
 Then open `http://localhost:5173` in your browser.
-

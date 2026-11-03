@@ -52,7 +52,7 @@ _Mapping to store L2->L1 message hashes status.
 messageHash => messageStatus (0: unknown, 1: received).
 For the most part this has been deprecated. This is only used for messages received pre-AlphaV2._
 
-### _updateL2L1MessageStatusToClaimed
+### \_updateL2L1MessageStatusToClaimed
 
 ```solidity
 function _updateL2L1MessageStatusToClaimed(bytes32 _messageHash) internal
@@ -65,7 +65,6 @@ Due to the nature of the rollup, we should not get a second entry of this._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageHash | bytes32 | Hash of the message. |
-
+| Name          | Type    | Description          |
+| ------------- | ------- | -------------------- |
+| \_messageHash | bytes32 | Hash of the message. |

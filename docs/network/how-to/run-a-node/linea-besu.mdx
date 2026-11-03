@@ -22,6 +22,7 @@ Windows/X86_64.
 
 We recommend using Linea Besu over standard Besu if you intend to run a node to interact with the
 blockchain, rather than just following it. Use Linea Besu if:
+
 - You are responsible for operating nodes as a service for others to use.
 - You want to use Linea with a personal, private RPC endpoint.
 
@@ -108,6 +109,7 @@ You can use [this page](https://whatismyip.com/) to find your public IP address.
       Adjust the `BESU_PROFILE` to match one of the profiles listed in step 1.
 
     </TabItem>
+
 </Tabs>
 
 ## Alternative: Run using the binary distribution
@@ -153,16 +155,12 @@ the parameters for each possible profile you can select for your Linea Besu node
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
   <TabItem value="Mainnet" label="Mainnet">
-    Select one according to your preferences:
-    - `basic-mainnet`: Creates a basic node on Linea Mainnet with no plugins enabled.
-    - `advanced-mainnet`: Creates an advanced node on Linea Mainnet with plugins that enable support
-    `linea_estimateGas` and the `finalized` block parameter tag.
+    Select one according to your preferences: - `basic-mainnet`: Creates a basic node on Linea Mainnet with no plugins enabled. - `advanced-mainnet`: Creates an advanced node on Linea Mainnet with
+    plugins that enable support `linea_estimateGas` and the `finalized` block parameter tag.
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-    Select one according to your preferences:
-    - `basic-sepolia`: Creates a basic node on Linea Sepolia with no plugins enabled.
-    - `advanced-sepolia`: Creates an advanced node on Linea Sepolia with plugins that enable support
-    `linea_estimateGas` and the `finalized` block parameter tag.
+    Select one according to your preferences: - `basic-sepolia`: Creates a basic node on Linea Sepolia with no plugins enabled. - `advanced-sepolia`: Creates an advanced node on Linea Sepolia with
+    plugins that enable support `linea_estimateGas` and the `finalized` block parameter tag.
   </TabItem>
 </Tabs>
 
@@ -176,16 +174,12 @@ only be defined if you are running an `advanced` node, since this is needed to q
 L1.
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
-    <TabItem value="Mainnet" label="Mainnet">
-    ```bash
-    bin/besu --profile=advanced-mainnet --plugin-linea-l1-rpc-endpoint=YOUR_L1_RPC_ENDPOINT
-    ```
-    </TabItem>
-    <TabItem value="Linea Sepolia" label="Linea Sepolia">
-    ```bash
-    bin/besu --profile=advanced-sepolia --plugin-linea-l1-rpc-endpoint=YOUR_L1_RPC_ENDPOINT
-    ```
-    </TabItem>
+  <TabItem value="Mainnet" label="Mainnet">
+    ```bash bin/besu --profile=advanced-mainnet --plugin-linea-l1-rpc-endpoint=YOUR_L1_RPC_ENDPOINT ```
+  </TabItem>
+  <TabItem value="Linea Sepolia" label="Linea Sepolia">
+    ```bash bin/besu --profile=advanced-sepolia --plugin-linea-l1-rpc-endpoint=YOUR_L1_RPC_ENDPOINT ```
+  </TabItem>
 </Tabs>
 
 The node will attempt to find peers to begin synchronizing and to download the world state.

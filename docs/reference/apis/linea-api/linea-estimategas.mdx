@@ -4,7 +4,7 @@ description: Estimates the gas limit, base fee, and priority fee for a Linea tra
 image: /img/socialCards/lineaestimategas.jpg
 ---
 
-import RpcPlayground from '@site/src/components/RpcPlayground';
+import RpcPlayground from "@site/src/components/RpcPlayground";
 
 # `linea_estimateGas`
 
@@ -32,15 +32,15 @@ gas, and the priority fee per gas. We recommend using `linea_estimateGas` for mo
   - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
   - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
   - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution. `linea_estimateGas` consumes
-      zero gas, but this parameter may be needed by some executions.
+    zero gas, but this parameter may be needed by some executions.
   - `gasPrice`: _\[optional]_ Hexadecimal value of the gas price used for each paid gas.
   - `maxPriorityFeePerGas`: _\[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
   - `maxFeePerGas`: _\[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
   - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
   - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
-      [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
-- `stateOverride`: _\[optional]_  Object that contains the address-to-state mapping to [override state values](#override-state-values).
-    Each entry specifies a state that will be temporarily overridden before executing the call:
+    [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+- `stateOverride`: _\[optional]_ Object that contains the address-to-state mapping to [override state values](#override-state-values).
+  Each entry specifies a state that will be temporarily overridden before executing the call:
   - `balance`: _\[optional]_ Hexadecimal of the temporary account balance for the call execution.
   - `nonce`: _\[optional]_ Hexadecimal of the temporary nonce value for the call execution.
   - `code` : _\[optional]_ Bytecode to inject into the account.
@@ -48,7 +48,7 @@ gas, and the priority fee per gas. We recommend using `linea_estimateGas` for mo
 
 ## Returns
 
-Hexadecimal values representing the recommended gas limit, the base fee per gas, and the priority 
+Hexadecimal values representing the recommended gas limit, the base fee per gas, and the priority
 fee per gas.
 
 ## Example
@@ -58,8 +58,8 @@ fee per gas.
   params={[
     {
       to: "0x176211869ca2b568f2a7d4ee941e073a821ee1ff",
-      data: "0x70a08231000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045"
-    }
+      data: "0x70a08231000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045",
+    },
   ]}
   exampleResponse={{
     jsonrpc: "2.0",
@@ -67,18 +67,19 @@ fee per gas.
     result: {
       baseFeePerGas: "0x7",
       gasLimit: "0xcf08",
-      priorityFeePerGas: "0x43a82a4"
-    }
+      priorityFeePerGas: "0x43a82a4",
+    },
   }}
 />
 
 Where:
+
 - `baseFeePerGas` - Uses the Linea base fee which is set at 7 wei.
 - `gasLimit` - Uses the standard `eth_estimateGas` API calculation.
 - `priorityFeePerGas` - Calculates the fee required to prioritize a transaction by considering factors such as the
-    compressed transaction size, layer 1 verification costs and capacity, gas price ratio between layer 1 and
-    layer 2, the transaction's gas usage, the minimum gas price on layer 2, and a minimum
-    margin (for error) for gas price estimation.
+  compressed transaction size, layer 1 verification costs and capacity, gas price ratio between layer 1 and
+  layer 2, the transaction's gas usage, the minimum gas price on layer 2, and a minimum
+  margin (for error) for gas price estimation.
 
 :::note
 

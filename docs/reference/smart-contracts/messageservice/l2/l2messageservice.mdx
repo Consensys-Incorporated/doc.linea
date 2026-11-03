@@ -24,14 +24,14 @@ Initializes underlying message service dependencies.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _rateLimitPeriod | uint256 | The period to rate limit against. |
-| _rateLimitAmount | uint256 | The limit allowed for withdrawing the period. |
-| _defaultAdmin | address | The account to be given DEFAULT_ADMIN_ROLE on initialization. |
-| _roleAddresses | struct IPermissionsManager.RoleAddress[] | The list of addresses to grant roles to. |
-| _pauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of pause type roles. |
-| _unpauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of unpause type roles. |
+| Name               | Type                                     | Description                                                   |
+| ------------------ | ---------------------------------------- | ------------------------------------------------------------- |
+| \_rateLimitPeriod  | uint256                                  | The period to rate limit against.                             |
+| \_rateLimitAmount  | uint256                                  | The limit allowed for withdrawing the period.                 |
+| \_defaultAdmin     | address                                  | The account to be given DEFAULT_ADMIN_ROLE on initialization. |
+| \_roleAddresses    | struct IPermissionsManager.RoleAddress[] | The list of addresses to grant roles to.                      |
+| \_pauseTypeRoles   | struct IPauseManager.PauseTypeRole[]     | The list of pause type roles.                                 |
+| \_unpauseTypeRoles | struct IPauseManager.PauseTypeRole[]     | The list of unpause type roles.                               |
 
 ### reinitializePauseTypesAndPermissions
 
@@ -45,9 +45,8 @@ _This function is a reinitializer and can only be called once per version. Shoul
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _roleAddresses | struct IPermissionsManager.RoleAddress[] | The list of addresses and roles to assign permissions to. |
-| _pauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of pause types to associate with roles. |
-| _unpauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of unpause types to associate with roles. |
-
+| Name               | Type                                     | Description                                               |
+| ------------------ | ---------------------------------------- | --------------------------------------------------------- |
+| \_roleAddresses    | struct IPermissionsManager.RoleAddress[] | The list of addresses and roles to assign permissions to. |
+| \_pauseTypeRoles   | struct IPauseManager.PauseTypeRole[]     | The list of pause types to associate with roles.          |
+| \_unpauseTypeRoles | struct IPauseManager.PauseTypeRole[]     | The list of unpause types to associate with roles.        |

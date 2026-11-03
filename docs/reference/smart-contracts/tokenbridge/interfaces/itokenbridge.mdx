@@ -26,8 +26,8 @@ Emitted when the token address is reserved.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                |
+| ----- | ------- | -------------------------- |
 | token | address | The indexed token address. |
 
 ### ReservationRemoved
@@ -40,8 +40,8 @@ Emitted when the token address reservation is removed.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                |
+| ----- | ------- | -------------------------- |
 | token | address | The indexed token address. |
 
 ### CustomContractSet
@@ -54,11 +54,11 @@ Emitted when the custom token address is set.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| nativeToken | address | The indexed nativeToken token address. |
-| customContract | address | The indexed custom contract address. |
-| setBy | address | The indexed address of who set the custom contract. |
+| Name           | Type    | Description                                         |
+| -------------- | ------- | --------------------------------------------------- |
+| nativeToken    | address | The indexed nativeToken token address.              |
+| customContract | address | The indexed custom contract address.                |
+| setBy          | address | The indexed address of who set the custom contract. |
 
 ### BridgingInitiated
 
@@ -72,12 +72,12 @@ _DEPRECATED in favor of BridgingInitiatedV2._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | address | The indexed sender address. |
-| recipient | address | The recipient address. |
-| token | address | The indexed token address. |
-| amount | uint256 | The indexed token amount. |
+| Name      | Type    | Description                 |
+| --------- | ------- | --------------------------- |
+| sender    | address | The indexed sender address. |
+| recipient | address | The recipient address.      |
+| token     | address | The indexed token address.  |
+| amount    | uint256 | The indexed token amount.   |
 
 ### BridgingInitiatedV2
 
@@ -89,12 +89,12 @@ Emitted when token bridging is initiated.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | address | The indexed sender address. |
+| Name      | Type    | Description                    |
+| --------- | ------- | ------------------------------ |
+| sender    | address | The indexed sender address.    |
 | recipient | address | The indexed recipient address. |
-| token | address | The indexed token address. |
-| amount | uint256 | The token amount. |
+| token     | address | The indexed token address.     |
+| amount    | uint256 | The token amount.              |
 
 ### BridgingFinalized
 
@@ -108,12 +108,12 @@ _DEPRECATED in favor of BridgingFinalizedV2._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| nativeToken | address | The indexed native token address. |
+| Name         | Type    | Description                        |
+| ------------ | ------- | ---------------------------------- |
+| nativeToken  | address | The indexed native token address.  |
 | bridgedToken | address | The indexed bridged token address. |
-| amount | uint256 | The indexed token amount. |
-| recipient | address | The recipient address. |
+| amount       | uint256 | The indexed token amount.          |
+| recipient    | address | The recipient address.             |
 
 ### BridgingFinalizedV2
 
@@ -125,12 +125,12 @@ Emitted when token bridging is finalized.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| nativeToken | address | The indexed native token address. |
+| Name         | Type    | Description                        |
+| ------------ | ------- | ---------------------------------- |
+| nativeToken  | address | The indexed native token address.  |
 | bridgedToken | address | The indexed bridged token address. |
-| amount | uint256 | The token amount. |
-| recipient | address | The indexed recipient address. |
+| amount       | uint256 | The token amount.                  |
+| recipient    | address | The indexed recipient address.     |
 
 ### NewToken
 
@@ -142,8 +142,8 @@ Emitted when a new token is seen being bridged on the origin chain for the first
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                |
+| ----- | ------- | -------------------------- |
 | token | address | The indexed token address. |
 
 ### NewTokenDeployed
@@ -156,10 +156,10 @@ Emitted when a new token is deployed.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name         | Type    | Description                        |
+| ------------ | ------- | ---------------------------------- |
 | bridgedToken | address | The indexed bridged token address. |
-| nativeToken | address | The indexed native token address. |
+| nativeToken  | address | The indexed native token address.  |
 
 ### RemoteTokenBridgeSet
 
@@ -171,10 +171,10 @@ Emitted when the remote token bridge is set.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| remoteTokenBridge | address | The indexed remote token bridge address. |
-| setBy | address | The indexed address that set the remote token bridge. |
+| Name              | Type    | Description                                           |
+| ----------------- | ------- | ----------------------------------------------------- |
+| remoteTokenBridge | address | The indexed remote token bridge address.              |
+| setBy             | address | The indexed address that set the remote token bridge. |
 
 ### TokenDeployed
 
@@ -188,8 +188,8 @@ _This can be triggered by anyone calling confirmDeployment on the alternate chai
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                |
+| ----- | ------- | -------------------------- |
 | token | address | The indexed token address. |
 
 ### DeploymentConfirmed
@@ -204,10 +204,10 @@ _This can be triggered by anyone provided there is correctly mapped token data._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| tokens | address[] | The token address list. |
-| confirmedBy | address | The indexed address confirming deployment. |
+| Name        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| tokens      | address[] | The token address list.                    |
+| confirmedBy | address   | The indexed address confirming deployment. |
 
 ### MessageServiceUpdated
 
@@ -219,11 +219,11 @@ Emitted when the message service address is set.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| newMessageService | address | The indexed new message service address. |
-| oldMessageService | address | The indexed old message service address. |
-| setBy | address | The indexed address setting the new message service address. |
+| Name              | Type    | Description                                                  |
+| ----------------- | ------- | ------------------------------------------------------------ |
+| newMessageService | address | The indexed new message service address.                     |
+| oldMessageService | address | The indexed old message service address.                     |
+| setBy             | address | The indexed address setting the new message service address. |
 
 ### ReservedToken
 
@@ -344,16 +344,16 @@ function bridgeTokenWithPermit(address _token, uint256 _amount, address _recipie
 ```
 
 Similar to `bridgeToken` function but allows to pass additional
-  permit data to do the ERC-20 approval in a single transaction.
+permit data to do the ERC-20 approval in a single transaction.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be bridged. |
-| _amount | uint256 | The amount of the token to be bridged. |
-| _recipient | address | The address that will receive the tokens on the other chain. |
-| _permitData | bytes | The permit data for the token, if applicable. |
+| Name         | Type    | Description                                                  |
+| ------------ | ------- | ------------------------------------------------------------ |
+| \_token      | address | The address of the token to be bridged.                      |
+| \_amount     | uint256 | The amount of the token to be bridged.                       |
+| \_recipient  | address | The address that will receive the tokens on the other chain. |
+| \_permitData | bytes   | The permit data for the token, if applicable.                |
 
 ### completeBridging
 
@@ -362,18 +362,18 @@ function completeBridging(address _nativeToken, uint256 _amount, address _recipi
 ```
 
 _It can only be called from the Message Service. To finalize the bridging
-  process, a user or postmen needs to use the `claimMessage` function of the
-  Message Service to trigger the transaction._
+process, a user or postmen needs to use the `claimMessage` function of the
+Message Service to trigger the transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeToken | address | The address of the token on its native chain. |
-| _amount | uint256 | The amount of the token to be received. |
-| _recipient | address | The address that will receive the tokens. |
-| _chainId | uint256 | The source chainId or target chaindId for this token |
-| _tokenMetadata | bytes | Additional data used to deploy the bridged token if it   doesn't exist already. |
+| Name            | Type    | Description                                                                   |
+| --------------- | ------- | ----------------------------------------------------------------------------- |
+| \_nativeToken   | address | The address of the token on its native chain.                                 |
+| \_amount        | uint256 | The amount of the token to be received.                                       |
+| \_recipient     | address | The address that will receive the tokens.                                     |
+| \_chainId       | uint256 | The source chainId or target chaindId for this token                          |
+| \_tokenMetadata | bytes   | Additional data used to deploy the bridged token if it doesn't exist already. |
 
 ### confirmDeployment
 
@@ -382,13 +382,13 @@ function confirmDeployment(address[] _tokens) external payable
 ```
 
 _Change the status to DEPLOYED to the tokens passed in parameter
-   Will call the method setDeployed on the other chain using the message Service_
+Will call the method setDeployed on the other chain using the message Service_
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _tokens | address[] | Array of bridged tokens that have been deployed. |
+| Name     | Type      | Description                                      |
+| -------- | --------- | ------------------------------------------------ |
+| \_tokens | address[] | Array of bridged tokens that have been deployed. |
 
 ### setMessageService
 
@@ -400,9 +400,9 @@ _Change the address of the Message Service._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageService | address | The address of the new Message Service. |
+| Name             | Type    | Description                             |
+| ---------------- | ------- | --------------------------------------- |
+| \_messageService | address | The address of the new Message Service. |
 
 ### setDeployed
 
@@ -411,15 +411,15 @@ function setDeployed(address[] _nativeTokens) external
 ```
 
 _It can only be called from the Message Service. To change the status of
-  the native tokens to DEPLOYED meaning they have been deployed on the other chain
-  a user or postman needs to use the `claimMessage` function of the
-  Message Service to trigger the transaction._
+the native tokens to DEPLOYED meaning they have been deployed on the other chain
+a user or postman needs to use the `claimMessage` function of the
+Message Service to trigger the transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeTokens | address[] | The addresses of the native tokens. |
+| Name           | Type      | Description                         |
+| -------------- | --------- | ----------------------------------- |
+| \_nativeTokens | address[] | The addresses of the native tokens. |
 
 ### setReserved
 
@@ -427,17 +427,17 @@ _It can only be called from the Message Service. To change the status of
 function setReserved(address _token) external
 ```
 
-Make sure that _token is native to the current chain
-  where you are calling this function from
+Make sure that \_token is native to the current chain
+where you are calling this function from
 
 _Linea can reserve tokens. In this case, the token cannot be bridged.
-  Linea can only reserve tokens that have not been bridged before._
+Linea can only reserve tokens that have not been bridged before._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be set as reserved. |
+| Name    | Type    | Description                                     |
+| ------- | ------- | ----------------------------------------------- |
+| \_token | address | The address of the token to be set as reserved. |
 
 ### setRemoteTokenBridge
 
@@ -449,9 +449,9 @@ _Sets the address of the remote token bridge. Can only be called once._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _remoteTokenBridge | address | The address of the remote token bridge to be set. |
+| Name                | Type    | Description                                       |
+| ------------------- | ------- | ------------------------------------------------- |
+| \_remoteTokenBridge | address | The address of the remote token bridge to be set. |
 
 ### removeReserved
 
@@ -463,9 +463,9 @@ _Removes a token from the reserved list._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be removed from the reserved list. |
+| Name    | Type    | Description                                                    |
+| ------- | ------- | -------------------------------------------------------------- |
+| \_token | address | The address of the token to be removed from the reserved list. |
 
 ### setCustomContract
 
@@ -474,13 +474,12 @@ function setCustomContract(address _nativeToken, address _targetContract) extern
 ```
 
 _Linea can set a custom ERC-20 contract for specific ERC-20.
-  For security purpose, Linea can only call this function if the token has
-  not been bridged yet._
+For security purpose, Linea can only call this function if the token has
+not been bridged yet._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeToken | address | address of the token on the source chain. |
-| _targetContract | address | address of the custom contract. |
-
+| Name             | Type    | Description                               |
+| ---------------- | ------- | ----------------------------------------- |
+| \_nativeToken    | address | address of the token on the source chain. |
+| \_targetContract | address | address of the custom contract.           |

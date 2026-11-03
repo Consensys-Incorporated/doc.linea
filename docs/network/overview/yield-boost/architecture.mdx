@@ -94,7 +94,8 @@ flowchart TD
     SV -->|Stake| BC
     BC -->|Unstake| SV
     SV -->|Withdraw ETH| LR
-```
+
+````
 </div>
 
 > The node operator's deposit trigger is part of an automated process agreed
@@ -156,7 +157,8 @@ flowchart TB
     YM -.->|Report net yield| LR[LineaRollup]
     LR -.->|Emit synthetic MessageSent message| L2MS[L2MessageService]
     L2MS -->|Distribute yield| L2YD[L2YieldDistributor]
-```
+````
+
 </div>
 
 **Legend**
@@ -171,26 +173,26 @@ backed by corresponding collateral growth on L1.
 
 ## Roles and permissions
 
-| Role | Held by | Permissions |
-| --- | --- | --- |
-| `YIELD_PROVIDER_STAKING_ROLE` | Automation Service, Security Council | Rebalance excess ETH from the `LineaRollup` reserve into the `StakingVault` |
-| `YIELD_PROVIDER_UNSTAKER_ROLE` | Automation Service, Security Council | Request validator withdrawals and replenish the `LineaRollup` reserve |
-| `YIELD_REPORTER_ROLE` | Automation Service, Security Council | Trigger yield reporting, including settlement of fees and liabilities from staking rewards |
-| `STAKING_PAUSE_CONTROLLER_ROLE` | Automation Service, Security Council | Pause or resume node operator deposits |
-| `OSSIFICATION_PROCESSOR_ROLE` | Automation Service, Security Council | Progress and finalize vault ossification |
-| `OSSIFICATION_INITIATOR_ROLE` | Security Council | Begin permanent shutdown of the staking vault |
-| `SET_YIELD_PROVIDER_ROLE` | Security Council | Register or remove yield providers. Emergency removal may bypass the remaining-user-funds check and transfer Dashboard or vault ownership to a supplied nonzero address |
-| `SET_L2_YIELD_RECIPIENT_ROLE` | Security Council | Add or remove permitted recipients of yield reported to L2 |
-| `WITHDRAWAL_RESERVE_SETTER_ROLE` | Security Council | Configure the minimum and target withdrawal reserve amounts and percentages |
-| `PAUSE_NATIVE_YIELD_STAKING_ROLE` / `UNPAUSE_NATIVE_YIELD_STAKING_ROLE` | Security Council | Pause or resume funding of yield providers |
-| `PAUSE_NATIVE_YIELD_UNSTAKING_ROLE` / `UNPAUSE_NATIVE_YIELD_UNSTAKING_ROLE` | Security Council | Pause or resume operator-led unstaking and reserve replenishment |
-| `PAUSE_NATIVE_YIELD_PERMISSIONLESS_ACTIONS_ROLE` / `UNPAUSE_NATIVE_YIELD_PERMISSIONLESS_ACTIONS_ROLE` | Security Council | Pause or resume permissionless unstaking and reserve replenishment |
-| `PAUSE_NATIVE_YIELD_REPORTING_ROLE` / `UNPAUSE_NATIVE_YIELD_REPORTING_ROLE` | Security Council | Pause or resume yield reporting |
-| `PAUSE_ALL_ROLE` / `UNPAUSE_ALL_ROLE` | Security Council | Pause or resume all pausable `YieldManager` operations |
-| `SECURITY_COUNCIL_ROLE` | Security Council | Create indefinite pauses, bypass pause cooldown restrictions, and manage pause expiry |
-| `DEFAULT_ADMIN_ROLE` | Security Council | Grant or revoke `YieldManager` roles |
-| `SET_YIELD_MANAGER_ROLE` | Security Council | Configure which `YieldManager` the `LineaRollup` uses |
-| Permissionless | Anyone | Donate ETH; call permissionless unstake and reserve replenishment when the `LineaRollup` reserve is below the minimum threshold |
+| Role                                                                                                  | Held by                              | Permissions                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `YIELD_PROVIDER_STAKING_ROLE`                                                                         | Automation Service, Security Council | Rebalance excess ETH from the `LineaRollup` reserve into the `StakingVault`                                                                                             |
+| `YIELD_PROVIDER_UNSTAKER_ROLE`                                                                        | Automation Service, Security Council | Request validator withdrawals and replenish the `LineaRollup` reserve                                                                                                   |
+| `YIELD_REPORTER_ROLE`                                                                                 | Automation Service, Security Council | Trigger yield reporting, including settlement of fees and liabilities from staking rewards                                                                              |
+| `STAKING_PAUSE_CONTROLLER_ROLE`                                                                       | Automation Service, Security Council | Pause or resume node operator deposits                                                                                                                                  |
+| `OSSIFICATION_PROCESSOR_ROLE`                                                                         | Automation Service, Security Council | Progress and finalize vault ossification                                                                                                                                |
+| `OSSIFICATION_INITIATOR_ROLE`                                                                         | Security Council                     | Begin permanent shutdown of the staking vault                                                                                                                           |
+| `SET_YIELD_PROVIDER_ROLE`                                                                             | Security Council                     | Register or remove yield providers. Emergency removal may bypass the remaining-user-funds check and transfer Dashboard or vault ownership to a supplied nonzero address |
+| `SET_L2_YIELD_RECIPIENT_ROLE`                                                                         | Security Council                     | Add or remove permitted recipients of yield reported to L2                                                                                                              |
+| `WITHDRAWAL_RESERVE_SETTER_ROLE`                                                                      | Security Council                     | Configure the minimum and target withdrawal reserve amounts and percentages                                                                                             |
+| `PAUSE_NATIVE_YIELD_STAKING_ROLE` / `UNPAUSE_NATIVE_YIELD_STAKING_ROLE`                               | Security Council                     | Pause or resume funding of yield providers                                                                                                                              |
+| `PAUSE_NATIVE_YIELD_UNSTAKING_ROLE` / `UNPAUSE_NATIVE_YIELD_UNSTAKING_ROLE`                           | Security Council                     | Pause or resume operator-led unstaking and reserve replenishment                                                                                                        |
+| `PAUSE_NATIVE_YIELD_PERMISSIONLESS_ACTIONS_ROLE` / `UNPAUSE_NATIVE_YIELD_PERMISSIONLESS_ACTIONS_ROLE` | Security Council                     | Pause or resume permissionless unstaking and reserve replenishment                                                                                                      |
+| `PAUSE_NATIVE_YIELD_REPORTING_ROLE` / `UNPAUSE_NATIVE_YIELD_REPORTING_ROLE`                           | Security Council                     | Pause or resume yield reporting                                                                                                                                         |
+| `PAUSE_ALL_ROLE` / `UNPAUSE_ALL_ROLE`                                                                 | Security Council                     | Pause or resume all pausable `YieldManager` operations                                                                                                                  |
+| `SECURITY_COUNCIL_ROLE`                                                                               | Security Council                     | Create indefinite pauses, bypass pause cooldown restrictions, and manage pause expiry                                                                                   |
+| `DEFAULT_ADMIN_ROLE`                                                                                  | Security Council                     | Grant or revoke `YieldManager` roles                                                                                                                                    |
+| `SET_YIELD_MANAGER_ROLE`                                                                              | Security Council                     | Configure which `YieldManager` the `LineaRollup` uses                                                                                                                   |
+| Permissionless                                                                                        | Anyone                               | Donate ETH; call permissionless unstake and reserve replenishment when the `LineaRollup` reserve is below the minimum threshold                                         |
 
 ## Fund flows
 
@@ -242,7 +244,8 @@ sequenceDiagram
     DB-->>SV: fund()
     Note over NO: Decides when/how much to deposit
     SV-->>BC: stake ETH
-```
+
+````
 </div>
 
 ### 2. Reserve replenishment
@@ -282,7 +285,8 @@ sequenceDiagram
         YM-->>SV: withdraw()
         SV-->>L1: send ETH
     end
-```
+````
+
 </div>
 
 ### 3. Yield reporting
@@ -321,7 +325,8 @@ sequenceDiagram
     YM-->>LR: reportNativeYield()
     LR-->>L2MS: emit MessageSent (synthetic)
     L2MS->>L2YD: distribute yield
-```
+
+````
 </div>
 
 ### 4. Permissionless flows
@@ -374,7 +379,8 @@ sequenceDiagram
         YM-->>SV: withdraw()
         SV-->>L1: send ETH
     end
-```
+````
+
 </div>
 
 ### 5. LST withdrawal
@@ -404,7 +410,8 @@ sequenceDiagram
     YM->>DB: mintStETH()
     DB-->>U: send stETH
     Note over YM: Pauses Beacon deposits,<br/>creates interest-bearing liability
-```
+
+````
 </div>
 
 Minting creates an LST liability that accrues interest. The system prioritizes
@@ -449,20 +456,21 @@ sequenceDiagram
         YM-->>SV: withdraw()
         SV-->>L1: send ETH
     end
-```
+````
+
 </div>
 
 ## Quick reference
 
-| Fund movement                    | Source                                                   | Destination                                 | Trigger                              | Role required                                                 |
-| -------------------------------- | -------------------------------------------------------- | ------------------------------------------- | ------------------------------------ | ------------------------------------------------------------- |
-| Stake excess reserve             | `LineaRollup` reserve                               | `StakingVault`                              | Automation Service                   | `YIELD_PROVIDER_STAKING_ROLE`                                 |
-| Beacon chain deposit             | `StakingVault`                                           | Beacon chain validators                              | Node Operator decision               | Node Operator                                                 |
-| Report yield to L2               | synthetic MessageSent event                              | L2YieldDistributor                          | Automation Service                   | `YIELD_REPORTER_ROLE`                                         |
+| Fund movement                    | Source                                                   | Destination                            | Trigger                              | Role required                                                 |
+| -------------------------------- | -------------------------------------------------------- | -------------------------------------- | ------------------------------------ | ------------------------------------------------------------- |
+| Stake excess reserve             | `LineaRollup` reserve                                    | `StakingVault`                         | Automation Service                   | `YIELD_PROVIDER_STAKING_ROLE`                                 |
+| Beacon chain deposit             | `StakingVault`                                           | Beacon chain validators                | Node Operator decision               | Node Operator                                                 |
+| Report yield to L2               | synthetic MessageSent event                              | L2YieldDistributor                     | Automation Service                   | `YIELD_REPORTER_ROLE`                                         |
 | Operator replenish reserve       | `StakingVault`                                           | `LineaRollup` reserve                  | Reserve below target                 | `YIELD_PROVIDER_UNSTAKER_ROLE`                                |
-| Permissionless unstake           | Validators                                               | `StakingVault`                              | Reserve below minimum                | Permissionless                                                |
+| Permissionless unstake           | Validators                                               | `StakingVault`                         | Reserve below minimum                | Permissionless                                                |
 | Permissionless replenish reserve | `StakingVault`                                           | `LineaRollup` reserve                  | Reserve below minimum                | Permissionless                                                |
-| LST withdrawal                   | Lido Protocol (minted against `StakingVault` collateral) | User                                        | Insufficient ETH for user withdrawal | Permissionless (user)                                         |
+| LST withdrawal                   | Lido Protocol (minted against `StakingVault` collateral) | User                                   | Insufficient ETH for user withdrawal | Permissionless (user)                                         |
 | Ossification withdrawal          | `StakingVault`                                           | `LineaRollup` reserve                  | Security Council initiates           | `OSSIFICATION_INITIATOR_ROLE` + `OSSIFICATION_PROCESSOR_ROLE` |
 | Donation                         | External                                                 | `LineaRollup` reserve / `StakingVault` | Voluntary                            | Permissionless                                                |
 

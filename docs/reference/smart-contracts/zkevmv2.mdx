@@ -44,7 +44,7 @@ mapping(uint256 => address) verifiers
 
 The verifier address to use for a proof type when proving.
 
-### _verifyProof
+### \_verifyProof
 
 ```solidity
 function _verifyProof(uint256 _publicInput, uint256 _proofType, bytes _proof) internal
@@ -56,9 +56,8 @@ _If the verifier based on proof type is not found, it reverts with InvalidProofT
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _publicInput | uint256 | The computed public input hash cast as uint256. |
-| _proofType | uint256 | The proof type to determine which verifier contract to use. |
-| _proof | bytes | The proof to be verified with the proof type verifier contract. |
-
+| Name          | Type    | Description                                                     |
+| ------------- | ------- | --------------------------------------------------------------- |
+| \_publicInput | uint256 | The computed public input hash cast as uint256.                 |
+| \_proofType   | uint256 | The proof type to determine which verifier contract to use.     |
+| \_proof       | bytes   | The proof to be verified with the proof type verifier contract. |

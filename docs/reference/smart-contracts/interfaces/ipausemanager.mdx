@@ -35,10 +35,10 @@ Emitted when a pause type is paused.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| messageSender | address | The address performing the pause. |
-| pauseType | enum IPauseManager.PauseType | The indexed pause type that was paused. |
+| Name          | Type                         | Description                             |
+| ------------- | ---------------------------- | --------------------------------------- |
+| messageSender | address                      | The address performing the pause.       |
+| pauseType     | enum IPauseManager.PauseType | The indexed pause type that was paused. |
 
 ### UnPaused
 
@@ -50,10 +50,10 @@ Emitted when a pause type is unpaused.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| messageSender | address | The address performing the unpause. |
-| pauseType | enum IPauseManager.PauseType | The indexed pause type that was unpaused. |
+| Name          | Type                         | Description                               |
+| ------------- | ---------------------------- | ----------------------------------------- |
+| messageSender | address                      | The address performing the unpause.       |
+| pauseType     | enum IPauseManager.PauseType | The indexed pause type that was unpaused. |
 
 ### PauseTypeRoleSet
 
@@ -65,10 +65,10 @@ Emitted when a pause type and its associated role are set in the `_pauseTypeRole
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| pauseType | enum IPauseManager.PauseType | The indexed type of pause. |
-| role | bytes32 | The indexed role associated with the pause type. |
+| Name      | Type                         | Description                                      |
+| --------- | ---------------------------- | ------------------------------------------------ |
+| pauseType | enum IPauseManager.PauseType | The indexed type of pause.                       |
+| role      | bytes32                      | The indexed role associated with the pause type. |
 
 ### UnPauseTypeRoleSet
 
@@ -80,10 +80,10 @@ Emitted when an unpause type and its associated role are set in the `_unPauseTyp
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| unPauseType | enum IPauseManager.PauseType | The indexed type of unpause. |
-| role | bytes32 | The indexed role associated with the unpause type. |
+| Name        | Type                         | Description                                        |
+| ----------- | ---------------------------- | -------------------------------------------------- |
+| unPauseType | enum IPauseManager.PauseType | The indexed type of unpause.                       |
+| role        | bytes32                      | The indexed role associated with the unpause type. |
 
 ### IsPaused
 
@@ -113,9 +113,9 @@ _Requires the role mapped in pauseTypeRoles for the pauseType._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 ### unPauseByType
 
@@ -129,9 +129,9 @@ _Requires the role mapped in unPauseTypeRoles for the pauseType._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 ### isPaused
 
@@ -143,13 +143,12 @@ Check if a pause type is enabled.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type | Description                                                |
+| ----------------- | ---- | ---------------------------------------------------------- |
 | pauseTypeIsPaused | bool | Returns true if the pause type if paused, false otherwise. |
-

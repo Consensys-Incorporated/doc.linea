@@ -10,10 +10,10 @@ Internal function that stores a uint256 value at a given key in the EVM's transi
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _key | bytes32 | The key in the EVM transient storage where the value should be stored. |
-| _value | uint256 | The uint256 value to be stored at the specified key in the EVM transient storage. |
+| Name    | Type    | Description                                                                       |
+| ------- | ------- | --------------------------------------------------------------------------------- |
+| \_key   | bytes32 | The key in the EVM transient storage where the value should be stored.            |
+| \_value | uint256 | The uint256 value to be stored at the specified key in the EVM transient storage. |
 
 ### tloadUint256
 
@@ -25,14 +25,14 @@ Internal function that retrieves a uint256 value from the EVM's transient storag
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _key | bytes32 | The key in the EVM transient storage from which the value should be retrieved. |
+| Name  | Type    | Description                                                                    |
+| ----- | ------- | ------------------------------------------------------------------------------ |
+| \_key | bytes32 | The key in the EVM transient storage from which the value should be retrieved. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                                                                      |
+| ----- | ------- | -------------------------------------------------------------------------------- |
 | value | uint256 | The uint256 value retrieved from the specified key in the EVM transient storage. |
 
 ### tstoreAddress
@@ -45,10 +45,10 @@ Internal function that stores an address at a given key in the EVM's transient s
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _key | bytes32 | The key in the EVM transient storage where the value should be stored. |
-| _addr | address | The address to be stored at the specified key in the EVM transient storage. |
+| Name   | Type    | Description                                                                 |
+| ------ | ------- | --------------------------------------------------------------------------- |
+| \_key  | bytes32 | The key in the EVM transient storage where the value should be stored.      |
+| \_addr | address | The address to be stored at the specified key in the EVM transient storage. |
 
 ### tloadAddress
 
@@ -60,13 +60,12 @@ Internal function that retrieves an address from the EVM's transient storage usi
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _key | bytes32 | The key in the EVM transient storage from which the value should be retrieved. |
+| Name  | Type    | Description                                                                    |
+| ----- | ------- | ------------------------------------------------------------------------------ |
+| \_key | bytes32 | The key in the EVM transient storage from which the value should be retrieved. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type    | Description                                                                |
+| ---- | ------- | -------------------------------------------------------------------------- |
 | addr | address | The address retrieved from the specified key in the EVM transient storage. |
-

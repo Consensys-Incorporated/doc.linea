@@ -7,23 +7,23 @@ image: /img/socialCards/add-a-fallback-for-rpc-requests.jpg
 ---
 
 It's best practice to ensure your app can still function if your primary RPC endpoint provider fails,
-enabling JSON-RPC API requests to fall back to an alternative. Wagmi provides a [`fallback`](https://wagmi.sh/core/api/transports/fallback) 
+enabling JSON-RPC API requests to fall back to an alternative. Wagmi provides a [`fallback`](https://wagmi.sh/core/api/transports/fallback)
 function that fulfils this need, and is based on the [corresponding Viem function](https://v1.viem.sh/docs/clients/transports/fallback.html).
 
-It enables you to add multiple [Transports](https://viem.sh/docs/clients/intro#transports) — the 
-element of Viem, and therefore Wagmi, which handles requests — to your app's configuration. If the 
+It enables you to add multiple [Transports](https://viem.sh/docs/clients/intro#transports) — the
+element of Viem, and therefore Wagmi, which handles requests — to your app's configuration. If the
 first fails, the request falls back to the next Transport.
 
 ## Prerequisites
 
-Install Wagmi and Viem: 
+Install Wagmi and Viem:
 
 ```bash
 npm install @wagmi/core @wagmi/connectors viem
 ```
 
-Viem is required for Wagmi to function. The `@wagmi/connectors` package is not strictly necessary, 
-since `fallback` is included in `@wagmi/core`, but you'll most likely need it for your app anyway. 
+Viem is required for Wagmi to function. The `@wagmi/connectors` package is not strictly necessary,
+since `fallback` is included in `@wagmi/core`, but you'll most likely need it for your app anyway.
 
 ## Usage
 
@@ -40,7 +40,7 @@ You can implement the `fallback` transport by adding it to your app's Wagmi conf
     }
 ```
 
-In this example, we define a primary RPC endpoint (Infura) and a fallback (`rpc.linea.build`). 
+In this example, we define a primary RPC endpoint (Infura) and a fallback (`rpc.linea.build`).
 
 <details>
     <summary>See full code example</summary>
@@ -60,8 +60,8 @@ In this example, we define a primary RPC endpoint (Infura) and a fallback (`rpc.
       },
     });
     ```
+
 </details>
 
 Optionally, you can also configure the [`rank` parameter](https://v1.viem.sh/docs/clients/transports/fallback.html#rank-optional)
 to enable your fallback Transport(s) to be used in order of latency and stability.
-

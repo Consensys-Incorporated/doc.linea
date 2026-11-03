@@ -4,18 +4,18 @@ description: How the tracer works with the sequencer and prover
 image: /img/socialCards/tracer.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 The tracer is part of the <GlossaryTerm term="Lineth" /> [sequencer](index.mdx).
 The tracer is a Besu plugin bundled with <GlossaryTerm term="Linea Besu" />.
 It generates the data the <GlossaryTerm term="Prover">prover</GlossaryTerm> needs to create
-<GlossaryTerm term="Zero-knowledge proof">ZK proofs</GlossaryTerm>, and the data the sequencer needs to
-keep blocks provable.
+
+<GlossaryTerm term="Zero-knowledge proof">ZK proofs</GlossaryTerm>, and the data the sequencer needs to keep blocks provable.
 
 A _trace_ records the operations the
-<GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> performs during execution: the
-state of the network, and the state of the accounts involved in a transaction, at each granular step of
-that transaction's execution.
+
+<GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> performs during execution: the state of the network, and the state of the accounts involved in a transaction, at each granular
+step of that transaction's execution.
 
 ## How it works
 

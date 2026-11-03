@@ -4,14 +4,13 @@ description: How Lineth's canonical token bridge uses lock-and-mint contracts an
 image: /img/socialCards/canonical-token-bridge.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 The canonical token bridge is a pair of lock-and-mint contracts, one on the
+
 <GlossaryTerm term="Lineth" /> network and one on its
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, that bridges any ERC-20 token.
-It carries no cross-chain machinery of its own: every transfer is a message sent through the
-[canonical message service](./canonical-message-service.mdx), and inherits that service's verification and
-delivery model.
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, that bridges any ERC-20 token. It carries no cross-chain machinery of its own: every transfer is a message sent through the
+[canonical message service](./canonical-message-service.mdx), and inherits that service's verification and delivery model.
 
 Native currency isn't bridged here.
 It moves through the message service directly, as the value attached to a message.
@@ -21,12 +20,12 @@ It moves through the message service directly, as the value attached to a messag
 Bridging a token away from its origin chain involves locking and minting as follows:
 
 1. The token holder calls `bridgeToken()` on the origin chain's token bridge.
-    The bridge escrows the tokens and sends a message via the message service, instructing the bridge on
-    the destination chain to complete the transfer.
+   The bridge escrows the tokens and sends a message via the message service, instructing the bridge on
+   the destination chain to complete the transfer.
 2. When that message is claimed, the destination bridge mints an equivalent amount of a `BridgedToken`, an
-    ERC-20 token it controls, to the recipient.
-    The first time a given token is bridged, the destination bridge also deploys that contract,
-    carrying over the escrowed token's name, symbol, and decimals.
+   ERC-20 token it controls, to the recipient.
+   The first time a given token is bridged, the destination bridge also deploys that contract,
+   carrying over the escrowed token's name, symbol, and decimals.
 
 Bridging back reverses this.
 The holder calls `bridgeToken()` on the destination bridge.
@@ -44,22 +43,23 @@ sequenceDiagram
   participant Messages as Message service
   participant Other as Destination token bridge
 
-  Note over Holder, Other: Away from the origin chain
-  Holder->>Home: bridgeToken()
-  Home->>Home: Escrow the ERC-20
-  Home->>Messages: sendMessage()
-  Messages->>Other: completeBridging()
-  opt First time bridging
-  Other->>Other: Deploy BridgedToken
-  end
-  Other->>Other: Mint BridgedToken to the recipient
+Note over Holder, Other: Away from the origin chain
+Holder->>Home: bridgeToken()
+Home->>Home: Escrow the ERC-20
+Home->>Messages: sendMessage()
+Messages->>Other: completeBridging()
+opt First time bridging
+Other->>Other: Deploy BridgedToken
+end
+Other->>Other: Mint BridgedToken to the recipient
 
-  Note over Holder, Other: Back to the origin chain
-  Holder->>Other: bridgeToken()
-  Other->>Other: Burn BridgedToken
-  Other->>Messages: sendMessage()
-  Messages->>Home: completeBridging()
-  Home->>Home: Release the escrowed ERC-20
+Note over Holder, Other: Back to the origin chain
+Holder->>Other: bridgeToken()
+Other->>Other: Burn BridgedToken
+Other->>Messages: sendMessage()
+Messages->>Home: completeBridging()
+Home->>Home: Release the escrowed ERC-20
+
 ```
 </div>
 
@@ -74,3 +74,4 @@ A token can only be reserved before it has been bridged.
   Mainnet, and the [Linea bridge](https://linea.build/hub/bridge/) for the public UI.
 - See the [token bridge source code](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/contracts/src/bridging/token)
   in the `lineth-monorepo`.
+```

@@ -38,156 +38,140 @@ You can follow the steps directly on the images included in this tutorial if you
 
 2. Copy and paste the following code:
 
-    ```solidity
-    // SPDX-License-Identifier: MIT
-    pragma solidity ^0.8.24;
+   ```solidity
+   // SPDX-License-Identifier: MIT
+   pragma solidity ^0.8.24;
 
-    import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+   import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-    contract StakingWithAllowlist {
-        mapping(address => mapping(address => uint256)) public stakedBalances;
-        mapping(address => bool) public allowlistedTokens;
+   contract StakingWithAllowlist {
+       mapping(address => mapping(address => uint256)) public stakedBalances;
+       mapping(address => bool) public allowlistedTokens;
 
-        event Staked(address indexed user, address indexed token, uint256 amount);
-        event Withdrawn(address indexed user, address indexed token, uint256 amount);
+       event Staked(address indexed user, address indexed token, uint256 amount);
+       event Withdrawn(address indexed user, address indexed token, uint256 amount);
 
-        constructor(address[] memory tokens) {
-            for (uint256 i = 0; i < tokens.length; i++) {
-                allowlistedTokens[tokens[i]] = true;
-            }
-        }
+       constructor(address[] memory tokens) {
+           for (uint256 i = 0; i < tokens.length; i++) {
+               allowlistedTokens[tokens[i]] = true;
+           }
+       }
 
-        function stake(address _token, uint256 _amount) public {
-            require(allowlistedTokens[_token], "Token is not in the allowlist");
-            require(_amount > 0, "Amount must be greater than 0");
-            IERC20 token = IERC20(_token);
-            require(token.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
-            stakedBalances[msg.sender][_token] += _amount;
-            emit Staked(msg.sender, _token, _amount);
-        }
+       function stake(address _token, uint256 _amount) public {
+           require(allowlistedTokens[_token], "Token is not in the allowlist");
+           require(_amount > 0, "Amount must be greater than 0");
+           IERC20 token = IERC20(_token);
+           require(token.transferFrom(msg.sender, address(this), _amount), "Token transfer failed");
+           stakedBalances[msg.sender][_token] += _amount;
+           emit Staked(msg.sender, _token, _amount);
+       }
 
-        function withdraw(address _token, uint256 _amount) public {
-            require(allowlistedTokens[_token], "Token is not in the allowlist");
-            require(_amount > 0, "Amount must be greater than 0");
-            require(stakedBalances[msg.sender][_token] >= _amount, "Insufficient staked balance");
-            IERC20 token = IERC20(_token);
-            stakedBalances[msg.sender][_token] -= _amount;
-            require(token.transfer(msg.sender, _amount), "Token transfer failed");
-            emit Withdrawn(msg.sender, _token, _amount);
-        }
+       function withdraw(address _token, uint256 _amount) public {
+           require(allowlistedTokens[_token], "Token is not in the allowlist");
+           require(_amount > 0, "Amount must be greater than 0");
+           require(stakedBalances[msg.sender][_token] >= _amount, "Insufficient staked balance");
+           IERC20 token = IERC20(_token);
+           stakedBalances[msg.sender][_token] -= _amount;
+           require(token.transfer(msg.sender, _amount), "Token transfer failed");
+           emit Withdrawn(msg.sender, _token, _amount);
+       }
 
-        function isTokenAllowlisted(address _token) public view returns (bool) {
-            return allowlistedTokens[_token];
-        }
-    }
-    ```
+       function isTokenAllowlisted(address _token) public view returns (bool) {
+           return allowlistedTokens[_token];
+       }
+   }
+   ```
 
-    This is a simplified version of a staking contract with an allowlist.
-    It allows you to stake any ERC-20, and contains the two basic functions `stake` and `withdraw`.
-    The allowlist is set up when the contract is deployed; there are other versions where the allowlist
-    can be modified, usually by the owner.
+   This is a simplified version of a staking contract with an allowlist.
+   It allows you to stake any ERC-20, and contains the two basic functions `stake` and `withdraw`.
+   The allowlist is set up when the contract is deployed; there are other versions where the allowlist
+   can be modified, usually by the owner.
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/learn/first-dapp/tutoremix_1.png"
-      alt="First 2 instructions on Remix interface"
-    />
+    <img src="/img/learn/first-dapp/tutoremix_1.png" alt="First 2 instructions on Remix interface" />
   </div>
 </div>
 
 ### 2. Compile the contract
 
 1. Go to the **Solidity Compiler** tab.
-  Select the London version in the EVM Version list under **Advanced Configurations** (to avoid any
-  compatibility issues).
+   Select the London version in the EVM Version list under **Advanced Configurations** (to avoid any
+   compatibility issues).
 
 2. Select **Compile**.
-    
+
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/learn/first-dapp/tutoremix_2.png"
-      alt="Compile instructions on Remix interface"
-    />
+    <img src="/img/learn/first-dapp/tutoremix_2.png" alt="Compile instructions on Remix interface" />
   </div>
 </div>
 
 After compiling the code, you'll see this below the compile button:
-    
+
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/learn/first-dapp/image.png"
-      alt="compile menu on Remix"
-    />
+    <img src="/img/learn/first-dapp/image.png" alt="compile menu on Remix" />
   </div>
 </div>
-    
-Copy the ABI using the button at the bottom.
-Save it in a JSON file, as you'll need it later.
+Copy the ABI using the button at the bottom. Save it in a JSON file, as you'll need it later.
 
 ### 3. Deploy the contract
 
-1. Go to the **Deploy** tab.
-  Select your injected provider (MetaMask) as the environment.
-  You'll get a connection request to accept.
+1.  Go to the **Deploy** tab.
+    Select your injected provider (MetaMask) as the environment.
+    You'll get a connection request to accept.
 
-    <details>
-    <summary>What should I do if my injected provider doesn't appear?</summary>
-    <div>        
+              <details>
 
-    If your injected provider does not appear by default:
+        <summary>What should I do if my injected provider doesn't appear?</summary>
 
-    1. Select **Customize this list** at the bottom of the environment list.
-      A page will open in Remix.
-    2. You should see your injected provider here.
-      Select the box at the top right and it should appear at the top of the list.
+    <div>
 
-    <div class="center-container">
-      <div class="img-large">
-        <img
-        src="/img/learn/first-dapp/tutoremix_troubleshoot1.png"
-        alt="injected provider menu on Remix"
-      />
-      </div>
-    </div>
-            
-    </div>
-    </details>
-        
+        If your injected provider does not appear by default:
+
+        1. Select **Customize this list** at the bottom of the environment list.
+           A page will open in Remix.
+        2. You should see your injected provider here.
+           Select the box at the top right and it should appear at the top of the list.
+
+        <div class="center-container">
+          <div class="img-large">
+            <img src="/img/learn/first-dapp/tutoremix_troubleshoot1.png" alt="injected provider menu on Remix" />
+          </div>
+        </div>
+
+  </div>
+  </details>
+
 2. Check that the contract is the one you want to deploy.
 
 3. Enter the list of tokens you want to allowlist.
-  For this tutorial, three ERC-20 contracts have been deployed for your use (you can copy and paste
-  directly into the field): 
+   For this tutorial, three ERC-20 contracts have been deployed for your use (you can copy and paste
+   directly into the field):
 
-    ```solidity
-    ["0x46871676658472B99720F2a368CDa6430c1647b9","0xB7D70343639aF53a02f6ea7d9cde240fc72de6Dd","0x66a6F52C2100FB82EE21FD1380b4D516CB540c93"]
-    ```
+   ```solidity
+   ["0x46871676658472B99720F2a368CDa6430c1647b9","0xB7D70343639aF53a02f6ea7d9cde240fc72de6Dd","0x66a6F52C2100FB82EE21FD1380b4D516CB540c93"]
+   ```
 
-    These ERC-20 contracts are verified so you can interact with them directly on Lineascan to mint some tokens.
-    Put your address and the number of tokens you want (don't forget that if you want 1 token you have to put 1e18, which is 100000000000000000).
+   These ERC-20 contracts are verified so you can interact with them directly on Lineascan to mint some tokens.
+   Put your address and the number of tokens you want (don't forget that if you want 1 token you have to put 1e18, which is 100000000000000000).
 
-    - [Mint link for COFFEE](https://sepolia.lineascan.build/address/0x46871676658472b99720f2a368cda6430c1647b9#writeContract#F3)
-    - [Mint link for TEA](https://sepolia.lineascan.build/address/0xb7d70343639af53a02f6ea7d9cde240fc72de6dd#writeContract#F3)
-    - [Mint link for WATER](https://sepolia.lineascan.build/address/0x66a6f52c2100fb82ee21fd1380b4d516cb540c93#writeContract#F3)
+   - [Mint link for COFFEE](https://sepolia.lineascan.build/address/0x46871676658472b99720f2a368cda6430c1647b9#writeContract#F3)
+   - [Mint link for TEA](https://sepolia.lineascan.build/address/0xb7d70343639af53a02f6ea7d9cde240fc72de6dd#writeContract#F3)
+   - [Mint link for WATER](https://sepolia.lineascan.build/address/0x66a6f52c2100fb82ee21fd1380b4d516cb540c93#writeContract#F3)
 
 4. Select **Deploy** and confirm the transaction in MetaMask.
-  You'll see success logs in the console at the bottom right.
-  You can copy the contract address by going to recorded transactions (under the deploy button), but you
-  can also find it by searching for your address on the
-  [Sepolia Linea explorer](https://sepolia.lineascan.build).
+   You'll see success logs in the console at the bottom right.
+   You can copy the contract address by going to recorded transactions (under the deploy button), but you
+   can also find it by searching for your address on the
+   [Sepolia Linea explorer](https://sepolia.lineascan.build).
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/learn/first-dapp/tutoremix_3.png"
-      alt="Deploy instructions on Remix interface"
-    />
+    <img src="/img/learn/first-dapp/tutoremix_3.png" alt="Deploy instructions on Remix interface" />
   </div>
 </div>
-
 
 ### 4. Set up the frontend with RainbowKit
 
@@ -199,17 +183,17 @@ listening for events and state changes, and more.
 2. Run `cd yourprojectname` and open the project in your IDE (run `code .` to open it in VS Code).
 3. Configure the chain to Linea Sepolia by modifying the `src/wagmi.ts` file:
 
-    ```tsx
-    import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-    import { lineaSepolia } from 'wagmi/chains';
+   ```tsx
+   import { getDefaultConfig } from "@rainbow-me/rainbowkit";
+   import { lineaSepolia } from "wagmi/chains";
 
-    export const config = getDefaultConfig({
-      appName: 'Linea Token Staking App',
-      projectId: 'YOUR_PROJECT_ID',
-      chains: [lineaSepolia],
-      ssr: true,
-    });
-    ```
+   export const config = getDefaultConfig({
+     appName: "Linea Token Staking App",
+     projectId: "YOUR_PROJECT_ID",
+     chains: [lineaSepolia],
+     ssr: true,
+   });
+   ```
 
 ### 5. Configure and style the frontend
 
@@ -227,37 +211,37 @@ Depending on your system, you might have some differences, so use the following 
 configuration expected by this tutorial:
 
 1. You should have an `app` folder, with a `global.css` file inside.
-  You can move it to `src/pages/globals.css` and edit the import at the top of `_app.tsx`:
+   You can move it to `src/pages/globals.css` and edit the import at the top of `_app.tsx`:
 
-    ```tsx
-    import './globals.css';
-    ```
+   ```tsx
+   import "./globals.css";
+   ```
 
 2. shadcn works by manually adding each component with the `pnpm dlx shadcn-ui@latest add <component>`,
-  so be sure to do it for each import.
-  Run this command to add all the components you'll use:
+   so be sure to do it for each import.
+   Run this command to add all the components you'll use:
 
-    ```bash
-    pnpm dlx shadcn-ui@latest add tabs button card input label popover command
-    ```
+   ```bash
+   pnpm dlx shadcn-ui@latest add tabs button card input label popover command
+   ```
 
 3. You also have a folder containing two folders `components` and `lib`.
-  You can move them under `src` —> `src/components` and `src/lib` .
+   You can move them under `src` —> `src/components` and `src/lib` .
 
 4. Verify that in the `tsconfig.json` file that you have this under `compilerOptions`:
 
-    ```tsx
-    "compilerOptions": {    
-        ...,
-        "paths": {
-          "@/*": ["./src/*"]
-        }
-    }
-    ```
+   ```tsx
+   "compilerOptions": {
+       ...,
+       "paths": {
+         "@/*": ["./src/*"]
+       }
+   }
+   ```
 
 5. You can delete the empty folders (these might vary depending on your system, but you should have an
-  empty `app` folder at least).
-  Also, if you have both `tailwind.config.js` and `tailwind.config.ts`, remove the `tailwind.config.js` file.
+   empty `app` folder at least).
+   Also, if you have both `tailwind.config.js` and `tailwind.config.ts`, remove the `tailwind.config.js` file.
 
 The configuration is done.
 You should have a project structure like this:
@@ -287,15 +271,15 @@ src
 You're ready to integrate your contracts and build the main interface.
 You'll do that in the `src/pages/index.tsx` file, which will be your main page.
 You can remove the content in this file and start from scratch.
-    
+
 Define an empty page with a connect button and some useful debug information.
 Use the `ConnectButton` from RainbowKit to handle the wallet connection, and the `useAccount` hook from
 Wagmi to get the connected account information.
 
 ```tsx
-import type { NextPage } from 'next';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount } from 'wagmi';
+import type { NextPage } from "next";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 const Home: NextPage = () => {
   const account = useAccount();
@@ -329,7 +313,7 @@ Verify that the `chainId` is `59141` in the debug information corner.
 ### 7. Add the staking interface
 
 Copy and paste this code for a simple staking card design at the top of `index.tsx`:
-    
+
 ```tsx
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -337,19 +321,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, ChevronsUpDown } from "lucide-react";
 
@@ -373,16 +346,8 @@ const TokensCombobox = ({ value, setValue, disabled }: any) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between"
-          disabled={disabled}
-        >
-          {value
-            ? tokens.find((token) => token.value === value)?.label
-            : "Select token..."}
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between" disabled={disabled}>
+          {value ? tokens.find((token) => token.value === value)?.label : "Select token..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -399,14 +364,8 @@ const TokensCombobox = ({ value, setValue, disabled }: any) => {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === token.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
+                  }}>
+                  <Check className={cn("mr-2 h-4 w-4", value === token.value ? "opacity-100" : "opacity-0")} />
                   {token.label}
                 </CommandItem>
               ))}
@@ -441,9 +400,7 @@ const StakingCard = ({ account, disabled }: any) => {
     <Card className="w-full max-w-sm relative">
       {disabled && (
         <div className="z-50 backdrop-blur-[3px] rounded-lg absolute inset-0 flex items-center justify-center">
-          <p className="text-md text-gray-500">
-            Please connect your wallet first
-          </p>
+          <p className="text-md text-gray-500">Please connect your wallet first</p>
         </div>
       )}
 
@@ -459,31 +416,15 @@ const StakingCard = ({ account, disabled }: any) => {
       <CardContent className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="targetToken">Token</Label>
-          <TokensCombobox
-            id="targetToken"
-            value={token}
-            setValue={setToken}
-            disabled={disabled}
-          />
+          <TokensCombobox id="targetToken" value={token} setValue={setToken} disabled={disabled} />
         </div>
 
         <Tabs defaultValue="stake" value={menuTab}>
-          <TabsList
-            className="grid w-full grid-cols-2"
-            hidden={amountStakable === 0 || amountStaked === 0}
-          >
-            <TabsTrigger
-              value="stake"
-              disabled={amountStakable === 0}
-              onClick={() => setMenuTab("stake")}
-            >
+          <TabsList className="grid w-full grid-cols-2" hidden={amountStakable === 0 || amountStaked === 0}>
+            <TabsTrigger value="stake" disabled={amountStakable === 0} onClick={() => setMenuTab("stake")}>
               Stake
             </TabsTrigger>
-            <TabsTrigger
-              value="unstake"
-              disabled={amountStaked === 0}
-              onClick={() => setMenuTab("unstake")}
-            >
+            <TabsTrigger value="unstake" disabled={amountStaked === 0} onClick={() => setMenuTab("unstake")}>
               Unstake/Withdraw
             </TabsTrigger>
           </TabsList>
@@ -495,29 +436,18 @@ const StakingCard = ({ account, disabled }: any) => {
                   id="amountToStake"
                   value={amountToStake}
                   onChange={(e) => {
-                    const value = Math.min(
-                      Number(e.target.value),
-                      amountStakable
-                    );
+                    const value = Math.min(Number(e.target.value), amountStakable);
                     setAmountToStake(value);
                   }}
                   disabled={disabled || amountStakable === 0}
                   type="number"
                 />
-                <Button
-                  type="submit"
-                  variant="secondary"
-                  onClick={() => setAmountToStake(amountStakable)}
-                >
+                <Button type="submit" variant="secondary" onClick={() => setAmountToStake(amountStakable)}>
                   Max
                 </Button>
               </div>
             </div>
-            <Button
-              className="w-full mt-4"
-              onClick={() => {}}
-              disabled={disabled || amountStakable === 0}
-            >
+            <Button className="w-full mt-4" onClick={() => {}} disabled={disabled || amountStakable === 0}>
               Stake
             </Button>
           </TabsContent>
@@ -529,29 +459,18 @@ const StakingCard = ({ account, disabled }: any) => {
                   id="amountToUnstake"
                   value={amountToUnstake}
                   onChange={(e) => {
-                    const value = Math.min(
-                      Number(e.target.value),
-                      amountStaked
-                    );
+                    const value = Math.min(Number(e.target.value), amountStaked);
                     setAmountToUnstake(value);
                   }}
                   disabled={disabled || amountStaked === 0}
                   type="number"
                 />
-                <Button
-                  type="submit"
-                  variant="secondary"
-                  onClick={() => setAmountToUnstake(amountStaked)}
-                >
+                <Button type="submit" variant="secondary" onClick={() => setAmountToUnstake(amountStaked)}>
                   Max
                 </Button>
               </div>
             </div>
-            <Button
-              className="w-full mt-4"
-              onClick={() => {}}
-              disabled={disabled || amountStaked === 0}
-            >
+            <Button className="w-full mt-4" onClick={() => {}} disabled={disabled || amountStaked === 0}>
               Unstake
             </Button>
           </TabsContent>
@@ -564,34 +483,33 @@ const StakingCard = ({ account, disabled }: any) => {
 
 This tutorial won't explain this code, since it's mostly React state management.
 You define the list of tokens as a constant to simplify.
-The `StakingCard` component handles all the token selection and inputs as well. 
+The `StakingCard` component handles all the token selection and inputs as well.
 
 Add it to the page (in React, this means putting the following in `return( ... )`):
 
 ```tsx
-{/* Main content */}
-<StakingCard
-  account={account}
-  disabled={account.status !== "connected"}
-/>
+{
+  /* Main content */
+}
+<StakingCard account={account} disabled={account.status !== "connected"} />;
 ```
 
 ### 8. Integrate the contract
 
 Until now, nothing is connected to the blockchain.
-Note that the `mockFetchAmountStakableForToken` and `mockFetchAmountStakedForToken`  functions just
+Note that the `mockFetchAmountStakableForToken` and `mockFetchAmountStakedForToken` functions just
 return a constant.
 You'll use the `useReadContracts` hook for this purpose.
 You'll also use `useWatchBlockNumber` to reread the state on each new block.
-    
+
 Before doing that, create an `abi.json` file in `src/pages` and paste the ABI from the smart contract
 (saved from [step 2](#2-compile-the-contract)).
-    
+
 Define the contract address and ABI:
 
 ```tsx
 import { useAccount, useReadContracts, useWatchBlockNumber } from "wagmi";
-import { erc20Abi } from 'viem'
+import { erc20Abi } from "viem";
 import CONTRACT_ABI from "./abi.json";
 const CONTRACT_ADDRESS = "0xe5fac868B1d0E4d119A09cC7253E2D7a3cb250da";
 ```
@@ -611,75 +529,72 @@ useEffect(() => {
 }, [token]);
 
 const [blockNumber, setBlockNumber] = useState<bigint>(BigInt(0));
-  useWatchBlockNumber({
-    onBlockNumber(blockNumber) {
-      setBlockNumber(blockNumber);
-    },
-  })
+useWatchBlockNumber({
+  onBlockNumber(blockNumber) {
+    setBlockNumber(blockNumber);
+  },
+});
 
 const { data, isSuccess, isLoading } = useReadContracts({
-	allowFailure: false,
-	blockNumber,
-	contracts: [
-	  // Token decimals
-	  {
-	    address: token,
-	    abi: erc20Abi,
-	    functionName: "decimals",
-	  },
-	  // Stakable
-	  {
-	    address: token,
-	    abi: erc20Abi,
-	    functionName: "balanceOf",
-	    args: [account.address],
-	  },
-	  // Staked
-	  {
-	    address: CONTRACT_ADDRESS,
-	    abi: CONTRACT_ABI,
-	    functionName: "stakedBalances",
+  allowFailure: false,
+  blockNumber,
+  contracts: [
+    // Token decimals
+    {
+      address: token,
+      abi: erc20Abi,
+      functionName: "decimals",
+    },
+    // Stakable
+    {
+      address: token,
+      abi: erc20Abi,
+      functionName: "balanceOf",
+      args: [account.address],
+    },
+    // Staked
+    {
+      address: CONTRACT_ADDRESS,
+      abi: CONTRACT_ABI,
+      functionName: "stakedBalances",
       args: [account.address, token],
-	  },
-		//Allowance
+    },
+    //Allowance
     {
       address: token,
       abi: erc20Abi,
       functionName: "allowance",
       args: [account.address, CONTRACT_ADDRESS],
     },
-	],
+  ],
 });
 
 useEffect(() => {
-	if (isSuccess) {
-	  const decimals = data?.[0] ?? 18;
-	  const stakable = Number((data?.[1] as bigint) ?? 0) / 10 ** decimals;
-	  const staked = Number((data?.[2] as bigint) ?? 0) / 10 ** decimals;
-	  setAmountStakable(stakable);
-	  setAmountStaked(staked);
-	}
+  if (isSuccess) {
+    const decimals = data?.[0] ?? 18;
+    const stakable = Number((data?.[1] as bigint) ?? 0) / 10 ** decimals;
+    const staked = Number((data?.[2] as bigint) ?? 0) / 10 ** decimals;
+    setAmountStakable(stakable);
+    setAmountStaked(staked);
+  }
 }, [data]);
 
 useEffect(() => {
-      setAmountToStake(0);
-      setAmountToUnstake(0);
-  }, [token])
+  setAmountToStake(0);
+  setAmountToUnstake(0);
+}, [token]);
 ```
 
 Optionally, you can use the `isLoading` boolean to add animation while fetching values for the two
 inputs, "Stake" and "Unstake":
-    
+
 ```tsx
 <Input
   id="amountToUnstake"
   value={amountToUnstake}
   className={isLoading ? " animate-pulse" : ""}
   onChange={(e) => {
-    const value = Math.min(
-      Number(e.target.value),
-      amountStaked
-    );
+    const value = Math.min(Number(e.target.value), amountStaked);
     setAmountToUnstake(value);
   }}
   disabled={disabled || amountStaked === 0}
@@ -706,7 +621,7 @@ const { writeContract, isPending } = useWriteContract();
 
 return (
 	//...
-	
+
   <Button
     className="w-full mt-4"
     onClick={() => {}}
@@ -756,9 +671,9 @@ return (
     )}
   </Button>
 )}
-  
+
 	//...
-	
+
   <Button
     className="w-full mt-4"
     onClick={() => {}}
@@ -780,7 +695,7 @@ return (
   >
     {isPending ? <Loader2 className="animate-spin" /> : <p>Unstake</p>}
   </Button>
-  
+
 	//...
 )
 ```

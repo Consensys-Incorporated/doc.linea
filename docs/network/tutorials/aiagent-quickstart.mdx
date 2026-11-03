@@ -36,7 +36,7 @@ ElizaOS is iterating fast, so steps in this tutorial are subject to change.
 :::
 
 Ensure you're using the correct Node version.
-If you get an error message, try starting again with a clean Node modules installation. 
+If you get an error message, try starting again with a clean Node modules installation.
 
 Checkout to the latest version of ElizaOS:
 
@@ -69,7 +69,7 @@ Be sure to keep this key private and do not reuse it to store real funds.
 You'll also need a `modelProvider` (unless you're running a local model on your computer; it can be slow
 depending on your computer's performance).
 Add your API key in the `.env` file, depending on which provider you'll use (OpenAI, Anthropic, Gaia, etc.).
-Some `modelProvider`s support different options, such as choosing a specific model for certain actions. 
+Some `modelProvider`s support different options, such as choosing a specific model for certain actions.
 
 ### 3. Install the EVM plugin
 
@@ -114,16 +114,7 @@ They define actions that can be performed by the agent.
 
 ```tsx title="actions/transfer.ts"
 import { type ByteArray, formatEther, parseEther, type Hex } from "viem";
-import {
-    type Action,
-    composeContext,
-    generateObjectDeprecated,
-    type HandlerCallback,
-    ModelClass,
-    type IAgentRuntime,
-    type Memory,
-    type State,
-} from "@elizaos/core";
+import { type Action, composeContext, generateObjectDeprecated, type HandlerCallback, ModelClass, type IAgentRuntime, type Memory, type State } from "@elizaos/core";
 
 import { initWalletProvider, type WalletProvider } from "../providers/wallet";
 import type { Transaction, TransferParams } from "../types";
@@ -131,167 +122,140 @@ import { transferTemplate } from "../templates";
 
 // Exported for tests
 export class TransferAction {
-    constructor(private walletProvider: WalletProvider) {}
+  constructor(private walletProvider: WalletProvider) {}
 
-    async transfer(params: TransferParams): Promise<Transaction> {
-        console.log(
-            `Transferring: ${params.amount} tokens to (${params.toAddress} on ${params.fromChain})`
-        );
+  async transfer(params: TransferParams): Promise<Transaction> {
+    console.log(`Transferring: ${params.amount} tokens to (${params.toAddress} on ${params.fromChain})`);
 
-        if (!params.data) {
-            params.data = "0x";
-        }
-
-        this.walletProvider.switchChain(params.fromChain);
-
-        const walletClient = this.walletProvider.getWalletClient(
-            params.fromChain
-        );
-
-        try {
-            const hash = await walletClient.sendTransaction({
-                account: walletClient.account,
-                to: params.toAddress,
-                value: parseEther(params.amount),
-                data: params.data as Hex,
-                kzg: {
-                    blobToKzgCommitment: (_: ByteArray): ByteArray => {
-                        throw new Error("Function not implemented.");
-                    },
-                    computeBlobKzgProof: (
-                        _blob: ByteArray,
-                        _commitment: ByteArray
-                    ): ByteArray => {
-                        throw new Error("Function not implemented.");
-                    },
-                },
-                chain: undefined,
-            });
-
-            return {
-                hash,
-                from: walletClient.account.address,
-                to: params.toAddress,
-                value: parseEther(params.amount),
-                data: params.data as Hex,
-            };
-        } catch (error) {
-            throw new Error(`Transfer failed: ${error.message}`);
-        }
+    if (!params.data) {
+      params.data = "0x";
     }
+
+    this.walletProvider.switchChain(params.fromChain);
+
+    const walletClient = this.walletProvider.getWalletClient(params.fromChain);
+
+    try {
+      const hash = await walletClient.sendTransaction({
+        account: walletClient.account,
+        to: params.toAddress,
+        value: parseEther(params.amount),
+        data: params.data as Hex,
+        kzg: {
+          blobToKzgCommitment: (_: ByteArray): ByteArray => {
+            throw new Error("Function not implemented.");
+          },
+          computeBlobKzgProof: (_blob: ByteArray, _commitment: ByteArray): ByteArray => {
+            throw new Error("Function not implemented.");
+          },
+        },
+        chain: undefined,
+      });
+
+      return {
+        hash,
+        from: walletClient.account.address,
+        to: params.toAddress,
+        value: parseEther(params.amount),
+        data: params.data as Hex,
+      };
+    } catch (error) {
+      throw new Error(`Transfer failed: ${error.message}`);
+    }
+  }
 }
 
-const buildTransferDetails = async (
-    state: State,
-    runtime: IAgentRuntime,
-    wp: WalletProvider
-): Promise<TransferParams> => {
-    const chains = Object.keys(wp.chains);
-    state.supportedChains = chains.map((item) => `"${item}"`).join("|");
+const buildTransferDetails = async (state: State, runtime: IAgentRuntime, wp: WalletProvider): Promise<TransferParams> => {
+  const chains = Object.keys(wp.chains);
+  state.supportedChains = chains.map((item) => `"${item}"`).join("|");
 
-    const context = composeContext({
-        state,
-        template: transferTemplate,
-    });
+  const context = composeContext({
+    state,
+    template: transferTemplate,
+  });
 
-    const transferDetails = (await generateObjectDeprecated({
-        runtime,
-        context,
-        modelClass: ModelClass.SMALL,
-    })) as TransferParams;
+  const transferDetails = (await generateObjectDeprecated({
+    runtime,
+    context,
+    modelClass: ModelClass.SMALL,
+  })) as TransferParams;
 
-    const existingChain = wp.chains[transferDetails.fromChain];
+  const existingChain = wp.chains[transferDetails.fromChain];
 
-    if (!existingChain) {
-        throw new Error(
-            "The chain " +
-                transferDetails.fromChain +
-                " not configured yet. Add the chain or choose one from configured: " +
-                chains.toString()
-        );
-    }
+  if (!existingChain) {
+    throw new Error("The chain " + transferDetails.fromChain + " not configured yet. Add the chain or choose one from configured: " + chains.toString());
+  }
 
-    return transferDetails;
+  return transferDetails;
 };
 
 export const transferAction: Action = {
-    name: "transfer",
-    description: "Transfer tokens between addresses on the same chain",
-    handler: async (
-        runtime: IAgentRuntime,
-        message: Memory,
-        state: State,
-        _options: any,
-        callback?: HandlerCallback
-    ) => {
-        if (!state) {
-            state = (await runtime.composeState(message)) as State;
-        } else {
-            state = await runtime.updateRecentMessageState(state);
-        }
+  name: "transfer",
+  description: "Transfer tokens between addresses on the same chain",
+  handler: async (runtime: IAgentRuntime, message: Memory, state: State, _options: any, callback?: HandlerCallback) => {
+    if (!state) {
+      state = (await runtime.composeState(message)) as State;
+    } else {
+      state = await runtime.updateRecentMessageState(state);
+    }
 
-        console.log("Transfer action handler called");
-        const walletProvider = await initWalletProvider(runtime);
-        const action = new TransferAction(walletProvider);
+    console.log("Transfer action handler called");
+    const walletProvider = await initWalletProvider(runtime);
+    const action = new TransferAction(walletProvider);
 
-        // Compose transfer context
-        const paramOptions = await buildTransferDetails(
-            state,
-            runtime,
-            walletProvider
-        );
+    // Compose transfer context
+    const paramOptions = await buildTransferDetails(state, runtime, walletProvider);
 
-        try {
-            const transferResp = await action.transfer(paramOptions);
-            if (callback) {
-                callback({
-                    text: `Successfully transferred ${paramOptions.amount} tokens to ${paramOptions.toAddress}\nTransaction Hash: ${transferResp.hash}`,
-                    content: {
-                        success: true,
-                        hash: transferResp.hash,
-                        amount: formatEther(transferResp.value),
-                        recipient: transferResp.to,
-                        chain: paramOptions.fromChain,
-                    },
-                });
-            }
-            return true;
-        } catch (error) {
-            console.error("Error during token transfer:", error);
-            if (callback) {
-                callback({
-                    text: `Error transferring tokens: ${error.message}`,
-                    content: { error: error.message },
-                });
-            }
-            return false;
-        }
-    },
-    validate: async (runtime: IAgentRuntime) => {
-        const privateKey = runtime.getSetting("EVM_PRIVATE_KEY");
-        return typeof privateKey === "string" && privateKey.startsWith("0x");
-    },
-    examples: [
-        [
-            {
-                user: "assistant",
-                content: {
-                    text: "I'll help you transfer 1 ETH to 0x9FA746b844747f77c6C54F4f88ab71048c608864",
-                    action: "SEND_TOKENS",
-                },
-            },
-            {
-                user: "user",
-                content: {
-                    text: "Transfer 1 ETH to 0x9FA746b844747f77c6C54F4f88ab71048c608864",
-                    action: "SEND_TOKENS",
-                },
-            },
-        ],
+    try {
+      const transferResp = await action.transfer(paramOptions);
+      if (callback) {
+        callback({
+          text: `Successfully transferred ${paramOptions.amount} tokens to ${paramOptions.toAddress}\nTransaction Hash: ${transferResp.hash}`,
+          content: {
+            success: true,
+            hash: transferResp.hash,
+            amount: formatEther(transferResp.value),
+            recipient: transferResp.to,
+            chain: paramOptions.fromChain,
+          },
+        });
+      }
+      return true;
+    } catch (error) {
+      console.error("Error during token transfer:", error);
+      if (callback) {
+        callback({
+          text: `Error transferring tokens: ${error.message}`,
+          content: { error: error.message },
+        });
+      }
+      return false;
+    }
+  },
+  validate: async (runtime: IAgentRuntime) => {
+    const privateKey = runtime.getSetting("EVM_PRIVATE_KEY");
+    return typeof privateKey === "string" && privateKey.startsWith("0x");
+  },
+  examples: [
+    [
+      {
+        user: "assistant",
+        content: {
+          text: "I'll help you transfer 1 ETH to 0x9FA746b844747f77c6C54F4f88ab71048c608864",
+          action: "SEND_TOKENS",
+        },
+      },
+      {
+        user: "user",
+        content: {
+          text: "Transfer 1 ETH to 0x9FA746b844747f77c6C54F4f88ab71048c608864",
+          action: "SEND_TOKENS",
+        },
+      },
     ],
-    similes: ["SEND_TOKENS", "TOKEN_TRANSFER", "MOVE_TOKENS"],
+  ],
+  similes: ["SEND_TOKENS", "TOKEN_TRANSFER", "MOVE_TOKENS"],
 };
-
 ```
 
 #### Contracts artifacts and sources
@@ -307,7 +271,7 @@ You can modify these to use AA wallets, for example, or connect your agent with 
 #### Templates
 
 Every time you send a prompt to the agent, it'll try to determine if you're trying to perform
-an action, then use the template for this action. 
+an action, then use the template for this action.
 
 Here's the transfer template:
 

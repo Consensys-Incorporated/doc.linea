@@ -6,14 +6,14 @@ description: >-
 image: /img/socialCards/multi-validator-consensus.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
-import MultiValidatorConsensusGraphic from '/img/stack/deployment/multi-validator-consensus.svg';
+import GlossaryTerm from "@theme/GlossaryTerm";
+import MultiValidatorConsensusGraphic from "/img/stack/deployment/multi-validator-consensus.svg";
 
 This page describes multi-validator consensus for a <GlossaryTerm term="Lineth" /> deployment.
 Multiple <GlossaryTerm term="Maru validator">Maru validators</GlossaryTerm> use
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> to order blocks together, so
-the network can keep producing blocks if one validator fails.
-To set up and operate multiple validators, see [Run multiple Maru validators](../how-to/run-multiple-validators.mdx).
+
+<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> to order blocks together, so the network can keep producing blocks if one validator fails. To set up and operate
+multiple validators, see [Run multiple Maru validators](../how-to/run-multiple-validators.mdx).
 
 [Linea Mainnet](../../network/index.mdx) runs a single, trusted Maru validator.
 A Lineth deployment can use a single validator if it accepts that trust model.
@@ -45,9 +45,9 @@ apply to Maru.
 ## Sequencer nodes
 
 Each Maru validator pairs 1:1 with its own <GlossaryTerm term="Linea Besu" /> execution client running the
-<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins.
-Together they form a **sequencer node**.
-This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders, builds, and executes the block.
+
+<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins. Together they form a **sequencer node**. This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders,
+builds, and executes the block.
 
 Multiple Maru validators communicate over a QBFT mesh.
 Use [direct, static peering](../how-to/run-multiple-validators.mdx#set-up-validators)
@@ -60,10 +60,7 @@ every sequencer node interchangeably.
 
 <div className="img-fit">
   <MultiValidatorConsensusGraphic />
-    <em>
-      4 Maru validators, each paired 1:1 with a Linea Besu execution client.
-      The coordinator reads from a single designated sequencer node.
-    </em>
+  <em>4 Maru validators, each paired 1:1 with a Linea Besu execution client. The coordinator reads from a single designated sequencer node.</em>
 </div>
 
 ## Validator count
@@ -115,12 +112,12 @@ Adding more validators improves fault tolerance but increases latency variance.
 
 The following examples apply the block building window formula at a 1-second configured block time:
 
-| Placement | One-way latency | Consensus overhead | Block-building window at 1s |
-| --- | --- | --- | --- |
-| Same data center | ~5ms | ~65ms | ~935ms |
-| Same region (~50ms ping) | ~25ms | ~125ms | ~875ms |
-| Cross-region, for example EU↔US (~100ms ping) | ~50ms | ~200ms | ~800ms |
-| Long haul, for example EU↔Asia (~300ms ping) | ~150ms | ~500ms | ~500ms |
+| Placement                                     | One-way latency | Consensus overhead | Block-building window at 1s |
+| --------------------------------------------- | --------------- | ------------------ | --------------------------- |
+| Same data center                              | ~5ms            | ~65ms              | ~935ms                      |
+| Same region (~50ms ping)                      | ~25ms           | ~125ms             | ~875ms                      |
+| Cross-region, for example EU↔US (~100ms ping) | ~50ms           | ~200ms             | ~800ms                      |
+| Long haul, for example EU↔Asia (~300ms ping)  | ~150ms          | ~500ms             | ~500ms                      |
 
 On a long-haul path, a 1s block time leaves about 500ms of block-building window; use a 2s block time to
 increase that window to about 1.5s.

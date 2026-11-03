@@ -4,7 +4,7 @@ description: Returns a transaction on Linea by block hash and transaction index.
 image: /img/socialCards/ethgettransactionbyblockhashandindex.jpg
 ---
 
-import RpcPlayground from '@site/src/components/RpcPlayground';
+import RpcPlayground from "@site/src/components/RpcPlayground";
 
 # `eth_getTransactionByBlockHashAndIndex`
 
@@ -24,10 +24,7 @@ or `null` if no transaction is found at the given index.
 
 <RpcPlayground
   method="eth_getTransactionByBlockHashAndIndex"
-  params={[
-    "0x8ebe90fa04dbbf92199c07cbb56c1f908343c69f3dd246a2f7d95272589dc550",
-    "0x0"
-  ]}
+  params={["0x8ebe90fa04dbbf92199c07cbb56c1f908343c69f3dd246a2f7d95272589dc550", "0x0"]}
   exampleResponse={{
     jsonrpc: "2.0",
     id: 1,
@@ -41,7 +38,7 @@ or `null` if no transaction is found at the given index.
       gas: "0x2635a",
       gasPrice: "0x257e36f",
       nonce: "0xc824c",
-      type: "0x2"
-    }
+      type: "0x2",
+    },
   }}
 />

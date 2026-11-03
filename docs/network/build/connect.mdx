@@ -6,8 +6,8 @@ description: >-
 image: /img/socialCards/connect.jpg
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Connect to the [RPC providers](#connect-to-rpc-providers) for Linea Mainnet and Linea Sepolia,
 or connect your [wallet](#connect-your-wallet) to Linea.
@@ -15,61 +15,90 @@ or connect your [wallet](#connect-your-wallet) to Linea.
 ## Connect to RPC providers
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
-  <TabItem 
-  value="Mainnet" label="Mainnet" default>
-  <table>
+  <TabItem value="Mainnet" label="Mainnet" default>
+    <table>
       <tr>
-          <td align="left"><b>Network Name</b></td>
-          <td align="left">Linea</td>
+        <td align="left">
+          <b>Network Name</b>
+        </td>
+        <td align="left">Linea</td>
       </tr>
       <tr>
-          <td align="left"><b>RPC URL</b></td>
-          <td align="left">https://rpc.linea.build or via <a href="https://docs.metamask.io/services/get-started/endpoints#linea">Infura</a> (recommended)</td>
+        <td align="left">
+          <b>RPC URL</b>
+        </td>
+        <td align="left">
+          https://rpc.linea.build or via <a href="https://docs.metamask.io/services/get-started/endpoints#linea">Infura</a> (recommended)
+        </td>
       </tr>
       <tr>
-          <td align="left"><b>Chain ID</b></td>
-          <td align="left">59144</td>
+        <td align="left">
+          <b>Chain ID</b>
+        </td>
+        <td align="left">59144</td>
       </tr>
       <tr>
-          <td align="left"><b>Currency Symbol</b></td>
-          <td align="left">ETH</td>
+        <td align="left">
+          <b>Currency Symbol</b>
+        </td>
+        <td align="left">ETH</td>
       </tr>
       <tr>
-          <td align="left"><b>Block Explorer URL</b></td>
-          <td align="left"> <a href="https://lineascan.build/">Lineascan</a>  </td>
+        <td align="left">
+          <b>Block Explorer URL</b>
+        </td>
+        <td align="left">
+          {" "}
+          <a href="https://lineascan.build/">Lineascan</a>{" "}
+        </td>
       </tr>
-  </table>
+    </table>
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-  <table>
+    <table>
       <tr>
-          <td align="left"><b>Network</b></td>
-          <td align="left">Linea</td>
+        <td align="left">
+          <b>Network</b>
+        </td>
+        <td align="left">Linea</td>
       </tr>
       <tr>
-          <td align="left"><b>RPC URL</b></td>
-          <td align="left">https://rpc.sepolia.linea.build or via <a href="https://docs.metamask.io/services/get-started/endpoints#linea">Infura</a> (recommended)</td>
+        <td align="left">
+          <b>RPC URL</b>
+        </td>
+        <td align="left">
+          https://rpc.sepolia.linea.build or via <a href="https://docs.metamask.io/services/get-started/endpoints#linea">Infura</a> (recommended)
+        </td>
       </tr>
       <tr>
-          <td align="left"><b>Chain ID</b></td>
-          <td align="left">59141</td>
+        <td align="left">
+          <b>Chain ID</b>
+        </td>
+        <td align="left">59141</td>
       </tr>
       <tr>
-          <td align="left"><b>Symbol</b></td>
-          <td align="left">ETH</td>
+        <td align="left">
+          <b>Symbol</b>
+        </td>
+        <td align="left">ETH</td>
       </tr>
       <tr>
-          <td align="left"><b>Block explorer</b></td>
-          <td align="left"> <a href="https://sepolia.lineascan.build">Lineascan</a> </td>
+        <td align="left">
+          <b>Block explorer</b>
+        </td>
+        <td align="left">
+          {" "}
+          <a href="https://sepolia.lineascan.build">Lineascan</a>{" "}
+        </td>
       </tr>
-  </table>
-  </TabItem> 
+    </table>
+  </TabItem>
 </Tabs>
 
 ### Connect to node providers
 
 If your dapp is using public endpoints, it may encounter rate limiting. You can find private RPC Linea node providers
-[here](../build/tools/node-providers/index.mdx). 
+[here](../build/tools/node-providers/index.mdx).
 
 Alternatively, consider running your [own RPC](../../protocol/architecture/nodes/rpc-services#why-run-your-own-rpc).
 
@@ -149,7 +178,7 @@ MetaMask automatically displays all your crypto assets across enabled networks, 
       </div>
 
       Select "Linea" to switch to Linea Mainnet.
-      
+
       <div class="center-container">
         <div class="img-small">
           <img
@@ -177,16 +206,16 @@ MetaMask automatically displays all your crypto assets across enabled networks, 
 
 :::note
 
-See the [MetaMask support article](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-connect-to-linea-on-metamask/) 
+See the [MetaMask support article](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-connect-to-linea-on-metamask/)
 for further information.
 
 :::
 
 #### Custom RPC endpoint
 
-You can configure MetaMask to connect to Linea Mainnet or Linea Sepolia with any RPC endpoint. 
+You can configure MetaMask to connect to Linea Mainnet or Linea Sepolia with any RPC endpoint.
 
-Refer to the [MetaMask Support site](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-add-a-custom-network-rpc/#adding-or-editing-rpc-urls) 
+Refer to the [MetaMask Support site](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-add-a-custom-network-rpc/#adding-or-editing-rpc-urls)
 for instructions on how to add RPC endpoints. You can find most networks and add them easily on [Chainlist](https://chainlist.org/).
 
 ### Other wallets
