@@ -2,3 +2,8 @@
 # the config-docs workflows. Prettier would reformat tables and prose and create churn
 # against the generator output, so this tree is exempt from formatting checks.
 docs/stack/reference/_generated/
+
+# Prettier's MDX parser pulls markdown lists out of JSX components in this file
+# (ChangelogDate) and escapes the hidden Version 1.0 comment, which fails the
+# Docusaurus build. Leave it unformatted.
+docs/changelog/release-notes.mdx
