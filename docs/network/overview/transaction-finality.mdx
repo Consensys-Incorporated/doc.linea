@@ -6,7 +6,7 @@ description: >-
 image: /img/socialCards/transaction-finality.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 A Linea transaction moves through two finality states before it is permanently settled on Ethereum.
 
@@ -60,12 +60,12 @@ where Ethereum-level security guarantees are needed.
 
 ## What you should care about
 
-| Use case | Finality needed | Why |
-|---|---|---|
-| In-app transactions, swaps | Soft | Once confirmed on Linea, the transaction is in the canonical chain and [will not be reversed](/protocol/reference/zero-knowledge-glossary#reorg) by the L2 |
-| Bridge withdrawals to L1 | Hard | Funds must be provably settled on Ethereum |
-| CEX deposits | Hard | Exchanges require irreversibility |
-| Onchain gaming, NFT mints | Soft | Speed matters, because Linea does not reorg after soft finality |
+| Use case                   | Finality needed | Why                                                                                                                                                        |
+| -------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In-app transactions, swaps | Soft            | Once confirmed on Linea, the transaction is in the canonical chain and [will not be reversed](/protocol/reference/zero-knowledge-glossary#reorg) by the L2 |
+| Bridge withdrawals to L1   | Hard            | Funds must be provably settled on Ethereum                                                                                                                 |
+| CEX deposits               | Hard            | Exchanges require irreversibility                                                                                                                          |
+| Onchain gaming, NFT mints  | Soft            | Speed matters, because Linea does not reorg after soft finality                                                                                            |
 
 ## How to check finality
 
@@ -111,20 +111,20 @@ finalized state, use the `finalized` JSON-RPC tag described above.
    :::
 
    ```javascript title="index.js"
-   const { Web3 } = require("web3")
-   const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/<YOUR-API-KEY>`))
-   const lineaRollupAbi = [{"constant":true,"inputs":[],"name":"currentL2BlockNumber","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
-   const lineaRollupAddress = '0xd19d4b5d358258f05d7b411e21a1460d11b0876f';
+   const { Web3 } = require("web3");
+   const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/<YOUR-API-KEY>`));
+   const lineaRollupAbi = [{ constant: true, inputs: [], name: "currentL2BlockNumber", outputs: [{ name: "", type: "uint256" }], payable: false, stateMutability: "view", type: "function" }];
+   const lineaRollupAddress = "0xd19d4b5d358258f05d7b411e21a1460d11b0876f";
    const lineaRollupContract = new web3.eth.Contract(lineaRollupAbi, lineaRollupAddress);
    async function getFinalizedL2BlockNumber() {
      try {
        const currentL2BlockNumber = await lineaRollupContract.methods.currentL2BlockNumber().call();
-       const blockNumberHex = '0x' + BigInt(currentL2BlockNumber).toString(16);
-       console.log('Finalized L2 Block Number:', currentL2BlockNumber.toString());
-       console.log('Finalized L2 Block Number (Hex):', blockNumberHex);
+       const blockNumberHex = "0x" + BigInt(currentL2BlockNumber).toString(16);
+       console.log("Finalized L2 Block Number:", currentL2BlockNumber.toString());
+       console.log("Finalized L2 Block Number (Hex):", blockNumberHex);
        return { blockNumber: currentL2BlockNumber, blockNumberHex };
      } catch (error) {
-       console.error('Error fetching L2 block number:', error);
+       console.error("Error fetching L2 block number:", error);
      }
    }
    getFinalizedL2BlockNumber();

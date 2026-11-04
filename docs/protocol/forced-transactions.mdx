@@ -42,7 +42,7 @@ and reordering attacks.
 
 ### Processing vs. execution
 
-Forced transactions guarantee *processing*, not necessarily inclusion or successful execution. The sequencer is
+Forced transactions guarantee _processing_, not necessarily inclusion or successful execution. The sequencer is
 required to process each forced transaction before its deadline, but processing can still result in the transaction
 being rejected or failing on the L2.
 
@@ -55,21 +55,21 @@ After a forced transaction is processed by the sequencer, the prover attempts to
 to the validity of the state transition for that batch. At this stage, the transaction may fail to execute on the L2 for
 reasons that include:
 
-| Failure reason | Description |
-|----------------|-------------|
-| **Invalid nonce** | The signer's nonce on L2 has changed since the transaction was signed. Another transaction may have executed first. |
-| **Insufficient gas** | The `gasLimit` specified is too low for the transaction to complete. |
-| **Insufficient balance** | The signer doesn't have enough ETH on L2 to cover `value + (gasLimit * maxFeePerGas)`. |
-| **Contract revert** | The target contract's logic reverted the call (require failed, custom error, etc.). |
-| **Out of gas during execution** | Complex computation exhausted the gas limit mid-execution. |
-| **Invalid signature** | Edge cases where the signature is technically valid but doesn't match L2 state. |
+| Failure reason                  | Description                                                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Invalid nonce**               | The signer's nonce on L2 has changed since the transaction was signed. Another transaction may have executed first. |
+| **Insufficient gas**            | The `gasLimit` specified is too low for the transaction to complete.                                                |
+| **Insufficient balance**        | The signer doesn't have enough ETH on L2 to cover `value + (gasLimit * maxFeePerGas)`.                              |
+| **Contract revert**             | The target contract's logic reverted the call (require failed, custom error, etc.).                                 |
+| **Out of gas during execution** | Complex computation exhausted the gas limit mid-execution.                                                          |
+| **Invalid signature**           | Edge cases where the signature is technically valid but doesn't match L2 state.                                     |
 
 ## Forced transaction lifecycle
 
 When a user submits a forced transaction, the following components validate and process the transaction:
 
-- `ForcedTransactionGateway`: Validates and submits the transaction to the `LineaRollup`,  and
-generates a rolling hash.
+- `ForcedTransactionGateway`: Validates and submits the transaction to the `LineaRollup`, and
+  generates a rolling hash.
 - [`LineaRollup`](../network/build/contracts): The Linea rollup and message service contract that stores the transaction.
 - [Coordinator](./architecture/coordinator/index.mdx): Forwards the transaction to the sequencer for processing.
 - [Sequencer](./architecture/sequencer/index.mdx): Processes the transaction before the deadline.
@@ -141,6 +141,7 @@ sequenceDiagram
         Stack->>L1: 3d: Submit proof + state root
         L1->>L1: 3e: Verify and finalize batch
     end
+
 ```
 </div>
 
@@ -159,3 +160,4 @@ sequenceDiagram
   Public Mainnet.
 - Consider the normal [transaction lifecycle](./architecture/index.mdx#transaction-lifecycle).
 - See the [changelog](../changelog/release-notes.mdx) for release history.
+```

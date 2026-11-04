@@ -11,6 +11,9 @@ indent_size = 2
 max_line_length = 100
 trim_trailing_whitespace = true
 
+[*.{md,mdx}]
+max_line_length = 100
+
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false

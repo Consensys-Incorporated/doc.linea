@@ -6,12 +6,12 @@ description: >-
 image: /img/socialCards/access-control.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This page describes how a <GlossaryTerm term="Lineth" />
-<GlossaryTerm term="Validium">private validium</GlossaryTerm> can restrict JSON-RPC access.
-In a restricted deployment, clients send all reads and writes to a single RPC endpoint.
-That endpoint authenticates callers and enforces role-based access control (RBAC) permissions.
+
+<GlossaryTerm term="Validium">private validium</GlossaryTerm> can restrict JSON-RPC access. In a restricted deployment, clients send all reads and writes to a single RPC endpoint. That endpoint
+authenticates callers and enforces role-based access control (RBAC) permissions.
 
 :::warning Access control is not cryptographic privacy
 
@@ -70,16 +70,17 @@ flowchart TB
   classDef access stroke-width:1.5px;
   classDef neutral stroke-width:1.5px;
 
-  CL["Wallets and apps"]:::neutral
-  EP["Access control RPC endpoint"]:::access
-  ND["Lineth node"]:::core
-  POL["RBAC database"]:::control
-  AUD["Access log"]:::control
+CL["Wallets and apps"]:::neutral
+EP["Access control RPC endpoint"]:::access
+ND["Lineth node"]:::core
+POL["RBAC database"]:::control
+AUD["Access log"]:::control
 
-  CL -->|"authenticate, then read or write"| EP
-  EP -->|"allowed JSON-RPC"| ND
-  EP -.-> POL
-  EP -.-> AUD
+CL -->|"authenticate, then read or write"| EP
+EP -->|"allowed JSON-RPC"| ND
+EP -.-> POL
+EP -.-> AUD
+
 ```
 </div>
 
@@ -165,3 +166,4 @@ They do not receive a view of private contracts or transaction data.
 
 - [Native interoperability](./interoperability.mdx): How two access controlled Lineth networks communicate
   with each other using the Cross Ledger Interoperability Protocol (CLIP).
+```

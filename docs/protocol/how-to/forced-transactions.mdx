@@ -10,7 +10,6 @@ image: /img/socialCards/submit-forced-transactions.jpg
 
 :::
 
-
 ## Submit a forced transaction
 
 To submit a forced transaction, you first need to query the latest finalized state and rolling hashes from the L1.
@@ -25,13 +24,7 @@ See the Linea contract addresses and ABIs in the monorepo for production integra
 
 ```typescript
 // Pseudocode example (ethers v6)
-import {
-  AbiCoder,
-  Contract,
-  JsonRpcProvider,
-  id,
-  keccak256
-} from "ethers";
+import { AbiCoder, Contract, JsonRpcProvider, id, keccak256 } from "ethers";
 
 // assume provider + contract already initialized
 // const provider = new JsonRpcProvider(L1_RPC_URL);
@@ -53,20 +46,18 @@ const logs = await provider.getLogs({
   address: await lineaRollup.getAddress(),
   topics: [eventTopic, blockNumberTopic],
   fromBlock: 0,
-  toBlock: "latest"
+  toBlock: "latest",
 });
 
 if (logs.length === 0) {
-  throw new Error(
-    `No FinalizedStateUpdated event found for L2 block ${currentL2BlockNumber}`
-  );
+  throw new Error(`No FinalizedStateUpdated event found for L2 block ${currentL2BlockNumber}`);
 }
 
 // 3. Decode the event
 const latestLog = logs[logs.length - 1];
 const parsed = lineaRollup.interface.parseLog({
   topics: latestLog.topics as string[],
-  data: latestLog.data
+  data: latestLog.data,
 });
 
 if (!parsed) {
@@ -74,16 +65,13 @@ if (!parsed) {
 }
 
 const {
-  timestamp,                // Finalization timestamp
-  messageNumber,            // L1->L2 message number
-  forcedTransactionNumber   // Last finalized forced tx number
+  timestamp, // Finalization timestamp
+  messageNumber, // L1->L2 message number
+  forcedTransactionNumber, // Last finalized forced tx number
 } = parsed.args;
 
 // 4. Query rolling hashes from contract state
-const [messageRollingHash, forcedTransactionRollingHash] = await Promise.all([
-  lineaRollup.rollingHashes(messageNumber),
-  lineaRollup.forcedTransactionRollingHashes(forcedTransactionNumber)
-]);
+const [messageRollingHash, forcedTransactionRollingHash] = await Promise.all([lineaRollup.rollingHashes(messageNumber), lineaRollup.forcedTransactionRollingHashes(forcedTransactionNumber)]);
 
 // 5. Construct the LastFinalizedState object
 const lastFinalizedState = {
@@ -91,21 +79,12 @@ const lastFinalizedState = {
   messageNumber,
   messageRollingHash,
   forcedTransactionNumber,
-  forcedTransactionRollingHash
+  forcedTransactionRollingHash,
 };
 
 // 6. OPTIONAL: Verify it matches the contract's stored hash
 const expectedHash = keccak256(
-  abiCoder.encode(
-    ["uint256", "bytes32", "uint256", "bytes32", "uint256"],
-    [
-      messageNumber,
-      messageRollingHash,
-      forcedTransactionNumber,
-      forcedTransactionRollingHash,
-      timestamp
-    ]
-  )
+  abiCoder.encode(["uint256", "bytes32", "uint256", "bytes32", "uint256"], [messageNumber, messageRollingHash, forcedTransactionNumber, forcedTransactionRollingHash, timestamp]),
 );
 
 const storedHash = await lineaRollup.currentFinalizedState();
@@ -139,7 +118,6 @@ struct LastFinalizedState {
 
 A signed EIP-1559 transaction destined for the L2 in field form:
 
-
 ```solidity
 struct Eip1559Transaction {
     uint256 nonce;
@@ -172,7 +150,7 @@ The transaction fee is fixed, you may query the `forcedTransactionFeeInWei` on t
 const forcedTransactionFeeInWei = await lineaRollup.forcedTransactionFeeInWei();
 
 await forcedTransactionGateway.submitForcedTransaction(forcedTransactionStruct, lastFinalizedStateStruct, {
-  value: forcedTransactionFeeInWei
+  value: forcedTransactionFeeInWei,
 });
 ```
 

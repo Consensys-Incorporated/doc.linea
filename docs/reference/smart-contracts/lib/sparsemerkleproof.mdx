@@ -98,17 +98,17 @@ Formats input, computes root and returns true if it matches the provided merkle 
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _rawProof | bytes[] | Raw sparse merkle tree proof |
-| _leafIndex | uint256 | Index of the leaf |
-| _root | bytes32 | Sparse merkle root |
+| Name        | Type    | Description                  |
+| ----------- | ------- | ---------------------------- |
+| \_rawProof  | bytes[] | Raw sparse merkle tree proof |
+| \_leafIndex | uint256 | Index of the leaf            |
+| \_root      | bytes32 | Sparse merkle root           |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | bool | If the computed merkle root matches the provided one |
+| Name | Type | Description                                          |
+| ---- | ---- | ---------------------------------------------------- |
+| [0]  | bool | If the computed merkle root matches the provided one |
 
 ### mimcHash
 
@@ -120,15 +120,15 @@ Hash a value using MIMC hash
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _input | bytes | Value to hash |
+| Name    | Type  | Description   |
+| ------- | ----- | ------------- |
+| \_input | bytes | Value to hash |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | bytes32 | bytes32 Mimc hash |
+| Name | Type    | Description       |
+| ---- | ------- | ----------------- |
+| [0]  | bytes32 | bytes32 Mimc hash |
 
 ### getLeaf
 
@@ -140,15 +140,15 @@ Get leaf
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _encodedLeaf | bytes | Encoded leaf bytes (prev, next, hKey, hValue) |
+| Name          | Type  | Description                                   |
+| ------------- | ----- | --------------------------------------------- |
+| \_encodedLeaf | bytes | Encoded leaf bytes (prev, next, hKey, hValue) |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | struct SparseMerkleProof.Leaf | Leaf Formatted leaf struct |
+| Name | Type                          | Description                |
+| ---- | ----------------------------- | -------------------------- |
+| [0]  | struct SparseMerkleProof.Leaf | Leaf Formatted leaf struct |
 
 ### getAccount
 
@@ -160,15 +160,15 @@ Get account
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _encodedAccountValue | bytes | Encoded account value bytes (nonce, balance, storageRoot, mimcCodeHash, keccakCodeHash, codeSize) |
+| Name                  | Type  | Description                                                                                       |
+| --------------------- | ----- | ------------------------------------------------------------------------------------------------- |
+| \_encodedAccountValue | bytes | Encoded account value bytes (nonce, balance, storageRoot, mimcCodeHash, keccakCodeHash, codeSize) |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | struct SparseMerkleProof.Account | Account Formatted account struct |
+| Name | Type                             | Description                      |
+| ---- | -------------------------------- | -------------------------------- |
+| [0]  | struct SparseMerkleProof.Account | Account Formatted account struct |
 
 ### hashAccountValue
 
@@ -180,15 +180,15 @@ Hash account value
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _value | bytes | Encoded account value bytes (nonce, balance, storageRoot, mimcCodeHash, keccakCodeHash, codeSize) |
+| Name    | Type  | Description                                                                                       |
+| ------- | ----- | ------------------------------------------------------------------------------------------------- |
+| \_value | bytes | Encoded account value bytes (nonce, balance, storageRoot, mimcCodeHash, keccakCodeHash, codeSize) |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | bytes32 | bytes32 Account value hash |
+| Name | Type    | Description                |
+| ---- | ------- | -------------------------- |
+| [0]  | bytes32 | bytes32 Account value hash |
 
 ### hashStorageValue
 
@@ -200,13 +200,12 @@ Hash storage value
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _value | bytes32 | Encoded storage value bytes |
+| Name    | Type    | Description                 |
+| ------- | ------- | --------------------------- |
+| \_value | bytes32 | Encoded storage value bytes |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | bytes32 | bytes32 Storage value hash |
-
+| Name | Type    | Description                |
+| ---- | ------- | -------------------------- |
+| [0]  | bytes32 | bytes32 Storage value hash |

@@ -10,11 +10,11 @@ Emitted when L2 minimum fee is changed.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| previousMinimumFee | uint256 | The previous minimum fee in Wei. |
-| newMinimumFee | uint256 | The new minimum fee in Wei. |
-| calledBy | address | The indexed address who changed the minimum fee. |
+| Name               | Type    | Description                                      |
+| ------------------ | ------- | ------------------------------------------------ |
+| previousMinimumFee | uint256 | The previous minimum fee in Wei.                 |
+| newMinimumFee      | uint256 | The new minimum fee in Wei.                      |
+| calledBy           | address | The indexed address who changed the minimum fee. |
 
 ### L1L2MessageHashesAddedToInbox
 
@@ -26,8 +26,8 @@ Emitted when L1->L2 message hashes have been added to L2 storage.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name          | Type      | Description                                            |
+| ------------- | --------- | ------------------------------------------------------ |
 | messageHashes | bytes32[] | The message hashes that were added to L2 for claiming. |
 
 ### MessageHashesListLengthHigherThanOneHundred
@@ -45,4 +45,3 @@ error MessageDoesNotExistOrHasAlreadyBeenClaimed(bytes32 messageHash)
 ```
 
 _Thrown when the message does not exist or has already been claimed._
-

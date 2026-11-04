@@ -82,7 +82,7 @@ address DEPLOYED_STATUS
 
 DEPLOYED means the bridged token contract has been deployed on the remote chain.
 
-### _PERMIT_SELECTOR
+### \_PERMIT_SELECTOR
 
 ```solidity
 bytes4 _PERMIT_SELECTOR
@@ -148,9 +148,9 @@ _Ensures the address is not address(0)._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _addr | address | Address to check. |
+| Name   | Type    | Description       |
+| ------ | ------- | ----------------- |
+| \_addr | address | Address to check. |
 
 ### nonZeroAmount
 
@@ -162,9 +162,9 @@ _Ensures the amount is not 0._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _amount | uint256 | amount to check. |
+| Name     | Type    | Description      |
+| -------- | ------- | ---------------- |
+| \_amount | uint256 | amount to check. |
 
 ### constructor
 
@@ -186,9 +186,9 @@ _Contract will be used as proxy implementation._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _initializationData | struct ITokenBridge.InitializationData | The initial data used for initializing the TokenBridge contract. |
+| Name                 | Type                                   | Description                                                      |
+| -------------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| \_initializationData | struct ITokenBridge.InitializationData | The initial data used for initializing the TokenBridge contract. |
 
 ### reinitializePauseTypesAndPermissions
 
@@ -202,12 +202,12 @@ _This function is a reinitializer and can only be called once per version. Shoul
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _defaultAdmin | address | The default admin account's address. |
-| _roleAddresses | struct IPermissionsManager.RoleAddress[] | The list of addresses and roles to assign permissions to. |
-| _pauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of pause types to associate with roles. |
-| _unpauseTypeRoles | struct IPauseManager.PauseTypeRole[] | The list of unpause types to associate with roles. |
+| Name               | Type                                     | Description                                               |
+| ------------------ | ---------------------------------------- | --------------------------------------------------------- |
+| \_defaultAdmin     | address                                  | The default admin account's address.                      |
+| \_roleAddresses    | struct IPermissionsManager.RoleAddress[] | The list of addresses and roles to assign permissions to. |
+| \_pauseTypeRoles   | struct IPauseManager.PauseTypeRole[]     | The list of pause types to associate with roles.          |
+| \_unpauseTypeRoles | struct IPauseManager.PauseTypeRole[]     | The list of unpause types to associate with roles.        |
 
 ### bridgeToken
 
@@ -216,30 +216,30 @@ function bridgeToken(address _token, uint256 _amount, address _recipient) public
 ```
 
 This function is the single entry point to bridge tokens to the
-  other chain, both for native and already bridged tokens. You can use it
-  to bridge any ERC-20. If the token is bridged for the first time an ERC-20
-  (BridgedToken.sol) will be automatically deployed on the target chain.
+other chain, both for native and already bridged tokens. You can use it
+to bridge any ERC-20. If the token is bridged for the first time an ERC-20
+(BridgedToken.sol) will be automatically deployed on the target chain.
 
 _User should first allow the bridge to transfer tokens on his behalf.
-  Alternatively, you can use BridgeTokenWithPermit to do so in a single
-  transaction. If you want the transfer to be automatically executed on the
-  destination chain. You should send enough ETH to pay the postman fees.
-  Note that Linea can reserve some tokens (which use a dedicated bridge).
-  In this case, the token cannot be bridged. Linea can only reserve tokens
-  that have not been bridged yet.
-  Linea can pause the bridge for security reason. In this case new bridge
-  transaction would revert.
+Alternatively, you can use BridgeTokenWithPermit to do so in a single
+transaction. If you want the transfer to be automatically executed on the
+destination chain. You should send enough ETH to pay the postman fees.
+Note that Linea can reserve some tokens (which use a dedicated bridge).
+In this case, the token cannot be bridged. Linea can only reserve tokens
+that have not been bridged yet.
+Linea can pause the bridge for security reason. In this case new bridge
+transaction would revert.
 Note: If, when bridging an unbridged token and decimals are unknown,
 the call will revert to prevent mismatched decimals. Only those ERC-20s,
 with a decimals function are supported._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be bridged. |
-| _amount | uint256 | The amount of the token to be bridged. |
-| _recipient | address | The address that will receive the tokens on the other chain. |
+| Name        | Type    | Description                                                  |
+| ----------- | ------- | ------------------------------------------------------------ |
+| \_token     | address | The address of the token to be bridged.                      |
+| \_amount    | uint256 | The amount of the token to be bridged.                       |
+| \_recipient | address | The address that will receive the tokens on the other chain. |
 
 ### bridgeTokenWithPermit
 
@@ -248,21 +248,21 @@ function bridgeTokenWithPermit(address _token, uint256 _amount, address _recipie
 ```
 
 Similar to `bridgeToken` function but allows to pass additional
-  permit data to do the ERC-20 approval in a single transaction.
-_permit can fail silently, don't rely on this function passing as a form
-  of authentication
+permit data to do the ERC-20 approval in a single transaction.
+\_permit can fail silently, don't rely on this function passing as a form
+of authentication
 
 _There is no need for validation at this level as the validation on pausing,
 and empty values exists on the "bridgeToken" call._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be bridged. |
-| _amount | uint256 | The amount of the token to be bridged. |
-| _recipient | address | The address that will receive the tokens on the other chain. |
-| _permitData | bytes | The permit data for the token, if applicable. |
+| Name         | Type    | Description                                                  |
+| ------------ | ------- | ------------------------------------------------------------ |
+| \_token      | address | The address of the token to be bridged.                      |
+| \_amount     | uint256 | The amount of the token to be bridged.                       |
+| \_recipient  | address | The address that will receive the tokens on the other chain. |
+| \_permitData | bytes   | The permit data for the token, if applicable.                |
 
 ### completeBridging
 
@@ -271,18 +271,18 @@ function completeBridging(address _nativeToken, uint256 _amount, address _recipi
 ```
 
 _It can only be called from the Message Service. To finalize the bridging
-  process, a user or postman needs to use the `claimMessage` function of the
-  Message Service to trigger the transaction._
+process, a user or postman needs to use the `claimMessage` function of the
+Message Service to trigger the transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeToken | address | The address of the token on its native chain. |
-| _amount | uint256 | The amount of the token to be received. |
-| _recipient | address | The address that will receive the tokens. |
-| _chainId | uint256 | The token's origin layer chaindId |
-| _tokenMetadata | bytes | Additional data used to deploy the bridged token if it   doesn't exist already. |
+| Name            | Type    | Description                                                                   |
+| --------------- | ------- | ----------------------------------------------------------------------------- |
+| \_nativeToken   | address | The address of the token on its native chain.                                 |
+| \_amount        | uint256 | The amount of the token to be received.                                       |
+| \_recipient     | address | The address that will receive the tokens.                                     |
+| \_chainId       | uint256 | The token's origin layer chaindId                                             |
+| \_tokenMetadata | bytes   | Additional data used to deploy the bridged token if it doesn't exist already. |
 
 ### setMessageService
 
@@ -295,9 +295,9 @@ SET_MESSAGE_SERVICE_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageService | address | The address of the new Message Service. |
+| Name             | Type    | Description                             |
+| ---------------- | ------- | --------------------------------------- |
+| \_messageService | address | The address of the new Message Service. |
 
 ### confirmDeployment
 
@@ -306,13 +306,13 @@ function confirmDeployment(address[] _tokens) external payable
 ```
 
 _Change the status to DEPLOYED to the tokens passed in parameter
-   Will call the method setDeployed on the other chain using the message Service_
+Will call the method setDeployed on the other chain using the message Service_
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _tokens | address[] | Array of bridged tokens that have been deployed. |
+| Name     | Type      | Description                                      |
+| -------- | --------- | ------------------------------------------------ |
+| \_tokens | address[] | Array of bridged tokens that have been deployed. |
 
 ### setDeployed
 
@@ -321,15 +321,15 @@ function setDeployed(address[] _nativeTokens) external
 ```
 
 _Change the status of tokens to DEPLOYED. New bridge transaction will not
-  contain token metadata, which save gas.
-  Can only be called from the Message Service. A user or postman needs to use
-  the `claimMessage` function of the Message Service to trigger the transaction._
+contain token metadata, which save gas.
+Can only be called from the Message Service. A user or postman needs to use
+the `claimMessage` function of the Message Service to trigger the transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeTokens | address[] | Array of native tokens for which the DEPLOYED status must be set. |
+| Name           | Type      | Description                                                       |
+| -------------- | --------- | ----------------------------------------------------------------- |
+| \_nativeTokens | address[] | Array of native tokens for which the DEPLOYED status must be set. |
 
 ### setRemoteTokenBridge
 
@@ -342,9 +342,9 @@ SET_REMOTE_TOKENBRIDGE_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _remoteTokenBridge | address | The address of the remote token bridge to be set. |
+| Name                | Type    | Description                                       |
+| ------------------- | ------- | ------------------------------------------------- |
+| \_remoteTokenBridge | address | The address of the remote token bridge to be set. |
 
 ### deployBridgedToken
 
@@ -353,23 +353,23 @@ function deployBridgedToken(address _nativeToken, bytes _tokenMetadata, uint256 
 ```
 
 _Deploy a new EC20 contract for bridged token using a beacon proxy pattern.
-  To adapt to future requirements, Linea can update the implementation of
-  all (existing and future) contracts by updating the beacon. This update is
-  subject to a delay by a time lock.
-  Contracts are deployed using CREATE2 so deployment address is deterministic._
+To adapt to future requirements, Linea can update the implementation of
+all (existing and future) contracts by updating the beacon. This update is
+subject to a delay by a time lock.
+Contracts are deployed using CREATE2 so deployment address is deterministic._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeToken | address | The address of the native token on the source chain. |
-| _tokenMetadata | bytes | The encoded metadata for the token. |
-| _chainId | uint256 | The chain id on which the token will be deployed, used to calculate the salt |
+| Name            | Type    | Description                                                                  |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| \_nativeToken   | address | The address of the native token on the source chain.                         |
+| \_tokenMetadata | bytes   | The encoded metadata for the token.                                          |
+| \_chainId       | uint256 | The chain id on which the token will be deployed, used to calculate the salt |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name                | Type    | Description                                              |
+| ------------------- | ------- | -------------------------------------------------------- |
 | bridgedTokenAddress | address | The address of the newly deployed BridgedToken contract. |
 
 ### setReserved
@@ -378,18 +378,18 @@ _Deploy a new EC20 contract for bridged token using a beacon proxy pattern.
 function setReserved(address _token) external
 ```
 
-Make sure that _token is native to the current chain
-  where you are calling this function from
+Make sure that \_token is native to the current chain
+where you are calling this function from
 
 _Linea can reserve tokens. In this case, the token cannot be bridged.
-  Linea can only reserve tokens that have not been bridged before.
+Linea can only reserve tokens that have not been bridged before.
 SET_RESERVED_TOKEN_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be set as reserved. |
+| Name    | Type    | Description                                     |
+| ------- | ------- | ----------------------------------------------- |
+| \_token | address | The address of the token to be set as reserved. |
 
 ### removeReserved
 
@@ -402,9 +402,9 @@ REMOVE_RESERVED_TOKEN_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the token to be removed from the reserved list. |
+| Name    | Type    | Description                                                    |
+| ------- | ------- | -------------------------------------------------------------- |
+| \_token | address | The address of the token to be removed from the reserved list. |
 
 ### setCustomContract
 
@@ -413,18 +413,18 @@ function setCustomContract(address _nativeToken, address _targetContract) extern
 ```
 
 _Linea can set a custom ERC-20 contract for specific ERC-20.
-  For security purpose, Linea can only call this function if the token has
-  not been bridged yet.
+For security purpose, Linea can only call this function if the token has
+not been bridged yet.
 SET_CUSTOM_CONTRACT_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _nativeToken | address | The address of the token on the source chain. |
-| _targetContract | address | The address of the custom contract. |
+| Name             | Type    | Description                                   |
+| ---------------- | ------- | --------------------------------------------- |
+| \_nativeToken    | address | The address of the token on the source chain. |
+| \_targetContract | address | The address of the custom contract.           |
 
-### _safeName
+### \_safeName
 
 ```solidity
 function _safeName(address _token) internal view returns (string tokenName)
@@ -434,17 +434,17 @@ _Provides a safe ERC-20.name version which returns 'NO_NAME' as fallback string.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the ERC-20 token contract |
+| Name    | Type    | Description                              |
+| ------- | ------- | ---------------------------------------- |
+| \_token | address | The address of the ERC-20 token contract |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type   | Description                           |
+| --------- | ------ | ------------------------------------- |
 | tokenName | string | Returns the string of the token name. |
 
-### _safeSymbol
+### \_safeSymbol
 
 ```solidity
 function _safeSymbol(address _token) internal view returns (string symbol)
@@ -454,38 +454,38 @@ _Provides a safe ERC-20.symbol version which returns 'NO_SYMBOL' as fallback str
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the ERC-20 token contract |
+| Name    | Type    | Description                              |
+| ------- | ------- | ---------------------------------------- |
+| \_token | address | The address of the ERC-20 token contract |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name   | Type   | Description                       |
+| ------ | ------ | --------------------------------- |
 | symbol | string | Returns the string of the symbol. |
 
-### _safeDecimals
+### \_safeDecimals
 
 ```solidity
 function _safeDecimals(address _token) internal view returns (uint8)
 ```
 
 Provides a safe ERC-20.decimals version which reverts when decimals are unknown
-  Note Tokens with (decimals > 255) are not supported
+Note Tokens with (decimals > 255) are not supported
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | The address of the ERC-20 token contract |
+| Name    | Type    | Description                              |
+| ------- | ------- | ---------------------------------------- |
+| \_token | address | The address of the ERC-20 token contract |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint8 | Returns the token's decimals value. |
+| Name | Type  | Description                         |
+| ---- | ----- | ----------------------------------- |
+| [0]  | uint8 | Returns the token's decimals value. |
 
-### _returnDataToString
+### \_returnDataToString
 
 ```solidity
 function _returnDataToString(bytes _data) internal pure returns (string decodedString)
@@ -495,17 +495,17 @@ _Converts returned data to string. Returns 'NOT_VALID_ENCODING' as fallback valu
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _data | bytes | returned data. |
+| Name   | Type  | Description    |
+| ------ | ----- | -------------- |
+| \_data | bytes | returned data. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name          | Type   | Description              |
+| ------------- | ------ | ------------------------ |
 | decodedString | string | The decoded string data. |
 
-### _permit
+### \_permit
 
 ```solidity
 function _permit(address _token, bytes _permitData) internal
@@ -516,8 +516,7 @@ Only support tokens implementing ERC-2612
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _token | address | ERC-20 token address |
-| _permitData | bytes | Raw data of the call `permit` of the token |
-
+| Name         | Type    | Description                                |
+| ------------ | ------- | ------------------------------------------ |
+| \_token      | address | ERC-20 token address                       |
+| \_permitData | bytes   | Raw data of the call `permit` of the token |

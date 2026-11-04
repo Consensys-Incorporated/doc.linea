@@ -4,15 +4,16 @@ description: Overview of Lineth for operators deploying a public or private netw
 image: /img/socialCards/lineth-stack.jpg
 ---
 
-import ActionCards from '@site/src/components/ActionCards';
-import GlossaryTerm from '@theme/GlossaryTerm';
-import TrilemmaGraphic from '/img/stack/institutional-trilemma.svg';
-import TrilemmaGraphicMobile from '/img/stack/institutional-trilemma-mobile.svg';
+import ActionCards from "@site/src/components/ActionCards";
+import GlossaryTerm from "@theme/GlossaryTerm";
+import TrilemmaGraphic from "/img/stack/institutional-trilemma.svg";
+import TrilemmaGraphicMobile from "/img/stack/institutional-trilemma-mobile.svg";
 
 Lineth (formerly the Linea Stack) is the collection of protocol components, onchain contracts, and operational
 capabilities that you can use to deploy your own Layer 2 or Layer 3 network, inheriting a
-<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> system and Ethereum-compatible execution.
-[Lineth is distinct from Linea](../protocol/linea-vs-lineth.mdx), the public network built on Lineth.
+
+<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> system and Ethereum-compatible execution. [Lineth is distinct from Linea](../protocol/linea-vs-lineth.mdx), the public network built
+on Lineth.
 
 Use this documentation to evaluate and design a custom Lineth deployment.
 Get started:
@@ -21,14 +22,12 @@ Get started:
   cards={[
     {
       text: "Evaluate Lineth",
-      description:
-        "Assess deployment models, trust assumptions, privacy, security, and compliance. This section helps determine whether Lineth is a suitable foundation for your use case.",
+      description: "Assess deployment models, trust assumptions, privacy, security, and compliance. This section helps determine whether Lineth is a suitable foundation for your use case.",
       href: "/stack/evaluate",
     },
     {
       text: "Design a deployment architecture",
-      description:
-        "Explore the components and design choices in a Lineth deployment, including data availability, finality, and access control. This section provides a reference architecture.",
+      description: "Explore the components and design choices in a Lineth deployment, including data availability, finality, and access control. This section provides a reference architecture.",
       href: "/stack/deployment",
     },
     {
@@ -54,9 +53,9 @@ For the public network overview, see [Linea Mainnet](../network/index.mdx).
 ## Why Lineth?
 
 Organizations that need capabilities beyond those of a public
+
 <GlossaryTerm term="Layer 1 (L1)">L1</GlossaryTerm> or
-<GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> face "the institutional blockchain trilemma," a
-three-way trade-off between the following:
+<GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> face "the institutional blockchain trilemma," a three-way trade-off between the following:
 
 - **Privacy and control:** Permissionless networks do not provide the configurable access, compliance,
   governance, and data visibility controls many institutions require.
@@ -86,9 +85,8 @@ maintaining a separate consensus layer.
 ## Key features
 
 A custom Lineth network has the same protocol foundations as [Linea Mainnet](../network/index.mdx).
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> configure access, data availability, and
-finalization to match their requirements.
-At a high level, Lineth provides:
+
+<GlossaryTerm term="Operator">Operators</GlossaryTerm> configure access, data availability, and finalization to match their requirements. At a high level, Lineth provides:
 
 - **Ethereum-compatible execution:** Run an Ethereum-equivalent network so existing Solidity contracts
   and Ethereum tooling work.

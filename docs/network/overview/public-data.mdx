@@ -4,7 +4,7 @@ description: How Linea Mainnet and Linea Sepolia presents data to the public.
 image: /img/socialCards/public-data.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 ## What is public network data?
 
@@ -23,6 +23,7 @@ By leveraging the expertise and resources of Infura, Consensys, and the Ethereum
 ## Client-facing RPC-API nodes
 
 [RPC nodes](../../protocol/architecture/nodes/rpc-services.mdx) do the "traditional" work of EVM nodes:
+
 - They receive updated network state information from the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm>
   and <GlossaryTerm term="State manager">state manager</GlossaryTerm>, and provide information about that state
   to users and dapps when they request it.
@@ -30,6 +31,7 @@ By leveraging the expertise and resources of Infura, Consensys, and the Ethereum
 
 To handle the traffic, Infura runs the nodes behind a load balancer. Those transactions submitted by users are, therefore,
 balanced across the nodes, and are thereby routed into the memory pool, for subsequent ingestion and processing by the
+
 <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm>.
 
 ### Archive nodes

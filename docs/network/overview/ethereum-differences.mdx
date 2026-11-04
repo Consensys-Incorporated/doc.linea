@@ -4,16 +4,16 @@ description: Learn about the key differences between Ethereum and Linea.
 image: /img/socialCards/ethereum-differences.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 # The differences between Ethereum and Linea
 
-This page outlines Ethereum Mainnet functionality that differs on Linea, or is not yet available on 
-Linea. Absence from this page indicates that the functionality is available on Linea and identical to 
+This page outlines Ethereum Mainnet functionality that differs on Linea, or is not yet available on
+Linea. Absence from this page indicates that the functionality is available on Linea and identical to
 behavior on Ethereum Mainnet; if you're experiencing otherwise, please contact us via the
 [support page](/support).
 
-:::note 
+:::note
 
 With Linea [Beta v4.4](../../changelog/release-notes.mdx#beta-v44), Linea upgraded to the Fusaka hard fork.
 
@@ -35,35 +35,30 @@ With Linea [Beta v4.4](../../changelog/release-notes.mdx#beta-v44), Linea upgrad
   <tr>
     <td>`BLOBHASH`</td>
     <td>
-      Given an an input in the form of an `index`, indicating the position of a
-      particular blob within an array of blobs associated with a transaction,
-      returns the hash of the corresponding blob.
+      Given an an input in the form of an `index`, indicating the position of a particular blob within an array of blobs associated with a transaction, returns the hash of the corresponding blob.
       <br /> <br /> If the index is out of bounds, returns `0`.
     </td>
     <td>Will always return `0`.</td>
   </tr>
   <tr>
     <td>`BLOCKHASH`</td>
+    <td>Returns the hash of a requested block from the 256 most recent blocks.</td>
     <td>
-      Returns the hash of a requested block from the 256 most recent blocks.
+      Returns the correct value, but the value is not guaranteed by the proof (Linea is a [type 2 zkEVM](https://vitalik.eth.limo/general/2022/08/04/zkevm.html), and uses/proves an L2-specific state
+      representation).
     </td>
-    <td>Returns the correct value, but the value is not guaranteed by the proof
-      (Linea is a [type 2 zkEVM](https://vitalik.eth.limo/general/2022/08/04/zkevm.html), and
-      uses/proves an L2-specific state representation).</td>
   </tr>
   <tr>
     <td>`PREVRANDAO`</td>
     <td>Returns the RANDAO value from the previous block.</td>
-    <td>
-      Use a formula similar to Ethereum, e.g. `L2_prevrandao XOR hash(signed(slot_id))`.
-    </td>
+    <td>Use a formula similar to Ethereum, e.g. `L2_prevrandao XOR hash(signed(slot_id))`.</td>
   </tr>
 </table>
 
-_Consult the Ethereum Foundation's [Opcode Reference](https://ethereum.org/en/developers/docs/evm/opcodes/) 
+_Consult the Ethereum Foundation's [Opcode Reference](https://ethereum.org/en/developers/docs/evm/opcodes/)
 for more._
 
-[Evmdiff](https://evmdiff.com) is also a useful resource for comparing Linea with Ethereum, and 
+[Evmdiff](https://evmdiff.com) is also a useful resource for comparing Linea with Ethereum, and
 [evm.codes](https://evm.codes/) is useful for information about specific opcodes on Ethereum.
 
 ## Precompiles
@@ -77,8 +72,7 @@ for more._
   <tr>
     <td>`MODEXP`</td>
     <td>Arbitrary-precision exponentiation under modulo.</td>
-    <td>Only supports arguments (base, exponent, modulus) that do not exceed
-      1024-byte integers.</td>
+    <td>Only supports arguments (base, exponent, modulus) that do not exceed 1024-byte integers.</td>
   </tr>
   <tr>
     <td>Precompiles as transaction recipients</td>
@@ -89,8 +83,8 @@ for more._
 
 ## Beacon root
 
-[EIP-4788](https://eips.ethereum.org/EIPS/eip-4788), included in Ethereum's Dencun upgrade, 
-introduced a smart contract that enables the caller to `get` or `set` the hash tree root of a 
+[EIP-4788](https://eips.ethereum.org/EIPS/eip-4788), included in Ethereum's Dencun upgrade,
+introduced a smart contract that enables the caller to `get` or `set` the hash tree root of a
 beacon chain block.
 
 This functionality is available on Linea. However, due to the difference in block time
@@ -104,8 +98,8 @@ The current limit is 60000 bytes.
 
 ## JSON-RPC API
 
-Linea uses the standard Ethereum JSON RPC API methods. However, in a few cases, methods differ from 
-those on Ethereum. These methods are documented in the [reference section](../../reference/apis/linea-api/index.mdx), 
+Linea uses the standard Ethereum JSON RPC API methods. However, in a few cases, methods differ from
+those on Ethereum. These methods are documented in the [reference section](../../reference/apis/linea-api/index.mdx),
 and include:
 
 - `linea_estimateGas`
@@ -115,7 +109,7 @@ and include:
 
 ## Type 3 transactions
 
-Linea does not support type 3 (`0x3` or "blob") transactions. This type is used on Ethereum Mainnet 
+Linea does not support type 3 (`0x3` or "blob") transactions. This type is used on Ethereum Mainnet
 primarily for L2 rollups to cheaply post data on L1.
 
 ## EIP-7702 (type 4 transactions)

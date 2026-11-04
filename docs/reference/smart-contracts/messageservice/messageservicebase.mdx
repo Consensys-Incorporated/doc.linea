@@ -26,10 +26,10 @@ _Event emitted when the remote sender is set._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| remoteSender | address | The address of the new remote sender. |
-| setter | address | The address of the account that set the remote sender. |
+| Name         | Type    | Description                                            |
+| ------------ | ------- | ------------------------------------------------------ |
+| remoteSender | address | The address of the new remote sender.                  |
+| setter       | address | The address of the account that set the remote sender. |
 
 ### CallerIsNotMessageService
 
@@ -53,11 +53,11 @@ _Thrown when remote sender address is not authorized._
 modifier onlyMessagingService()
 ```
 
-_Modifier to make sure the caller is the known message service.
+\_Modifier to make sure the caller is the known message service.
 
 Requirements:
 
-- The msg.sender must be the message service._
+- The msg.sender must be the message service.\_
 
 ### onlyAuthorizedRemoteSender
 
@@ -65,13 +65,13 @@ Requirements:
 modifier onlyAuthorizedRemoteSender()
 ```
 
-_Modifier to make sure the original sender is allowed.
+\_Modifier to make sure the original sender is allowed.
 
 Requirements:
 
-- The original message sender via the message service must be a known sender._
+- The original message sender via the message service must be a known sender.\_
 
-### __MessageServiceBase_init
+### \_\_MessageServiceBase_init
 
 ```solidity
 function __MessageServiceBase_init(address _messageService) internal
@@ -83,11 +83,11 @@ _Must be initialized in the initialize function of the main contract or construc
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageService | address | The message service address, cannot be empty. |
+| Name             | Type    | Description                                   |
+| ---------------- | ------- | --------------------------------------------- |
+| \_messageService | address | The message service address, cannot be empty. |
 
-### _setRemoteSender
+### \_setRemoteSender
 
 ```solidity
 function _setRemoteSender(address _remoteSender) internal
@@ -99,7 +99,6 @@ _This function sets the remote sender address and emits the RemoteSenderSet even
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _remoteSender | address | The authorized remote sender address, cannot be empty. |
-
+| Name           | Type    | Description                                            |
+| -------------- | ------- | ------------------------------------------------------ |
+| \_remoteSender | address | The authorized remote sender address, cannot be empty. |

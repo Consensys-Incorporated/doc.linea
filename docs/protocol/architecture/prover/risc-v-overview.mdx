@@ -4,14 +4,11 @@ description: How RISC-V can support guest-program-based proving in Lineth.
 image: /img/socialCards/risc-v-proving-architecture.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
-<GlossaryTerm term="Lineth" /> is evolving toward a RISC-V-based proving architecture.
-In this proving context, RISC-V is the execution target for _guest programs:_ programs that define the
-computation the protocol needs to prove.
-Instead of representing every proving task only through custom constraints and circuits, a guest program
-can be compiled to RISC-V, executed in the Lineth proving system, and composed into the broader
-proof-generation flow.
+<GlossaryTerm term="Lineth" /> is evolving toward a RISC-V-based proving architecture. In this proving context, RISC-V is the execution target for _guest programs:_ programs that define the
+computation the protocol needs to prove. Instead of representing every proving task only through custom constraints and circuits, a guest program can be compiled to RISC-V, executed in the Lineth
+proving system, and composed into the broader proof-generation flow.
 
 :::warning Status
 RISC-V proving is in development and is not yet part of the proving path in any Lineth deployment.
@@ -40,6 +37,7 @@ constraints or circuits for each EVM change.
 The [prover](./index.mdx) generates the proofs that support protocol correctness guarantees.
 The current proof-generation path produces execution, compression, and aggregation proofs.
 [Corset](./corset.mdx) expands the traces for each proof, and [gnark](./gnark.mdx) turns the result into a
+
 <GlossaryTerm term="zk-SNARK" />.
 
 The RISC-V architecture is an evolution within the prover role.
@@ -57,7 +55,7 @@ At a high level, the planned RISC-V proving architecture follows this flow:
 3. The Lineth proving system executes the RISC-V program and produces a proof for that computation.
 4. Proofs can be composed into the broader proof-generation flow.
 5. The coordinator submits the resulting proof data to the <GlossaryTerm term="Finalization layer">
-    finalization layer</GlossaryTerm> according to the network's deployment model.
+   finalization layer</GlossaryTerm> according to the network's deployment model.
 
 At the protocol level, Lineth still proves that state transitions are valid and finalizes those proofs
 through the configured finalization layer.

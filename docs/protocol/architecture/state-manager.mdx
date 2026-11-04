@@ -4,8 +4,8 @@ description: How the Lineth state manager tracks network state and supplies the 
 image: /img/socialCards/evm-state-manager.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
-import StateManagerAccumulator from '/img/protocol/architecture/state-manager-accumulator.svg';
+import GlossaryTerm from "@theme/GlossaryTerm";
+import StateManagerAccumulator from "/img/protocol/architecture/state-manager-accumulator.svg";
 
 The state manager tracks the network's state in a sparse Merkle tree, which the prover uses to prove
 each block's state transition.
@@ -16,8 +16,8 @@ and a [Shomei node](https://github.com/Consensys-Incorporated/shomei) that impor
 :::note
 
 "State" refers to the data stored on the blockchain at any given point in time. To
-update state is to update the record of the contents of every account whose contents have 
-changed. 
+update state is to update the record of the contents of every account whose contents have
+changed.
 
 :::
 
@@ -29,32 +29,26 @@ applies them to its own tree, tracking the state of user accounts, smart contrac
 block by block, and deriving a new state root for each block.
 
 The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> requests the Merkle proof
-for a batch of blocks and includes it in the execution proof request it sends to the
-<GlossaryTerm term="Prover">prover</GlossaryTerm>.
-The prover returns an execution proof, a <GlossaryTerm term="zk-SNARK" /> of the state transition
-that batch produced.
-The state manager also serves
-[`linea_getProof`](../../reference/apis/linea-api/linea-getproof) to callers that need
-a Merkle proof of an account or a storage slot for a block already finalized on the
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
+for a batch of blocks and includes it in the execution proof request it sends to the <GlossaryTerm term="Prover">prover</GlossaryTerm>. The prover returns an execution proof, a <GlossaryTerm term="zk-SNARK" /> of the state transition that batch produced. The state manager also serves
+[`linea_getProof`](../../reference/apis/linea-api/linea-getproof) to callers that need a Merkle proof of an account or a storage slot for a block already finalized on the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 Two data structures are involved:
 
-1. <GlossaryTerm term="Linea Besu"/> records the world state in a [Merkle-Patricia Trie](https://ethereum.org/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) and uses that trie to process blocks.
-This mirrors how Ethereum records world state.
+1. <GlossaryTerm term="Linea Besu" /> records the world state in a [Merkle-Patricia Trie](https://ethereum.org/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) and uses that trie to
+   process blocks. This mirrors how Ethereum records world state.
 2. The state manager tracks the same state in a variant of a regular
-[Merkle tree](#merkle-trees) called a sparse Merkle tree (SMT), which is more efficient to update
-and prove.
+   [Merkle tree](#merkle-trees) called a sparse Merkle tree (SMT), which is more efficient to update
+   and prove.
 
 The rest of this page explains Lineth's SMT implementation in more detail.
 
 ## Merkle trees
 
-The Merkle tree and its variations are commonly used across <GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> chains to store and retrieve 
+The Merkle tree and its variations are commonly used across <GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> chains to store and retrieve
 state data.
 
 A Merkle tree is comprised of "nodes" that branch off from each other. The root,
-or state root, is the hash from which the branches stem, and the leaves stem from the branches. 
+or state root, is the hash from which the branches stem, and the leaves stem from the branches.
 
 <div class="img-large">
   <div class="mermaid-medium">
@@ -69,16 +63,16 @@ or state root, is the hash from which the branches stem, and the leaves stem fro
 
 An internal node is the hash of its children.
 A leaf is the hash of the data stored there, such as an account.
-The root is therefore a commitment to the state of every account in the tree. 
+The root is therefore a commitment to the state of every account in the tree.
 
-Cryptographic hashes are deterministic and one-way: the same data always produces the same hash, 
+Cryptographic hashes are deterministic and one-way: the same data always produces the same hash,
 but you can't recover the data from the hash. Anyone holding the root can check whether a piece of data
 belongs in the tree by rehashing it along with the sibling hashes on its path to the root, without seeing
-the rest of the tree. 
+the rest of the tree.
 
 ## Sparse Merkle trees (SMTs)
 
-Lineth implements a sparse Merkle tree (SMT) to track account state and generate and store proofs, which keeps 
+Lineth implements a sparse Merkle tree (SMT) to track account state and generate and store proofs, which keeps
 updates and proofs cheap enough to produce for every block.
 
 An SMT is a variation of a standard Merkle tree.
@@ -87,7 +81,7 @@ leaf holds data only when that position is in use.
 
 At the beginning of the chain's history, every leaf holds the zero value.
 A parent whose children are empty holds the default hash for its level.
-A node with that default hash represents an empty subtree. 
+A node with that default hash represents an empty subtree.
 
 <div class="center-container">
   <div class="mermaid-medium">
@@ -116,14 +110,14 @@ further down that subtree can be disregarded. Only the _non-empty_ subtrees need
 ## Lineth's SMT as a cryptographic accumulator
 
 In this context, Lineth's SMT is a "cryptographic accumulator": a type of cryptographic
-primitive that encodes a collection 
-of items into short strings and allows read/write operations to be proven. Merkle trees and 
-SMTs are elementary examples of accumulators, but there are others with more powerful 
+primitive that encodes a collection
+of items into short strings and allows read/write operations to be proven. Merkle trees and
+SMTs are elementary examples of accumulators, but there are others with more powerful
 capabilities.
 
-Lineth's state manager uses an extended version of an SMT that enables it to prove all 
+Lineth's state manager uses an extended version of an SMT that enables it to prove all
 CRUD (create, read, update, delete) operations for a key-addressed database. It
-uses an SMT to store the nodes of a sorted, doubly-linked list that 
+uses an SMT to store the nodes of a sorted, doubly-linked list that
 encodes all the non-zero items of the state.
 
 The leaves of the tree have the following structure: `prev || next || hKey || hVal`.
@@ -155,15 +149,14 @@ It receives the next free tree index.
 The head and the tail already occupy indexes 0 and 1, so the first stored leaf receives index 2, and each later
 insertion receives the next index.
 These indexes are separate from the linked-list order in the diagram above.
-The order of insertions follows the history of state changes, so the same history rebuilds the same tree, and the
-<GlossaryTerm term="Prover">prover</GlossaryTerm> can check the Merkle proof against it.
+The order of insertions follows the history of state changes, so the same history rebuilds the same tree, and the <GlossaryTerm term="Prover">prover</GlossaryTerm> can check the Merkle proof against it.
 
 ## Applying the accumulator
 
 Ethereum records two trees in a [Merkle-Patricia Trie](https://ethereum.org/developers/docs/data-structures-and-encoding/patricia-merkle-trie/):
 
 - World state, which keeps track of accounts.
-- Account storage state, which keeps track of the storage slots of each account. 
+- Account storage state, which keeps track of the storage slots of each account.
 
 Lineth adapts this structure. Linea Besu still uses the Merkle-Patricia Trie to execute blocks, but
 the state manager tracks both trees using the custom cryptographic accumulator described above.
@@ -218,16 +211,16 @@ significant bytes (LSB), the last 16 bytes.
 The accumulator hashes the two halves:
 
 - `hKey`: Hash(`StorageKeyMSB`, `StorageKeyLSB`)
-- `hVal`: Hash(`StorageValueMSB`, `StorageValueLSB`) 
+- `hVal`: Hash(`StorageValueMSB`, `StorageValueLSB`)
 
 ## Conclusion
 
-The accumulator, built using a sparse Merkle tree, is simultaneously: 
+The accumulator, built using a sparse Merkle tree, is simultaneously:
 
 - A data structure on which you can perform operations.
 - A dataset that you can summarize using a short string (the root hash) at any time.
 - A tool that can be used by Lineth to verify that a given operation triggered a
-transition from hash A to hash B.
+  transition from hash A to hash B.
 
 Once the accumulator has processed a new block's state changes and updated state accordingly, the
 coordinator can request the Merkle proof of the resulting transition and include it in the execution

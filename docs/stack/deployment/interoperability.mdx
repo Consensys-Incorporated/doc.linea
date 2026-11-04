@@ -4,7 +4,7 @@ description: >-
   Native interoperability between two Lineth networks using the Cross Ledger Interoperability Protocol (CLIP)
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This page describes native interoperability between two <GlossaryTerm term="Lineth" /> networks.
 Native interoperability is enabled via the Cross Ledger Interoperability Protocol (CLIP).
@@ -67,18 +67,19 @@ sequenceDiagram
   participant Dest as Destination network
   participant DestEP as Destination access control endpoint
 
-  App->>Src: Initiate the call
-  Src->>Dest: Prepare
-  Dest->>DestEP: Is this root call allowed?
-  DestEP->>DestEP: Check grants for source contract DID
-  alt Allowed
-    DestEP-->>Dest: Allow
-    Dest-->>Src: Commit
-  else Denied or unreachable
-    DestEP-->>Dest: Deny
-    Dest-->>Src: Abort
-  end
-  DestEP->>DestEP: Write access log
+App->>Src: Initiate the call
+Src->>Dest: Prepare
+Dest->>DestEP: Is this root call allowed?
+DestEP->>DestEP: Check grants for source contract DID
+alt Allowed
+DestEP-->>Dest: Allow
+Dest-->>Src: Commit
+else Denied or unreachable
+DestEP-->>Dest: Deny
+Dest-->>Src: Abort
+end
+DestEP->>DestEP: Write access log
+
 ```
 </div>
 
@@ -101,3 +102,4 @@ There is no shared proof across the two Lineth networks that replaces trust in t
 - [Access control](./access-control.mdx): The access control stack for restricted deployments.
 - [Canonical bridge](../../protocol/architecture/bridge/index.mdx): Canonical message service
   and token bridge to the finalization layer.
+```

@@ -26,7 +26,7 @@ npm install wagmi viem@2.x @tanstack/react-query
 ### 2. Create the app provider
 
 Create an `AppProvider` component that wraps `WagmiProvider`, and `QueryClientProvider` to provide
-Wagmi and TanStack Query context to your dapp. 
+Wagmi and TanStack Query context to your dapp.
 
 This config supports Linea Mainnet and Linea Sepolia Testnet.
 For the advanced configuration, see
@@ -58,8 +58,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 <TabItem value = "config.ts">
 
 ```ts
-import { createConfig, http } from 'wagmi'
-import { linea, lineaSepolia } from 'wagmi/chains'
+import { createConfig, http } from "wagmi";
+import { linea, lineaSepolia } from "wagmi/chains";
 
 export const config = createConfig({
   chains: [linea, lineaSepolia],
@@ -67,7 +67,7 @@ export const config = createConfig({
     [linea.id]: http(),
     [lineaSepolia.id]: http(),
   },
-})
+});
 ```
 
 </TabItem>
@@ -92,47 +92,49 @@ When the atomic capability is `ready`, the wallet supports EIP-7702 account upgr
 
 :::note
 If the atomic capability is `unsupported`, provide a fallback for the standard transaction flow.
-::: 
+:::
 
 ```ts
-import { useConnection, useCapabilities } from 'wagmi'
+import { useConnection, useCapabilities } from "wagmi";
 
-const { isConnected, account } = useConnection()
-const { data: capabilities } = useCapabilities()
+const { isConnected, account } = useConnection();
+const { data: capabilities } = useCapabilities();
 
 // Additional check to make sure the EOA wallet is connected
 // and values are available.
-if (!isConnected ) {
+if (!isConnected) {
   // Handle the case
 }
 
-const is7702Supported = capabilities?.[linea.id.toString()]?.atomic?.status === 'ready'
+const is7702Supported = capabilities?.[linea.id.toString()]?.atomic?.status === "ready";
 ```
 
 ### 4. Upgrade the EOA
 
 Use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook to upgrade the account if
-the wallet supports EIP-7702. 
+the wallet supports EIP-7702.
 
-On MetaMask, single transactions using `useSendCalls` execute normally without triggering an account upgrade. 
+On MetaMask, single transactions using `useSendCalls` execute normally without triggering an account upgrade.
 Only batch transactions using `useSendCalls` trigger the account upgrade.
 
 ```ts
-import { useSendCalls } from 'wagmi'
-import { zeroAddress } from 'viem'
+import { useSendCalls } from "wagmi";
+import { zeroAddress } from "viem";
 
-const sendCalls = useSendCalls()
+const sendCalls = useSendCalls();
 
 sendCalls.mutate({
-    calls: [{
-        to: '0x70997970c51812dc3a010c7d01b50e0d17dc79c8',
-        value: parseEther('0.01')
+  calls: [
+    {
+      to: "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+      value: parseEther("0.01"),
     },
     {
-        to: zeroAddress,
-        value: parseEther('0.00001')
-    }]
-})
+      to: zeroAddress,
+      value: parseEther("0.00001"),
+    },
+  ],
+});
 ```
 
 ## Next steps
@@ -140,4 +142,3 @@ sendCalls.mutate({
 - Learn more about [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 - Learn more about [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 - See [MetaMask Smart Accounts Kit EIP-7702 quickstart](https://docs.metamask.io/smart-accounts-kit/get-started/smart-account-quickstart/eip7702/) to upgrade embedded EOAs to smart account.
-

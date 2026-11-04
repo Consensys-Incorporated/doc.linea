@@ -8,30 +8,31 @@ image: /img/socialCards/ethsendbundle.jpg
 
 :::note
 
-Access to this endpoint is permissioned via Infura. Currently, only Infura nodes are able to forward 
+Access to this endpoint is permissioned via Infura. Currently, only Infura nodes are able to forward
 the requests to the sequencer.
 
 This method is in private beta and not publicly available for use.
 
 :::
 
-Privately sends a bundle of signed transactions to be executed atomically, allowing the caller to 
+Privately sends a bundle of signed transactions to be executed atomically, allowing the caller to
 define transaction execution order. This enables services such as:
+
 - Frontrunning protection
 - Gas abstraction
 - Revert protection.
 
 Due to being sent atomically, the bundle will only be executed if all transactions are confirmed.
 
-The method can also improve UX, as users can review and approve a bundle of transactions with one 
-click, rather than multiple clicks. (Assuming the dapp and wallet being used have implemented [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792), 
+The method can also improve UX, as users can review and approve a bundle of transactions with one
+click, rather than multiple clicks. (Assuming the dapp and wallet being used have implemented [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792),
 and the wallet supports `eth_sendBundle` on Linea.)
 
 :::info
 
-Methods for cancelling the bundle (`eth_cancelBundle`) or retrieving its status (`eth_getBundleStatus`) 
-are not yet supported. To get the bundle status, we recommend wallets use `eth_getTransactionReceipt` 
-on each transaction in the bundle. Dapps can fetch status by using the `wallet_getCallsStatus` 
+Methods for cancelling the bundle (`eth_cancelBundle`) or retrieving its status (`eth_getBundleStatus`)
+are not yet supported. To get the bundle status, we recommend wallets use `eth_getTransactionReceipt`
+on each transaction in the bundle. Dapps can fetch status by using the `wallet_getCallsStatus`
 method added in EIP-5792.
 
 :::
@@ -40,12 +41,12 @@ method added in EIP-5792.
 
 - `txs`: An array of signed transactions to execute in the bundle.
 - `blockNumber`: Hexadecimal block number for the block the bundle is valid in.
-- `minTimestamp`: [optional] A number representing the minimum timestamp for which the bundle is 
-valid, in seconds since the unix epoch.
-- `maxTimestamp`: [optional] A number representing the maximum timestamp for which the bundle is 
-valid, in seconds since the unix epoch.
+- `minTimestamp`: [optional] A number representing the minimum timestamp for which the bundle is
+  valid, in seconds since the unix epoch.
+- `maxTimestamp`: [optional] A number representing the maximum timestamp for which the bundle is
+  valid, in seconds since the unix epoch.
 
-Additional optional parameters supported [elsewhere](https://docs.flashbots.net/flashbots-auction/advanced/rpc-endpoint#eth_sendbundle) 
+Additional optional parameters supported [elsewhere](https://docs.flashbots.net/flashbots-auction/advanced/rpc-endpoint#eth_sendbundle)
 are not supported on Linea.
 
 ## Returns
@@ -67,10 +68,10 @@ curl 'https://linea-mainnet.infura.io/v3/YOUR-API-KEY' \
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": {
-        "bundleHash": "0x1234567890abcdef..."
-    }
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "bundleHash": "0x1234567890abcdef..."
+  }
 }
 ```

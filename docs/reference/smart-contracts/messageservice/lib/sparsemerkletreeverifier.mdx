@@ -17,7 +17,7 @@ error LeafIndexOutOfBounds(uint32 leafIndex, uint32 maxAllowedIndex)
 
 _Custom error for when the leaf index is out of bounds._
 
-### _verifyMerkleProof
+### \_verifyMerkleProof
 
 ```solidity
 function _verifyMerkleProof(bytes32 _leafHash, bytes32[] _proof, uint32 _leafIndex, bytes32 _root) internal pure returns (bool proofIsValid)
@@ -29,17 +29,17 @@ _The depth of the tree is expected to be validated elsewhere beforehand._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _leafHash | bytes32 | Leaf hash. |
-| _proof | bytes32[] | Sparse merkle tree proof. |
-| _leafIndex | uint32 | Index of the leaf. |
-| _root | bytes32 | Merkle root. |
+| Name        | Type      | Description               |
+| ----------- | --------- | ------------------------- |
+| \_leafHash  | bytes32   | Leaf hash.                |
+| \_proof     | bytes32[] | Sparse merkle tree proof. |
+| \_leafIndex | uint32    | Index of the leaf.        |
+| \_root      | bytes32   | Merkle root.              |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name         | Type | Description                           |
+| ------------ | ---- | ------------------------------------- |
 | proofIsValid | bool | Returns if the proof is valid or not. |
 
 ### safeCastToUint32
@@ -54,13 +54,12 @@ _This is based on OpenZeppelin's SafeCast library._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _value | uint256 | The value being cast to uint32. |
+| Name    | Type    | Description                     |
+| ------- | ------- | ------------------------------- |
+| \_value | uint256 | The value being cast to uint32. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name       | Type   | Description                   |
+| ---------- | ------ | ----------------------------- |
 | castUint32 | uint32 | Returns a uint32 safely cast. |
-

@@ -4,7 +4,7 @@ description: Returns the bytecode deployed at a contract address on Linea.
 image: /img/socialCards/ethgetcode.jpg
 ---
 
-import RpcPlayground from '@site/src/components/RpcPlayground';
+import RpcPlayground from "@site/src/components/RpcPlayground";
 
 # `eth_getCode`
 
@@ -29,6 +29,7 @@ This example reads the bytecode of the USDC proxy contract.
   exampleResponse={{
     jsonrpc: "2.0",
     id: 1,
-    result: "0x60806040526004361061005a5760003560e01c80635c60da1b116100435780635c60da1b146101315780638f2839701461016f578063f851a440146101af5761005a565b80633659cfe6146100645780634f1ef286146100a4575b6100626101c4565b..."
+    result:
+      "0x60806040526004361061005a5760003560e01c80635c60da1b116100435780635c60da1b146101315780638f2839701461016f578063f851a440146101af5761005a565b80633659cfe6146100645780634f1ef286146100a4575b6100626101c4565b...",
   }}
 />

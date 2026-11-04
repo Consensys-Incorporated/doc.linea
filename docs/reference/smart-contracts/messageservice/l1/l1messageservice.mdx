@@ -8,7 +8,7 @@ uint256 systemMigrationBlock
 
 _This is currently not in use, but is reserved for future upgrades._
 
-### __MessageService_init
+### \_\_MessageService_init
 
 ```solidity
 function __MessageService_init(uint256 _rateLimitPeriod, uint256 _rateLimitAmount) internal
@@ -18,10 +18,10 @@ Initialises underlying message service dependencies.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _rateLimitPeriod | uint256 | The period to rate limit against. |
-| _rateLimitAmount | uint256 | The limit allowed for withdrawing the period. |
+| Name              | Type    | Description                                   |
+| ----------------- | ------- | --------------------------------------------- |
+| \_rateLimitPeriod | uint256 | The period to rate limit against.             |
+| \_rateLimitAmount | uint256 | The limit allowed for withdrawing the period. |
 
 ### sendMessage
 
@@ -36,11 +36,11 @@ This function should be called with a `msg.value` equal to `_value` plus `_fee`.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _to | address | The address the message is intended for. |
-| _fee | uint256 | The fee being paid for the message delivery. |
-| _calldata | bytes | The calldata to pass to the recipient. |
+| Name       | Type    | Description                                  |
+| ---------- | ------- | -------------------------------------------- |
+| \_to       | address | The address the message is intended for.     |
+| \_fee      | uint256 | The fee being paid for the message delivery. |
+| \_calldata | bytes   | The calldata to pass to the recipient.       |
 
 ### claimMessageWithProof
 
@@ -55,8 +55,8 @@ if tree depth is different than proof size, it will revert with ProofLengthDiffe
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name      | Type                                                   | Description                                              |
+| --------- | ------------------------------------------------------ | -------------------------------------------------------- |
 | `_params` | `struct IL1MessageService.ClaimMessageWithProofParams` | Collection of claim data with proof and supporting data. |
 
 ### sender
@@ -71,6 +71,6 @@ _The message sender address is set temporarily in the transient storage when cla
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name           | Type    | Description                                                                                   |
+| -------------- | ------- | --------------------------------------------------------------------------------------------- |
 | originalSender | address | The message sender address that is stored temporarily in the transient storage when claiming. |

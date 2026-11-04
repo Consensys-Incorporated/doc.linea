@@ -7,8 +7,8 @@ category: featured
 image: /img/socialCards/privy.jpg
 ---
 
-Privy provides comprehensive social login authentication for web3 applications, enabling users to 
-create embedded wallets through familiar social platforms. 
+Privy provides comprehensive social login authentication for web3 applications, enabling users to
+create embedded wallets through familiar social platforms.
 
 ## Supported social providers
 
@@ -24,7 +24,7 @@ Privy supports authentication through many popular social platforms:
 - TikTok
 - X
 
-For X, Privy supports both OAuth 2.0 and OAuth 1.0a authentication flows, providing flexibility 
+For X, Privy supports both OAuth 2.0 and OAuth 1.0a authentication flows, providing flexibility
 based on your application's needs.
 
 ## How social login works
@@ -53,15 +53,17 @@ Configure social authentication in the [Privy Dashboard](https://dashboard.privy
 
 Next to each social provider, you can see a dropdown that enables you to access OAuth configuration.
 Privy offers two approaches for OAuth configuration:
-- Default credentials: Use Privy's pre-configured OAuth credentials for quick setup and testing. This 
+
+- Default credentials: Use Privy's pre-configured OAuth credentials for quick setup and testing. This
   is perfect for development and getting started quickly.
-- Custom credentials: Configure your own OAuth applications for production use. This provides better 
+- Custom credentials: Configure your own OAuth applications for production use. This provides better
   security, branding control, and eliminates shared rate limits.
 
-See the [Privy guide](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods#configure-your-oauth-credentials) 
+See the [Privy guide](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods#configure-your-oauth-credentials)
 to learn how to set up OAuth credentials with each provider.
 
 Benefits of custom credentials:
+
 - Your app branding appears on social login screens
 - Better security and application control
 - Dedicated rate limits for your application
@@ -77,12 +79,12 @@ First, install the Privy SDK:
 npm install @privy-io/react-auth
 ```
 
-There are many SDK flavours, depending on which language you're using. 
+There are many SDK flavours, depending on which language you're using.
 
 Now wrap your app in the `PrivyProvider`:
 
 ```jsx
-import { PrivyProvider } from '@privy-io/react-auth';
+import { PrivyProvider } from "@privy-io/react-auth";
 
 export default function App() {
   return (
@@ -90,14 +92,13 @@ export default function App() {
       appId="your-privy-app-id"
       config={{
         // Configure which login methods to show
-        loginMethods: ['email', 'wallet', 'google', 'twitter', 'discord'],
+        loginMethods: ["email", "wallet", "google", "twitter", "discord"],
         // Customize the authentication experience
         appearance: {
-          theme: 'light',
-          accentColor: '#676FFF',
+          theme: "light",
+          accentColor: "#676FFF",
         },
-      }}
-    >
+      }}>
       {/* Your app components */}
     </PrivyProvider>
   );
@@ -107,8 +108,8 @@ export default function App() {
 ## Resources
 
 - Visit the [Privy Dashboard](https://dashboard.privy.io) to configure social authentication
-- Review [OAuth provider setup guides](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods#social-providers) 
+- Review [OAuth provider setup guides](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods#social-providers)
   for platform-specific configuration
-- Explore [embedded wallets](https://docs.privy.io/guide/react/wallets/embedded) for seamless web3 
+- Explore [embedded wallets](https://docs.privy.io/guide/react/wallets/embedded) for seamless web3
   integration
 - Check out the [Privy documentation](https://docs.privy.io) for advanced configuration options

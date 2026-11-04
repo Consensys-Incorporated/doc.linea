@@ -10,9 +10,9 @@ import GlossaryTerm from "@theme/GlossaryTerm";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
 This page describes how to expose health and metrics endpoints on a
+
 <GlossaryTerm term="Lineth" /> deployment, and what signals to watch on each component.
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> define alert thresholds and recovery
-objectives for their own environment.
+<GlossaryTerm term="Operator">Operators</GlossaryTerm> define alert thresholds and recovery objectives for their own environment.
 
 ## Prerequisites
 
@@ -99,18 +99,12 @@ each component.
         <GlossaryTerm term="Linea Besu" />
       </td>
       <td>
-        <a
-          href="https://docs.besu-eth.org/public-networks/reference/options#metrics-enabled"
-          target="_blank"
-          rel="noopener noreferrer">
+        <a href="https://docs.besu-eth.org/public-networks/reference/options#metrics-enabled" target="_blank" rel="noopener noreferrer">
           <code>{"--metrics-enabled"}</code>
           <IconExternalLink />
         </a>
         <br />
-        <a
-          href="https://docs.besu-eth.org/public-networks/reference/options#metrics-port"
-          target="_blank"
-          rel="noopener noreferrer">
+        <a href="https://docs.besu-eth.org/public-networks/reference/options#metrics-port" target="_blank" rel="noopener noreferrer">
           <code>{"--metrics-port"}</code>
           <IconExternalLink />
         </a>
@@ -159,7 +153,9 @@ each component.
           <code>API_PORT</code>
         </a>
       </td>
-      <td><code>3000</code></td>
+      <td>
+        <code>3000</code>
+      </td>
       <td>Unsupported</td>
       <td>
         <code>/metrics</code>
@@ -175,9 +171,9 @@ The coordinator, Maru, and Linea Besu default to port `9545`.
 Assign a different port or host when more than one of these processes shares a machine.
 
 The coordinator also polls the
+
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>
-to track finalized state.
-Set the poll interval, retries, and warning thresholds in
+to track finalized state. Set the poll interval, retries, and warning thresholds in
 [`l1-finalization-monitor`](../../reference/component-configuration/linea-coordinator-options#l1-finalization-monitor).
 
 ## Alert on these signals

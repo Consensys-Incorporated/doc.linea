@@ -6,7 +6,7 @@ description: >-
 image: /img/socialCards/trust-and-responsibilities.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This page describes the trust model in a <GlossaryTerm term="Lineth" />
 deployment: what each component can do, what participants can verify, privileged contract roles,
@@ -18,10 +18,9 @@ For protocol guarantees and operator-controlled security measures, see
 ## Trust assumptions
 
 In a <GlossaryTerm term="Rollup">rollup</GlossaryTerm> and a
+
 <GlossaryTerm term="Validium">validium</GlossaryTerm>, the
-<GlossaryTerm term="Operator">operator</GlossaryTerm> runs the
-[deployment components](../deployment/core-components.mdx).
-In both deployment models, the components can take these actions:
+<GlossaryTerm term="Operator">operator</GlossaryTerm> runs the [deployment components](../deployment/core-components.mdx). In both deployment models, the components can take these actions:
 
 - The <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> can order, delay, or omit transactions within a block.
 - The <GlossaryTerm term="Prover">prover</GlossaryTerm> can stall proof generation, which halts finalization.
@@ -48,10 +47,9 @@ What a participant can see through the operator's RPC depends on the deployment'
 Access control does not hide data already posted onchain.
 
 When the deployment uses
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>,
-block production depends on the validator set: with `3f+1` validators, at most `f` can fail
-or deviate.
-See [Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
+
+<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>, block production depends on the validator set: with `3f+1` validators, at most `f` can fail or deviate. See
+[Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
 
 ### What participants can verify
 
@@ -70,20 +68,16 @@ Participants can reconstruct state from those blobs while they are retained.
 After Ethereum's blob retention window, reconstructing history from Ethereum requires a copy of
 the blob data kept outside Ethereum's blob store.
 Participants can also verify public rollup block contents and ordering by running a
-<GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state
-from that public data.
+
+<GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state from that public data.
 
 In a <GlossaryTerm term="Validium">validium</GlossaryTerm>, transaction data stays
 offchain.
 Data availability (DA) is operated by
-<GlossaryTerm term="Archive node">archive nodes</GlossaryTerm> or a DA committee.
-Those providers can withhold data, which halts recovery, but they cannot forge state, because
-proofs still verify on the finalization layer.
-Participants can verify data and state claims they are authorized to access, including checks with
-[Merkle proofs](/protocol/architecture/state-manager#merkle-trees) against posted state roots.
-A Merkle proof can support inclusion of authorized data.
-It does not by itself establish global transaction ordering for participants who do not have the
-full ordered data set.
+
+<GlossaryTerm term="Archive node">archive nodes</GlossaryTerm> or a DA committee. Those providers can withhold data, which halts recovery, but they cannot forge state, because proofs still verify on
+the finalization layer. Participants can verify data and state claims they are authorized to access, including checks with [Merkle proofs](/protocol/architecture/state-manager#merkle-trees) against
+posted state roots. A Merkle proof can support inclusion of authorized data. It does not by itself establish global transaction ordering for participants who do not have the full ordered data set.
 
 ### Finalization layer
 
@@ -109,14 +103,14 @@ It belongs to whoever controls the proxy admin, not automatically to `DEFAULT_AD
 In production deployments, both role holders and proxy admin control should sit behind a
 multisig, governance contract, or timelock, and may involve multiple independent parties.
 
-| Role | What it can do | Recommended holder |
-| --- | --- | --- |
-| `DEFAULT_ADMIN_ROLE` | Grant or revoke other roles | High-security multisig or governance contract; initial holder set during initialization |
-| `OPERATOR_ROLE` | Submit blobs/calldata, finalize blocks | Day-to-day operator address |
-| `SECURITY_COUNCIL_ROLE` | Reserved for governance pause/upgrade authority | High-security governance contract or multisig |
-| `PAUSE_*_ROLE` / `UNPAUSE_*_ROLE` | Pause and unpause specific subsystems (L1↔L2, L2→L1, finalization, state submission, etc.) | Split between operator (pause) and governance (unpause) for fast incident containment |
-| `VERIFIER_SETTER_ROLE` | Change the verifier contract for a given proof type | Governance contract |
-| `RATE_LIMIT_SETTER_ROLE` | Change L2→L1 withdrawal rate limits | Governance contract |
+| Role                              | What it can do                                                                             | Recommended holder                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `DEFAULT_ADMIN_ROLE`              | Grant or revoke other roles                                                                | High-security multisig or governance contract; initial holder set during initialization |
+| `OPERATOR_ROLE`                   | Submit blobs/calldata, finalize blocks                                                     | Day-to-day operator address                                                             |
+| `SECURITY_COUNCIL_ROLE`           | Reserved for governance pause/upgrade authority                                            | High-security governance contract or multisig                                           |
+| `PAUSE_*_ROLE` / `UNPAUSE_*_ROLE` | Pause and unpause specific subsystems (L1↔L2, L2→L1, finalization, state submission, etc.) | Split between operator (pause) and governance (unpause) for fast incident containment   |
+| `VERIFIER_SETTER_ROLE`            | Change the verifier contract for a given proof type                                        | Governance contract                                                                     |
+| `RATE_LIMIT_SETTER_ROLE`          | Change L2→L1 withdrawal rate limits                                                        | Governance contract                                                                     |
 
 Contracts are upgradeable via the
 [OpenZeppelin Transparent Upgradeable Proxy pattern](/protocol/architecture/smart-contracts#contract-versioning).

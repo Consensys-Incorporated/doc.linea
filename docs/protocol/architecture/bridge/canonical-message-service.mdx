@@ -4,16 +4,16 @@ description: How Lineth's canonical message service passes arbitrary messages be
 image: /img/socialCards/canonical-message-service.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
-import MessagePath from '/img/protocol/architecture/bridge/message-path.svg';
-import MessageNetworkToLayer from '/img/protocol/architecture/bridge/message-network-to-layer.svg';
-import MessageLayerToNetwork from '/img/protocol/architecture/bridge/message-layer-to-network.svg';
+import GlossaryTerm from "@theme/GlossaryTerm";
+import MessagePath from "/img/protocol/architecture/bridge/message-path.svg";
+import MessageNetworkToLayer from "/img/protocol/architecture/bridge/message-network-to-layer.svg";
+import MessageLayerToNetwork from "/img/protocol/architecture/bridge/message-layer-to-network.svg";
 
 The canonical message service passes arbitrary messages (that is, user-specified data and native currency)
 between a <GlossaryTerm term="Lineth" /> network and its
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
-It is general-purpose infrastructure: the [canonical token bridge](./canonical-token-bridge.mdx) is built on it,
-and any contract or dapp can call it directly.
+
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. It is general-purpose infrastructure: the [canonical token bridge](./canonical-token-bridge.mdx) is built on it, and any
+contract or dapp can call it directly.
 
 ## How it works
 
@@ -22,11 +22,11 @@ An optional offchain relay, the **Postman**, watches both contracts and submits 
 Sending a message from the origin chain to the destination chain works as follows:
 
 1. A caller invokes `sendMessage()` on the origin contract with a destination address, a calldata payload, any
-    native value to transfer, and an optional delivery fee.
-    The contract emits the message.
+   native value to transfer, and an optional delivery fee.
+   The contract emits the message.
 2. A [message commitment](#message-commitments) is anchored on the destination contract.
 3. Claiming the message executes it: the destination contract checks the claim against that commitment, then
-    calls the destination address with the payload and the value.
+   calls the destination address with the payload and the value.
 
 Claiming is permissionless: anyone can submit the claim.
 This gives senders two delivery modes:
@@ -40,7 +40,7 @@ Push relies on the Postman for convenience, not for correctness.
 The fee goes to whoever submits the claim, so if the Postman is unavailable, the recipient or a third party
 can claim the message and collect the fee instead.
 
-<div className="img-medium" style={{ maxWidth: '43%' }}>
+<div className="img-medium" style={{ maxWidth: "43%" }}>
   <MessagePath />
 </div>
 
@@ -50,13 +50,11 @@ Each direction commits to its messages differently, because only one of the two 
 
 **Network to finalization layer.**
 Finalizing a range of blocks verifies its
-<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> and anchors the Merkle root of the messages
-those blocks sent.
-A claim on the finalization layer's message service carries a Merkle proof.
-The service accepts the claim only if the proof shows the message is included under that anchored root.
-Messages are therefore only claimable once the blocks that sent them are finalized.
 
-<div className="img-medium" style={{ maxWidth: '43%' }}>
+<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> and anchors the Merkle root of the messages those blocks sent. A claim on the finalization layer's message service carries a Merkle
+proof. The service accepts the claim only if the proof shows the message is included under that anchored root. Messages are therefore only claimable once the blocks that sent them are finalized.
+
+<div className="img-medium" style={{ maxWidth: "43%" }}>
   <MessageNetworkToLayer />
 </div>
 
@@ -69,7 +67,7 @@ service computed when the messages were sent.
 If the hashes differ, the network cannot finalize, because it would be finalizing messages the
 finalization layer never sent.
 
-<div className="img-large" style={{ maxWidth: '75%' }}>
+<div className="img-large" style={{ maxWidth: "75%" }}>
   <MessageLayerToNetwork />
 </div>
 

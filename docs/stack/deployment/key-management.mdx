@@ -19,9 +19,8 @@ The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> has three signer
 The <GlossaryTerm term="Postman" /> has two (message relay on the Lineth network and
 finalization layer).
 The <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> liveness plugin and
-<GlossaryTerm term="Maru validator" /> each have one.
-Each signer role has its own key, configuration, and impact if that key is lost or compromised.
-Do not reuse one key across roles.
+
+<GlossaryTerm term="Maru validator" /> each have one. Each signer role has its own key, configuration, and impact if that key is lost or compromised. Do not reuse one key across roles.
 
 <table className="table-valign-middle table-narrow-first-col">
   <thead>
@@ -35,9 +34,7 @@ Do not reuse one key across roles.
   <tbody>
     <tr>
       <td rowspan="3">Coordinator</td>
-      <td>
-        Blob submission to the finalization layer
-      </td>
+      <td>Blob submission to the finalization layer</td>
       <td>
         <a href="../../reference/component-configuration/linea-coordinator-options#l1-submission">
           <code>l1-submission.blob.signer.type</code>
@@ -45,13 +42,14 @@ Do not reuse one key across roles.
       </td>
       <td>
         Submission from that address stalls or can be issued by an attacker until
-        <a href="../evaluate/trust-model#system-contract-roles"><code>OPERATOR_ROLE</code></a> is revoked
+        <a href="../evaluate/trust-model#system-contract-roles">
+          <code>OPERATOR_ROLE</code>
+        </a>{" "}
+        is revoked
       </td>
     </tr>
     <tr>
-      <td>
-        Aggregation and finalization submissions
-      </td>
+      <td>Aggregation and finalization submissions</td>
       <td>
         <a href="../../reference/component-configuration/linea-coordinator-options#l1-submission">
           <code>l1-submission.aggregation.signer.type</code>
@@ -59,78 +57,59 @@ Do not reuse one key across roles.
       </td>
       <td>
         Finalization from that address stalls or can be issued by an attacker until
-        <a href="../evaluate/trust-model#system-contract-roles"><code>OPERATOR_ROLE</code></a> is revoked
+        <a href="../evaluate/trust-model#system-contract-roles">
+          <code>OPERATOR_ROLE</code>
+        </a>{" "}
+        is revoked
       </td>
     </tr>
     <tr>
-      <td>
-        Message-anchoring transactions
-      </td>
+      <td>Message-anchoring transactions</td>
       <td>
         <a href="../../reference/component-configuration/linea-coordinator-options#message-anchoring">
           <code>message-anchoring.signer.type</code>
         </a>
       </td>
-      <td>
-        Anchoring from that address stalls or can be issued by an attacker
-      </td>
+      <td>Anchoring from that address stalls or can be issued by an attacker</td>
     </tr>
     <tr>
       <td rowspan="2">Postman</td>
-      <td>
-        Message claim or relay on the finalization layer
-      </td>
+      <td>Message claim or relay on the finalization layer</td>
       <td>
         <a href="../../reference/component-configuration/linea-postman-options#signer">
           <code>L1_SIGNER_TYPE</code>
         </a>
       </td>
-      <td>
-        Finalization layer relay from that address stalls or can be issued by an attacker
-      </td>
+      <td>Finalization layer relay from that address stalls or can be issued by an attacker</td>
     </tr>
     <tr>
-      <td>
-        Message claim or relay on the Lineth network
-      </td>
+      <td>Message claim or relay on the Lineth network</td>
       <td>
         <a href="../../reference/component-configuration/linea-postman-options#signer">
           <code>L2_SIGNER_TYPE</code>
         </a>
       </td>
-      <td>
-        Lineth network relay from that address stalls or can be issued by an attacker
-      </td>
+      <td>Lineth network relay from that address stalls or can be issued by an attacker</td>
     </tr>
     <tr>
       <td>Sequencer liveness plugin</td>
-      <td>
-        Liveness contract transactions
-      </td>
+      <td>Liveness contract transactions</td>
       <td>
         <a href="../../reference/component-configuration/linea-besu-plugin-options#sequencer--liveness-service">
           <code>{"--plugin-linea-liveness-signer-type"}</code>
         </a>
       </td>
-      <td>
-        Liveness reporting from that address stalls or can be issued by an
-        attacker. Block production does not use this key
-      </td>
+      <td>Liveness reporting from that address stalls or can be issued by an attacker. Block production does not use this key</td>
     </tr>
     <tr>
       <td>Maru validator</td>
-      <td>
-        QBFT consensus messages
-      </td>
+      <td>QBFT consensus messages</td>
       <td>
         <a href="../../reference/component-configuration/linea-maru-options#persistence">
           <code>persistence.private-key-path</code>
         </a>
       </td>
-      <td>
-        That validator can miss or sign unauthorized consensus messages.
-        Replacing the key is a coordinated genesis update
-      </td>
+      <td>That validator can miss or sign unauthorized consensus messages. Replacing the key is a coordinated genesis update</td>
     </tr>
   </tbody>
 </table>
@@ -171,9 +150,8 @@ To use hardware-backed custody for Maru signing, use a [custom signer factory](#
 
 ### Web3Signer
 
-<GlossaryTerm term="Web3Signer" /> is a remote signing service you call over HTTP.
-When using Web3Signer, the Lineth component holds the endpoint and the public key.
-Web3Signer holds the private key in the store attached to it.
+<GlossaryTerm term="Web3Signer" /> is a remote signing service you call over HTTP. When using Web3Signer, the Lineth component holds the endpoint and the public key. Web3Signer holds the private key
+in the store attached to it.
 
 Configure `web3signer` for the [coordinator](../../reference/component-configuration/linea-coordinator-options#l1-submission)
 or [Postman](../../reference/component-configuration/linea-postman-options#signer), or

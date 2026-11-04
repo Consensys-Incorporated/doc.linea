@@ -4,27 +4,27 @@ description: How module limits ensure the prover can generate proofs.
 image: /img/socialCards/module-limits.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
-<GlossaryTerm term="Lineth" /> uses module limits to keep proof complexity manageable and ensure that the [prover](./index.mdx) can
-generate proofs efficiently without overwhelming the infrastructure. 
+<GlossaryTerm term="Lineth" /> uses module limits to keep proof complexity manageable and ensure that the [prover](./index.mdx) can generate proofs efficiently without overwhelming the infrastructure.
 
 Lineth's arithmetization specification is divided into modules, and each module represents a collection
 of <GlossaryTerm term="Ethereum Virtual Machine (EVM)">EVM</GlossaryTerm> or Lineth <GlossaryTerm term="zkEVM" /> operations (opcodes). Modules can:
+
 - Process transaction data.
 - Manage zkEVM memory.
 - Coordinate interactions between modules.
 
-Each module has a specific limit on the number of lines of data its operations can generate, 
-regardless of its purpose. You can view these limits in the 
-[Lineth source code](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docker/config/common/traces-limits-v5.toml). 
-Additional lines are generated each time unique instructions are provided to a module's operations, 
+Each module has a specific limit on the number of lines of data its operations can generate,
+regardless of its purpose. You can view these limits in the
+[Lineth source code](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docker/config/common/traces-limits-v5.toml).
+Additional lines are generated each time unique instructions are provided to a module's operations,
 but repeat calls with the same arguments do not generate new lines.
 
-High-complexity transactions that repeatedly use a large volume of operations may generate too many 
+High-complexity transactions that repeatedly use a large volume of operations may generate too many
 lines of data and exceed a module's limit. Transactions that reach this point are rejected by the
-<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> to ensure that the trace data passed to the prover is of a
-manageable scope, and that a proof can be generated.
+
+<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> to ensure that the trace data passed to the prover is of a manageable scope, and that a proof can be generated.
 
 Transactions rejected for exceeding module limits can be identified through the following
 methods, which return an error:
@@ -36,5 +36,5 @@ Use [`linea_getTransactionExclusionStatusV1`](../../../reference/apis/linea-api/
 to get the rejection status of a transaction that was sent, but was not rejected immediately
 nor included in a block.
 You can use this method to identify the reason for rejection in edge cases where
-`linea_estimateGas` or `eth_sendRawTransaction` do not return an error. It's intended to be used 
+`linea_estimateGas` or `eth_sendRawTransaction` do not return an error. It's intended to be used
 only in cases the transaction execution differs between an <GlossaryTerm term="RPC node" /> and the sequencer.

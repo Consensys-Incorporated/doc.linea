@@ -4,12 +4,12 @@ description: How the Lineth prover turns execution traces into zero-knowledge pr
 image: /img/socialCards/prover.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 The prover is a <GlossaryTerm term="Lineth"/> module that turns execution traces into
-<GlossaryTerm term="zk-SNARK">zk-SNARKs</GlossaryTerm>.
-These zk-SNARKs enable the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> to
-accept a Lineth state transition without re-executing any transactions.
+
+<GlossaryTerm term="zk-SNARK">zk-SNARKs</GlossaryTerm>. These zk-SNARKs enable the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm> to accept a Lineth state transition without
+re-executing any transactions.
 
 Proof generation is computationally intensive, so deployments run the prover as one or more dedicated
 instances rather than inside the execution client.
@@ -26,9 +26,9 @@ It is in development and is not yet part of any Lineth deployment.
 
 The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> drives the prover.
 It writes each proof request, along with the <GlossaryTerm term="Conflation">conflated</GlossaryTerm> traces produced by the
-<GlossaryTerm term="Tracer">tracer</GlossaryTerm>, to the directories the prover watches, and collects the
-finished proof from the same place.
-Those traces stay within the [module limits](./module-limits.mdx) that keep a batch provable.
+
+<GlossaryTerm term="Tracer">tracer</GlossaryTerm>, to the directories the prover watches, and collects the finished proof from the same place. Those traces stay within the [module
+limits](./module-limits.mdx) that keep a batch provable.
 
 The prover produces three kinds of proofs:
 
@@ -39,10 +39,10 @@ The prover produces three kinds of proofs:
 Each proof is built in two stages:
 
 1. [Corset](./corset.mdx) expands the trace data into the full constraint system, the
-    arithmetization the prover proves against.
+   arithmetization the prover proves against.
 2. The proving system reduces that expanded data to an inner proof, then wraps it with the
-    [gnark](./gnark.mdx) library into an outer proof: the zk-SNARK that a verifier contract on the
-    finalization layer can check cheaply.
+   [gnark](./gnark.mdx) library into an outer proof: the zk-SNARK that a verifier contract on the
+   finalization layer can check cheaply.
 
 Because the proof accompanies the data it proves, anyone can confirm that a state transition is correct
 by checking the proof onchain, instead of trusting the operator or re-executing the transactions themselves.

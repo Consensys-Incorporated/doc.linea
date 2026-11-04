@@ -4,7 +4,7 @@ description: Returns block information on Linea by block hash.
 image: /img/socialCards/ethgetblockbyhash.jpg
 ---
 
-import RpcPlayground from '@site/src/components/RpcPlayground';
+import RpcPlayground from "@site/src/components/RpcPlayground";
 
 # `eth_getBlockByHash`
 
@@ -24,10 +24,7 @@ no block is found.
 
 <RpcPlayground
   method="eth_getBlockByHash"
-  params={[
-    "0x8ebe90fa04dbbf92199c07cbb56c1f908343c69f3dd246a2f7d95272589dc550",
-    false
-  ]}
+  params={["0x8ebe90fa04dbbf92199c07cbb56c1f908343c69f3dd246a2f7d95272589dc550", false]}
   exampleResponse={{
     jsonrpc: "2.0",
     id: 1,
@@ -39,9 +36,7 @@ no block is found.
       gasUsed: "0x1458e",
       gasLimit: "0x77359400",
       baseFeePerGas: "0x7",
-      transactions: [
-        "0x972fd73b83ee0d567143ebc67509d4fc98fa1b1941c2c145a342d3d10715c259"
-      ]
-    }
+      transactions: ["0x972fd73b83ee0d567143ebc67509d4fc98fa1b1941c2c145a342d3d10715c259"],
+    },
   }}
 />
