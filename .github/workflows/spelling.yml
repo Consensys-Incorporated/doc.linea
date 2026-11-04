@@ -13,9 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
+      # Branch ref on purpose: this pilot reads the branch's Vale config, not main.
       - name: Vale
-        uses: Consensys-Incorporated/github-actions/docs-spelling-check@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
+        uses: Consensys-Incorporated/github-actions/docs-spelling-check@vale/linea-pilot

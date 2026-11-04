@@ -1,0 +1,3 @@
+# Terms for this site only. One term or pattern per line.
+# Add a term in the pull request that introduces it.
+# Words every Consensys docs site uses belong in the shared Vale list.
