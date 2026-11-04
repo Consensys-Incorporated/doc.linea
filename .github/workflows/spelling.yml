@@ -21,6 +21,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Branch ref on purpose: this pilot reads the branch's Vale config, not main.
+      # vale/linea-pilot. Move this pin to the merged commit after that pull request lands.
       - name: Vale
-        uses: Consensys-Incorporated/github-actions/docs-spelling-check@vale/linea-pilot
+        uses: Consensys-Incorporated/github-actions/docs-spelling-check@39a3578e2979bc6ce4363b53016a377e111fbb09
