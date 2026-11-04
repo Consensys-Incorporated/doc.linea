@@ -18,13 +18,8 @@ alwaysApply: false
 ## Line wrapping
 
 - Default to US English usage.
-- Respect the 100-character line limit from `.editorconfig`. Use the full 100 characters
-  before wrapping. Don't break lines early at convenient points, and only wrap when a
-  line would actually exceed the limit.
+- When writing prose, wrap at about 100 characters. Start each sentence on its own line.
 - Never break words or URLs when wrapping a line.
-- Use semantic line breaks: start each new sentence on a new line, even when it would
-  still fit within the 100-character limit on the previous line. This is independent of
-  the wrap rule above and keeps future diffs scoped to the sentence that changed.
 
 ## Headings
 
