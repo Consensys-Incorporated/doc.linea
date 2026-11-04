@@ -1,3 +1,31 @@
 # Terms for this site only. One term or pattern per line.
 # Add a term in the pull request that introduces it.
 # Words every Consensys docs site uses belong in the shared Vale list.
+
+[sS]hnarfs?
+[Uu]npause[ds]?
+Sumsub(?:'s)?
+Arcana(?:'s)?
+Onramper
+prover(?:'s)?
+Pinax
+Firehose
+Substreams
+Layerswap
+escrowed
+Phylax
+Openfort(?:'s)?
+shadcn
+sequencer(?:'s)?
+Filtrex
+KPIs
+DVNs
+Blocknative(?:'s)?
+CEXs
+SMTs
+USDe
+DAOs
+ABIs
+Envio(?:'s)?
+growthepie
+SRSs
