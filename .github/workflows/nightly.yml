@@ -11,7 +11,7 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   linkCheck:
     name: Run link check
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set-ubuntu-24-amd64-small
     permissions:
       contents: read
     steps:
@@ -26,7 +26,7 @@ jobs:
   slackNotification:
     needs: linkCheck
     if: ${{ failure() }}
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set-ubuntu-24-amd64-small
     permissions: {}   # zero scopes
     steps:
       - name: Slack Notification

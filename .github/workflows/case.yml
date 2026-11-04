@@ -11,7 +11,7 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   case:
     name: Check for case being inconsistent
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || 'gha-runner-scale-set-ubuntu-24-amd64-small' }}
     strategy:
       matrix:
         folder: ["docs"]
