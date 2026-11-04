@@ -10,7 +10,7 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   linkCheck:
     name: Link Checking
-    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || 'gha-runner-scale-set-ubuntu-24-amd64-small' }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
