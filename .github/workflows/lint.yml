@@ -10,7 +10,8 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   lint:
     name: Lint code and Markdown
-    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || 'gha-runner-scale-set-ubuntu-24-amd64-small' }}
+    runs-on:
+      ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && 'ubuntu-latest' || 'gha-runner-scale-set-ubuntu-24-amd64-small' }}
     permissions:
       contents: read
     steps:
