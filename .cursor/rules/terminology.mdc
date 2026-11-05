@@ -56,5 +56,3 @@ changed documentation file.
   `.github/vale/accept.txt` in the same pull request. Vale treats each line as a
   case-sensitive regular expression. Include plurals and possessives in the pattern
   when the page uses them, for example `Openfort(?:'s)?`.
-- Leave the shared accept list in `github-actions` unchanged. It already contains the
-  terms accepted in the initial audit. New terms stay in this repository's file.
