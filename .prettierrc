@@ -3,7 +3,16 @@
   "bracketSameLine": true,
   "bracketSpacing": true,
   "printWidth": 80,
-  "proseWrap": "always",
+  "proseWrap": "preserve",
+  "overrides": [
+    {
+      "files": ["**/*.md", "**/*.mdx"],
+      "options": {
+        "printWidth": 200,
+        "proseWrap": "preserve"
+      }
+    }
+  ],
   "singleQuote": false,
   "trailingComma": "all",
   "tabWidth": 2,

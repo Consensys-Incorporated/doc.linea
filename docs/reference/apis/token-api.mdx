@@ -17,6 +17,7 @@ specifications, request/response examples, and authentication details.
 ## Key features
 
 ### Token data
+
 - Complete list of available tokens on Linea
 - Detailed token metadata (name, symbol, decimals, logo)
 - Current and historical prices
@@ -24,11 +25,13 @@ specifications, request/response examples, and authentication details.
 - Fairly diluted valuation
 
 ### Market analytics
+
 - Most traded tokens in the last 24h
 - Top movers, gainers and losers (price variation)
 - Price movement tracking
 
 ### Use cases
+
 - Token monitoring dashboards
 - Onchain data analysis
 - DeFi application integration
@@ -41,6 +44,7 @@ specifications, request/response examples, and authentication details.
 Data is collected and updated from multiple sources:
 
 ### Primary sources
+
 - Onchain data (smart contract states)
 - [CoinGecko](https://coingecko.com/en/api)
 - MetaMask Token & Price API
@@ -51,6 +55,7 @@ Please see the [Linea terms of use](https://linea.build/terms-of-service) about 
 information.
 
 ### Update frequencies
+
 - Token detection and metadata: every two hours
 - Historical prices: hourly
 - Current prices: every five minutes
@@ -69,8 +74,8 @@ than $50k.
 ```typescript
 async function getSecureTokens() {
   const BASE_URL = "https://token-api.linea.build";
-  const tokens = await fetch(`${BASE_URL}/tokens?isSecure=true`).then(r => r.json());
-  console.log('Secure tokens:', tokens);
+  const tokens = await fetch(`${BASE_URL}/tokens?isSecure=true`).then((r) => r.json());
+  console.log("Secure tokens:", tokens);
 }
 ```
 
@@ -82,8 +87,8 @@ Adding an `isSecure` filter might be a good idea to avoid scams.
 ```typescript
 async function getNewGems() {
   const BASE_URL = "https://token-api.linea.build";
-  const tokens = await fetch(`${BASE_URL}/tokens?order=createdAt&sort=desc`).then(r => r.json());
-  console.log('Recent tokens:', tokens);
+  const tokens = await fetch(`${BASE_URL}/tokens?order=createdAt&sort=desc`).then((r) => r.json());
+  console.log("Recent tokens:", tokens);
 }
 ```
 
@@ -91,12 +96,11 @@ async function getNewGems() {
 
 You can get the most-swapped tokens in the last 24 hours using the `swaps` ordering parameter.
 
-
 ```typescript
 async function getMostSwapped() {
   const BASE_URL = "https://token-api.linea.build";
-  const tokens = await fetch(`${BASE_URL}/tokens?order=swaps&sort=desc`).then(r => r.json());
-  console.log('Most swapped tokens:', tokens);
+  const tokens = await fetch(`${BASE_URL}/tokens?order=swaps&sort=desc`).then((r) => r.json());
+  console.log("Most swapped tokens:", tokens);
 }
 ```
 
@@ -105,10 +109,10 @@ async function getMostSwapped() {
 ```typescript
 async function monitorPriceChange(contractAddress: string, threshold: number) {
   const BASE_URL = "https://token-api.linea.build";
-  const { currentPrice: initialPrice } = await fetch(`${BASE_URL}/tokens/${contractAddress}`).then(r => r.json());
+  const { currentPrice: initialPrice } = await fetch(`${BASE_URL}/tokens/${contractAddress}`).then((r) => r.json());
 
   setInterval(async () => {
-    const { currentPrice } = await fetch(`${BASE_URL}/tokens/${contractAddress}`).then(r => r.json());
+    const { currentPrice } = await fetch(`${BASE_URL}/tokens/${contractAddress}`).then((r) => r.json());
     const priceChange = (currentPrice - initialPrice) / initialPrice;
 
     if (Math.abs(priceChange) > threshold) {
@@ -122,6 +126,7 @@ async function monitorPriceChange(contractAddress: string, threshold: number) {
 ## Best practices
 
 1. **Rate limiting**
+
 - This API has strict rate limits per IP:
   - Two requests per second
   - 60 requests per minute
@@ -129,11 +134,13 @@ async function monitorPriceChange(contractAddress: string, threshold: number) {
 - Implement backoff strategies
 
 2. **Error handling**
+
 - Check HTTP status codes
 - Implement retry with exponential backoff
 - Validate token addresses
 
 3. **Performance and security**
+
 - Use pagination for large lists
 - Use local caching when appropriate
 - Validate and sanitize all inputs

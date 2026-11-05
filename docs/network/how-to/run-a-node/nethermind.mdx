@@ -10,9 +10,9 @@ import TabItem from "@theme/TabItem";
 
 :::note
 
-This section is undergoing maintenance. Similarly to Ethereum, and as of Linea [Beta v4](../../../changelog/release-notes.mdx#beta-v40), 
-Linea uses a dual-layer architecture, with a consensus layer client, Maru, and an execution layer 
-client of your choice. 
+This section is undergoing maintenance. Similarly to Ethereum, and as of Linea [Beta v4](../../../changelog/release-notes.mdx#beta-v40),
+Linea uses a dual-layer architecture, with a consensus layer client, Maru, and an execution layer
+client of your choice.
 
 This section will be updated shortly to reflect this new architecture and is inaccurate for the time
 being.
@@ -30,10 +30,10 @@ Ethereum JSON-RPC. The `linea_` namespace is implemented by Linea Besu plugins, 
 ## Run using the binary distribution
 
 :::info
-Ensure you review [Nethermind's installation Guidelines](https://docs.nethermind.io/get-started/installing-nethermind) 
+Ensure you review [Nethermind's installation Guidelines](https://docs.nethermind.io/get-started/installing-nethermind)
 before installing the Nethermind client.
 
-If you're not comfortable with installing the binary distribution, consider using [Docker](#run-using-docker) 
+If you're not comfortable with installing the binary distribution, consider using [Docker](#run-using-docker)
 instead.
 :::
 
@@ -75,14 +75,14 @@ Start the node using the following command:
   </TabItem>
 </Tabs>
 
-The Nethermind node will attempt to find peers to begin synchronizing and to download the world 
+The Nethermind node will attempt to find peers to begin synchronizing and to download the world
 state.
 
 ## Run using Docker
 
 ### Prerequisites
 
-Download and install [Docker](https://docker.com/products/docker-desktop/) and ensure it is 
+Download and install [Docker](https://docker.com/products/docker-desktop/) and ensure it is
 running throughout.
 
 ### Step 1. Download Docker image
@@ -135,9 +135,9 @@ docker pull nethermind/nethermind:latest
 
 :::note
 
-Ensure that you correctly configure the Docker volume to persist data between container restarts. 
-Without proper volume setup, data will be lost when the container is stopped. 
-Additionally, make sure to expose the necessary ports (e.g., 8545 for JSON-RPC and 8008 for metrics) 
+Ensure that you correctly configure the Docker volume to persist data between container restarts.
+Without proper volume setup, data will be lost when the container is stopped.
+Additionally, make sure to expose the necessary ports (e.g., 8545 for JSON-RPC and 8008 for metrics)
 to enable external access to these services.
 
 :::
@@ -168,4 +168,3 @@ You should get a result similar to:
   }
 }
 ```
-

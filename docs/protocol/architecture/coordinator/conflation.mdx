@@ -6,18 +6,19 @@ description: >-
 image: /img/socialCards/conflation.jpg
 ---
 
-import ConflationGraphic from '/img/get_started/concepts/sequencer/conflation/Linea_block_conflation.svg';
-import GlossaryTerm from '@theme/GlossaryTerm';
+import ConflationGraphic from "/img/get_started/concepts/sequencer/conflation/Linea_block_conflation.svg";
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 Conflation is the process of combining two or more blocks' worth of transactions into one data set,
 which <GlossaryTerm term="Lineth" /> proves as a single batch.
 Each batch produces one "before and after" map of the network state (a
 [Merkle tree](../state-manager.mdx#merkle-trees)) and one
+
 <GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm>, published to the
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 <div className="img-large">
-    <ConflationGraphic />
+  <ConflationGraphic />
 </div>
 
 Ethereum publishes transaction data in discrete blocks, one at a time and in order.
@@ -30,6 +31,7 @@ which makes the proving system more efficient.
 ## How it works
 
 Conflation is driven by the [coordinator](./index.mdx), using trace data from the
+
 <GlossaryTerm term="Tracer">tracer</GlossaryTerm>:
 
 1. As the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> produces each block, the coordinator requests that

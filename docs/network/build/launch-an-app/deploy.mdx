@@ -7,13 +7,14 @@ image: /img/socialCards/deploy-your-contract.jpg
 ---
 
 Building apps on Linea needn't be complicated. Linea is Ethereum Virtual Machine (EVM)-equivalent,
-providing a development experience identical to Ethereum, and allowing you to leverage the many 
-smart contracts, tools, and libraries created for EVM chains. 
+providing a development experience identical to Ethereum, and allowing you to leverage the many
+smart contracts, tools, and libraries created for EVM chains.
 
-In this guide, we'll walk you through using [Foundry](https://book.getfoundry.sh/) to create a new 
-project from scratch. 
+In this guide, we'll walk you through using [Foundry](https://book.getfoundry.sh/) to create a new
+project from scratch.
 
 This involves:
+
 1. [Creating a project](#create-your-project)
 2. [Deploying](#deploy-your-contract) and then [verifying](#verify-your-contract) your contract.
 
@@ -42,14 +43,14 @@ Firstly, let's [install Foundry](https://book.getfoundry.sh/getting-started/inst
 curl -L https://foundry.paradigm.xyz | bash
 ```
 
-Then initiate the new project, choosing whatever name you prefer. Make sure you're in the 
+Then initiate the new project, choosing whatever name you prefer. Make sure you're in the
 directory you want to create your project in:
 
 ```bash
 forge init linea_test_project
 ```
 
-Foundry will build out the file structure and create a git repository. It also installs one 
+Foundry will build out the file structure and create a git repository. It also installs one
 dependency: `forge-std`, the Forge Standard Library, which enables you to test your project.
 To get more familiar with your new project, it might help to open it in a code editor and inspect
 the files.
@@ -66,12 +67,12 @@ use Foundry.
 
 ## Deploy your contract
 
-The default Foundry template comes with a simple placeholder contract, `Counter.sol`. You're likely 
-going to need something with a bit more functionality. You probably already have an idea of what 
-you want your app to do, and you might have the skills to write your own contract from scratch. 
+The default Foundry template comes with a simple placeholder contract, `Counter.sol`. You're likely
+going to need something with a bit more functionality. You probably already have an idea of what
+you want your app to do, and you might have the skills to write your own contract from scratch.
 
-For simplicity, we're going to stick with `Counter.sol`, but you can use any template you want, or 
-refer to our [contract templates section](../tools/contracts-templates/index.mdx) for more inspiration. 
+For simplicity, we're going to stick with `Counter.sol`, but you can use any template you want, or
+refer to our [contract templates section](../tools/contracts-templates/index.mdx) for more inspiration.
 
 We'll use the `forge create` command to deploy the contract. First, we must get an RPC endpoint and
 ensure we have a secure method for using a private key.
@@ -80,14 +81,14 @@ ensure we have a secure method for using a private key.
 
 #### Get your RPC endpoint
 
-To deploy a contract, you need to interact with the blockchain, which means you need an [RPC  endpoint](../tools/node-providers/index.mdx) 
-to send those calls to. 
+To deploy a contract, you need to interact with the blockchain, which means you need an [RPC endpoint](../tools/node-providers/index.mdx)
+to send those calls to.
 
-To keep things simple, we're going to use the default public RPC endpoint for Linea Sepolia: 
+To keep things simple, we're going to use the default public RPC endpoint for Linea Sepolia:
 `https://rpc.sepolia.linea.build`.
 
 Public endpoints such as this one are rate limited, and if you intend to deploy your app for public
-use, you'll need an endpoint better equipped to handle the load. We recommend heading to the 
+use, you'll need an endpoint better equipped to handle the load. We recommend heading to the
 MetaMask Developer Dashboard to get a private RPC endpoint ([instructions](https://docs.metamask.io/developer-tools/dashboard/get-started/create-api/)).
 
 You can also find alternative public and private RPC endpoints on our [node providers page](../tools/node-providers/index.mdx).
@@ -104,7 +105,7 @@ sepolia = "https://rpc.sepolia.linea.build"
 ### Store your private key
 
 Deploying a contract requires an account's private key, which means you need to either provide it in
-the command line when running the deployment command (not recommended) or store it securely and 
+the command line when running the deployment command (not recommended) or store it securely and
 access it with alternative methods. See the [MetaMask support guide to finding your private key](https://support.metamask.io/managing-my-wallet/secret-recovery-phrase-and-private-keys/how-to-export-an-accounts-private-key/).
 
 :::tip[Private key security best practices]
@@ -118,9 +119,9 @@ work in a sandboxed context with a somewhat expendable account.
 
 :::
 
-A standard approach is to store your private key as an environment variable in a `.env` file that 
+A standard approach is to store your private key as an environment variable in a `.env` file that
 is only stored locally (i.e. listed in `.gitignore` file). However, we're going to use Foundry's
-keystore system to encrypt and store the private key, and then access it with a password. This 
+keystore system to encrypt and store the private key, and then access it with a password. This
 ensures that you won't accidentally expose your private key—for example, in a GitHub repository.
 
 To do this, we'll use Foundry's [`cast`](https://book.getfoundry.sh/cast/) CLI tool; specifically,
@@ -131,10 +132,10 @@ cast wallet import --interactive test-account
 ```
 
 The `--interactive` flag means that you'll be prompted to enter your private key in the terminal,
-followed by a corresponding password. `test-account` is the name you want to give the account in 
+followed by a corresponding password. `test-account` is the name you want to give the account in
 the keystore; choose whatever is suitable for your purposes here.
 
-When you enter the private key and then your password, you'll get confirmation that it has been 
+When you enter the private key and then your password, you'll get confirmation that it has been
 stored successfully:
 
 ```
@@ -147,14 +148,14 @@ Run `cast wallet list` to see accounts in your keystore.
 
 #### Adjust Solidity version
 
-By default, the `forge init` command we used originally creates the `Counter.sol` contract with the 
+By default, the `forge init` command we used originally creates the `Counter.sol` contract with the
 following Solidity compiler version:
 
 ```
 pragma solidity ^0.8.13;
 ```
 
-This enables the compiler to use any version newer than Solidity v0.8.13. [Linea is only compatible 
+This enables the compiler to use any version newer than Solidity v0.8.13. [Linea is only compatible
 with Solidity 0.8.19 or lower](../../overview/ethereum-differences.mdx), so we need to make some
 adjustments.
 
@@ -176,7 +177,7 @@ solc-version = "0.8.19"
 
 #### Run `forge create`
 
-With your RPC endpoint to hand and your private key stored more securely, you're ready to deploy 
+With your RPC endpoint to hand and your private key stored more securely, you're ready to deploy
 using `forge create`.
 
 Execute this command, then enter your password to use the private key when prompted:
@@ -187,11 +188,11 @@ forge create --rpc-url https://rpc.sepolia.linea.build --account test-account --
 
 - `--rpc-url` is the RPC endpoint you want to use.
 - `--account` is the keystore account you want to use to deploy the contract.
-- `--broadcast` tells Forge to send the transaction to the network. You can test the command by 
-omitting this flag, but you won't actually deploy the contract.
+- `--broadcast` tells Forge to send the transaction to the network. You can test the command by
+  omitting this flag, but you won't actually deploy the contract.
 
 The format of the contract you want to deploy is `path/to/contract.sol:ContractName`; in this case,
-we want the `Counter` contract from `src/Counter.sol`. 
+we want the `Counter` contract from `src/Counter.sol`.
 
 If successful, you'll see this in the terminal:
 
@@ -201,7 +202,7 @@ Deployed to: 0x ... // The address of the deployed contract
 Transaction hash: 0x ... // The deployment transaction itself
 ```
 
-You can copy each of these addresses and head to the [block explorer](https://sepolia.lineascan.build/) 
+You can copy each of these addresses and head to the [block explorer](https://sepolia.lineascan.build/)
 to see the deployed contract.
 
 Make sure to copy the `Deployed to` address, as you'll need it to verify the contract. It'll also
@@ -210,7 +211,7 @@ app.
 
 ## Verify your contract
 
-Verifying a contract makes the source code publicly visible, and also confirms to others that it 
+Verifying a contract makes the source code publicly visible, and also confirms to others that it
 originated from a genuine source.
 
 Verifying can be done with the `forge verify-contract` command, and requires a Lineascan API key.
@@ -219,7 +220,7 @@ Verifying can be done with the `forge verify-contract` command, and requires a L
 
 Get a Lineascan API key by [creating an account](https://lineascan.build/myapikey).
 
-Since it's best practice to avoid using API keys in the command line, add the API key to your 
+Since it's best practice to avoid using API keys in the command line, add the API key to your
 `.env` file:
 
 ```
@@ -236,7 +237,7 @@ linea-sepolia = { key = "${LINEASCAN_API_KEY}" }
 
 #### Run `forge verify-contract`
 
-Execute this command: 
+Execute this command:
 
 ```bash
 forge verify-contract --chain linea-sepolia YOUR_CONTRACT_ADDRESS path_to_contract:contract_name --watch
@@ -248,7 +249,7 @@ terminal until verification is complete.
 :::note
 
 You can also complete verification at the same time as deployment by adding the `--verify` and
-`--verifier-url` flags to the `forge create` command, and providing your Lineascan API key. 
+`--verifier-url` flags to the `forge create` command, and providing your Lineascan API key.
 
 For example:
 
@@ -259,11 +260,11 @@ forge create --rpc-url https://rpc.sepolia.linea.build --account test-account --
 :::
 
 Now you've successfully deployed and verified your contract! It's recorded on the blockchain and
-ready to receive calls from your app. 
+ready to receive calls from your app.
 
-## Next steps 
+## Next steps
 
-Proceed to [part two](./app.mdx) of this quickstart, where we'll build a simple web app for 
+Proceed to [part two](./app.mdx) of this quickstart, where we'll build a simple web app for
 interacting with the counter contract.
 
 ## Help and resources

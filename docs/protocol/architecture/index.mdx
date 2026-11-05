@@ -5,16 +5,14 @@ description: Protocol architecture overview and core components of Lineth
 image: /img/socialCards/architecture.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
-import TransactionLifecycle from '/img/protocol/architecture/transaction-lifecycle.svg';
+import GlossaryTerm from "@theme/GlossaryTerm";
+import TransactionLifecycle from "/img/protocol/architecture/transaction-lifecycle.svg";
 
-<GlossaryTerm term="Lineth" /> architecture supports a configurable protocol that delivers developer-ready L2 and
-L3 networks, scaling Ethereum by providing an Ethereum-equivalent execution environment.
+<GlossaryTerm term="Lineth" /> architecture supports a configurable protocol that delivers developer-ready L2 and L3 networks, scaling Ethereum by providing an Ethereum-equivalent execution
+environment.
 
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> and network designers configure their stack to shape
-protocol behavior and trust assumptions, for example, choosing the
-[data availability](../../stack/deployment/data-availability.mdx) and
-[finalization layer](../../stack/deployment/finalization-layer.mdx) design.
+<GlossaryTerm term="Operator">Operators</GlossaryTerm> and network designers configure their stack to shape protocol behavior and trust assumptions, for example, choosing the [data
+availability](../../stack/deployment/data-availability.mdx) and [finalization layer](../../stack/deployment/finalization-layer.mdx) design.
 
 ## Transaction lifecycle
 
@@ -30,9 +28,9 @@ Transactions enter the mempool through the [RPC](./nodes/rpc-services.mdx) entry
 The <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> validates, orders, and executes them
 into blocks.
 Block building runs on a <GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>: a
-<GlossaryTerm term="Maru validator" /> paired with a <GlossaryTerm term="Linea Besu" /> execution client.
-It enforces Lineth [validity conditions](./sequencer/index.mdx#transaction-validity-conditions),
-including a profitability threshold.
+
+<GlossaryTerm term="Maru validator" /> paired with a <GlossaryTerm term="Linea Besu" /> execution client. It enforces Lineth [validity
+conditions](./sequencer/index.mdx#transaction-validity-conditions), including a profitability threshold.
 
 ### 2. Batch and trace blocks
 
@@ -49,9 +47,9 @@ The coordinator combines those batches into blobs, and the prover generates comp
 ### 4. Submit for data availability and finalization
 
 The coordinator submits the data and the proofs to the
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
-The finalization contract validates the <GlossaryTerm term="zk-SNARK" /> proofs and records the state roots.
-After verification and any configured delay, transactions reach settlement finality on the selected finalization layer.
+
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. The finalization contract validates the <GlossaryTerm term="zk-SNARK" /> proofs and records the state roots. After
+verification and any configured delay, transactions reach settlement finality on the selected finalization layer.
 
 [Data availability](../../stack/deployment/data-availability.mdx) is the guarantee that the
 transaction data underlying these proofs remains accessible to the parties who need it to verify or
@@ -63,11 +61,8 @@ How data availability is provided depends on the
   transaction data to the finalization layer as EIP-4844 blobs.
   The rollup must support the `IAcceptEip4844Blobs` interface.
 - For a <GlossaryTerm term="Validium">validium</GlossaryTerm>, submission is
-  <GlossaryTerm term="Shnarf">shnarf</GlossaryTerm>-only.
-  Only proofs and state commitments are posted to the finalization layer.
-  The validium must support the `IAcceptShnarfData` interface.
-  The network may rely on another blockchain or a third-party service, or operators may run nodes
-  specifically for data availability.
+  <GlossaryTerm term="Shnarf">shnarf</GlossaryTerm>-only. Only proofs and state commitments are posted to the finalization layer. The validium must support the `IAcceptShnarfData` interface. The
+  network may rely on another blockchain or a third-party service, or operators may run nodes specifically for data availability.
 
 Read more about [Data commitments (shnarfs)](smart-contracts.mdx#data-commitments-shnarfs).
 

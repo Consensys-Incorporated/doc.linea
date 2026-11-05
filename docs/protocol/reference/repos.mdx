@@ -25,7 +25,7 @@ The primary Lineth repository. It includes the components that power Linea Mainn
 
 Specification and arithmetization of the constraint system underlying Lineth's zkEVM.
 
-Constraints are mathematical equations and a constraint system is a collection of such equations. 
+Constraints are mathematical equations and a constraint system is a collection of such equations.
 Lineth's constraint system aims to capture the logic of valid EVM executions.
 
 The constraints specified here are implemented in the `tracer-constraints` directory.
@@ -35,7 +35,7 @@ The constraints specified here are implemented in the `tracer-constraints` direc
 Implementation of the constraint system specified in the `arithmetization` directory.
 
 Lineth's constraint system applies to so-called "traces", which are large matrices of fixed width
-(that is, a fixed number of columns or "registries") and variable depth (correlating with the complexity 
+(that is, a fixed number of columns or "registries") and variable depth (correlating with the complexity
 of the EVM execution). The production of such traces is the job of the `linea-tracer` repo.
 
 Constraints and traces are two of the inputs to the prover.
@@ -44,8 +44,8 @@ Constraints and traces are two of the inputs to the prover.
 
 Linea Besu plugin which produces the traces that the constraint system applies and that serve as inputs to the prover.
 
-Tracing refers to the process of extracting data from the execution of an EVM client in order to 
-construct large matrices known as execution traces. Execution traces are subject to the constraint 
+Tracing refers to the process of extracting data from the execution of an EVM client in order to
+construct large matrices known as execution traces. Execution traces are subject to the constraint
 system specified in the `arithmetization` directory and implemented in the `tracer-constraints` directory.
 
 ## [`linea-besu-upstream`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/linea-besu)
@@ -55,7 +55,7 @@ A Besu build configured for Lineth.
 [Besu](https://besu.hyperledger.org/) is an Ethereum client that supports [Linea as a named network](https://besu.hyperledger.org/public-networks/reference/cli/options#network), with optional plugins for additional functionality.
 
 As Lineth is EVM-equivalent, networks built on it are compatible with
-[standard Ethereum clients](../../network/how-to/run-a-node/index.mdx). 
+[standard Ethereum clients](../../network/how-to/run-a-node/index.mdx).
 
 ## [`gnark`](https://github.com/Consensys/gnark)
 

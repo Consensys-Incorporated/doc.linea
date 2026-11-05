@@ -22,10 +22,11 @@ This flow handles user verification through **Sumsub's Proof of Personhood** flo
 
 :::tip Before you start
 You’ll need:
+
 - A frontend app connected to the Linea network
 - A reliable Linea Mainnet RPC provider such as [Infura](https://developer.metamask.io)
 - A way to read the user’s wallet address (e.g. [Wagmi](https://2.x.wagmi.sh/react/api/hooks/useAccount))
-:::
+  :::
 
 ### Typical flow
 
@@ -33,21 +34,23 @@ Here’s how the complete user verification process works step-by-step:
 
 1. The user connects their Ethereum wallet.
 2. Your app queries the Linea PoH API to check whether the user is already verified.\
-Endpoint: `https://poh-api.linea.build/poh/v2/{address}`\
-Documentation [here](https://poh-api.linea.build/#/PoH/PohController_getOnePOHv2).
+   Endpoint: `https://poh-api.linea.build/poh/v2/{address}`\
+   Documentation [here](https://poh-api.linea.build/#/PoH/PohController_getOnePOHv2).
 
 The endpoint returns `true` if the address is verified, or `false` otherwise.
 Use `false` to trigger the Sumsub flow (next step).
 
 3. Your app asks them to sign a message, containing these variables:
-  - Their wallet address
-  - A timestamp (ISO date)
-  - A nonce (random string for replay protection)
+
+- Their wallet address
+- A timestamp (ISO date)
+- A nonce (random string for replay protection)
 
 The signature is used by Sumsub to confirm wallet ownership and link the verification to the correct address onchain.
 A recommended way to sign the message is to use Wagmi's [`useSignMessage` hook](https://wagmi.sh/react/api/hooks/useSignMessage):
+
 ```tsx
-import {useAccount, useSignMessage} from "wagmi";
+import { useAccount, useSignMessage } from "wagmi";
 
 function App() {
   const { address } = useAccount();
@@ -57,9 +60,12 @@ function App() {
   const issuedAt = new Date().toISOString();
 
   return (
-    <button onClick={() => signMessage({
-      message: `${window.location.host} wants you to sign in with your Ethereum account:\n${address}\n\nI confirm that I am the owner of this wallet and consent to performing a risk assessment and issuing a Verax attestation to this address.\n\nURI: https://in.sumsub.com\nVersion: 1\nChain ID: 59144\nNonce: ${nonce}\nIssued At: ${issuedAt}`,
-    })}>
+    <button
+      onClick={() =>
+        signMessage({
+          message: `${window.location.host} wants you to sign in with your Ethereum account:\n${address}\n\nI confirm that I am the owner of this wallet and consent to performing a risk assessment and issuing a Verax attestation to this address.\n\nURI: https://in.sumsub.com\nVersion: 1\nChain ID: 59144\nNonce: ${nonce}\nIssued At: ${issuedAt}`,
+        })
+      }>
       Sign message
     </button>
   );
@@ -69,9 +75,10 @@ function App() {
 Note: this message contains the Linea Mainnet chain ID (59144). The nonce provides replay protection, and `window.location.host` dynamically uses your app's domain.
 
 4. Generate a link including this signed payload and redirect to it, or open it in an iframe.
-You need to encode the JSON payload in base64 to safely include it in the Sumsub verification URL.
+   You need to encode the JSON payload in base64 to safely include it in the Sumsub verification URL.
 
 Payload to encode:
+
 ```json
 {
   "signInMessage": "<YOUR_DOMAIN> wants you to sign in with your Ethereum account:\n<WALLET_ADDRESS>\n\nI confirm that I am the owner of this wallet and consent to performing a risk assessment and issuing a Verax attestation to this address.\n\nURI: https://in.sumsub.com\nVersion: 1\nChain ID: 59144\nNonce: <RANDOM_NONCE>\nIssued At: <ISO_DATE>",
@@ -86,13 +93,14 @@ const authMsg = btoa(JSON.stringify(payload));
 const url = new URL("https://in.sumsub.com/websdk/p/uni_BKWTkQpZ2EqnGoY7");
 url.search = new URLSearchParams({
   authMsg,
-  utm_source: 'your-app-name', // Optional: for tracking purposes
+  utm_source: "your-app-name", // Optional: for tracking purposes
 }).toString();
 ```
 
 5. The Sumsub verification process happens on their side.
 6. Once verified, the user is redirected back to your app, or your frontend receives a message event from the iframe wrapper.
-Listening for the event:
+   Listening for the event:
+
 ```typescript
 const iframe = document.getElementById("sumsub-frame") as HTMLIFrameElement;
 const ac = new AbortController();
@@ -103,18 +111,21 @@ window.addEventListener(
     if (e.source !== iframe.contentWindow) return;
     if (e.origin !== "https://in.sumsub.com") return;
 
-    if (e.data.status === "completed") { /* proceed */ }
+    if (e.data.status === "completed") {
+      /* proceed */
+    }
 
     ac.abort();
   },
   { signal: ac.signal },
 );
 ```
+
 Alternatively, you can redirect users back to your app via a callback URL instead of using an iframe.
 
 7. You can then query the Linea PoH API to confirm that the attestation has been issued onchain.\
-Endpoint: `https://poh-api.linea.build/poh/v2/{address}`\
-Documentation [here](https://poh-api.linea.build/#/PoH/PohController_getOnePOHv2).
+   Endpoint: `https://poh-api.linea.build/poh/v2/{address}`\
+   Documentation [here](https://poh-api.linea.build/#/PoH/PohController_getOnePOHv2).
 
 ### Notes
 
@@ -151,6 +162,7 @@ The response is raw text, not JSON.
 - `true` = address has PoH status.
 
 **Example:**
+
 ```typescript
 const res = await fetch(`.../poh/v2/${address}`);
 if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -212,10 +224,12 @@ function verify(
 ```
 
 Parameters:
+
 - `signature`: The signed message from the previous step.
 - `address`: The address of the account being queried.
 
 It returns a boolean:
+
 - `true`: The account has PoH status.
 - `false`: The account does not have PoH status.
 
@@ -238,7 +252,7 @@ if (!pohVerifier.verify(signature, msg.sender)) {
 ## Summary
 
 | Use case         | Recommended method | Description                                   |
-|------------------|--------------------|-----------------------------------------------|
+| ---------------- | ------------------ | --------------------------------------------- |
 | Frontend dapps   | Sumsub web flow    | Best UX for end users, real-time verification |
 | Backend services | Offchain PoH API   | Fast boolean response, easy to integrate      |
 | Smart contracts  | Onchain verifier   | Fully verifiable verification on Linea        |

@@ -4,11 +4,11 @@ description: A step-by-step guide to building a simple voting dapp on Linea.
 image: /img/socialCards/build-a-voting-dapp.jpg
 ---
 
-Web3 values such as transparency, trust and decentralization naturally lend themselves to 
+Web3 values such as transparency, trust and decentralization naturally lend themselves to
 decentralized voting, where removing intermediaries and ensuring transparency can significantly
-enhance the democratic process. 
+enhance the democratic process.
 
-This tutorial walks you through building a simple voting dapp, and you'll learn how to write, deploy and 
+This tutorial walks you through building a simple voting dapp, and you'll learn how to write, deploy and
 interact with a smart contract designed for a decentralized voting process.
 
 ## Prerequisites
@@ -31,52 +31,50 @@ integrations out of the box, including MetaMask SDK, Linea support, Infura integ
 of templates to choose from.
 
 1. Open your terminal and run the following command:
-    
-    ```bash
-    pnpm create @consensys/create-web3-template
-    ```
-    
+
+   ```bash
+   pnpm create @consensys/create-web3-template
+   ```
+
 2. You'll be prompted to specify a name for your project.
-  Name it `simple-voting-dapp`:
-    
-    ```
-    ? Please specify a name for your project: simple-voting-dapp
-    ```
-    
+   Name it `simple-voting-dapp`:
+   ```
+   ? Please specify a name for your project: simple-voting-dapp
+   ```
 3. Next, select the Next.js framework for your frontend:
-    
-    ```
-    ? Please select the framework you want to use:
-      HardHat Vanilla
-      React
-    ❯ Next.js
-    ```
-    
+
+   ```
+   ? Please select the framework you want to use:
+     HardHat Vanilla
+     React
+   ❯ Next.js
+   ```
+
 4. Choose Hardhat as the smart contract development environment:
-    
-    ```
-    ? Would you like to use HardHat or Foundry?
-    ❯ HardHat
-      Foundry
-    
-    ```
-    
+
+   ```
+   ? Would you like to use HardHat or Foundry?
+   ❯ HardHat
+     Foundry
+
+   ```
+
 5. Select your preferred package manager. This tutorial uses pnpm:
-    
-    ```
-    ? Please select the package manager you want to use:
-      Yarn
-      NPM
-    ❯ pnpm
-    
-    ```
-    
+
+   ```
+   ? Please select the package manager you want to use:
+     Yarn
+     NPM
+   ❯ pnpm
+
+   ```
+
 The CLI will generate the project based on your selections.
 
 <details>
 <summary>Project structure</summary>
-<div>
-After the setup is complete, your project directory `simple-voting-dapp` will have the following 
+
+After the setup is complete, your project directory `simple-voting-dapp` will have the following
 structure:
 
 ```
@@ -91,7 +89,7 @@ simple-voting-dapp
 - **`packages/site`**: Contains the frontend code of the dapp, built with Next.js.
 - **`packages/blockchain`**: Contains the smart contracts and related scripts using HardHat.
 - **`pnpm-workspace.yaml`**: Defines the workspace configuration for the monorepo.
-</div>
+
 </details>
 
 ### 2. Install dependencies
@@ -117,36 +115,36 @@ To ensure everything is set up correctly, run the development servers.
 **For the frontend:**
 
 1. Navigate to the `site` directory:
-    
-    ```bash
-    cd packages/site
-    ```
-    
+
+   ```bash
+   cd packages/site
+   ```
+
 2. Start the Next.js development server:
-    
-    ```bash
-    pnpm dev
-    ```
-    
+
+   ```bash
+   pnpm dev
+   ```
+
 3. Open your browser and go to `http://localhost:3000` to see the frontend running.
 
 **For the backend:**
 
 1. Open a new terminal window.
 2. Navigate to the `blockchain` directory:
-    
-    ```bash
-    cd packages/blockchain
-    ```
-    
+
+   ```bash
+   cd packages/blockchain
+   ```
+
 3. Compile the default smart contracts:
-    
-    ```bash
-    pnpm hardhat compile
-    ```
-    
-    This will compile the sample contracts included in the HardHat setup.
-    
+
+   ```bash
+   pnpm hardhat compile
+   ```
+
+   This will compile the sample contracts included in the HardHat setup.
+
 ### 4. Configure `.env` variables
 
 Update the `.env` file in the `packages/blockchain` directory with the following values:
@@ -161,12 +159,12 @@ ACCOUNT_PRIVATE_KEY=your_account_private_key_here
 ```
 
 - Replace `your_infura_api_key_here` with your Infura API key.
-- Replace `your_account_private_key_here` with the private key of the Ethereum account you will use 
-for deploying the contract.
+- Replace `your_account_private_key_here` with the private key of the Ethereum account you will use
+  for deploying the contract.
 
 ### 5. Create the voting contract
 
-Create a `Voting.sol` file and add the following code: 
+Create a `Voting.sol` file and add the following code:
 
 ```jsx
 // SPDX-License-Identifier: MIT
@@ -184,16 +182,16 @@ contract Voting {
 
     /// @notice Array to store all candidates
     Candidate[] public candidates;
-    
+
     /// @notice Address of the contract owner
     address owner;
-    
+
     /// @notice Mapping to track if an address has voted
     mapping(address => bool) public voters;
 
     /// @notice Timestamp when voting starts
     uint256 public votingStart;
-    
+
     /// @notice Timestamp when voting ends
     uint256 public votingEnd;
 
@@ -272,10 +270,7 @@ This image illustrates the concept of the smart contract:
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/voting-dapp/voting.png"
-      alt=""
-    />
+    <img src="/img/voting-dapp/voting.png" alt="" />
   </div>
 </div>
 
@@ -307,7 +302,7 @@ This image illustrates the concept of the smart contract:
 - `getRemainingTime` calculates and returns how much time is left in the voting period.
 - These functions provide users with real-time information about the election.
 
-This smart contract facilitates a decentralized voting system where users can vote for candidates 
+This smart contract facilitates a decentralized voting system where users can vote for candidates
 securely, with all votes and results recorded on the blockchain.
 
 ### 6. Deploy the contract
@@ -325,16 +320,10 @@ const VotingModule = buildModule("VotingModule", (m) => {
 
   // Get parameters with default values
   const candidateNames = m.getParameter("candidateNames", DEFAULT_CANDIDATES);
-  const durationInMinutes = m.getParameter(
-    "durationInMinutes",
-    DEFAULT_DURATION_MINUTES
-  );
+  const durationInMinutes = m.getParameter("durationInMinutes", DEFAULT_DURATION_MINUTES);
 
   // Deploy the Voting contract
-  const voting = m.contract("Voting", [
-    candidateNames,
-    durationInMinutes,
-  ]);
+  const voting = m.contract("Voting", [candidateNames, durationInMinutes]);
 
   return { voting };
 });
@@ -358,7 +347,7 @@ Deploy the contract on Linea Sepolia by running the following command from the `
 npx hardhat ignition deploy ignition/modules/Voting.ts --network linea-testnet
 ```
 
-This command tells Hardhat to use Ignition to deploy the `Voting` module to the `linea-testnet` 
+This command tells Hardhat to use Ignition to deploy the `Voting` module to the `linea-testnet`
 network.
 
 Alternatively, you can add a deployment script to your `package.json` to simplify the process.
@@ -413,7 +402,7 @@ This configuration sets up the connection to the Linea testnet and enables walle
 In the `src` directory, create a file named `constants.ts` and add the following:
 
 ```tsx
-export const CONTRACT_ADDRESS = 'your_deployed_contract_address_here';
+export const CONTRACT_ADDRESS = "your_deployed_contract_address_here";
 
 export const ABI = [
   // Paste the ABI of your Voting contract here
@@ -477,6 +466,7 @@ export default function Home() {
   const [number, setNumber] = useState("");
 
 ```
+
 - **Function component**: Defines the `Home` component as the default export.
 - **Wallet information**:
   - `address`: The user's wallet address obtained from `useAccount`.
@@ -543,11 +533,7 @@ async function vote() {
     console.error("Missing required data for voting");
     return;
   }
-  if (
-    isNaN(Number(number)) ||
-    Number(number) < 0 ||
-    Number(number) >= candidates.length
-  ) {
+  if (isNaN(Number(number)) || Number(number) < 0 || Number(number) >= candidates.length) {
     console.error("Invalid candidate index");
     return;
   }
@@ -588,9 +574,7 @@ async function vote() {
 ```jsx
 return (
   <main className="container mx-auto p-4">
-    <h1 className="text-2xl font-bold mb-4">
-      Decentralized Voting Application
-    </h1>
+    <h1 className="text-2xl font-bold mb-4">Decentralized Voting Application</h1>
     <ConnectButton />
 
     {votingStatus ? (
@@ -601,13 +585,7 @@ return (
             <p>Remaining Time: {Number(remainingTime)} seconds</p>
             {!canVote ? (
               <div className="mt-4">
-                <Input
-                  type="number"
-                  placeholder="Enter Candidate Index"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                  className="mb-2"
-                />
+                <Input type="number" placeholder="Enter Candidate Index" value={number} onChange={(e) => setNumber(e.target.value)} className="mb-2" />
                 <Button onClick={vote}>Vote</Button>
               </div>
             ) : (
@@ -618,8 +596,7 @@ return (
               <ul>
                 {candidates.map((candidate) => (
                   <li key={candidate.index}>
-                    {candidates.indexOf(candidate)}: {candidate.name} -{" "}
-                    {Number(candidate.voteCount)} votes
+                    {candidates.indexOf(candidate)}: {candidate.name} - {Number(candidate.voteCount)} votes
                   </li>
                 ))}
               </ul>

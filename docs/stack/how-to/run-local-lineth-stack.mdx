@@ -6,12 +6,12 @@ description: >-
 image: /img/socialCards/run-a-local-lineth-stack.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This quickstart guide walks you through starting a local <GlossaryTerm term="Lineth" />
-<GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, deploying the required contracts,
-and verifying L1 finality.
-You will choose the L1 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, and how the stack proves blocks.
+
+<GlossaryTerm term="Layer 2 (L2)">L2</GlossaryTerm> <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, deploying the required contracts, and verifying L1 finality. You will choose the L1
+<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>, and how the stack proves blocks.
 
 This quickstart is intended for <GlossaryTerm term="Operator">operators</GlossaryTerm>, architects, and engineers evaluating how
 the stack behaves before designing a production deployment.
@@ -40,13 +40,11 @@ details, see [Deployment components](/stack/deployment/core-components).
 
 - Linea Besu <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm>, and an L2 Besu
   <GlossaryTerm term="Follower execution client">follower execution client</GlossaryTerm> that serves RPC
-- <GlossaryTerm term="Maru"/> consensus layer client, running as a
-  <GlossaryTerm term="Maru validator">validator</GlossaryTerm> and driving both execution clients
-- <GlossaryTerm term="Shomei"/> state manager
-- <GlossaryTerm term="Coordinator"/> for batching, proof orchestration, L2 message data anchoring, and
-  submissions
-- <GlossaryTerm term="Postman"/> for L1-to-L2 and L2-to-L1 message relay
-- <GlossaryTerm term="Web3Signer"/> for generated runtime signer keys used by the coordinator and Postman
+- <GlossaryTerm term="Maru" /> consensus layer client, running as a<GlossaryTerm term="Maru validator">validator</GlossaryTerm> and driving both execution clients
+- <GlossaryTerm term="Shomei" /> state manager
+- <GlossaryTerm term="Coordinator" /> for batching, proof orchestration, L2 message data anchoring, and submissions
+- <GlossaryTerm term="Postman" /> for L1-to-L2 and L2-to-L1 message relay
+- <GlossaryTerm term="Web3Signer" /> for generated runtime signer keys used by the coordinator and Postman
 - <GlossaryTerm term="Prover" /> for proof generation
 - Local L2 Blockscout block explorer, including API backend and frontend
 
@@ -69,10 +67,10 @@ The following is required for both Sepolia and local L1 mode:
 
 The following is required only for Sepolia mode:
 
-| Requirement | Minimum                                                       |
-| ----------- | ------------------------------------------------------------- |
+| Requirement | Minimum                                                            |
+| ----------- | ------------------------------------------------------------------ |
 | Sepolia RPC | Reliable HTTPS endpoint: a paid RPC plan, or your own Sepolia node |
-| Sepolia ETH | Enough for deployment and runtime account top-ups             |
+| Sepolia ETH | Enough for deployment and runtime account top-ups                  |
 
 :::note
 These requirements may change as the Lineth Stack

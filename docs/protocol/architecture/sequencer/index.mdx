@@ -6,7 +6,7 @@ description: >-
 image: /img/socialCards/sequencer.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 The sequencer is a set of plugins, bundled with <GlossaryTerm term="Linea Besu" />, that extends the
 [Besu](https://docs.besu-eth.org/) execution client.
@@ -35,17 +35,17 @@ ensure the block fits within blob size constraints, then executes and imports th
 
 The sequencer also provides the <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> with the data needed to prove
 those blocks: the trace counts that determine how many blocks to
-<GlossaryTerm term="Conflation">conflate</GlossaryTerm> into one batch, and then the conflated trace file for that
-batch, produced by re-executing its blocks.
-This keeps proofs compact, which reduces the data posted to the
+
+<GlossaryTerm term="Conflation">conflate</GlossaryTerm> into one batch, and then the conflated trace file for that batch, produced by re-executing its blocks. This keeps proofs compact, which reduces
+the data posted to the
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 :::note
 
 A single-validator deployment runs one sequencer.
 [Multi-validator deployments](/stack/deployment/multi-validator-consensus) run one sequencer per
-<GlossaryTerm term="Maru validator">Maru validator</GlossaryTerm>, since each validator needs its own Linea
-Besu with the sequencer plugins.
+
+<GlossaryTerm term="Maru validator">Maru validator</GlossaryTerm>, since each validator needs its own Linea Besu with the sequencer plugins.
 
 :::
 

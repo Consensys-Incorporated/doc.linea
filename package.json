@@ -6,11 +6,14 @@
     "prebuild": "node scripts/generate-glossary.js && node scripts/generateSocialCard.js && node scripts/updateCategories.js",
     "build": "docusaurus build",
     "postbuild": "node scripts/agent-docs/generate.js",
+    "prepare": "node scripts/husky-prepare.js",
     "clean-slate": "bash ./clean-slate.sh",
     "clear": "docusaurus clear",
     "deploy": "docusaurus deploy",
     "docusaurus": "docusaurus",
     "format": "prettier --write \"{blog,docs,src,static}/(**/*).{md,mdx,ts,js,tsx,jsx,json}\"",
+    "format:docs": "prettier --write \"docs/**/*.{md,mdx}\"",
+    "format:docs:check": "prettier --check \"docs/**/*.{md,mdx}\"",
     "glossary:generate": "node scripts/generate-glossary.js",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint .",
@@ -37,7 +40,8 @@
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:js:fix",
     "**/*.{ts,tsx}": "npm run typecheck-staged",
     "**/*.css": "npm run lint:style",
-    "**/*.{md,mdx,ts,js,tsx,jsx,json}": "npm run format"
+    "**/*.{ts,js,tsx,jsx,json}": "prettier --write",
+    "**/*.{md,mdx}": "prettier --write"
   },
   "browserslist": {
     "production": [
@@ -106,6 +110,7 @@
     "globals": "17.13.0",
     "google-auth-library": "10.9.1",
     "googleapis-common": "8.0.3",
+    "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "prettier": "3.9.10",
     "stylelint": "17.16.0",

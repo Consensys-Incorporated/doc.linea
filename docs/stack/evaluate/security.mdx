@@ -6,7 +6,7 @@ description: >-
 image: /img/socialCards/security-and-assurance.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This page describes <GlossaryTerm term="Lineth" /> protocol guarantees,
 operator-controlled security measures, and available assurance evidence.
@@ -25,6 +25,7 @@ send a private report to
 [security-report@linea.build](mailto:security-report@linea.build), or report a Linea Mainnet issue
 through the [Linea bug bounty on Immunefi](https://immunefi.com/bounty/linea/).
 The policy lists what to include in the report.
+
 </div>
 </details>
 
@@ -33,12 +34,10 @@ The policy lists what to include in the report.
 Under the configured deployment model, Lineth provides:
 
 - State-transition correctness through <GlossaryTerm term="zk-SNARK" /> proof verification on the
-  <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
-  A valid proof means the operator cannot finalize an invalid state transition through the normal proof path.
+  <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. A valid proof means the operator cannot finalize an invalid state transition through the normal proof path.
 - Byzantine fault tolerant consensus for deployments that use
-  <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> with `3f+1` validators.
-  Single-validator deployments do not use QBFT and rely on the operator trust model.
-  See [Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
+  <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> with `3f+1` validators. Single-validator deployments do not use QBFT and rely on the operator trust model. See
+  [Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
 - Settlement finality on the selected finalization layer, scoped to that layer's
   own finality assumptions. A deployment finalizing to Ethereum inherits
   Ethereum L1 finality; a deployment finalizing to Linea Mainnet inherits Linea
@@ -50,8 +49,7 @@ For the trust assumptions in a Lineth deployment, see [Trust model](./trust-mode
 
 ## Operator-controlled security surfaces
 
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> define and operate their own security boundary.
-Operators are responsible for:
+<GlossaryTerm term="Operator">Operators</GlossaryTerm> define and operate their own security boundary. Operators are responsible for:
 
 - Infrastructure isolation and network security controls.
 - [Access control](../deployment/access-control.mdx) for JSON-RPC, APIs, and tooling.
@@ -73,13 +71,13 @@ mechanics, see the
 
 The following table outlines the cryptographic primitives Lineth relies on, where they are used in the stack, and what standards they correspond to.
 
-| Primitive | Where the stack uses it | Standard |
-| --- | --- | --- |
-| ECDSA over secp256k1 | Transaction signing and Maru validator signing | Ethereum-standard curve. |
-| ECDSA over secp256r1 (P-256) | Available to smart contracts through the `P256VERIFY` precompile ([RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md)) | Curve approved under [FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) |
-| Keccak-256 | EVM hashing, state commitments, and role identifiers | Based on the Keccak permutation standardized in [FIPS 202](https://csrc.nist.gov/pubs/fips/202/final) (SHA-3 family). Ethereum uses the pre-standardization Keccak-256 padding, not the FIPS 202 SHA3-256 output. |
-| TLS | Service-to-service and RPC endpoints | Standard TLS. Configuration is per deployment. |
-| Key custody | Remote signing through [Web3Signer](https://docs.web3signer.consensys.com/), with optional AWS KMS-backed secp256k1 signing | AWS KMS uses FIPS 140-2 and FIPS 140-3 validated HSMs (validations held by AWS). Key custody is a deployment choice. |
+| Primitive                    | Where the stack uses it                                                                                                                      | Standard                                                                                                                                                                                                          |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ECDSA over secp256k1         | Transaction signing and Maru validator signing                                                                                               | Ethereum-standard curve.                                                                                                                                                                                          |
+| ECDSA over secp256r1 (P-256) | Available to smart contracts through the `P256VERIFY` precompile ([RIP-7212](https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md)) | Curve approved under [FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final)                                                                                                                                    |
+| Keccak-256                   | EVM hashing, state commitments, and role identifiers                                                                                         | Based on the Keccak permutation standardized in [FIPS 202](https://csrc.nist.gov/pubs/fips/202/final) (SHA-3 family). Ethereum uses the pre-standardization Keccak-256 padding, not the FIPS 202 SHA3-256 output. |
+| TLS                          | Service-to-service and RPC endpoints                                                                                                         | Standard TLS. Configuration is per deployment.                                                                                                                                                                    |
+| Key custody                  | Remote signing through [Web3Signer](https://docs.web3signer.consensys.com/), with optional AWS KMS-backed secp256k1 signing                  | AWS KMS uses FIPS 140-2 and FIPS 140-3 validated HSMs (validations held by AWS). Key custody is a deployment choice.                                                                                              |
 
 ## Available evidence
 

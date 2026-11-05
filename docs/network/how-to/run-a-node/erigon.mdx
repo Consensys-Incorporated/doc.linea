@@ -83,13 +83,13 @@ configuration. The same directory contains the Geth genesis file that Erigon sho
   directory from the Linea monorepo. The Erigon services in the compose file already reference
   the patched image and mount the Geth genesis file directly, so no manual edits are required.
 
-  :::note[bootnodes]
-  You can choose from a range of bootnodes for Linea Mainnet. The Docker Compose file uses all
-  bootnodes by default.
+:::note[bootnodes]
+You can choose from a range of bootnodes for Linea Mainnet. The Docker Compose file uses all
+bootnodes by default.
 
-  The [bootnodes page](bootnodes.mdx) contains a full list of available bootnodes.
-  :::
-  
+The [bootnodes page](bootnodes.mdx) contains a full list of available bootnodes.
+:::
+
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
   
@@ -158,18 +158,12 @@ directory specified by [`datadir` in Step 4](#step-4-bootstrap-your-node).
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
   <TabItem value="Mainnet" label="Mainnet">
-  
-  Download the current Linea Mainnet
-  [`geth-genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-mainnet/geth/geth-genesis.json)
-  file from the Linea monorepo. Save it in your Erigon data directory as `genesis.json`.
-  
+    Download the current Linea Mainnet [`geth-genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-mainnet/geth/geth-genesis.json) file from the Linea
+    monorepo. Save it in your Erigon data directory as `genesis.json`.
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-  
-  Download the current Linea Sepolia
-  [`geth-genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-sepolia/geth/geth-genesis.json)
-  file from the Linea monorepo. Save it in your Erigon data directory as `genesis.json`.
-  
+    Download the current Linea Sepolia [`geth-genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-sepolia/geth/geth-genesis.json) file from the Linea
+    monorepo. Save it in your Erigon data directory as `genesis.json`.
   </TabItem>
 </Tabs>
 
@@ -192,19 +186,11 @@ Bootstrap the node using the following command:
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
   <TabItem value="Mainnet" label="Mainnet">
-  
-    ```bash
-    erigon --datadir $HOME/erigon-mainnet-data/ init $HOME/erigon-mainnet-data/genesis.json
-    ```
-  
+    ```bash erigon --datadir $HOME/erigon-mainnet-data/ init $HOME/erigon-mainnet-data/genesis.json ```
   </TabItem>
-  
+
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-  
-  ```bash
-  erigon --datadir $HOME/erigon-sepolia-data/ init $HOME/erigon-sepolia-data/genesis.json
-  ```
-  
+    ```bash erigon --datadir $HOME/erigon-sepolia-data/ init $HOME/erigon-sepolia-data/genesis.json ```
   </TabItem>
 </Tabs>
 
@@ -234,13 +220,13 @@ Start the node using the following command:
     --verbosity 3
     ```
 
-  :::note[bootnodes]
-  You can choose from a range of bootnodes for Linea Mainnet. The above command uses 
-  all bootnodes by default.
+:::note[bootnodes]
+You can choose from a range of bootnodes for Linea Mainnet. The above command uses
+all bootnodes by default.
 
-  The [bootnodes page](bootnodes.mdx) contains a full list of available bootnodes.
-  :::
-  
+The [bootnodes page](bootnodes.mdx) contains a full list of available bootnodes.
+:::
+
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
   

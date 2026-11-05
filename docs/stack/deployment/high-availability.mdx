@@ -6,7 +6,7 @@ description: >-
 image: /img/socialCards/high-availability.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
 This page describes how a <GlossaryTerm term="Lineth" /> deployment can be designed for high
 availability (HA).
@@ -19,8 +19,9 @@ Detailed production topology and supported tooling for a given deployment can be
 ## Example multi-region design
 
 An example HA topology includes four independent cloud regions, which is the smallest
-<GlossaryTerm term="Maru validator">Maru validator</GlossaryTerm> set that can tolerate the loss of one region
-under <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> (`n=4`, `f=1`).
+
+<GlossaryTerm term="Maru validator">Maru validator</GlossaryTerm> set that can tolerate the loss of one region under <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>
+(`n=4`, `f=1`).
 
 In this example, each region is a self-contained deployment.
 Two of the four regions (primary and warm standby) run the finalization pipeline.
@@ -48,31 +49,32 @@ flowchart TB
   classDef control stroke-width:1.5px,stroke-dasharray:6 4;
   classDef neutral stroke-width:1.5px;
 
-  CL["Clients and applications"]:::neutral
-  GA["Global traffic entry<br/>(nearest healthy region, firewall-protected)"]:::access
-  CP["Deployment control plane"]:::control
+CL["Clients and applications"]:::neutral
+GA["Global traffic entry<br/>(nearest healthy region, firewall-protected)"]:::access
+CP["Deployment control plane"]:::control
 
-  subgraph Regions["Regions"]
-    direction LR
-    V1["Region 1 (primary)<br/>Sequencer node + RPC +<br/>finalization pipeline (active)"]:::core
-    V2["Region 2 (standby)<br/>Sequencer node + RPC +<br/>finalization pipeline (warm standby)"]:::core
-    V3["Region 3<br/>Sequencer node + RPC"]:::core
-    V4["Region 4<br/>Sequencer node + RPC"]:::core
-  end
+subgraph Regions["Regions"]
+direction LR
+V1["Region 1 (primary)<br/>Sequencer node + RPC +<br/>finalization pipeline (active)"]:::core
+V2["Region 2 (standby)<br/>Sequencer node + RPC +<br/>finalization pipeline (warm standby)"]:::core
+V3["Region 3<br/>Sequencer node + RPC"]:::core
+V4["Region 4<br/>Sequencer node + RPC"]:::core
+end
 
-  CL --> GA
-  GA --> Regions
-  CP -.-> Regions
+CL --> GA
+GA --> Regions
+CP -.-> Regions
 
-  V1 -.-|QBFT consensus mesh| V2
-  V2 -.- V3
-  V3 -.- V4
+V1 -.-|QBFT consensus mesh| V2
+V2 -.- V3
+V3 -.- V4
 
-  FL["Finalization layer<br/>(for example, Ethereum)"]:::neutral
-  OBS["Observability plane"]:::control
-  Regions --> FL
-  Regions -.-> OBS
-```
+FL["Finalization layer<br/>(for example, Ethereum)"]:::neutral
+OBS["Observability plane"]:::control
+Regions --> FL
+Regions -.-> OBS
+
+````
 </div>
 
 Each region runs a <GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>: a
@@ -164,7 +166,8 @@ sequenceDiagram
   S->>S: Promote replicated DB and scale finalization stack
   S->>FL: Finalization resumes
   Note over U,FL: Users see uninterrupted chain, finalization catches up
-```
+````
+
 </div>
 
 Finalization failover depends on keeping the right data available in the standby region, and on
@@ -183,8 +186,7 @@ choosing what to replicate versus rebuild:
 - State snapshots: Checkpoint chain state so services can restore from a trusted snapshot instead of
   replaying from genesis.
   Design snapshot frequency with database backups and, for
-  <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments,
-  [data availability](./data-availability.mdx#validiums) redundancy.
+  <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, [data availability](./data-availability.mdx#validiums) redundancy.
 
 ### Key custody
 
@@ -199,15 +201,15 @@ without a new key ceremony, and access stays least-privilege and auditable.
 
 In the example design, failures resolve as follows:
 
-| Event | What happens |
-| --- | --- |
-| Single availability zone (AZ) loss | Workloads reschedule across zones; multi-AZ databases and storage continue. |
-| One non-primary region lost | Consensus continues on three validators; RPC drains and redistributes; occasional delayed block when the missing validator would have proposed. |
-| Primary region lost | Automated finalization failover to the standby region; chain keeps producing while finalization pauses, then resumes. |
-| Two regions lost at once | Chain pauses safely below quorum until a region returns; state remains intact. |
-| Control plane loss | Running network unaffected; new deployments or configuration changes pause until rebuilt. |
-| Observability plane loss | Telemetry buffers; temporary monitoring gap until monitoring is rebuilt from replicated data. |
-| Finalization layer provider outage | Chain keeps producing; finalization catches up when the provider returns. |
+| Event                              | What happens                                                                                                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Single availability zone (AZ) loss | Workloads reschedule across zones; multi-AZ databases and storage continue.                                                                     |
+| One non-primary region lost        | Consensus continues on three validators; RPC drains and redistributes; occasional delayed block when the missing validator would have proposed. |
+| Primary region lost                | Automated finalization failover to the standby region; chain keeps producing while finalization pauses, then resumes.                           |
+| Two regions lost at once           | Chain pauses safely below quorum until a region returns; state remains intact.                                                                  |
+| Control plane loss                 | Running network unaffected; new deployments or configuration changes pause until rebuilt.                                                       |
+| Observability plane loss           | Telemetry buffers; temporary monitoring gap until monitoring is rebuilt from replicated data.                                                   |
+| Finalization layer provider outage | Chain keeps producing; finalization catches up when the provider returns.                                                                       |
 
 ## Within-region redundancy
 
@@ -225,9 +227,7 @@ Multi-region high availability still depends on within-region design:
 ## See also
 
 - Learn how [multi-validator consensus](./multi-validator-consensus.mdx) improves
-  <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> fault tolerance and learn how to
-  [run multiple Maru validators](../how-to/run-multiple-validators.mdx).
+  <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> fault tolerance and learn how to [run multiple Maru validators](../how-to/run-multiple-validators.mdx).
 - Understand [data availability](./data-availability.mdx)
   redundancy and backup responsibilities for
-  <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, where participants
-  cannot reconstruct full history from the finalization layer alone.
+  <GlossaryTerm term="Validium">validium</GlossaryTerm> deployments, where participants cannot reconstruct full history from the finalization layer alone.

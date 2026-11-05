@@ -8,7 +8,7 @@ ERC-20 token created when a native token is bridged to a target chain.
 address bridge
 ```
 
-### _decimals
+### \_decimals
 
 ```solidity
 uint8 _decimals
@@ -52,10 +52,10 @@ _Called by the bridge to mint tokens during a bridge transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _recipient | address | The address to receive the minted tokens. |
-| _amount | uint256 | The amount of tokens to mint. |
+| Name        | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| \_recipient | address | The address to receive the minted tokens. |
+| \_amount    | uint256 | The amount of tokens to mint.             |
 
 ### burn
 
@@ -68,10 +68,10 @@ User should first have allowed the bridge to spend tokens on their behalf._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _account | address | The account from which tokens will be burned. |
-| _amount | uint256 | The amount of tokens to burn. |
+| Name      | Type    | Description                                   |
+| --------- | ------- | --------------------------------------------- |
+| \_account | address | The account from which tokens will be burned. |
+| \_amount  | uint256 | The amount of tokens to burn.                 |
 
 ### decimals
 
@@ -83,7 +83,6 @@ _Overrides ERC-20 default function to support tokens with different decimals._
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint8 | The number of decimal. |
-
+| Name | Type  | Description            |
+| ---- | ----- | ---------------------- |
+| [0]  | uint8 | The number of decimal. |

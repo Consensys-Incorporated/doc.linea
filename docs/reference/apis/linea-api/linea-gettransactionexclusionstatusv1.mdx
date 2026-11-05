@@ -6,10 +6,9 @@ image: /img/socialCards/lineagettransactionexclusionstatusv1.jpg
 
 # `linea_getTransactionExclusionStatusV1`
 
-Queries a temporary database maintained by the transaction exclusion API service to check if a 
-transaction was rejected by the sequencer, connected P2P node, or RPC nodes for exceeding data line limits 
+Queries a temporary database maintained by the transaction exclusion API service to check if a
+transaction was rejected by the sequencer, connected P2P node, or RPC nodes for exceeding data line limits
 that would prevent the prover from generating a proof.
-
 
 :::info
 
@@ -27,17 +26,17 @@ will return `null`.
 
 ## Returns
 
-- `txHash`: The hash of the subject transaction. 
-- `from`: The public address of the account that sent the transaction. 
-- `nonce`: Number of transaction made by the sender, in hexadecimal format. 
+- `txHash`: The hash of the subject transaction.
+- `from`: The public address of the account that sent the transaction.
+- `nonce`: Number of transaction made by the sender, in hexadecimal format.
 - `txRejectionStage`: A string detailing the point at which the transaction was rejected. One of:
-    - `SEQUENCER`: Rejected by the sequencer.
-    - `RPC`: Rejected by an RPC node (for example, `https://rpc.linea.build`).
-    - `P2P`: Rejected by a P2P-connected node (for example, a bootnode). 
-- `reasonMessage`: Explains why the transaction was rejected. 
-- `blockNumber`: The block that the transaction was rejected from, in hexadecimal format. Only 
-returned for transactions rejected by the sequencer. 
-- `timestamp`: Time of rejection, in ISO 8601 format. 
+  - `SEQUENCER`: Rejected by the sequencer.
+  - `RPC`: Rejected by an RPC node (for example, `https://rpc.linea.build`).
+  - `P2P`: Rejected by a P2P-connected node (for example, a bootnode).
+- `reasonMessage`: Explains why the transaction was rejected.
+- `blockNumber`: The block that the transaction was rejected from, in hexadecimal format. Only
+  returned for transactions rejected by the sequencer.
+- `timestamp`: Time of rejection, in ISO 8601 format.
 
 ## Example
 
@@ -59,17 +58,17 @@ curl https://rpc.linea.build \
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": "1",
-    "result": {
-        "txHash": "0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7",
-        "from": "0x4d144d7b9c96b26361d6ac74dd1d8267edca4fc2",
-        "nonce": "0x64",
-        "txRejectionStage": "SEQUENCER",
-        "reasonMessage": "Transaction line count for module ADD=402 is above the limit 70",
-        "blockNumber": "0x3039",
-        "timestamp": "2024-08-22T09:18:51Z"
-    }
+  "jsonrpc": "2.0",
+  "id": "1",
+  "result": {
+    "txHash": "0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7",
+    "from": "0x4d144d7b9c96b26361d6ac74dd1d8267edca4fc2",
+    "nonce": "0x64",
+    "txRejectionStage": "SEQUENCER",
+    "reasonMessage": "Transaction line count for module ADD=402 is above the limit 70",
+    "blockNumber": "0x3039",
+    "timestamp": "2024-08-22T09:18:51Z"
+  }
 }
 ```
 
@@ -80,14 +79,14 @@ you'll be unable to reproduce this response with the above example.
 
 :::
 
-If a transaction was not rejected for exceeding line limits, it will not be found in the database, 
+If a transaction was not rejected for exceeding line limits, it will not be found in the database,
 and a `null` result is returned. For example:
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": null
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": null
 }
 ```
 

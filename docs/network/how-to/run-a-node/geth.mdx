@@ -48,13 +48,13 @@ same directory.
   You can choose to manually download each, copy their contents into files of your own, or clone the
   Linea monorepo.
 
-  :::note[bootnodes]
-  You can choose from a range of bootnodes for Linea Mainnet. The Geth `docker-compose.yml`
-  file uses all bootnodes by default. 
+:::note[bootnodes]
+You can choose from a range of bootnodes for Linea Mainnet. The Geth `docker-compose.yml`
+file uses all bootnodes by default.
 
-  See our [bootnodes page](bootnodes.mdx) for a full list of available bootnodes.
-  :::
-  
+See our [bootnodes page](bootnodes.mdx) for a full list of available bootnodes.
+:::
+
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
   
@@ -83,7 +83,7 @@ The node should now be running and looking for peers to sync.
 ### Step 1. Install Geth
 
 [Download and install](https://geth.ethereum.org/docs/getting-started/installing-geth) the Geth
-client. 
+client.
 
 ### Step 2. Download the genesis file
 
@@ -91,20 +91,17 @@ Download the genesis file for the relevant network.
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
   <TabItem value="Mainnet" label="Mainnet">
-  
-  Mainnet [`genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/docs/getting-started/linea-mainnet/geth) file.
-  
+    Mainnet [`genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/docs/getting-started/linea-mainnet/geth) file.
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-  
-  Sepolia [`genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/docs/getting-started/linea-sepolia/geth) file.
-  
+    Sepolia [`genesis.json`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/docs/getting-started/linea-sepolia/geth) file.
   </TabItem>
 </Tabs>
 
 ### Step 3. Define disk space volume (optional) {#disk-space-geth}
 
 Define a volume size appropriate to your expected usage. A Geth archive node uses:
+
 <NodeSize network="mainnet" cluster="linea-prod-eks" pvc="data-linea-geth-archive-v2-0" />
 
 <LastUpdated />
@@ -124,19 +121,11 @@ Bootstrap the node using the following command:
 
 <Tabs groupId="Mainnet-Testnet" className="my-tabs">
   <TabItem value="Mainnet" label="Mainnet">
-  
-    ```bash
-    geth --datadir ./geth-linea-data init ./geth-genesis.json
-    ```
-  
+    ```bash geth --datadir ./geth-linea-data init ./geth-genesis.json ```
   </TabItem>
-  
+
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
-  
-  ```bash
-  geth --datadir ./geth-sepolia-data init ./geth-genesis.json
-  ```
-  
+    ```bash geth --datadir ./geth-sepolia-data init ./geth-genesis.json ```
   </TabItem>
 </Tabs>
 
@@ -166,13 +155,13 @@ Start the node using the following command:
     --verbosity 3
     ```
 
-  :::note[bootnodes]
-  You can choose from a range of bootnodes for Linea Mainnet. The above command uses 
-  all bootnodes by default.
+:::note[bootnodes]
+You can choose from a range of bootnodes for Linea Mainnet. The above command uses
+all bootnodes by default.
 
-  See our [bootnodes page](bootnodes.mdx) for a full list of available bootnodes.
-  :::
-  
+See our [bootnodes page](bootnodes.mdx) for a full list of available bootnodes.
+:::
+
   </TabItem>
   <TabItem value="Linea Sepolia" label="Linea Sepolia">
   

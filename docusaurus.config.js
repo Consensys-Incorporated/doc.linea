@@ -68,7 +68,8 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Set a base path separate from default /docs
-          editUrl: "https://github.com/Consensys-Incorporated/doc.linea/tree/main/",
+          editUrl:
+            "https://github.com/Consensys-Incorporated/doc.linea/tree/main/",
           path: "docs",
           routeBasePath: "/",
           include: ["**/*.md", "**/*.mdx"],

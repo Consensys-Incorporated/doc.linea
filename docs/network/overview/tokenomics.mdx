@@ -1,6 +1,6 @@
 ---
 title: Tokenomics
-description: 'The utility, distribution, and numbers behind the token, LINEA.'
+description: "The utility, distribution, and numbers behind the token, LINEA."
 image: /img/socialCards/tokenomics.jpg
 ---
 
@@ -31,32 +31,28 @@ Ecosystem Fund, with 15% held long-term by Consensys.
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/technology/tokenomics/Linea_token_allocation.png"
-      alt="Pie chart showing the token allocation"
-    />
+    <img src="/img/technology/tokenomics/Linea_token_allocation.png" alt="Pie chart showing the token allocation" />
   </div>
 </div>
 
 The supply is allocated according to the below table:
 
 <table>
-	<tr>
-		<th>Category</th>
-		<th>% of supply</th>
-		<th>Details</th>
-	</tr>
-	<tr>
-		<td>Ecosystem</td>
-		<td>85%</td>
-		<td>75% for a long-term Ecosystem Fund, and 10% for early contributors.</td>
-	</tr>
-	<tr>
-		<td>Consensys treasury</td>
-		<td>15%</td>
-		<td>Locked (non-transferable) for five years. Consensys holds the tokens long-term for
-		alignment and to support Linea and its ecosystem.</td>
-	</tr>
+  <tr>
+    <th>Category</th>
+    <th>% of supply</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>Ecosystem</td>
+    <td>85%</td>
+    <td>75% for a long-term Ecosystem Fund, and 10% for early contributors.</td>
+  </tr>
+  <tr>
+    <td>Consensys treasury</td>
+    <td>15%</td>
+    <td>Locked (non-transferable) for five years. Consensys holds the tokens long-term for alignment and to support Linea and its ecosystem.</td>
+  </tr>
 </table>
 
 Except for the initial allocation to Consensys, which is locked for five years, there is **no
@@ -76,6 +72,7 @@ various schedules.
 ### Early contributors (10%)
 
 The initial airdrop for early contributors comprised 10% of the supply:
+
 - 9% to early contributors
 - 1% to strategic builders
 
@@ -137,6 +134,7 @@ Every swap, transfer, NFT mint, or smart contract interaction contributes to thi
 #### Step 2: Covering infrastructure costs
 
 Running a high-performance layer 2 network has real costs:
+
 - **Onchain costs**: Submitting transaction data to Ethereum L1, finalizing proofs, bridge
   transactions (anchoring and claiming)
 - **Offchain costs**: Running the mainnet infrastructure (servers, databases, monitoring systems)
@@ -162,14 +160,15 @@ This ETH is permanently removed from circulation; it can never be recovered or u
 ##### LINEA burn (80%)
 
 The remaining 80% goes through a more complex process:
+
 1. **Swap**: The ETH is swapped for LINEA tokens using a decentralized exchange (DEX) on Linea.
-  This creates buying pressure on LINEA and happens at the current market rate with slippage
-  protection to prevent unfavorable trades.
+   This creates buying pressure on LINEA and happens at the current market rate with slippage
+   protection to prevent unfavorable trades.
 2. **Bridge**: The LINEA tokens are then bridged from Linea (L2) to Ethereum (L1) using Linea's
-  native token bridge. They're sent to a special burner contract on L1.
+   native token bridge. They're sent to a special burner contract on L1.
 3. **Burn**: On Ethereum L1, the LINEA tokens are permanently burned. This is important because
-  LINEA's total supply is tracked on L1, so burning must happen there to properly reduce the
-  circulating supply.
+   LINEA's total supply is tracked on L1, so burning must happen there to properly reduce the
+   circulating supply.
 
 The bridging and burning on L1 is designed to be permissionless: anyone can trigger the final burn
 step, ensuring the process can't be blocked or censored.
@@ -177,6 +176,7 @@ step, ensuring the process can't be blocked or censored.
 #### Step 4: Transparency
 
 Every step of this process is recorded onchain:
+
 - Invoice submissions with exact cost amounts and time periods
 - Burn operations with precise amounts of ETH and LINEA destroyed
 - Bridge transactions showing LINEA moving from L2 to L1
@@ -186,6 +186,7 @@ You can verify everything yourself by checking the blockchain.
 The [**Dune dashboard**](https://dune.com/linea/burn-metrics) and
 [growthepie burn tracker](https://www.growthepie.com/quick-bites/linea-burn)
 make it easy to track:
+
 - Total gas fees collected
 - Total ETH burned since September 11, 2025
 - Total LINEA burned since September 11, 2025

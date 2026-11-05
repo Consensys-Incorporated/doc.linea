@@ -1,6 +1,6 @@
 ---
 title: Maru
-description: 'How to run Linea''s consensus layer client, Maru.'
+description: "How to run Linea's consensus layer client, Maru."
 image: /img/socialCards/maru.jpg
 ---
 
@@ -25,13 +25,13 @@ You must run Maru alongside an execution layer client like [Besu](./besu.mdx) or
 
 ## Minimum requirements
 
-| Requirement | Minimum |
-| --- | --- |
-| Memory | 2 GB for Maru; the reference Mainnet and Sepolia configurations run Maru with a 2 GB Java heap (`JAVA_OPTS=-Xmx2g`) |
-| Network | Ports 8080 (REST API), 9000 TCP/UDP (P2P), 9090 (metrics, optional) |
-| Software | Docker, or Java 25 and Make 3.81 for the binary distribution |
-| CPU | No specific minimum; plan for the execution client's needs |
-| Storage | Small; Maru stores only its own consensus state and keystore. Size your disk for the execution client |
+| Requirement | Minimum                                                                                                             |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| Memory      | 2 GB for Maru; the reference Mainnet and Sepolia configurations run Maru with a 2 GB Java heap (`JAVA_OPTS=-Xmx2g`) |
+| Network     | Ports 8080 (REST API), 9000 TCP/UDP (P2P), 9090 (metrics, optional)                                                 |
+| Software    | Docker, or Java 25 and Make 3.81 for the binary distribution                                                        |
+| CPU         | No specific minimum; plan for the execution client's needs                                                          |
+| Storage     | Small; Maru stores only its own consensus state and keystore. Size your disk for the execution client               |
 
 For CPU, memory, and disk space, size your machine for the execution layer client you run
 alongside Maru, since that client executes transactions and stores the blockchain state.
@@ -40,6 +40,7 @@ See the [Besu](./besu.mdx), [Linea Besu](./linea-besu.mdx), [Geth](./geth.mdx), 
 ## Run using Docker
 
 There are two methods you can use to run Maru using Docker:
+
 - Clone the Linea monorepo and use `docker compose`
 - Clone the Linea monorepo and build a Maru Docker image locally from `maru/`.
 
@@ -81,12 +82,13 @@ There are two methods you can use to run Maru using Docker:
     ```
 
     ### Step 2. Run Maru
-    
+
     Run Maru using the following command:
 
     ```bash
     make docker-run-stack
     ```
+
   </TabItem>
 </Tabs>
 

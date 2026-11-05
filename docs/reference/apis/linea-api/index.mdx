@@ -5,8 +5,8 @@ image: /img/socialCards/linea-api.jpg
 ---
 
 import DocCardList from "@theme/DocCardList";
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Linea supports the standard Ethereum JSON-RPC API methods, meaning the developer experience is
 identical to building on Ethereum itself. However, some methods differ to Ethereum, and are covered
@@ -35,13 +35,13 @@ You must connect to an RPC endpoint when making calls to the Linea blockchain. U
 following options:
 
 - **Run your own node**: Either [run your own node by setting it up yourself](../../../network/how-to/run-a-node/index.mdx), or
-    [use a node provider](../../../network/build/tools/node-providers/index.mdx).
-    We recommend running [Linea Besu](../../../network/how-to/run-a-node/linea-besu.mdx) if you want to run a node yourself and interact with the
-    blockchain.
+  [use a node provider](../../../network/build/tools/node-providers/index.mdx).
+  We recommend running [Linea Besu](../../../network/how-to/run-a-node/linea-besu.mdx) if you want to run a node yourself and interact with the
+  blockchain.
 - **Connect to a private RPC endpoint**: [Connect to a blockchain infrastructure provider](../../../network/build/tools/node-providers/index.mdx#private-rpc-endpoints)
-    such as Infura or Alchemy. Multiple providers offer free tier access.
+  such as Infura or Alchemy. Multiple providers offer free tier access.
 - **Use a public endpoint**: [Public endpoints](../../../network/build/tools/node-providers/index.mdx#public-rpc-endpoints) are
-    free to use but are rate limited and not suitable for production environments.
+  free to use but are rate limited and not suitable for production environments.
 
 ## Make calls
 
@@ -86,24 +86,29 @@ folder, initialise your new project:
 
 #### Node Fetch
 
-1. In your project folder, install the `node-fetch` package:
+1.  In your project folder, install the `node-fetch` package:
 
-    <Tabs groupId="package-manager">
-      <TabItem value="npm">
+         <Tabs groupId="package-manager">
 
-      ```bash
-      npm i node-fetch
-      ```
-      </TabItem>
-      <TabItem value="yarn">
+    <TabItem value="npm">
 
-      ```bash
-      yarn add node-fetch
-      ```
-      </TabItem>
-    </Tabs>
+    ```bash
+    npm i node-fetch
+    ```
 
-1. Create your JavaScript file and copy the following code:
+           </TabItem>
+
+        <TabItem value="yarn">
+
+    ```bash
+    yarn add node-fetch
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+1.  Create your JavaScript file and copy the following code:
 
     ```javascript title="index.js"
     const fetch = require("node-fetch");
@@ -122,14 +127,14 @@ folder, initialise your new project:
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
       })
       .catch((error) => {
-        console.error(error)
-      })
+        console.error(error);
+      });
     ```
 
-1. Run the code using the following command:
+1.  Run the code using the following command:
 
     ```bash
     node index.js
@@ -137,27 +142,32 @@ folder, initialise your new project:
 
 #### Axios
 
-1. In your project folder, install the `axios` package:
+1.  In your project folder, install the `axios` package:
 
-    <Tabs groupId="package-manager">
-      <TabItem value="npm">
+         <Tabs groupId="package-manager">
 
-      ```bash
-      npm i axios
-      ```
-      </TabItem>
-      <TabItem value="yarn">
+    <TabItem value="npm">
 
-      ```bash
-      yarn add axios
-      ```
-      </TabItem>
-    </Tabs>
+    ```bash
+    npm i axios
+    ```
 
-1. Create your JavaScript file and copy the following code:
+           </TabItem>
+
+        <TabItem value="yarn">
+
+    ```bash
+    yarn add axios
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+1.  Create your JavaScript file and copy the following code:
 
     ```javascript title="index.js"
-    const axios = require("axios")
+    const axios = require("axios");
 
     axios
       .post("https://rpc.linea.build", {
@@ -167,14 +177,14 @@ folder, initialise your new project:
         id: 1,
       })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
-        console.error(error)
-      })
+        console.error(error);
+      });
     ```
 
-1. Run the code using the following command:
+1.  Run the code using the following command:
 
     ```bash
     node index.js
@@ -182,45 +192,51 @@ folder, initialise your new project:
 
 #### Viem
 
-1. In your project folder, install the `viem` package:
+1.  In your project folder, install the `viem` package:
 
-    <Tabs groupId="package-manager">
-      <TabItem value="npm">
+         <Tabs groupId="package-manager">
 
-      ```bash
-      npm i viem
-      ```
-      </TabItem>
-      <TabItem value="yarn">
+    <TabItem value="npm">
 
-      ```bash
-      yarn add viem
-      ```
-      </TabItem>
-    </Tabs>
-
-1. Create your JavaScript file and copy the following code:
-
-    ```javascript title="index.js"
-    const { createClient, http } = require('viem');
-
-    const client = createClient({
-      transport: http('https://rpc.linea.build')
-    });
-
-    client.request({
-      method: 'eth_blockNumber',
-      params: []
-    })
-    .then((blockNumber) => {
-      console.log(parseInt(blockNumber, 16)); // Convert hex to decimal
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    ```bash
+    npm i viem
     ```
 
-1. Run the code using the following command:
+           </TabItem>
+
+        <TabItem value="yarn">
+
+    ```bash
+    yarn add viem
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+1.  Create your JavaScript file and copy the following code:
+
+    ```javascript title="index.js"
+    const { createClient, http } = require("viem");
+
+    const client = createClient({
+      transport: http("https://rpc.linea.build"),
+    });
+
+    client
+      .request({
+        method: "eth_blockNumber",
+        params: [],
+      })
+      .then((blockNumber) => {
+        console.log(parseInt(blockNumber, 16)); // Convert hex to decimal
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    ```
+
+1.  Run the code using the following command:
 
     ```bash
     node index.js

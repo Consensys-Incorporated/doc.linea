@@ -6,7 +6,7 @@
 uint256 nextMessageNumber
 ```
 
-### _messageSender
+### \_messageSender
 
 ```solidity
 address _messageSender
@@ -48,12 +48,12 @@ The unspent fee is refunded if applicable.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _feeInWei | uint256 | The fee paid for delivery in Wei. |
-| _to | address | The recipient of the message and gas refund. |
-| _calldata | bytes | The calldata of the message. |
-| _feeRecipient | address |  |
+| Name           | Type    | Description                                  |
+| -------------- | ------- | -------------------------------------------- |
+| \_feeInWei     | uint256 | The fee paid for delivery in Wei.            |
+| \_to           | address | The recipient of the message and gas refund. |
+| \_calldata     | bytes   | The calldata of the message.                 |
+| \_feeRecipient | address |                                              |
 
 ### claimMessage
 
@@ -63,19 +63,18 @@ function claimMessage(address _from, address _to, uint256 _fee, uint256 _value, 
 
 Claims and delivers a cross-chain message.
 
-__feeRecipient can be set to address(0) to receive as msg.sender.
+\__feeRecipient can be set to address(0) to receive as msg.sender.
 The original message sender address is temporarily set in transient storage,
 while claiming. This address is used in sender()._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _from | address | The address of the original sender. |
-| _to | address | The address the message is intended for. |
-| _fee | uint256 | The fee being paid for the message delivery. |
-| _value | uint256 | The value to be transferred to the destination address. |
-| _feeRecipient | address payable | The recipient for the fee. |
-| _calldata | bytes | The calldata to pass to the recipient. |
-| _nonce | uint256 | The unique auto generated nonce used when sending the message. |
-
+| Name           | Type            | Description                                                    |
+| -------------- | --------------- | -------------------------------------------------------------- |
+| \_from         | address         | The address of the original sender.                            |
+| \_to           | address         | The address the message is intended for.                       |
+| \_fee          | uint256         | The fee being paid for the message delivery.                   |
+| \_value        | uint256         | The value to be transferred to the destination address.        |
+| \_feeRecipient | address payable | The recipient for the fee.                                     |
+| \_calldata     | bytes           | The calldata to pass to the recipient.                         |
+| \_nonce        | uint256         | The unique auto generated nonce used when sending the message. |

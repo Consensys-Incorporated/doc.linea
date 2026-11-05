@@ -26,7 +26,7 @@ jobs:
   slackNotification:
     needs: linkCheck
     if: ${{ failure() }}
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set-ubuntu-24-amd64-small
     permissions: {}   # zero scopes
     steps:
       - name: Slack Notification

@@ -8,21 +8,21 @@ event MessageSent(address _from, address _to, uint256 _fee, uint256 _value, uint
 
 Emitted when a message is sent.
 
-__calldata has the _ because calldata is a reserved word.
+\__calldata has the _ because calldata is a reserved word.
 We include the message hash to save hashing costs on the rollup.
-This event is used on both L1 and L2._
+This event is used on both L1 and L2.\_
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _from | address | The indexed sender address of the message (msg.sender). |
-| _to | address | The indexed intended recipient address of the message on the other layer. |
-| _fee | uint256 | The fee being being paid to deliver the message to the recipient in Wei. |
-| _value | uint256 | The value being sent to the recipient in Wei. |
-| _nonce | uint256 | The unique message number. |
-| _calldata | bytes | The calldata being passed to the intended recipient when being called on claiming. |
-| _messageHash | bytes32 | The indexed hash of the message parameters. |
+| Name          | Type    | Description                                                                        |
+| ------------- | ------- | ---------------------------------------------------------------------------------- |
+| \_from        | address | The indexed sender address of the message (msg.sender).                            |
+| \_to          | address | The indexed intended recipient address of the message on the other layer.          |
+| \_fee         | uint256 | The fee being being paid to deliver the message to the recipient in Wei.           |
+| \_value       | uint256 | The value being sent to the recipient in Wei.                                      |
+| \_nonce       | uint256 | The unique message number.                                                         |
+| \_calldata    | bytes   | The calldata being passed to the intended recipient when being called on claiming. |
+| \_messageHash | bytes32 | The indexed hash of the message parameters.                                        |
 
 ### MessageClaimed
 
@@ -34,9 +34,9 @@ Emitted when a message is claimed.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageHash | bytes32 | The indexed hash of the message that was claimed. |
+| Name          | Type    | Description                                       |
+| ------------- | ------- | ------------------------------------------------- |
+| \_messageHash | bytes32 | The indexed hash of the message that was claimed. |
 
 ### FeeTooLow
 
@@ -53,7 +53,7 @@ error ValueSentTooLow()
 ```
 
 _Thrown when the value sent is less than the fee.
-Value to forward on is msg.value - _fee._
+Value to forward on is msg.value - \_fee._
 
 ### MessageSendingFailed
 
@@ -79,15 +79,15 @@ function sendMessage(address _to, uint256 _fee, bytes _calldata) external payabl
 
 Sends a message for transporting from the given chain.
 
-_This function should be called with a msg.value = _value + _fee. The fee will be paid on the destination chain._
+_This function should be called with a msg.value = \_value + \_fee. The fee will be paid on the destination chain._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _to | address | The destination address on the destination chain. |
-| _fee | uint256 | The message service fee on the origin chain. |
-| _calldata | bytes | The calldata used by the destination message service to call the destination contract. |
+| Name       | Type    | Description                                                                            |
+| ---------- | ------- | -------------------------------------------------------------------------------------- |
+| \_to       | address | The destination address on the destination chain.                                      |
+| \_fee      | uint256 | The message service fee on the origin chain.                                           |
+| \_calldata | bytes   | The calldata used by the destination message service to call the destination contract. |
 
 ### claimMessage
 
@@ -100,15 +100,15 @@ Is called by the Postman, dApp or end user.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _from | address | The msg.sender calling the origin message service. |
-| _to | address | The destination address on the destination chain. |
-| _fee | uint256 | The message service fee on the origin chain. |
-| _value | uint256 | The value to be transferred to the destination address. |
-| _feeRecipient | address payable | Address that will receive the fees. |
-| _calldata | bytes | The calldata used by the destination message service to call/forward to the destination contract. |
-| _nonce | uint256 | Unique message number. |
+| Name           | Type            | Description                                                                                       |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------------- |
+| \_from         | address         | The msg.sender calling the origin message service.                                                |
+| \_to           | address         | The destination address on the destination chain.                                                 |
+| \_fee          | uint256         | The message service fee on the origin chain.                                                      |
+| \_value        | uint256         | The value to be transferred to the destination address.                                           |
+| \_feeRecipient | address payable | Address that will receive the fees.                                                               |
+| \_calldata     | bytes           | The calldata used by the destination message service to call/forward to the destination contract. |
+| \_nonce        | uint256         | Unique message number.                                                                            |
 
 ### sender
 
@@ -120,7 +120,6 @@ Returns the original sender of the message on the origin layer.
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name           | Type    | Description                                             |
+| -------------- | ------- | ------------------------------------------------------- |
 | originalSender | address | The original sender of the message on the origin layer. |
-

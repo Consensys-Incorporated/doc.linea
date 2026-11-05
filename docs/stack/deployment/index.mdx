@@ -7,9 +7,9 @@ description: >-
 image: /img/socialCards/deployment-architecture.jpg
 ---
 
-import ActionCards from '@site/src/components/ActionCards';
-import GlossaryTerm from '@theme/GlossaryTerm';
-import DeploymentArchitectureGraphic from '/img/stack/deployment/lineth-deployment-architecture.svg';
+import ActionCards from "@site/src/components/ActionCards";
+import GlossaryTerm from "@theme/GlossaryTerm";
+import DeploymentArchitectureGraphic from "/img/stack/deployment/lineth-deployment-architecture.svg";
 
 This section describes the components and design choices in a <GlossaryTerm term="Lineth" /> deployment,
 providing a high-level reference architecture you can use when designing your own deployment.
@@ -20,58 +20,49 @@ Detailed production topology and supported tooling for a given deployment can be
   cards={[
     {
       text: "Deployment components",
-      description:
-        "Required and optional components in the deployment footprint, including how they are versioned or replaced.",
+      description: "Required and optional components in the deployment footprint, including how they are versioned or replaced.",
       href: "/stack/deployment/core-components",
     },
     {
       text: "Data availability",
-      description:
-        "Where transaction data is stored: on the finalization layer in a rollup, or offchain in a validium.",
+      description: "Where transaction data is stored: on the finalization layer in a rollup, or offchain in a validium.",
       href: "/stack/deployment/data-availability",
     },
     {
       text: "Finalization layer",
-      description:
-        "Where proofs and state commitments settle: on Ethereum (L1) or Linea Mainnet (L2).",
+      description: "Where proofs and state commitments settle: on Ethereum (L1) or Linea Mainnet (L2).",
       href: "/stack/deployment/finalization-layer",
     },
     {
       text: "Finality",
-      description:
-        "Application-level finality on the network versus settlement finality on the finalization layer.",
+      description: "Application-level finality on the network versus settlement finality on the finalization layer.",
       href: "/stack/deployment/finality",
     },
     {
       text: "Multi-validator consensus",
-      description:
-        "Maru multi-validator QBFT for sequencer fault tolerance and distributed block ordering within the execution path.",
+      description: "Maru multi-validator QBFT for sequencer fault tolerance and distributed block ordering within the execution path.",
       href: "/stack/deployment/multi-validator-consensus",
     },
     {
       text: "High availability",
-      description:
-        "Multi-region setup: validators and RPC across regions, primary and warm-standby finalization, and failure behavior.",
+      description: "Multi-region setup: validators and RPC across regions, primary and warm-standby finalization, and failure behavior.",
       href: "/stack/deployment/high-availability",
     },
     {
       text: "Access control",
-      description:
-        "How to restrict RPC access using a single endpoint that authenticates callers and enforces RBAC permissions.",
+      description: "How to restrict RPC access using a single endpoint that authenticates callers and enforces RBAC permissions.",
       href: "/stack/deployment/access-control",
     },
     {
       text: "Native interoperability",
-      description:
-        "How two Lineth networks communicate with each other using the Cross Ledger Interoperability Protocol (CLIP).",
+      description: "How two Lineth networks communicate with each other using the Cross Ledger Interoperability Protocol (CLIP).",
       href: "/stack/deployment/interoperability",
     },
     {
       text: "Key management",
-      description:
-        "Signer roles, the key custody options each role can use, and the controls the operator owns.",
+      description: "Signer roles, the key custody options each role can use, and the controls the operator owns.",
       href: "/stack/deployment/key-management",
-    }
+    },
   ]}
 />
 
@@ -85,6 +76,7 @@ For protocol-level architecture details, see [Protocol Architecture](../../proto
 All Lineth deployments use the same [core components](core-components.mdx).
 Internal protocol services stay inside the operator's network.
 Proofs and state commitments go to a chosen
+
 <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 <GlossaryTerm term="Operator">Operators</GlossaryTerm> also choose:
@@ -92,8 +84,7 @@ Proofs and state commitments go to a chosen
 - [Key management](key-management.mdx): Local keys, remote signing through
   <GlossaryTerm term="Web3Signer" />, or AWS KMS
 - [Data availability](data-availability.mdx): On the finalization layer in a
-  <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, or offchain in a
-  <GlossaryTerm term="Validium">validium</GlossaryTerm>
+  <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, or offchain in a<GlossaryTerm term="Validium">validium</GlossaryTerm>
 - [Finalization layer](finalization-layer.mdx): Ethereum (L1) or Linea Mainnet (L2)
 - Validator model: Single Maru validator, or [multi-validator QBFT](multi-validator-consensus.mdx)
 
@@ -102,9 +93,9 @@ Lineth does not recommend a specific set of customizations.
 ## Example architecture
 
 The following diagram illustrates an example architecture for a
-<GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted
-network boundary, and message relayers to other chains.
-A rollup or public validium uses the same internal services; access and data availability differ.
+
+<GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted network boundary, and message relayers to other chains. A rollup or public validium
+uses the same internal services; access and data availability differ.
 
 In this example, transaction data stays on the operator's restricted node set, and is not shown on the
 diagram.
@@ -123,8 +114,7 @@ The example architecture flows as follows:
 1. Clients reach the API portal, block explorer, and RPC.
    This example gates that path with [access control](./access-control.mdx).
 2. Those tools query near-head and archive
-   <GlossaryTerm term="RPC node">RPC nodes</GlossaryTerm>, which read chain state from
-   onchain contracts.
+   <GlossaryTerm term="RPC node">RPC nodes</GlossaryTerm>, which read chain state from onchain contracts.
 3. The sequencer orders transactions and builds blocks.
    [Multi-validator consensus](./multi-validator-consensus.mdx) is a design choice that improves sequencer
    fault tolerance.

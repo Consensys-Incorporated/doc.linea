@@ -4,7 +4,7 @@ description: A step-by-step guide to building a simple marketplace dapp on Linea
 image: /img/socialCards/build-a-marketplace-dapp.jpg
 ---
 
-Decentralized marketplaces are one of the most popular types of web3 dapps, and enable users to 
+Decentralized marketplaces are one of the most popular types of web3 dapps, and enable users to
 buy and sell items directly on the blockchain while removing the need for any intermediaries.
 
 This tutorial walks you through building a simple marketplace dapp.
@@ -37,7 +37,7 @@ Create a `pnpm-workspace.yaml` file in the root to define your workspace structu
 
 ```yaml
 packages:
-  - 'packages/*'
+  - "packages/*"
 ```
 
 Your workspace file structure will look like this:
@@ -71,14 +71,14 @@ Hardhat will automatically install the necessary dependencies for you.
 
 <details>
 <summary>Project structure</summary>
-<div>
+
 After initialization, you'll have a project structure that includes:
 
 - **`contracts/`**: Solidity contracts
 - **`ignition/`**: Ignition deployment modules
 - **`test/`**: Test files
 - **`hardhat.config.js`**: Hardhat configuration
-</div>
+
 </details>
 
 ### 2. Configure `.env` variables
@@ -94,8 +94,8 @@ ACCOUNT_PRIVATE_KEY=your_account_private_key_here
 ```
 
 - Replace `your_infura_api_key_here` with your Infura API key.
-- Replace `your_account_private_key_here` with the private key of the Ethereum account you will use 
-for deploying the contract.
+- Replace `your_account_private_key_here` with the private key of the Ethereum account you will use
+  for deploying the contract.
 
 ### 3. Create the marketplace contract
 
@@ -210,36 +210,33 @@ This image illustrates the concept of the smart contract:
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/marketplace/marketplace-contract.png"
-      alt=""
-    />
+    <img src="/img/marketplace/marketplace-contract.png" alt="" />
   </div>
 </div>
 
 1. **Seller**:
-    - **Listing an item**:
-        - Sellers can list items for sale by calling the `listItem` function.
-        - This function requires a name and price for the item.
-        - The item is added to the marketplace with a unique ID, and the seller is recorded as the 
-        owner.
+   - **Listing an item**:
+     - Sellers can list items for sale by calling the `listItem` function.
+     - This function requires a name and price for the item.
+     - The item is added to the marketplace with a unique ID, and the seller is recorded as the
+       owner.
 2. **Buyer**:
-    - **Purchasing an item**:
-        - Buyers can purchase items using the `purchaseItem` function.
-        - The function checks that the item exists, the price is correct, and that the item is not 
-        already sold.
-        - The payment is transferred to the seller, and ownership of the item is updated.
+   - **Purchasing an item**:
+     - Buyers can purchase items using the `purchaseItem` function.
+     - The function checks that the item exists, the price is correct, and that the item is not
+       already sold.
+     - The payment is transferred to the seller, and ownership of the item is updated.
 3. **Transferring ownership**:
-    - **Ownership transfer**:
-        - The `_transferOwnership` function handles the internal logic for transferring item ownership.
-        - It updates the owner in the `items` mapping and adjusts the `ownedItems` lists for both 
-        the previous and new owners.
-    - **Manual transfer**:
-        - The `transferItem` function allows current owners to transfer their items to another address.
-        - It ensures the sender is the current owner before calling the `_transferOwnership` function.
+   - **Ownership transfer**:
+     - The `_transferOwnership` function handles the internal logic for transferring item ownership.
+     - It updates the owner in the `items` mapping and adjusts the `ownedItems` lists for both
+       the previous and new owners.
+   - **Manual transfer**:
+     - The `transferItem` function allows current owners to transfer their items to another address.
+     - It ensures the sender is the current owner before calling the `_transferOwnership` function.
 4. **Retrieving owned items**:
-    - **Get items by owner**:
-        - The `getItemsByOwner` function returns a list of item IDs owned by a specific address.
+   - **Get items by owner**:
+     - The `getItemsByOwner` function returns a list of item IDs owned by a specific address.
 
 This smart contract facilitates a decentralized marketplace where items can be listed, purchased, and
 transferred securely, with all transactions and ownership changes recorded on the blockchain.
@@ -315,7 +312,7 @@ When prompted, choose the following options:
 - Tailwind CSS: Yes
 - `src/` directory: No (or Yes, if you prefer)
 - App Router: Yes
-- Import alias: Yes (default @/*)
+- Import alias: Yes (default @/\*)
 
 Install shadcn CLI:
 
@@ -327,10 +324,7 @@ Install the necessary UI components like buttons, cards, and input fields as nee
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/marketplace/marketplace-ui.png"
-      alt=""
-    />
+    <img src="/img/marketplace/marketplace-ui.png" alt="" />
   </div>
 </div>
 
@@ -361,7 +355,7 @@ In the `site/src` directory, create a file called `constants.ts` and add the fol
 
 ```jsx
 export const CONTRACT_ADDRESS = // Paste deployed contract here
-export const ABI = 
+export const ABI =
   // Paste the ABI here
 ```
 
@@ -453,13 +447,14 @@ const listItem = async () => {
 ```jsx
 <Card className="p-4 sm:p-6" key={index}>
   <li key={item.id} className=" p-4">
-    <p><strong>Name:</strong> {item.name}</p>
+    <p>
+      <strong>Name:</strong> {item.name}
+    </p>
     {/* ... other item details */}
     <Button
       variant="outline"
       onClick={() => purchaseItem(item.id, item.price)}
-      className="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white py-2 px-4 rounded  duration-200 hover:shadow-xl"
-    >
+      className="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white py-2 px-4 rounded  duration-200 hover:shadow-xl">
       Purchase
     </Button>
   </li>
@@ -473,13 +468,7 @@ const listItem = async () => {
 #### Form handling
 
 ```jsx
-<Input
-  type="text"
-  placeholder="Item Name"
-  value={newItemName}
-  onChange={(e) => setNewItemName(e.target.value)}
-  className="border p-2 flex-1"
-/>
+<Input type="text" placeholder="Item Name" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} className="border p-2 flex-1" />
 ```
 
 - Controlled inputs are used for the form fields.
@@ -495,7 +484,7 @@ try {
 }
 ```
 
-- Try-catch blocks are used throughout the code to handle potential errors in asynchronous operations, 
+- Try-catch blocks are used throughout the code to handle potential errors in asynchronous operations,
   especially during blockchain interactions.
 
 `app/page.tsx` can become quite large so you can also refactor the code in the
@@ -529,10 +518,7 @@ Your Next.js application with shadcn/ui is now running at `http://localhost:3000
 
 <div class="center-container">
   <div class="img-large">
-    <img
-      src="/img/marketplace/marketplace-dapp.png"
-      alt=""
-    />
+    <img src="/img/marketplace/marketplace-dapp.png" alt="" />
   </div>
 </div>
 

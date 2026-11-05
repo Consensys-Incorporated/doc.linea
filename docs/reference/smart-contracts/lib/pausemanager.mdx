@@ -32,9 +32,9 @@ _Modifier to make a function callable only when the specific and general types a
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value being checked. Requirements: - The type must not be paused. |
+| Name        | Type                         | Description                                                                      |
+| ----------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value being checked. Requirements: - The type must not be paused. |
 
 ### whenTypeNotPaused
 
@@ -46,11 +46,11 @@ _Modifier to make a function callable only when the type is not paused._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value being checked. Requirements: - The type must not be paused. |
+| Name        | Type                         | Description                                                                      |
+| ----------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value being checked. Requirements: - The type must not be paused. |
 
-### __PauseManager_init
+### \_\_PauseManager_init
 
 ```solidity
 function __PauseManager_init(struct IPauseManager.PauseTypeRole[] _pauseTypeRoleAssignments, struct IPauseManager.PauseTypeRole[] _unpauseTypeRoleAssignments) internal
@@ -62,12 +62,12 @@ _This function is called during contract initialization to set up the pause and 
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseTypeRoleAssignments | struct IPauseManager.PauseTypeRole[] | An array of PauseTypeRole structs defining the pause types and their associated roles. |
-| _unpauseTypeRoleAssignments | struct IPauseManager.PauseTypeRole[] | An array of PauseTypeRole structs defining the unpause types and their associated roles. |
+| Name                         | Type                                 | Description                                                                              |
+| ---------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------- |
+| \_pauseTypeRoleAssignments   | struct IPauseManager.PauseTypeRole[] | An array of PauseTypeRole structs defining the pause types and their associated roles.   |
+| \_unpauseTypeRoleAssignments | struct IPauseManager.PauseTypeRole[] | An array of PauseTypeRole structs defining the unpause types and their associated roles. |
 
-### _requireTypeAndGeneralNotPaused
+### \_requireTypeAndGeneralNotPaused
 
 ```solidity
 function _requireTypeAndGeneralNotPaused(enum IPauseManager.PauseType _pauseType) internal view virtual
@@ -78,11 +78,11 @@ Checks the specific and general pause types._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value being checked. |
+| Name        | Type                         | Description                         |
+| ----------- | ---------------------------- | ----------------------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value being checked. |
 
-### _requireTypeNotPaused
+### \_requireTypeNotPaused
 
 ```solidity
 function _requireTypeNotPaused(enum IPauseManager.PauseType _pauseType) internal view virtual
@@ -93,9 +93,9 @@ Checks the specific pause type._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value being checked. |
+| Name        | Type                         | Description                         |
+| ----------- | ---------------------------- | ----------------------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value being checked. |
 
 ### pauseByType
 
@@ -109,9 +109,9 @@ _Requires the role mapped in `_pauseTypeRoles` for the pauseType._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 ### unPauseByType
 
@@ -125,9 +125,9 @@ _Requires the role mapped in `_unPauseTypeRoles` for the pauseType._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 ### isPaused
 
@@ -139,13 +139,12 @@ Check if a pause type is enabled.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _pauseType | enum IPauseManager.PauseType | The pause type value. |
+| Name        | Type                         | Description           |
+| ----------- | ---------------------------- | --------------------- |
+| \_pauseType | enum IPauseManager.PauseType | The pause type value. |
 
 #### Return Values
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name              | Type | Description                                                |
+| ----------------- | ---- | ---------------------------------------------------------- |
 | pauseTypeIsPaused | bool | Returns true if the pause type if paused, false otherwise. |
-

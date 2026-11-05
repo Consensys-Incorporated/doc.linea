@@ -4,6 +4,7 @@ image: /img/socialCards/run-a-linea-node.jpg
 ---
 
 Linea follows Ethereum’s dual-layer design. Every Linea node runs:
+
 - Maru for consensus
 - An execution layer client of your choice
 
@@ -26,7 +27,10 @@ to Linea-specific features.
     </tr>
     <tr>
       <td>[Linea Besu](./linea-besu.mdx)</td>
-      <td>Besu client with plugins that implement Linea-specific features, such as [API methods](../../../reference/apis/linea-api/index.mdx) and a [finalized](../../overview/transaction-finality.mdx#use-the-finalized-tag) tag.</td>
+      <td>
+        Besu client with plugins that implement Linea-specific features, such as [API methods](../../../reference/apis/linea-api/index.mdx) and a
+        [finalized](../../overview/transaction-finality.mdx#use-the-finalized-tag) tag.
+      </td>
       <td>✅</td>
     </tr>
     <tr>
@@ -48,16 +52,19 @@ Docker Compose is the recommended method to run a node. For binaries or build-fr
 individual guides, or keep reading for a general guide.
 
 Use Docker Compose as the default path. The canonical compose files live in the Linea monorepo:
+
 - Mainnet: [`/docs/getting-started/linea-mainnet/docker-compose.yml`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-mainnet/docker-compose.yml)
 - Linea Sepolia: [`/docs/getting-started/linea-sepolia/docker-compose.yml`](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/getting-started/linea-sepolia/docker-compose.yml)
 
 Quick steps:
+
 1. Pick your network (mainnet or Linea Sepolia) and download the compose file above.
 2. From that directory, run Docker Compose to start Maru plus your execution client.
 3. For Linea-specific APIs such as `linea_estimateGas` and the `finalized` tag, use the Linea Besu
    compose example.
 
 Next actions:
+
 - Default compose examples: [Linea Besu](./linea-besu.mdx) and [Maru](./maru.mdx).
 - Alternative EL clients: [Besu](./besu.mdx), [Geth](./geth.mdx), or [Erigon](./erigon.mdx), for
   standard Ethereum JSON-RPC without the `linea_` namespace.
@@ -71,7 +78,6 @@ Next actions:
 - Compose files in the Linea monorepo (paths above) are the source of truth for images and versions.
 - **Linea Besu** (basic and advanced profiles): use the [`linea-besu/package/docker`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/linea-besu/package/docker) compose profiles.
 - **All other execution layer clients** (Besu, Geth, etc.): use the compose files under [`docs/getting-started/`](https://github.com/LFDT-Lineth/lineth-monorepo/tree/main/docs/getting-started).
-
 
 ## Alternative paths
 

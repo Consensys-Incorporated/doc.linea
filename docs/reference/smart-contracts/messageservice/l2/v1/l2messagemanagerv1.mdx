@@ -29,7 +29,7 @@ mapping(bytes32 => uint256) inboxL1L2MessageStatus
 _Mapping to store L1->L2 message hashes status.
 messageHash => messageStatus (0: unknown, 1: received, 2: claimed)._
 
-### _updateL1L2MessageStatusToClaimed
+### \_updateL1L2MessageStatusToClaimed
 
 ```solidity
 function _updateL1L2MessageStatusToClaimed(bytes32 _messageHash) internal
@@ -39,7 +39,6 @@ Update the status of L1->L2 message when a user claims a message on L2.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageHash | bytes32 | Hash of the message. |
-
+| Name          | Type    | Description          |
+| ------------- | ------- | -------------------- |
+| \_messageHash | bytes32 | Hash of the message. |

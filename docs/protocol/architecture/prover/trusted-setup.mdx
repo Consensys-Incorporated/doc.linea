@@ -6,22 +6,20 @@ description: >-
 image: /img/socialCards/trusted-setup.jpg
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
+import GlossaryTerm from "@theme/GlossaryTerm";
 
-<GlossaryTerm term="Lineth" /> uses structured reference strings (SRSs) produced by previously completed public
-multi-party computation (MPC) ceremonies.
-It does not depend on a Linea-operated ceremony or an active MPC network for normal proof
-generation.
+<GlossaryTerm term="Lineth" /> uses structured reference strings (SRSs) produced by previously completed public multi-party computation (MPC) ceremonies. It does not depend on a Linea-operated
+ceremony or an active MPC network for normal proof generation.
 
 ## Reused public ceremonies
 
 The proving system uses ceremony outputs for three curves:
 
-| Curve | Use in the proving system | Public ceremony |
-| --- | --- | --- |
-| BN254 | Final and emulation proofs verified on Ethereum | [Aztec Ignition](https://github.com/AztecProtocol/ignition-verification), with 176 participants |
-| BLS12-377 | Execution and other inner wrapper proofs | [Aleo Setup I](https://github.com/AleoNet/aleo-setup), with 106 participants |
-| BW6-761 | Recursive aggregation proofs | [Celo Plumo](https://github.com/celo-org/snark-setup), with 55 participants |
+| Curve     | Use in the proving system                       | Public ceremony                                                                                 |
+| --------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| BN254     | Final and emulation proofs verified on Ethereum | [Aztec Ignition](https://github.com/AztecProtocol/ignition-verification), with 176 participants |
+| BLS12-377 | Execution and other inner wrapper proofs        | [Aleo Setup I](https://github.com/AleoNet/aleo-setup), with 106 participants                    |
+| BW6-761   | Recursive aggregation proofs                    | [Celo Plumo](https://github.com/celo-org/snark-setup), with 55 participants                     |
 
 The [L2BEAT Linea prover catalog](https://l2beat.com/zk-catalog/lineaprover) documents the
 ceremony mapping and participant counts.

@@ -129,10 +129,10 @@ _All bytes8 values are string based SemVer in the format M.m - e.g. "6.0"._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name            | Type   | Description           |
+| --------------- | ------ | --------------------- |
 | previousVersion | bytes8 | The previous version. |
-| newVersion | bytes8 | The new version. |
+| newVersion      | bytes8 | The new version.      |
 
 ### FallbackOperatorRoleGranted
 
@@ -144,9 +144,9 @@ Emitted when the fallback operator role is granted.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| caller | address | The address that called the function granting the role. |
+| Name             | Type    | Description                                                    |
+| ---------------- | ------- | -------------------------------------------------------------- |
+| caller           | address | The address that called the function granting the role.        |
 | fallbackOperator | address | The fallback operator address that received the operator role. |
 
 ### FallbackOperatorAddressSet
@@ -159,10 +159,10 @@ Emitted when the fallback operator role is set on the contract.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| caller | address | The address that set the fallback operator address. |
-| fallbackOperator | address | The fallback operator address. |
+| Name             | Type    | Description                                         |
+| ---------------- | ------- | --------------------------------------------------- |
+| caller           | address | The address that set the fallback operator address. |
+| fallbackOperator | address | The fallback operator address.                      |
 
 ### VerifierAddressChanged
 
@@ -177,12 +177,12 @@ The oldVerifierAddress can be the zero address._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| verifierAddress | address | The indexed new verifier address being set. |
-| proofType | uint256 | The indexed proof type/index that the verifier is mapped to. |
-| verifierSetBy | address | The index address who set the verifier at the mapping. |
-| oldVerifierAddress | address | Indicates the previous address mapped to the proof type. |
+| Name               | Type    | Description                                                  |
+| ------------------ | ------- | ------------------------------------------------------------ |
+| verifierAddress    | address | The indexed new verifier address being set.                  |
+| proofType          | uint256 | The indexed proof type/index that the verifier is mapped to. |
+| verifierSetBy      | address | The index address who set the verifier at the mapping.       |
+| oldVerifierAddress | address | Indicates the previous address mapped to the proof type.     |
 
 ### DataSubmittedV3
 
@@ -196,10 +196,10 @@ _The block range is indexed and parent shnarf included for state reconstruction 
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| parentShnarf | bytes32 | The parent shnarf for the data being submitted. |
-| shnarf | bytes32 | The indexed shnarf for the data being submitted. |
+| Name               | Type    | Description                                                                                           |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------- |
+| parentShnarf       | bytes32 | The parent shnarf for the data being submitted.                                                       |
+| shnarf             | bytes32 | The indexed shnarf for the data being submitted.                                                      |
 | finalStateRootHash | bytes32 | The L2 state root hash that the current blob submission ends on. NB: The last blob in the collection. |
 
 ### DataFinalizedV3
@@ -212,13 +212,13 @@ Emitted when L2 blocks have been finalized on L1.
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| startBlockNumber | uint256 | The indexed L2 block number indicating which block the finalization the data starts from. |
-| endBlockNumber | uint256 | The indexed L2 block number indicating which block the finalization the data ends on. |
-| shnarf | bytes32 | The indexed shnarf being set as currentFinalizedShnarf in the current finalization. |
-| parentStateRootHash | bytes32 | The parent L2 state root hash that the current finalization starts from. |
-| finalStateRootHash | bytes32 | The L2 state root hash that the current finalization ends on. |
+| Name                | Type    | Description                                                                               |
+| ------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| startBlockNumber    | uint256 | The indexed L2 block number indicating which block the finalization the data starts from. |
+| endBlockNumber      | uint256 | The indexed L2 block number indicating which block the finalization the data ends on.     |
+| shnarf              | bytes32 | The indexed shnarf being set as currentFinalizedShnarf in the current finalization.       |
+| parentStateRootHash | bytes32 | The parent L2 state root hash that the current finalization starts from.                  |
+| finalStateRootHash  | bytes32 | The L2 state root hash that the current finalization ends on.                             |
 
 ### LastFinalizationTimeNotLapsed
 
@@ -409,10 +409,10 @@ _VERIFIER_SETTER_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _newVerifierAddress | address | The address for the verifier contract. |
-| _proofType | uint256 | The proof type being set/updated. |
+| Name                 | Type    | Description                            |
+| -------------------- | ------- | -------------------------------------- |
+| \_newVerifierAddress | address | The address for the verifier contract. |
+| \_proofType          | uint256 | The proof type being set/updated.      |
 
 ### setFallbackOperator
 
@@ -426,11 +426,11 @@ _Reverts if six months have not passed since the last finalization._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _messageNumber | uint256 | Last finalized L1 message number as part of the feedback loop. |
-| _rollingHash | bytes32 | Last finalized L1 rolling hash as part of the feedback loop. |
-| _lastFinalizedTimestamp | uint256 | Last finalized L2 block timestamp. |
+| Name                     | Type    | Description                                                    |
+| ------------------------ | ------- | -------------------------------------------------------------- |
+| \_messageNumber          | uint256 | Last finalized L1 message number as part of the feedback loop. |
+| \_rollingHash            | bytes32 | Last finalized L1 rolling hash as part of the feedback loop.   |
+| \_lastFinalizedTimestamp | uint256 | Last finalized L2 block timestamp.                             |
 
 ### unsetVerifierAddress
 
@@ -444,9 +444,9 @@ _VERIFIER_UNSETTER_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _proofType | uint256 | The proof type being set/updated. |
+| Name        | Type    | Description                       |
+| ----------- | ------- | --------------------------------- |
+| \_proofType | uint256 | The proof type being set/updated. |
 
 ### submitBlobs
 
@@ -461,11 +461,11 @@ This should be a blob carrying transaction._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _blobSubmissions | struct ILineaRollup.BlobSubmission[] | The data for blob submission including proofs and required polynomials. |
-| _parentShnarf | bytes32 | The parent shnarf used in continuity checks as it includes the parentStateRootHash in its computation. |
-| _finalBlobShnarf | bytes32 | The expected final shnarf post computation of all the blob shnarfs. |
+| Name              | Type                                 | Description                                                                                            |
+| ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| \_blobSubmissions | struct ILineaRollup.BlobSubmission[] | The data for blob submission including proofs and required polynomials.                                |
+| \_parentShnarf    | bytes32                              | The parent shnarf used in continuity checks as it includes the parentStateRootHash in its computation. |
+| \_finalBlobShnarf | bytes32                              | The expected final shnarf post computation of all the blob shnarfs.                                    |
 
 ### submitDataAsCalldata
 
@@ -479,11 +479,11 @@ _OPERATOR_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _submission | struct ILineaRollup.CompressedCalldataSubmission | The supporting data for compressed data submission including compressed data. |
-| _parentShnarf | bytes32 | The parent shnarf used in continuity checks as it includes the parentStateRootHash in its computation. |
-| _expectedShnarf | bytes32 | The expected shnarf post computation of all the submission. |
+| Name             | Type                                             | Description                                                                                            |
+| ---------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| \_submission     | struct ILineaRollup.CompressedCalldataSubmission | The supporting data for compressed data submission including compressed data.                          |
+| \_parentShnarf   | bytes32                                          | The parent shnarf used in continuity checks as it includes the parentStateRootHash in its computation. |
+| \_expectedShnarf | bytes32                                          | The expected shnarf post computation of all the submission.                                            |
 
 ### finalizeBlocks
 
@@ -497,9 +497,8 @@ _OPERATOR_ROLE is required to execute._
 
 #### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| _aggregatedProof | bytes | The aggregated proof. |
-| _proofType | uint256 | The proof type. |
-| _finalizationData | struct ILineaRollup.FinalizationDataV3 | The full finalization data. |
-
+| Name               | Type                                   | Description                 |
+| ------------------ | -------------------------------------- | --------------------------- |
+| \_aggregatedProof  | bytes                                  | The aggregated proof.       |
+| \_proofType        | uint256                                | The proof type.             |
+| \_finalizationData | struct ILineaRollup.FinalizationDataV3 | The full finalization data. |
