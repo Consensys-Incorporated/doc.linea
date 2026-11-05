@@ -1,0 +1,3 @@
+# New terms for this site. One term or pattern per line.
+# Add a term in the pull request that introduces it.
+# Vale treats each line as a case-sensitive regular expression.
