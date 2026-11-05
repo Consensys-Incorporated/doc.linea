@@ -24,4 +24,4 @@ jobs:
 
       # vale/linea-pilot. Move this pin to the merged commit after that pull request lands.
       - name: Vale
-        uses: Consensys-Incorporated/github-actions/docs-spelling-check@0ffd48112236b102fe4ec8a3ced5b6d309748d18
+        uses: Consensys-Incorporated/github-actions/docs-spelling-check@f58f87140f906f4662ffaac6bf93d575b61d1b5a
