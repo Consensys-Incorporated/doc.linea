@@ -1,6 +1,9 @@
 ---
 description: Required spelling, casing, and naming for product terms and technical concepts across docs.linea.build.
-globs: docs/**/*.{mdx,md}
+globs:
+  - docs/**/*.{mdx,md}
+  - .github/vale/**
+  - .github/workflows/spelling.yml
 alwaysApply: false
 ---
 
@@ -42,3 +45,16 @@ them at random on the same page.
   data availability, finalization layer, and endpoints. Use it for how the stack is run.
 - A **network** is the chain that instance produces: it has a chain ID and state, and it
   sends or claims messages. Use it for chain-to-chain behavior.
+
+## Spelling
+
+Pull requests run Vale spelling. A warning means Vale does not recognize a word in a
+changed documentation file.
+
+- If the word is a typo, correct it in the documentation.
+- If the word is a real term this change introduces, add one pattern to
+  `.github/vale/accept.txt` in the same pull request. Vale treats each line as a
+  case-sensitive regular expression. Include plurals and possessives in the pattern
+  when the page uses them, for example `Openfort(?:'s)?`.
+- Leave the shared accept list in `github-actions` unchanged. It already contains the
+  terms accepted in the initial audit. New terms stay in this repository's file.
