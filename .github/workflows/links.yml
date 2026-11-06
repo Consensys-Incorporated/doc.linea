@@ -1,23 +1,61 @@
----
 name: Check for broken links
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 permissions: {} # lock everything by default (least-privilege)
 
 jobs:
   linkCheck:
     name: Link Checking
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # docs-link-check applies its Chrome sandbox fix on 24.04 only
     permissions:
       contents: read
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Limit the check to the pull request diff
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "${{ github.base_ref }}"
+          git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.md' '*.mdx' > "$RUNNER_TEMP/changed-docs.txt"
+          if [ ! -s "$RUNNER_TEMP/changed-docs.txt" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          python3 - "$RUNNER_TEMP/changed-docs.txt" << 'PY'
+          import pathlib
+          import sys
+          changed = [line.strip() for line in pathlib.Path(sys.argv[1]).read_text().splitlines() if line.strip()]
+          source = pathlib.Path(".linkspector.yml").read_text().splitlines()
+          kept = []
+          index = 0
+          while index < len(source):
+              line = source[index]
+              if line.startswith("dirs:"):
+                  index += 1
+                  while index < len(source) and source[index].startswith((" ", "\t")):
+                      index += 1
+                  continue
+              kept.append(line)
+              index += 1
+
+          def quote(path):
+              return '"' + path.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+          files = ["files:"] + [f"  - {quote(path)}" for path in changed]
+          pathlib.Path(".linkspector-pr.yml").write_text("\n".join(files + kept) + "\n")
+          PY
 
       - name: LinkCheck
-        uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
+        if: steps.diff.outputs.skip != 'true'
+        uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
         with:
-          CONFIG_FILE: '.linkspector.yml'
+          CONFIG_FILE: .linkspector-pr.yml
