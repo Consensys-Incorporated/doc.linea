@@ -21,10 +21,12 @@ jobs:
       - name: Limit the check to the pull request diff
         id: diff
         shell: bash
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
           set -euo pipefail
-          git fetch --no-tags origin "${{ github.base_ref }}"
-          git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.md' '*.mdx' > "$RUNNER_TEMP/changed-docs.txt"
+          git fetch --no-tags origin "$BASE_REF"
+          git diff --name-only --diff-filter=ACMR "origin/${BASE_REF}...HEAD" -- '*.md' '*.mdx' > "$RUNNER_TEMP/changed-docs.txt"
           if [ ! -s "$RUNNER_TEMP/changed-docs.txt" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
@@ -56,6 +58,6 @@ jobs:
 
       - name: LinkCheck
         if: steps.diff.outputs.skip != 'true'
-        uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
+        uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
         with:
           CONFIG_FILE: .linkspector-pr.yml
