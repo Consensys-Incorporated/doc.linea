@@ -21,14 +21,14 @@ for debugging contract interactions before sending them.
 
 ## Parameters
 
-- `transaction`: _\[required]_ Transaction call object (same fields as [`eth_call`](eth-call)).
+- `transaction`: _\[required]_ Transaction call object (same fields as [`eth_call`](eth-call.mdx)).
 - `blockParameter`: _\[required]_ Hexadecimal block number, or `latest`, `earliest`, `pending`, `finalized`.
 - `options`: _\[required]_ Object specifying the tracer:
   - `tracer`: _\[required]_ `"callTracer"` or `"prestateTracer"`.
 
 ## Returns
 
-Same trace output as [`debug_traceTransaction`](debug-tracetransaction), but for a simulated call.
+Same trace output as [`debug_traceTransaction`](debug-tracetransaction.mdx), but for a simulated call.
 
 ## Example: `callTracer`
 
@@ -87,4 +87,4 @@ curl https://rpc.linea.build \
 ```
 
 `prestateTracer` is also supported and returns the pre-execution state of every account the call
-would touch, identical in shape to the [`debug_traceTransaction` `prestateTracer` response](debug-tracetransaction#example-prestatetracer).
+would touch, identical in shape to the [`debug_traceTransaction` `prestateTracer` response](debug-tracetransaction.mdx#example-prestatetracer).

@@ -30,7 +30,7 @@ block by block, and deriving a new state root for each block.
 
 The <GlossaryTerm term="Coordinator">coordinator</GlossaryTerm> requests the Merkle proof
 for a batch of blocks and includes it in the execution proof request it sends to the <GlossaryTerm term="Prover">prover</GlossaryTerm>. The prover returns an execution proof, a <GlossaryTerm term="zk-SNARK" /> of the state transition that batch produced. The state manager also serves
-[`linea_getProof`](../../reference/apis/linea-api/linea-getproof) to callers that need a Merkle proof of an account or a storage slot for a block already finalized on the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
+[`linea_getProof`](../../reference/apis/linea-api/linea-getproof.mdx) to callers that need a Merkle proof of an account or a storage slot for a block already finalized on the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 Two data structures are involved:
 
@@ -231,7 +231,7 @@ the previous state root produces the new one.
 
 - See the [coordinator](./coordinator/index.mdx) for how Merkle proofs reach the prover, and the
   [prover](./prover/index.mdx) for how the prover turns them into an execution proof.
-- See [`linea_getProof`](../../reference/apis/linea-api/linea-getproof) for requesting an account or storage
+- See [`linea_getProof`](../../reference/apis/linea-api/linea-getproof.mdx) for requesting an account or storage
   proof directly.
 - See the source code for the [Shomei plugin](https://github.com/Consensys-Incorporated/besu-shomei-plugin) and
   [Shomei node](https://github.com/Consensys-Incorporated/shomei).

@@ -6,6 +6,7 @@ excludedDirs:
   - ./.vercel
   - ./build
   - ./.docusaurus
+  - ./docs/network
 followRedirects: true
 fileExtensions:
   - md
@@ -28,6 +29,9 @@ ignorePatterns:
   - pattern: '^https://app\.bitscrunch\.com(?:[/?].*)?$'
   - pattern: '^https://www\.coingecko\.com/en/api(?:[/?].*)?$'
   - pattern: '^https://(?:www\.)?dune\.com(?:[/?].*)?$'
+  - pattern: '^http://localhost'
+  - pattern: '^http://127\.0\.0\.1'
+  - pattern: 'linea-(?:maru|besu-plugin|coordinator|postman|prover)-options'
 aliveStatusCodes:
   - 200
   - 206

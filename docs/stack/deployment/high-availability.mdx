@@ -29,6 +29,7 @@ Deployment management and observability operate separately from the transaction-
 The diagram shows these as the deployment control plane and observability plane.
 
 <div class="mermaid-fit mermaid-deployment">
+
 ```mermaid
 %%{init: {
   "themeVariables": {
@@ -73,8 +74,8 @@ FL["Finalization layer<br/>(for example, Ethereum)"]:::neutral
 OBS["Observability plane"]:::control
 Regions --> FL
 Regions -.-> OBS
+```
 
-````
 </div>
 
 Each region runs a <GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>: a
@@ -144,6 +145,7 @@ Failback to the original primary region is typically a controlled
 <GlossaryTerm term="Operator">operator</GlossaryTerm> step after the incident is resolved.
 
 <div class="mermaid-fit">
+
 ```mermaid
 %%{init: {
   "sequence": {
@@ -166,7 +168,7 @@ sequenceDiagram
   S->>S: Promote replicated DB and scale finalization stack
   S->>FL: Finalization resumes
   Note over U,FL: Users see uninterrupted chain, finalization catches up
-````
+```
 
 </div>
 
