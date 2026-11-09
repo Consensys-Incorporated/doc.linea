@@ -53,15 +53,21 @@ jobs:
               path = path.replace("\\", "/").strip()
               while path.startswith("./"):
                   path = path[2:]
-              return path.rstrip("/")
+              path = path.rstrip("/")
+              if path == ".":
+                  return ""
+              return path
 
           def under(path, root):
+              # An empty root is "." or "./": the whole repository.
+              if root == "":
+                  return True
               return path == root or path.startswith(root + "/")
 
-          roots = [norm(path) for path in section("dirs") if norm(path)]
+          roots = [norm(path) for path in section("dirs")]
           if not roots:
               sys.exit("The linkspector config has no dirs, so the pull request check has no scope.")
-          excluded = [norm(path) for path in section("excludedDirs") if norm(path)]
+          excluded = [norm(path) for path in section("excludedDirs")]
 
           def included(path):
               path = norm(path)
