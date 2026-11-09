@@ -1,17 +1,20 @@
----
-name: Nightly check
+name: Weekly check
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 1"
   workflow_dispatch: {}
+
+concurrency:
+  group: weekly-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions: {} # lock everything by default (least-privilege)
 
 jobs:
   linkCheck:
     name: Run link check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # docs-link-check applies its Chrome sandbox fix on 24.04 only
     permissions:
       contents: read
     steps:
@@ -27,13 +30,13 @@ jobs:
     needs: linkCheck
     if: ${{ failure() }}
     runs-on: gha-runner-scale-set-ubuntu-24-amd64-small
-    permissions: {}   # zero scopes
+    permissions: {}
     steps:
       - name: Slack Notification
         uses: Consensys-Incorporated/github-actions/slack-notify@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
         with:
-          SLACK_CHANNEL: doc-ci-alerts
+          SLACK_CHANNEL: ci-documentation
           SLACK_COLOR: danger
-          SLACK_TITLE: Linea docs nightly build - Failure
+          SLACK_TITLE: Linea docs weekly link check - Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           MSG_MINIMAL: true
