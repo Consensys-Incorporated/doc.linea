@@ -1,12 +1,12 @@
-name: Nightly check
+name: Weekly check
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 1"
   workflow_dispatch: {}
 
 concurrency:
-  group: nightly-${{ github.ref }}
+  group: weekly-${{ github.ref }}
   cancel-in-progress: true
 
 permissions: {} # lock everything by default (least-privilege)
@@ -37,6 +37,6 @@ jobs:
         with:
           SLACK_CHANNEL: ci-documentation
           SLACK_COLOR: danger
-          SLACK_TITLE: Linea docs nightly link check - Failure
+          SLACK_TITLE: Linea docs weekly link check - Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           MSG_MINIMAL: true
