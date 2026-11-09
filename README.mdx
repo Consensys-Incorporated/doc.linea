@@ -54,7 +54,7 @@ mapping to a top-level directory under `docs/`:
 | Linea Mainnet | Linea            | Users and app builders transacting on and building for Linea Mainnet and Sepolia                                                           | `docs/network`   |
 | Lineth Stack  | Lineth           | Operators deploying and running their own networks on Lineth                                                                               | `docs/stack`     |
 | Protocol      | Lineth           | Readers learning how the Lineth protocol works (zero-knowledge proofs, prover, architecture, contracts)                                    | `docs/protocol`  |
-| Reference     | Linea and Lineth | Developers using the Linea JSON-RPC API, smart contract reference, Linea SDK, and Token API                                                | `docs/reference`       |
+| Reference     | Linea and Lineth | Developers using the Linea JSON-RPC API, smart contract reference, Linea SDK, and Token API                                                | `docs/reference` |
 | Changelog     | Linea and Lineth | Releases, upgrades, and tooling updates across the Lineth stack and protocol and the Linea network, plus the Linea Security Council record | `docs/changelog` |
 
 ## Repository structure
@@ -82,7 +82,9 @@ repo root.
 ## Requirements
 
 - **Node.js `24.22.1`** (pinned in `.nvmrc` and `engines` in `package.json`).
-- **npm** as the package manager.
+- **npm `12.2.1`** as the package manager (pinned in `packageManager` and
+  `engines` in `package.json`). Install it with `npm install -g npm@12.2.1`.
+  `.npmrc` sets a 7-day minimum release age for new dependency versions.
 
 It is highly recommended that you use a tool like
 [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating) to manage Node.js

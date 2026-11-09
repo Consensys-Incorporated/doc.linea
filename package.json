@@ -120,7 +120,8 @@
     "typescript-eslint": "8.72.0"
   },
   "engines": {
-    "node": "24.22.1"
+    "node": "24.22.1",
+    "npm": ">=12.2.1"
   },
   "overrides": {
     "@vercel/nft": {
@@ -149,5 +150,6 @@
     "esbuild": false,
     "fsevents": false,
     "unrs-resolver": false
-  }
+  },
+  "packageManager": "npm@12.2.1"
 }
