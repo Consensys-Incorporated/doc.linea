@@ -123,12 +123,22 @@
     "node": "24.22.1"
   },
   "overrides": {
+    "@vercel/nft": {
+      "glob": "14.0.2"
+    },
     "@vercel/node": {
       "path-to-regexp": "6.3.0",
       "undici": "6.29.1"
     },
     "@vercel/static-config": {
       "ajv": "8.20.0"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
+    },
+    "deepmerge": "4.1.2",
+    "rimraf": {
+      "glob": "14.0.2"
     },
     "serialize-javascript": "7.1.4",
     "tinypool": "2.2.0"
