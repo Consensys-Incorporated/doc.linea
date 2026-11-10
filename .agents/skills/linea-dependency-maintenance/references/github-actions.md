@@ -17,8 +17,9 @@ Use these notes for the GitHub Actions referenced by `.github/workflows/*.yml` a
 - Default scope is same-major (patch/minor) bumps. Track semver-major action bumps as issues; they can change runner or
   Node baselines and need deliberate migration.
 - Local actions (`uses: ./.github/actions/...`) are first-party and are not pinned.
-- Dependabot keeps opening the routine `github-actions` PRs. Do not disable that job; its cooldown in `dependabot.yml`
-  (7 days) matches this maturity window. This skill covers manual/agent sweeps and enforcing the rules above on every PR.
+- Renovate opens the routine GitHub Actions pull requests. Do not disable `.github/workflows/renovatebot.yml`. The
+  7-day `minimumReleaseAge` in `renovate.json` matches this maturity window. This skill covers manual/agent sweeps and
+  enforcing the rules above on every pull request.
 
 ## Baseline
 
