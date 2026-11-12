@@ -4,6 +4,10 @@ description: Find out all you need to know about the latest Linea versions.
 displayed_sidebar: changelogSidebar
 image: /img/socialCards/release-notes.jpg
 release_toc:
+  beta-v53:
+    label: Prover performance optimizations
+    mainnet: July 2026
+    sepolia: June 2026
   beta-v52:
     label: Small fields and contract upgrades
     mainnet: 1 April 2026
@@ -143,17 +147,21 @@ that allows users to submit L2 transactions directly to the L1.
 
 */}
 
-<div id="beta-v54" className="legacy-anchor" /><div id="beta-v53" className="legacy-anchor" />
+## Beta v5.3
 
-<details open className="contrast-card">
-<summary>Upcoming releases</summary>
+<ChangelogDate sectionId="beta-v53" />
 
-Timings are targets and can move.
+<ChangelogEntry tag="performance">
 
-- **Beta v5.3** &middot; Prover performance optimizations &mdash; Linea Mainnet Q4 2026
-- **Beta v5.4** &middot; Finality under 30min &mdash; Linea Mainnet Q4 2026
+Optimizes the limitless prover to reduce proof generation time. Ships with prover 7.5.0.
 
-</details>
+</ChangelogEntry>
+
+<ChangelogEntry tag="upgrade">
+
+Upgrades the `LineaRollup` contract with support for future [forced transactions](../protocol/forced-transactions.mdx), deploys the address filter, and adds a new verifier. Executed via [Security Council nonce 77 (L1)](./security-council-record.mdx); see the [audit reports](https://github.com/LFDT-Lineth/lineth-monorepo/blob/main/docs/audits.md).
+
+</ChangelogEntry>
 
 <div id="small-fields" className="legacy-anchor" />
 
