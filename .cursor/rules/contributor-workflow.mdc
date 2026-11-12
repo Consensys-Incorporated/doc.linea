@@ -17,10 +17,18 @@ an issue first makes it much easier for the docs team to process the contributio
 
 ## Redirects
 
-Every deleted, renamed, or moved page needs a matching entry in `redirects.json`, and every
-internal link that pointed at the old path needs updating. `onBrokenLinks` is configured to
-fail the build, so a missed redirect or stale link breaks CI, not just the reader's
-experience.
+Every deleted, renamed, or moved page needs a permanent redirect in `vercel.json`, and every
+internal link that pointed at the old path needs updating. Add an object to the `redirects`
+array:
+
+```json
+{ "source": "/old-path", "destination": "/new-path", "permanent": true }
+```
+
+`trailingSlash` is `false`, matching `docusaurus.config.js`, so one entry covers the path
+with and without a trailing slash. Vercel applies these redirects. `npm start` serves the
+docs app and does not apply `vercel.json`; confirm a new redirect on the Vercel preview.
+`onBrokenLinks` is `throw`, so a stale internal link fails the build.
 
 ## Auto-generated content
 

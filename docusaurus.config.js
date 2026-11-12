@@ -4,8 +4,6 @@ const { themes: prismThemes } = require("prism-react-renderer");
 const lightCodeTheme = prismThemes.github;
 const darkCodeTheme = prismThemes.dracula;
 
-const redirectsData = require("./redirects.json");
-
 // const isDev = process.env.NODE_ENV === "development";
 // const baseUrl = isDev ? "/" : "/";
 
@@ -332,12 +330,6 @@ const config = {
       "@docusaurus/plugin-google-tag-manager",
       {
         containerId: "GTM-TB58STH",
-      },
-    ],
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        redirects: redirectsData,
       },
     ],
     "@r74tech/docusaurus-plugin-panzoom",
