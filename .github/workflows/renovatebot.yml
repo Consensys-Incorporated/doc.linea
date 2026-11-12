@@ -2,7 +2,7 @@ name: renovatebot
 
 on:
   schedule:
-    - cron: "15 3 14,28 * *"
+    - cron: "15 3 * * 0"
   push:
     branches:
       - main
