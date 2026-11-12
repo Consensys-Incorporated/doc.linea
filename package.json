@@ -75,7 +75,7 @@
     "cheerio": "1.2.0",
     "clsx": "2.1.1",
     "dotenv": "17.4.2",
-    "fast-xml-parser": "5.11.2",
+    "fast-xml-parser": "5.12.0",
     "github-slugger": "1.5.0",
     "ignore": "7.0.14",
     "prism-react-renderer": "2.4.1",
