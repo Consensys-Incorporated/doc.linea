@@ -94,7 +94,8 @@ Before finishing, check:
 
 After creating the page, remind the user to:
 
-1. Add an entry to `redirects.json` if any page was moved, renamed, or removed.
+1. Add a redirect to `vercel.json` if any page was moved, renamed, or removed. See
+   `.cursor/rules/contributor-workflow.mdc`.
 2. Preview locally with `npm run start`.
 3. Run `npm run lint` and `npm run typecheck` before opening a PR.
 4. Link the issue from Step 1 in the pull request description (see
