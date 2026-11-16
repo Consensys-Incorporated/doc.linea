@@ -28,7 +28,7 @@ jobs:
         run: npm install -g npm@12.2.1
 
       - name: Lint code
-        uses: Consensys-Incorporated/github-actions/docs-lint-all@633ca293fa3bc3490d58840b085245780774c989 # 2.0.0
+        uses: Consensys-Incorporated/github-actions/docs-lint-all@10825e5427095aae0ca5686db2caa5029d693a4f # 2.0.1
 
       - name: Check Markdown formatting
         run: npm run format:docs:check

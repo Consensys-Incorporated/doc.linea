@@ -110,6 +110,6 @@ jobs:
 
       - name: LinkCheck
         if: steps.diff.outputs.skip != 'true'
-        uses: Consensys-Incorporated/github-actions/docs-link-check@633ca293fa3bc3490d58840b085245780774c989 # 2.0.0
+        uses: Consensys-Incorporated/github-actions/docs-link-check@10825e5427095aae0ca5686db2caa5029d693a4f # 2.0.1
         with:
           CONFIG_FILE: .linkspector-pr.yml
