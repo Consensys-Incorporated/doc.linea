@@ -23,4 +23,4 @@ jobs:
           fetch-depth: 0
 
       - name: Vale
-        uses: Consensys-Incorporated/github-actions/docs-spelling-check@5f8fb160fc7f4cba9e72602cc615199c07d4d1a0
+        uses: Consensys-Incorporated/github-actions/docs-spelling-check@633ca293fa3bc3490d58840b085245780774c989 # 2.0.0

@@ -1,0 +1,25 @@
+---
+name: Trivy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+
+permissions: {} # lock everything by default (least-privilege)
+
+jobs:
+  trivy:
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: Consensys-Incorporated/github-actions/.github/workflows/trivy.yml@633ca293fa3bc3490d58840b085245780774c989 # 2.0.0
+    with:
+      environment: security # holds SLACK_WEBHOOK
