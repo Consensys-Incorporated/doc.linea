@@ -42,10 +42,6 @@ Don't add an `image` field manually: the social card is generated automatically 
 
 ## Links
 
-- Link to other docs pages with relative file paths that include the `.mdx` extension (for
-  example, `./transaction-finality.mdx`, not `./transaction-finality`). Linkspector checks
-  relative links against files on disk, so a link without the extension fails the link
-  check.
 - The `](/` pattern is an absolute link; `](./` and `](../` are relative links. Prefer
   relative links within the same tab.
 - Use descriptive link text embedded in the sentence. Don't use "click here" or a bare

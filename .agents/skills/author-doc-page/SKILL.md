@@ -86,7 +86,7 @@ Before finishing, check:
 - [ ] Terminology and casing match `terminology.mdc` and the canonical
   `/protocol/linea-vs-lineth` page.
 - [ ] Any unverified values are marked `[VERIFY]`.
-- [ ] Links are relative where possible, with the `.mdx` extension, and descriptive text.
+- [ ] Links are relative where possible, with descriptive text.
 - [ ] Code samples have language tags and are placed near the bottom of the page.
 - [ ] File uses lowercase and dashes, and lives in the correct tab/content-type folder.
 
