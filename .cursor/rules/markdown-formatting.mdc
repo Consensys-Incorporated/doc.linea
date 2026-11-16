@@ -49,7 +49,7 @@ Don't add an `image` field manually: the social card is generated automatically 
 - Use descriptive link text embedded in the sentence. Don't use "click here" or a bare
   URL.
 - If you move or rename a page, see `.cursor/rules/contributor-workflow.mdc` for the
-  `redirects.json` requirement.
+  `vercel.json` redirect requirement.
 
 ## Images
 
