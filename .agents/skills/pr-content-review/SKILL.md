@@ -82,7 +82,7 @@ of truth for full criteria:
 ### Formatting (`markdown-formatting.mdc`)
 
 - Frontmatter has `title` and `description`; no manually added `image`.
-- Links are relative where possible, have no `.mdx` extension, and use descriptive text.
+- Links are relative where possible, include the `.mdx` extension, and use descriptive text.
 - Lines respect the 100-character limit without breaking words or URLs.
 
 ### Contributor workflow (`contributor-workflow.mdc`)
@@ -132,7 +132,7 @@ existing published content that hasn't been reconciled yet.
 - Line 8: "Lineth" used where the claim is Linea-specific. Check /protocol/linea-vs-lineth.
 
 ### Formatting
-- Line 45: Link has a trailing `.mdx` extension.
+- Line 45: Relative link is missing the `.mdx` extension.
 
 ### Content and accuracy
 - Line 30: Unverified value. Add `[VERIFY]` or confirm against source.
