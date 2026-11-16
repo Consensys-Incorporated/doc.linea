@@ -88,8 +88,8 @@ of truth for full criteria:
 ### Contributor workflow (`contributor-workflow.mdc`)
 
 - An issue exists and is linked from the PR (see CONTRIBUTING.md).
-- `redirects.json` updated if the page was moved, renamed, or removed, and every internal
-  link that pointed at the old path is updated too.
+- `vercel.json` has a permanent redirect if the page was moved, renamed, or removed, and
+  every internal link that pointed at the old path is updated too.
 - `docs/reference/smart-contracts/` wasn't hand-edited (it's auto-generated).
 
 ### Content and accuracy
