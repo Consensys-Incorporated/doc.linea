@@ -1,9 +1,6 @@
-# Agent contract: field labels are shared across Consensys docs repositories.
-# Do not rename them. Product-specific values belong in Docs area options,
-# placeholders, and config.yml contact links only.
-# Content forms: Summary, Docs area, Target audience, Content type, Affected pages,
-# Source links, Acceptance criteria, Out of scope, Agent disposition, PR gates.
-# The site form omits Docs area, Target audience, and Content type.
+# Agent contract: do not rename these field labels.
+# Fields: Summary, Site issue type, Affected pages, Source links,
+# Acceptance criteria, Out of scope, Agent disposition, PR gates.
 # A docs pull request is ready without extra triage only when Agent disposition is
 # "Ready for a docs PR" and every PR gate is checked. A new page or a new section
 # requires Needs human judgment.
