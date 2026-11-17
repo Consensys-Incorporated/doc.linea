@@ -207,7 +207,7 @@ const config = {
           },
           {
             to: "/support",
-            label: "Support",
+            label: "Help",
             position: "right",
             className: "support-link",
           },
@@ -264,7 +264,7 @@ const config = {
                 href: "https://linea.build/apps",
               },
               {
-                label: "User support",
+                label: "Help",
                 to: "/support",
               },
               {
