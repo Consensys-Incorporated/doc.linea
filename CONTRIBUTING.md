@@ -9,8 +9,9 @@ contributors alike.
 
 Open an issue describing the change you want to make **before** you start working on it,
 and [link to it in your pull request](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
-We provide issue templates for [bug reports](.github/ISSUE_TEMPLATE/bug-report.yml),
-[enhancements](.github/ISSUE_TEMPLATE/enhancement.yml), and
+We provide issue templates for [new content](.github/ISSUE_TEMPLATE/new-content.yml),
+[docs fixes](.github/ISSUE_TEMPLATE/fix-content.yml),
+[site and tooling](.github/ISSUE_TEMPLATE/site.yml), and
 [partner contributions](.github/ISSUE_TEMPLATE/partner-contribution.yml).
 
 > This is particularly important if you're an ecosystem contributor: submitting your
