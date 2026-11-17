@@ -1,10 +1,12 @@
-# Agent contract: these field labels are shared across Consensys docs repositories.
+# Agent contract: field labels are shared across Consensys docs repositories.
 # Do not rename them. Product-specific values belong in Docs area options,
 # placeholders, and config.yml contact links only.
-# Summary, Docs area, Target audience, Content type, Affected pages, Source links,
-# Acceptance criteria, Out of scope, Agent disposition, PR gates.
+# Content forms: Summary, Docs area, Target audience, Content type, Affected pages,
+# Source links, Acceptance criteria, Out of scope, Agent disposition, PR gates.
+# The site form omits Docs area, Target audience, and Content type.
 # A docs pull request is ready without extra triage only when Agent disposition is
-# "Ready for a docs PR" and every PR gate is checked.
+# "Ready for a docs PR" and every PR gate is checked. A new page or a new section
+# requires Needs human judgment.
 name: Site, tooling, or build
 description: Report a docs site, tooling, dependency, workflow, or CI issue.
 title: "Site: "
@@ -14,8 +16,6 @@ body:
     attributes:
       value: |
         Use this form for the docs site, dependencies, CI, or tooling.
-
-        These field labels are shared across Consensys docs repositories. Do not rename them. Leave a box unchecked when it does not apply. Link a source for every product fact, and do not invent behavior.
   - type: textarea
     id: summary
     attributes:
@@ -25,48 +25,6 @@ body:
         Example: "Fix the broken redirect from the old architecture path."
     validations:
       required: true
-  - type: dropdown
-    id: docs-area
-    attributes:
-      label: Docs area
-      description: "Which part of the docs site this change belongs to."
-      options:
-        - "Linea Mainnet"
-        - "Lineth Stack"
-        - "Protocol"
-        - "Reference"
-        - "Changelog"
-        - "Multiple or unsure"
-        - "Site-wide"
-    validations:
-      required: true
-  - type: dropdown
-    id: audience
-    attributes:
-      label: Target audience
-      description: "Who the page is for. Select every audience the page must serve. Select Docs maintainers for site and tooling work."
-      options:
-        - "End users"
-        - "Operators"
-        - "App or protocol developers"
-        - "Architects and evaluators"
-        - "Contributors"
-        - "Docs maintainers"
-      multiple: true
-    validations:
-      required: true
-  - type: checkboxes
-    id: content-type
-    attributes:
-      label: Content type
-      description: "Concept is an explanation page. Select every type this change needs. Select Not a content change for site and tooling work that does not change a published page."
-      options:
-        - label: "Concept"
-        - label: "How-to guide"
-        - label: "Get-started or onboarding"
-        - label: "Reference"
-        - label: "Tutorial"
-        - label: "Not a content change"
   - type: checkboxes
     id: site-issue-type
     attributes:
@@ -118,7 +76,7 @@ body:
     id: disposition
     attributes:
       label: Agent disposition
-      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new conceptual page, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
+      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new page, including a how-to guide or tutorial, a new section, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
       options:
         - "Needs triage"
         - "Ready for a docs PR"
@@ -134,5 +92,5 @@ body:
       options:
         - label: "Affected page URL or repo path is named"
         - label: "A linked source verifies every product fact"
-        - label: "The change does not add a new conceptual page, restructure navigation, or change positioning"
+        - label: "The change does not add a new page or section, restructure navigation, or change positioning"
         - label: "No unreleased, roadmap, or unverified claims"

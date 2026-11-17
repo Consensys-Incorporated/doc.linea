@@ -10,7 +10,7 @@ Fixes #
 
 ## Audience and area
 
-<!-- Copy the issue's Target audience, Docs area, and Content type. -->
+<!-- Copy the issue's Target audience, Docs area, and Content type. Leave blank for a site or tooling issue. -->
 
 ## Pages
 

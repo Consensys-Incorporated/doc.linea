@@ -1,10 +1,12 @@
-# Agent contract: these field labels are shared across Consensys docs repositories.
+# Agent contract: field labels are shared across Consensys docs repositories.
 # Do not rename them. Product-specific values belong in Docs area options,
 # placeholders, and config.yml contact links only.
-# Summary, Docs area, Target audience, Content type, Affected pages, Source links,
-# Acceptance criteria, Out of scope, Agent disposition, PR gates.
+# Content forms: Summary, Docs area, Target audience, Content type, Affected pages,
+# Source links, Acceptance criteria, Out of scope, Agent disposition, PR gates.
+# The site form omits Docs area, Target audience, and Content type.
 # A docs pull request is ready without extra triage only when Agent disposition is
-# "Ready for a docs PR" and every PR gate is checked.
+# "Ready for a docs PR" and every PR gate is checked. A new page or a new section
+# requires Needs human judgment.
 name: I'm an ecosystem contributor
 description: If you're a protocol, dapp, or other ecosystem organization, submit your issue here.
 labels: ["ecosystem"]
@@ -13,8 +15,6 @@ body:
     attributes:
       value: |
         Use this form for ecosystem and partner documentation requests.
-
-        These field labels are shared across Consensys docs repositories. Do not rename them. Leave a box unchecked when it does not apply. Link a source for every product fact, and do not invent behavior.
   - type: textarea
     id: organization
     attributes:
@@ -77,6 +77,7 @@ body:
         - "Protocol"
         - "Reference"
         - "Changelog"
+        - "New section"
         - "Multiple or unsure"
         - "Site-wide"
     validations:
@@ -85,14 +86,13 @@ body:
     id: audience
     attributes:
       label: Target audience
-      description: "Who the page is for. Select every audience the page must serve. Select Docs maintainers for site and tooling work."
+      description: "Who the page is for. Select every audience the page must serve."
       options:
         - "End users"
         - "Operators"
         - "App or protocol developers"
         - "Architects and evaluators"
         - "Contributors"
-        - "Docs maintainers"
       multiple: true
     validations:
       required: true
@@ -141,7 +141,7 @@ body:
     id: disposition
     attributes:
       label: Agent disposition
-      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new conceptual page, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
+      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new page, including a how-to guide or tutorial, a new section, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
       options:
         - "Needs triage"
         - "Ready for a docs PR"
@@ -157,5 +157,5 @@ body:
       options:
         - label: "Affected page URL or repo path is named"
         - label: "A linked source verifies every product fact"
-        - label: "The change does not add a new conceptual page, restructure navigation, or change positioning"
+        - label: "The change does not add a new page or section, restructure navigation, or change positioning"
         - label: "No unreleased, roadmap, or unverified claims"
