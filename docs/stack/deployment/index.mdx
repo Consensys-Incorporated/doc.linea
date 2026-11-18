@@ -75,16 +75,12 @@ For protocol-level architecture details, see [Protocol Architecture](../../proto
 
 All Lineth deployments use the same [core components](core-components.mdx).
 Internal protocol services stay inside the operator's network.
-Proofs and state commitments go to a chosen
-
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
-
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> also choose:
+Proofs and state commitments go to a chosen <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. <GlossaryTerm term="Operator">Operators</GlossaryTerm> also choose:
 
 - [Key management](key-management.mdx): Local keys, remote signing through
   <GlossaryTerm term="Web3Signer" />, or AWS KMS
 - [Data availability](data-availability.mdx): On the finalization layer in a
-  <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, or offchain in a<GlossaryTerm term="Validium">validium</GlossaryTerm>
+  <GlossaryTerm term="Rollup">rollup</GlossaryTerm>, or offchain in a <GlossaryTerm term="Validium">validium</GlossaryTerm>
 - [Finalization layer](finalization-layer.mdx): Ethereum (L1) or Linea Mainnet (L2)
 - Validator model: Single Maru validator, or [multi-validator QBFT](multi-validator-consensus.mdx)
 
@@ -92,9 +88,7 @@ Lineth does not recommend a specific set of customizations.
 
 ## Example architecture
 
-The following diagram illustrates an example architecture for a
-
-<GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted network boundary, and message relayers to other chains. A rollup or public validium
+The following diagram illustrates an example architecture for a <GlossaryTerm term="Validium">private validium</GlossaryTerm> deployment: access control at the edge, a restricted network boundary, and message relayers to other chains. A rollup or public validium
 uses the same internal services; access and data availability differ.
 
 In this example, transaction data stays on the operator's restricted node set, and is not shown on the

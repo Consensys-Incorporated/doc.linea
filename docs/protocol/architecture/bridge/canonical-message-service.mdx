@@ -10,9 +10,7 @@ import MessageNetworkToLayer from "/img/protocol/architecture/bridge/message-net
 import MessageLayerToNetwork from "/img/protocol/architecture/bridge/message-layer-to-network.svg";
 
 The canonical message service passes arbitrary messages (that is, user-specified data and native currency)
-between a <GlossaryTerm term="Lineth" /> network and its
-
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. It is general-purpose infrastructure: the [canonical token bridge](./canonical-token-bridge.mdx) is built on it, and any
+between a <GlossaryTerm term="Lineth" /> network and its <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>. It is general-purpose infrastructure: the [canonical token bridge](./canonical-token-bridge.mdx) is built on it, and any
 contract or dapp can call it directly.
 
 ## How it works
@@ -49,9 +47,7 @@ can claim the message and collect the fee instead.
 Each direction commits to its messages differently, because only one of the two chains sits behind a proof.
 
 **Network to finalization layer.**
-Finalizing a range of blocks verifies its
-
-<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> and anchors the Merkle root of the messages those blocks sent. A claim on the finalization layer's message service carries a Merkle
+Finalizing a range of blocks verifies its <GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm> and anchors the Merkle root of the messages those blocks sent. A claim on the finalization layer's message service carries a Merkle
 proof. The service accepts the claim only if the proof shows the message is included under that anchored root. Messages are therefore only claimable once the blocks that sent them are finalized.
 
 <div className="img-medium" style={{ maxWidth: "43%" }}>

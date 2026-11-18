@@ -9,10 +9,7 @@ image: /img/socialCards/monitor-a-deployment.jpg
 import GlossaryTerm from "@theme/GlossaryTerm";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 
-This page describes how to expose health and metrics endpoints on a
-
-<GlossaryTerm term="Lineth" /> deployment, and what signals to watch on each component.
-<GlossaryTerm term="Operator">Operators</GlossaryTerm> define alert thresholds and recovery objectives for their own environment.
+This page describes how to expose health and metrics endpoints on a <GlossaryTerm term="Lineth" /> deployment, and what signals to watch on each component. <GlossaryTerm term="Operator">Operators</GlossaryTerm> define alert thresholds and recovery objectives for their own environment.
 
 ## Prerequisites
 
@@ -170,9 +167,7 @@ each component.
 The coordinator, Maru, and Linea Besu default to port `9545`.
 Assign a different port or host when more than one of these processes shares a machine.
 
-The coordinator also polls the
-
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>
+The coordinator also polls the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>
 to track finalized state. Set the poll interval, retries, and warning thresholds in
 [`l1-finalization-monitor`](../../reference/component-configuration/linea-coordinator-options#l1-finalization-monitor).
 

@@ -16,9 +16,7 @@ services, either publicly or only within the operator's network.
 
 ## Consensus client: Maru
 
-[Maru](../../reference/repos.mdx#maru) implements
-
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> consensus and runs on every node, in one of two roles:
+[Maru](../../reference/repos.mdx#maru) implements <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> consensus and runs on every node, in one of two roles:
 
 - **Maru validator:** Proposes and votes on blocks as part of the QBFT validator set.
   Maru requests a payload from its dedicated Linea Besu execution client, then signs and broadcasts
@@ -53,9 +51,7 @@ trace generation for the <GlossaryTerm term="Prover">prover</GlossaryTerm>, Line
 rules, <GlossaryTerm term="State manager">state manager</GlossaryTerm> integration, and the `linea_`
 RPC namespace.
 
-Each Maru validator requires a dedicated Linea Besu execution client with
-
-<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins. A Maru validator paired with such a client is a<GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>, and that pairing is
+Each Maru validator requires a dedicated Linea Besu execution client with <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins. A Maru validator paired with such a client is a <GlossaryTerm term="Sequencer node">sequencer node</GlossaryTerm>, and that pairing is
 what produces canonical blocks. During block building, the sequencer generates <GlossaryTerm term="Tracer">traces</GlossaryTerm> to ensure blocks remain within prover limits. Execution clients that
 generate prover input traces must also use Linea Besu.
 

@@ -12,10 +12,7 @@ import GlossaryTerm from "@theme/GlossaryTerm";
 Conflation is the process of combining two or more blocks' worth of transactions into one data set,
 which <GlossaryTerm term="Lineth" /> proves as a single batch.
 Each batch produces one "before and after" map of the network state (a
-[Merkle tree](../state-manager.mdx#merkle-trees)) and one
-
-<GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm>, published to the
-<GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
+[Merkle tree](../state-manager.mdx#merkle-trees)) and one <GlossaryTerm term="Zero-knowledge proof">ZK proof</GlossaryTerm>, published to the <GlossaryTerm term="Finalization layer">finalization layer</GlossaryTerm>.
 
 <div className="img-large">
   <ConflationGraphic />
@@ -30,9 +27,7 @@ which makes the proving system more efficient.
 
 ## How it works
 
-Conflation is driven by the [coordinator](./index.mdx), using trace data from the
-
-<GlossaryTerm term="Tracer">tracer</GlossaryTerm>:
+Conflation is driven by the [coordinator](./index.mdx), using trace data from the <GlossaryTerm term="Tracer">tracer</GlossaryTerm>:
 
 1. As the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> produces each block, the coordinator requests that
    block's trace counts from the tracer.

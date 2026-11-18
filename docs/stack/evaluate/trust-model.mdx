@@ -17,10 +17,7 @@ For protocol guarantees and operator-controlled security measures, see
 
 ## Trust assumptions
 
-In a <GlossaryTerm term="Rollup">rollup</GlossaryTerm> and a
-
-<GlossaryTerm term="Validium">validium</GlossaryTerm>, the
-<GlossaryTerm term="Operator">operator</GlossaryTerm> runs the [deployment components](../deployment/core-components.mdx). In both deployment models, the components can take these actions:
+In a <GlossaryTerm term="Rollup">rollup</GlossaryTerm> and a <GlossaryTerm term="Validium">validium</GlossaryTerm>, the <GlossaryTerm term="Operator">operator</GlossaryTerm> runs the [deployment components](../deployment/core-components.mdx). In both deployment models, the components can take these actions:
 
 - The <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> can order, delay, or omit transactions within a block.
 - The <GlossaryTerm term="Prover">prover</GlossaryTerm> can stall proof generation, which halts finalization.
@@ -46,9 +43,7 @@ What a participant can see through the operator's RPC depends on the deployment'
 [access control](../deployment/access-control.mdx) configuration.
 Access control does not hide data already posted onchain.
 
-When the deployment uses
-
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>, block production depends on the validator set: with `3f+1` validators, at most `f` can fail or deviate. See
+When the deployment uses <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm>, block production depends on the validator set: with `3f+1` validators, at most `f` can fail or deviate. See
 [Multi-validator consensus](../deployment/multi-validator-consensus.mdx).
 
 ### What participants can verify
@@ -67,15 +62,11 @@ When the finalization layer is Ethereum, transaction data is posted as
 Participants can reconstruct state from those blobs while they are retained.
 After Ethereum's blob retention window, reconstructing history from Ethereum requires a copy of
 the blob data kept outside Ethereum's blob store.
-Participants can also verify public rollup block contents and ordering by running a
-
-<GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state from that public data.
+Participants can also verify public rollup block contents and ordering by running a <GlossaryTerm term="Full node">full node</GlossaryTerm>, and can verify their own observed state from that public data.
 
 In a <GlossaryTerm term="Validium">validium</GlossaryTerm>, transaction data stays
 offchain.
-Data availability (DA) is operated by
-
-<GlossaryTerm term="Archive node">archive nodes</GlossaryTerm> or a DA committee. Those providers can withhold data, which halts recovery, but they cannot forge state, because proofs still verify on
+Data availability (DA) is operated by <GlossaryTerm term="Archive node">archive nodes</GlossaryTerm> or a DA committee. Those providers can withhold data, which halts recovery, but they cannot forge state, because proofs still verify on
 the finalization layer. Participants can verify data and state claims they are authorized to access, including checks with [Merkle proofs](/protocol/architecture/state-manager#merkle-trees) against
 posted state roots. A Merkle proof can support inclusion of authorized data. It does not by itself establish global transaction ordering for participants who do not have the full ordered data set.
 

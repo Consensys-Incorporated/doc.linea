@@ -10,9 +10,7 @@ import GlossaryTerm from "@theme/GlossaryTerm";
 import MultiValidatorConsensusGraphic from "/img/stack/deployment/multi-validator-consensus.svg";
 
 This page describes multi-validator consensus for a <GlossaryTerm term="Lineth" /> deployment.
-Multiple <GlossaryTerm term="Maru validator">Maru validators</GlossaryTerm> use
-
-<GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> to order blocks together, so the network can keep producing blocks if one validator fails. To set up and operate
+Multiple <GlossaryTerm term="Maru validator">Maru validators</GlossaryTerm> use <GlossaryTerm term="Quorum Byzantine Fault Tolerance (QBFT)">QBFT</GlossaryTerm> to order blocks together, so the network can keep producing blocks if one validator fails. To set up and operate
 multiple validators, see [Run multiple Maru validators](../how-to/run-multiple-validators.mdx).
 
 [Linea Mainnet](../../network/index.mdx) runs a single, trusted Maru validator.
@@ -44,9 +42,7 @@ apply to Maru.
 
 ## Sequencer nodes
 
-Each Maru validator pairs 1:1 with its own <GlossaryTerm term="Linea Besu" /> execution client running the
-
-<GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins. Together they form a **sequencer node**. This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders,
+Each Maru validator pairs 1:1 with its own <GlossaryTerm term="Linea Besu" /> execution client running the <GlossaryTerm term="Sequencer">sequencer</GlossaryTerm> plugins. Together they form a **sequencer node**. This pairing is what produces canonical blocks: Maru handles consensus, and Linea Besu orders,
 builds, and executes the block.
 
 Multiple Maru validators communicate over a QBFT mesh.
