@@ -23,7 +23,6 @@
     "start": "docusaurus start",
     "swizzle": "docusaurus swizzle",
     "typecheck": "tsc",
-    "typecheck-staged": "tsc-files --noEmit",
     "write-heading-ids": "docusaurus write-heading-ids",
     "write-translations": "docusaurus write-translations"
   },
@@ -98,7 +97,6 @@
     "googleapis-common": "8.0.3",
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
-    "tsc-files": "1.1.4",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.0"
   },
