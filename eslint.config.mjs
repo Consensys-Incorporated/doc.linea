@@ -2,7 +2,6 @@ import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
 import react from "eslint-plugin-react";
 import jsxA11Y from "eslint-plugin-jsx-a11y";
 import _import from "eslint-plugin-import";
-import prettier from "eslint-plugin-prettier";
 import typescriptEslint from "typescript-eslint";
 import globals from "globals";
 import path from "node:path";
@@ -46,7 +45,6 @@ export default [
     compat.extends(
       "plugin:react/recommended",
       "plugin:import/typescript",
-      "plugin:prettier/recommended",
     ),
   ),
   {
@@ -54,7 +52,6 @@ export default [
       react: fixupPluginRules(react),
       "jsx-a11y": jsxA11Y,
       import: fixupPluginRules(_import),
-      prettier: fixupPluginRules(prettier),
       "@typescript-eslint": typescriptEslint.plugin,
     },
 
