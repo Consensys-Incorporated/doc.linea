@@ -1,0 +1,24 @@
+# Checks every uses: in this repository's workflows and actions with the shared
+# workflow-audit workflow: impostor commits (SHAs that exist only in a fork),
+# tag or branch references, and version comments that don't match the SHA.
+# Report-only for now; it becomes a required check once findings are fixed.
+name: workflow-audit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  workflow-audit:
+    permissions:
+      contents: read
+    uses: Consensys-Incorporated/github-actions/.github/workflows/workflow-audit.yml@b1b859363ac0a54a542a45dfb379d8b48e34a081 # 2.1.1
+    with:
+      report-only: true
