@@ -3,7 +3,7 @@ name: linea-dependency-maintenance
 description:
   Safely plan and execute dependency maintenance for JavaScript/TypeScript (npm, pnpm) and GitHub Actions, including npm
   lockfiles, pnpm workspaces, catalogs, overrides, SHA-pinned action versions, release-age policies, audits, CI
-  validation, Dependabot boundaries, PRs, and GitHub tracking issues. Use whenever the user asks to update, bump,
+  validation, Renovate boundaries, PRs, and GitHub tracking issues. Use whenever the user asks to update, bump,
   refresh, audit, clean, modernize, or review dependencies or GitHub Actions, reduce vulnerabilities, clean overrides, or
   prepare dependency PRs/issues.
 metadata:
@@ -28,7 +28,7 @@ hiding remaining risk.
    - Do not introduce a different lockfile, workspace file, package-manager metadata, or install command.
 3. Check branch and worktree state with `git status --short --branch`. If unrelated changes are present, use an isolated
    worktree or avoid touching those files.
-4. Read `.nvmrc`, `.node-version`, `engines`, `.npmrc`, deploy config, `dependabot.yml`, and the GitHub Actions pins in
+4. Read `.nvmrc`, `.node-version`, `engines`, `.npmrc`, deploy config, `renovate.json`, and the GitHub Actions pins in
    `.github/workflows/*.yml` and `.github/actions/**/action.yml`.
 5. Capture the baseline: outdated report, audit report, lockfile state, and relevant validation commands.
 
@@ -38,11 +38,11 @@ hiding remaining risk.
 - In pnpm repos, `minimumReleaseAge` is a maturity window in minutes. Treat the configured `minimumReleaseAgeExclude`
   list as read-only: respect the existing entries, but never add or widen it to push a fresher version through — the
   maturity window is a hard gate, not a hurdle to bypass.
-- Treat npm/pnpm dependency updates as owned by this skill. Do not re-enable Dependabot npm/pnpm package-ecosystem jobs
-  unless the user explicitly asks.
-- GitHub Actions are in scope for manual/agent sweeps and for policy enforcement, but Dependabot keeps opening the
-  routine `github-actions` PRs: its cooldown in `dependabot.yml` (7 days) matches the action maturity window, so leave
-  that job enabled and let the two coexist. Docker and other non-JavaScript ecosystems also stay under Dependabot.
+- Treat npm/pnpm dependency updates as owned by this skill. Renovate opens the routine npm pull requests. Do not add a
+  Dependabot npm package-ecosystem job unless the user explicitly asks.
+- GitHub Actions are in scope for manual/agent sweeps and for policy enforcement. Renovate opens the routine GitHub
+  Actions pull requests. The 7-day `minimumReleaseAge` in `renovate.json` matches the action maturity window, so leave
+  `.github/workflows/renovatebot.yml` enabled.
 - Pin GitHub Actions to a full 40-character commit SHA, never a tag or branch ref (`@v4`, `@main`). A movable ref lets
   the upstream repo change what runs in CI without review. Append the human-readable version as an end-of-line comment
   (`uses: actions/checkout@<sha> # v7.0.0`) and update that comment on every bump so the SHA stays auditable.
@@ -220,7 +220,7 @@ dedicated branch, then pause and confirm with the user before pushing and creati
   - npm/pnpm only: stage manifest and lockfile changes together. Use the repo-approved scope (for example
     `deps(global): refresh dependencies`).
   - GitHub Actions only: stage `.github/workflows/*.yml` and `.github/actions/**/action.yml` changes together. Use
-    `deps(actions): refresh GitHub Actions` to align with Dependabot's `github-actions` commit prefix.
+    `ci(actions): refresh GitHub Actions`.
   - Mixed JS and Actions updates: prefer separate commits per ecosystem, or one commit whose message names both scopes
     explicitly.
 - Open a PR.
