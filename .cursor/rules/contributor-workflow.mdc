@@ -11,9 +11,19 @@ below highlight requirements that are most often missed.
 ## Issue first
 
 Open an issue describing the change before starting work on it, and link the issue from
-the pull request. Use the templates in `.github/ISSUE_TEMPLATE/` (bug report, enhancement,
-partner contribution). This matters especially for ecosystem/partner contributions: filing
-an issue first makes it much easier for the docs team to process the contribution.
+the pull request. Use the templates in `.github/ISSUE_TEMPLATE/` (new content, docs fix,
+site and tooling, partner contribution). This matters especially for ecosystem/partner
+contributions: filing an issue first makes it much easier for the docs team to process the
+contribution.
+
+`new-content.yml` and `fix-content.yml` share one field contract. Do not rename these
+labels: Summary, Docs area, Target audience, Content type, Affected pages, Source links,
+Acceptance criteria, Out of scope, Agent disposition, and PR gates. Only the Docs area
+options and examples are product-specific. `site.yml` uses the same labels except Docs
+area, Target audience, and Content type. Open a docs pull request without extra triage
+only when Agent disposition is `Ready for a docs PR` and every PR gate is checked. A
+new page, including a how-to guide or tutorial, or a new section requires Needs human
+judgment.
 
 ## Redirects
 
