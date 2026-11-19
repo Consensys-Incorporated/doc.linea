@@ -10,7 +10,7 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   linkCheck:
     name: Link Checking
-    runs-on: ubuntu-24.04 # docs-link-check applies its Chrome sandbox fix on 24.04 only
+    runs-on: ubuntu-24.04 # docs-link-check applies its Chrome sandbox fix on 24.04 only; Renovate leaves this pinned (renovate.json)
     permissions:
       contents: read
     steps:
