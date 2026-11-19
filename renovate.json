@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["github-actions", "npm"],
+  "dependencyDashboard": false,
+  "schedule": ["before 6am on monday"],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "description": "Pin all GitHub Actions to SHA digests",
+      "matchManagers": ["github-actions"],
+      "pinDigests": true,
+      "minimumReleaseAge": "7 days",
+      "groupName": "Renovatebot GHA Updates"
+    },
+    {
+      "description": "Allow immediate updates for Consensys-Incorporated/github-actions",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["Consensys-Incorporated/github-actions{/,}**"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "description": "Group npm dependency updates",
+      "matchManagers": ["npm"],
+      "minimumReleaseAge": "7 days",
+      "groupName": "npm dependencies"
+    },
+    {
+      "description": "Keep the docs-link-check jobs on ubuntu-24.04; the action applies its Chrome sandbox fix on 24.04 only",
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["github-runner"],
+      "matchPackageNames": ["ubuntu"],
+      "matchFileNames": [
+        ".github/workflows/links.yml",
+        ".github/workflows/weekly.yml"
+      ],
+      "enabled": false
+    }
+  ]
+}

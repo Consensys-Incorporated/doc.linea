@@ -19,6 +19,6 @@ jobs:
   workflow-audit:
     permissions:
       contents: read
-    uses: Consensys-Incorporated/github-actions/.github/workflows/workflow-audit.yml@b1b859363ac0a54a542a45dfb379d8b48e34a081 # 2.1.1
+    uses: Consensys-Incorporated/github-actions/.github/workflows/workflow-audit.yml@d7118b7e3733bac9a7f92f05f02f18c73892d5ad # 2.2.0
     with:
       report-only: true
