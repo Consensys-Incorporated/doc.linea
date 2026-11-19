@@ -42,28 +42,6 @@
   max-width: 640px;
 }
 
-.primaryButton {
-  background: var(--linea-white);
-  border: 0;
-  border-radius: var(--linea-radius-pill);
-  color: var(--linea-black) !important;
-  cursor: pointer;
-  font-family: AtypDisplay, sans-serif;
-  font-size: var(--font-body-sm);
-  font-weight: 500;
-  margin-top: 32px;
-  min-height: 48px;
-  padding: 12px 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.primaryButton:hover,
-.primaryButton:focus {
-  background: var(--linea-brand-cyan);
-  color: var(--linea-black) !important;
-}
-
 .status {
   color: var(--linea-white);
   font-size: var(--font-body-md);
@@ -178,9 +156,5 @@
 
   .intro {
     font-size: var(--font-body-md);
-  }
-
-  .primaryButton {
-    width: 100%;
   }
 }

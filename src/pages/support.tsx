@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
-import clsx from "clsx";
+import React from "react";
 import Link from "@docusaurus/Link";
-import Intercom, { show, shutdown } from "@intercom/messenger-js-sdk";
 import { DiscordIcon, GitHubIcon } from "@site/src/components/icons";
 
 import styles from "./support.module.css";
-
-const INTERCOM_APP_ID = "aprh5f83";
 
 type LayoutProps = {
   title?: string;
@@ -17,40 +13,22 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = require("@theme/Layout").default;
 
 export default function Support(): React.ReactNode {
-  useEffect(() => {
-    Intercom({
-      app_id: INTERCOM_APP_ID,
-      hide_default_launcher: true,
-    });
-
-    return () => {
-      shutdown();
-    };
-  }, []);
-
   return (
     <Layout
-      title="Linea and Lineth support resources"
-      description="Find support and community resources for Linea Mainnet users, developers building on Linea, and Lineth stack operators and evaluators.">
+      title="Linea and Lineth help resources"
+      description="Find help and community resources for Linea Mainnet users, developers building on Linea, and Lineth stack operators and evaluators.">
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroContent}>
-            <h1>Linea Support</h1>
+            <h1>Linea Help</h1>
             <p className={styles.intro}>
-              Can&apos;t find what you need in the docs? Contact support or
-              choose the resources for your situation below.
+              Can&apos;t find what you need in the docs? Choose the resources
+              for your situation below.
             </p>
-            <button
-              id="intercom-button"
-              type="button"
-              className={clsx("button", styles.primaryButton)}
-              onClick={() => show()}>
-              Contact support
-            </button>
           </div>
         </section>
 
-        <section className={styles.resources} aria-label="Support resources">
+        <section className={styles.resources} aria-label="Help resources">
           <div className={styles.resourcesInner}>
             <div className={styles.audienceSection}>
               <h2 id="support-resources">Linea Mainnet users</h2>
