@@ -60,7 +60,6 @@
     "@11ty/gray-matter": "1.0.0",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "3.10.2",
-    "@docusaurus/plugin-client-redirects": "3.10.2",
     "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/plugin-google-tag-manager": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",

@@ -11,16 +11,34 @@ below highlight requirements that are most often missed.
 ## Issue first
 
 Open an issue describing the change before starting work on it, and link the issue from
-the pull request. Use the templates in `.github/ISSUE_TEMPLATE/` (bug report, enhancement,
-partner contribution). This matters especially for ecosystem/partner contributions: filing
-an issue first makes it much easier for the docs team to process the contribution.
+the pull request. Use the templates in `.github/ISSUE_TEMPLATE/` (new content, docs fix,
+site and tooling, partner contribution). This matters especially for ecosystem/partner
+contributions: filing an issue first makes it much easier for the docs team to process the
+contribution.
+
+`new-content.yml` and `fix-content.yml` share one field contract. Do not rename these
+labels: Summary, Docs area, Target audience, Content type, Affected pages, Source links,
+Acceptance criteria, Out of scope, Agent disposition, and PR gates. Only the Docs area
+options and examples are product-specific. `site.yml` uses the same labels except Docs
+area, Target audience, and Content type. Open a docs pull request without extra triage
+only when Agent disposition is `Ready for a docs PR` and every PR gate is checked. A
+new page, including a how-to guide or tutorial, or a new section requires Needs human
+judgment.
 
 ## Redirects
 
-Every deleted, renamed, or moved page needs a matching entry in `redirects.json`, and every
-internal link that pointed at the old path needs updating. `onBrokenLinks` is configured to
-fail the build, so a missed redirect or stale link breaks CI, not just the reader's
-experience.
+Every deleted, renamed, or moved page needs a permanent redirect in `vercel.json`, and every
+internal link that pointed at the old path needs updating. Add an object to the `redirects`
+array:
+
+```json
+{ "source": "/old-path", "destination": "/new-path", "permanent": true }
+```
+
+`trailingSlash` is `false`, matching `docusaurus.config.js`, so one entry covers the path
+with and without a trailing slash. Vercel applies these redirects. `npm start` serves the
+docs app and does not apply `vercel.json`; confirm a new redirect on the Vercel preview.
+`onBrokenLinks` is `throw`, so a stale internal link fails the build.
 
 ## Auto-generated content
 

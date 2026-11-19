@@ -1,0 +1,93 @@
+# Agent contract: do not rename these field labels.
+# Fields: Summary, Site issue type, Affected pages, Source links,
+# Acceptance criteria, Out of scope, Agent disposition, PR gates.
+# A docs pull request is ready without extra triage only when Agent disposition is
+# "Ready for a docs PR" and every PR gate is checked. A new page or a new section
+# requires Needs human judgment.
+name: Site, tooling, or build
+description: Report a docs site, tooling, dependency, workflow, or CI issue.
+title: "Site: "
+labels: ["site"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for the docs site, dependencies, CI, or tooling.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: "What the docs change needs to accomplish. Include the fact to document, not a design for the prose."
+      placeholder: |
+        Example: "Fix the broken redirect from the old architecture path."
+    validations:
+      required: true
+  - type: checkboxes
+    id: site-issue-type
+    attributes:
+      label: Site issue type
+      description: "Select every type that applies."
+      options:
+        - label: "Build or CI"
+        - label: "Configuration, dependencies, or plugins"
+        - label: "UI/UX"
+        - label: "Navigation"
+        - label: "Search, analytics, or metadata"
+        - label: "Redirects or routing"
+        - label: "AI tooling"
+        - label: "Other"
+  - type: textarea
+    id: affected-pages
+    attributes:
+      label: Affected pages
+      description: "One page per line. Give the public URL and the repo path. If the page does not exist yet, give the proposed path. For site work, give the workflow or config path."
+      placeholder: |
+        https://docs.linea.build/protocol/linea-vs-lineth — docs/protocol/linea-vs-lineth.mdx
+    validations:
+      required: true
+  - type: textarea
+    id: source-links
+    attributes:
+      label: Source links
+      description: "Link the product PR, code, release note, spec, issue, or discussion that verifies the change. Use a public URL."
+      placeholder: |
+        https://github.com/Consensys-Incorporated/doc.linea/pull/123
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: "What must be true in the docs when this issue is done. One item per line."
+      placeholder: |
+        - The named page states the verified fact.
+        - Unrelated pages are unchanged.
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: "What a pull request for this issue must not change."
+      placeholder: |
+        Example: "Do not rewrite the rest of the page."
+  - type: dropdown
+    id: disposition
+    attributes:
+      label: Agent disposition
+      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new page, including a how-to guide or tutorial, a new section, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
+      options:
+        - "Needs triage"
+        - "Ready for a docs PR"
+        - "Needs human judgment"
+      default: 0
+    validations:
+      required: true
+  - type: checkboxes
+    id: pr-gates
+    attributes:
+      label: PR gates
+      description: "Check a gate only when it is true. Automation opens a docs pull request only when Agent disposition is Ready for a docs PR and every gate is checked."
+      options:
+        - label: "Affected page URL or repo path is named"
+        - label: "A linked source verifies every product fact"
+        - label: "The change does not add a new page or section, restructure navigation, or change positioning"
+        - label: "No unreleased, roadmap, or unverified claims"

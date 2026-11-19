@@ -1,0 +1,137 @@
+# Agent contract: field labels are shared across Consensys docs repositories.
+# Do not rename them. Product-specific values belong in Docs area options,
+# placeholders, and config.yml contact links only.
+# Fields: Summary, Docs area, Target audience, Content type, Content issue type,
+# Affected pages, Source links, Acceptance criteria, Out of scope, Agent disposition,
+# PR gates.
+# A docs pull request is ready without extra triage only when Agent disposition is
+# "Ready for a docs PR" and every PR gate is checked. A new page or a new section
+# requires Needs human judgment.
+name: Docs change or fix
+description: Report a small docs fix, source-linked update, or known content issue.
+title: "Fix: "
+labels: ["fix-content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for corrections and source-linked updates to existing docs.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: "What the docs change needs to accomplish. Include the fact to document, not a design for the prose."
+      placeholder: |
+        Example: "Correct the gas price guidance on the Linea Mainnet deploy page."
+    validations:
+      required: true
+  - type: dropdown
+    id: docs-area
+    attributes:
+      label: Docs area
+      description: "Which part of the docs site this change belongs to."
+      options:
+        - "Linea Mainnet"
+        - "Lineth Stack"
+        - "Protocol"
+        - "Reference"
+        - "Changelog"
+        - "New section"
+        - "Multiple or unsure"
+        - "Site-wide"
+    validations:
+      required: true
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Target audience
+      description: "Who the page is for. Select every audience the page must serve."
+      options:
+        - "End users"
+        - "Network or node operators"
+        - "App or protocol developers"
+        - "Enterprise evaluators or architects"
+        - "Contributors"
+        - "Multiple or other"
+      multiple: true
+    validations:
+      required: true
+  - type: checkboxes
+    id: content-type
+    attributes:
+      label: Content type
+      description: "Concept is an explanation page. Select every type this change needs. Select Not a content change for site and tooling work that does not change a published page."
+      options:
+        - label: "Concept"
+        - label: "How-to guide"
+        - label: "Get-started or onboarding"
+        - label: "Reference"
+        - label: "Tutorial"
+        - label: "Not a content change"
+  - type: checkboxes
+    id: content-issue-type
+    attributes:
+      label: Content issue type
+      description: "Select every type that applies."
+      options:
+        - label: "Inaccurate content"
+        - label: "Outdated content"
+        - label: "Missing content"
+        - label: "Broken or misleading example"
+        - label: "Link or navigation issue"
+        - label: "Typo, grammar, or style issue"
+  - type: textarea
+    id: affected-pages
+    attributes:
+      label: Affected pages
+      description: "One page per line. Give the public URL and the repo path. If the page does not exist yet, give the proposed path. For site work, give the workflow or config path."
+      placeholder: |
+        https://docs.linea.build/protocol/linea-vs-lineth — docs/protocol/linea-vs-lineth.mdx
+    validations:
+      required: true
+  - type: textarea
+    id: source-links
+    attributes:
+      label: Source links
+      description: "Link the product PR, code, release note, spec, issue, or discussion that verifies the change. Use a public URL."
+      placeholder: |
+        https://github.com/Consensys-Incorporated/doc.linea/pull/123
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: "What must be true in the docs when this issue is done. One item per line."
+      placeholder: |
+        - The named page states the verified fact.
+        - Unrelated pages are unchanged.
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: "What a pull request for this issue must not change."
+      placeholder: |
+        Example: "Do not rewrite the rest of the page."
+  - type: dropdown
+    id: disposition
+    attributes:
+      label: Agent disposition
+      description: "Choose Ready for a docs PR only when every PR gate below is true. Choose Needs human judgment for a new page, including a how-to guide or tutorial, a new section, a restructure, positioning, roadmap, or anything you could not verify. Otherwise leave Needs triage."
+      options:
+        - "Needs triage"
+        - "Ready for a docs PR"
+        - "Needs human judgment"
+      default: 0
+    validations:
+      required: true
+  - type: checkboxes
+    id: pr-gates
+    attributes:
+      label: PR gates
+      description: "Check a gate only when it is true. Automation opens a docs pull request only when Agent disposition is Ready for a docs PR and every gate is checked."
+      options:
+        - label: "Affected page URL or repo path is named"
+        - label: "A linked source verifies every product fact"
+        - label: "The change does not add a new page or section, restructure navigation, or change positioning"
+        - label: "No unreleased, roadmap, or unverified claims"
