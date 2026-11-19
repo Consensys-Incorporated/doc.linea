@@ -35,4 +35,4 @@ jobs:
         run: npm install -g npm@12.2.1
 
       - name: Build docs
-        uses: Consensys-Incorporated/github-actions/docs-build@89c262a30cae735be99dc776f9556b796fb456ca # 1.0.0
+        uses: Consensys-Incorporated/github-actions/docs-build@10825e5427095aae0ca5686db2caa5029d693a4f # 2.0.1
