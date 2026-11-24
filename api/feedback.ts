@@ -1,6 +1,4 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { sheets } from "@googleapis/sheets";
-import { GoogleAuth } from "googleapis-common";
 import { sanitizeFeedbackText } from "./feedback-sanitize";
 
 // ---------- Types ----------
@@ -24,40 +22,9 @@ function isValidPageUrl(url: string): boolean {
   }
 }
 
-// ---------- Device type ----------
-
-function getDeviceType(ua: string): "mobile" | "desktop" {
-  return /Mobile|Android|iPhone|iPad/i.test(ua) ? "mobile" : "desktop";
-}
-
-// ---------- Google Sheets (module-scoped for reuse across warm invocations) ----------
-
-const credentials = JSON.parse(
-  Buffer.from(process.env.GOOGLE_SHEETS_CREDENTIALS!, "base64").toString(),
-);
-
-const auth = new GoogleAuth({
-  credentials,
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
-
-const sheetsClient = sheets({ version: "v4", auth });
-
-async function appendToSheet(row: string[]) {
-  await sheetsClient.spreadsheets.values.append({
-    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-    range: "Sheet1!A:E",
-    valueInputOption: "RAW",
-    requestBody: { values: [row] },
-  });
-}
-
 // ---------- GitHub Issue ----------
 
-async function createGitHubIssue(
-  pageUrl: string,
-  reason: string,
-): Promise<string | null> {
+async function createGitHubIssue(pageUrl: string, reason: string): Promise<void> {
   const repo = process.env.GITHUB_REPO!; // "Consensys-Incorporated/doc.linea"
   const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
     method: "POST",
@@ -74,41 +41,7 @@ async function createGitHubIssue(
   });
 
   if (!res.ok) {
-    console.error(
-      "GitHub issue creation failed:",
-      res.status,
-      await res.text(),
-    );
-    return null;
-  }
-
-  const data = await res.json();
-  return data.html_url;
-}
-
-// ---------- Slack Webhook ----------
-
-async function notifySlack(
-  pageUrl: string,
-  reason: string,
-  issueUrl: string | null,
-) {
-  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
-  if (!webhookUrl) return;
-
-  let text = `:warning: Negative docs feedback on *${pageUrl}*\n>${reason.replace(/\n/g, "\n>")}`;
-  if (issueUrl) {
-    text += `\n<${issueUrl}|View GitHub issue>`;
-  }
-
-  const res = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
-  });
-
-  if (!res.ok) {
-    console.error("Slack notification failed:", res.status, await res.text());
+    console.error("GitHub issue creation failed:", res.status, await res.text());
   }
 }
 
@@ -122,17 +55,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Rate limiting is handled by Vercel Firewall (project dashboard)
 
   // Validate
-  const {
-    page_url: pageUrl,
-    rating,
-    reason,
-    timestamp,
-  } = req.body as FeedbackBody;
+  const { page_url: pageUrl, rating, reason } = req.body as FeedbackBody;
 
   if (!pageUrl || !rating || !["yes", "no"].includes(rating)) {
-    return res
-      .status(400)
-      .json({ error: "page_url and rating (yes/no) are required" });
+    return res.status(400).json({ error: "page_url and rating (yes/no) are required" });
   }
 
   if (!isValidPageUrl(pageUrl)) {
@@ -142,39 +68,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const cleanReason = reason ? sanitizeFeedbackText(reason) : "";
 
   if (rating === "no" && !cleanReason) {
-    return res
-      .status(400)
-      .json({ error: "reason is required for negative feedback" });
-  }
-  const ts = timestamp ?? new Date().toISOString();
-
-  // Google Sheet — every submission
-  try {
-    await appendToSheet([
-      ts,
-      pageUrl,
-      rating,
-      cleanReason,
-      getDeviceType((req.headers["user-agent"] as string) ?? ""),
-    ]);
-  } catch (err) {
-    console.error("Google Sheets append failed:", err);
-    // Don't block the response
+    return res.status(400).json({ error: "reason is required for negative feedback" });
   }
 
-  // Negative + reason → GitHub issue, then Slack with issue link
+  // Negative + reason → GitHub issue
   if (rating === "no" && cleanReason) {
-    let issueUrl: string | null = null;
     try {
-      issueUrl = await createGitHubIssue(pageUrl, cleanReason);
+      await createGitHubIssue(pageUrl, cleanReason);
     } catch (err) {
       console.error("GitHub issue failed:", err);
-    }
-
-    try {
-      await notifySlack(pageUrl, cleanReason, issueUrl);
-    } catch (err) {
-      console.error("Slack notification failed:", err);
     }
   }
 
