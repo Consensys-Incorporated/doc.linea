@@ -107,7 +107,7 @@
     "runtime": {
       "name": "node",
       "version": "24.22.3",
-      "onFail": "error"
+      "onFail": "warn"
     }
   },
   "overrides": {
