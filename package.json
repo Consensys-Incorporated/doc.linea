@@ -103,6 +103,13 @@
     "node": "24.22.3",
     "npm": ">=12.2.1"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.22.3",
+      "onFail": "warn"
+    }
+  },
   "overrides": {
     "@vercel/nft": {
       "glob": "14.0.2"
